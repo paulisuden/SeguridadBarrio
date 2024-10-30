@@ -2,6 +2,8 @@ package com.is.servidor_barrio.business.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -17,9 +19,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Direccion implements Serializable {
-  
+
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String calle;
     private String numeracion;
     private String barrio;
@@ -32,6 +35,5 @@ public class Direccion implements Serializable {
     @ManyToOne
     private Localidad localidad;
     private boolean eliminado;
-
 
 }

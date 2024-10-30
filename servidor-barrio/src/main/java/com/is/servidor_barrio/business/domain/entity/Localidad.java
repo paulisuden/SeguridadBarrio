@@ -1,6 +1,8 @@
 package com.is.servidor_barrio.business.domain.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -17,11 +19,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Localidad implements Serializable {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private boolean eliminado;
     private String codigoPostal;
     @ManyToOne
     private Departamento departamento;
-    
+
 }

@@ -15,11 +15,12 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class Pais implements Serializable {
 
-    @SuppressWarnings("deprecation")
+    // @SuppressWarnings("deprecation")
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    // @GeneratedValue(generator = "uuid")
+    // @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private boolean eliminado = false;
 }
