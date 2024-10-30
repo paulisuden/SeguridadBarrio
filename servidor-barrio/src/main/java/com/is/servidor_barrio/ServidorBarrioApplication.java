@@ -21,10 +21,11 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		Pais pais = new Pais();
 		pais.setNombre("Argentina");
 
-		paisService.save(pais);  // Guardar el país en la base de datos
+		paisService.save(pais); // Guardar el país en la base de datos
 		System.out.println("País guardado correctamente.");
 	}
 }
