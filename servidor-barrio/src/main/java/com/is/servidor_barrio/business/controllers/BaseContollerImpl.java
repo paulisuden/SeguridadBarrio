@@ -15,7 +15,7 @@ import com.is.servidor_barrio.business.logic.service.BaseServiceImpl;
 
 public abstract class BaseContollerImpl<E extends Base, S extends BaseServiceImpl<E, Long>>
     implements BaseContoller<E, Long> {
-  @Autowired
+
   protected S servicio;
 
   @GetMapping("") // solicitudes HTTP GET
