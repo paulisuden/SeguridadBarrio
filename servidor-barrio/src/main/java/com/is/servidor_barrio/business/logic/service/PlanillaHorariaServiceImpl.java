@@ -3,13 +3,14 @@ package com.is.servidor_barrio.business.logic.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.is.servidor_barrio.business.domain.entity.Usuario;
+import com.is.servidor_barrio.business.domain.entity.PlanillaHoraria;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Long> implements UsuarioService {
+public class PlanillaHorariaServiceImpl extends BaseServiceImpl<PlanillaHoraria, Long>
+    implements PlanillaHorariaService {
   @Autowired
-  public UsuarioServiceImpl(BaseRepository<Usuario, Long> baseRepository) {
+  public PlanillaHorariaServiceImpl(BaseRepository<PlanillaHoraria, Long> baseRepository) {
     super(baseRepository);
   }
 

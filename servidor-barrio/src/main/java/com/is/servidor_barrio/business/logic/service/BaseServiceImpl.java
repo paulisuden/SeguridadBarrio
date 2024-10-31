@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> implements BaseService<E, ID> {
     protected BaseRepository<E, ID> baseRepository;
 
