@@ -8,7 +8,7 @@ import com.is.servidor_barrio.business.domain.entity.Base;
 
 import java.io.Serializable;
 
-public interface BaseContoller<E extends Base, ID extends Serializable> {
+public interface BaseController<E extends Base, ID extends Serializable> {
   public ResponseEntity<?> getAll();
 
   // el ? es lo mismo que extend object es un comodin
