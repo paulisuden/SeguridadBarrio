@@ -18,7 +18,6 @@ import lombok.Setter;
 public class Localidad extends Base {
 
     private String nombre;
-    private boolean eliminado;
     private String codigoPostal;
     @ManyToOne
     private Departamento departamento;

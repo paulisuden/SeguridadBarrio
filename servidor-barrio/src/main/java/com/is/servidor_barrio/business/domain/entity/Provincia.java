@@ -15,7 +15,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Provincia extends Base {
     private String nombre;
-    private boolean eliminado;
     @ManyToOne
     private Pais pais;
 }
