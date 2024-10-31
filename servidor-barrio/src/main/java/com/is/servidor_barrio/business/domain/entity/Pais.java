@@ -12,5 +12,4 @@ import lombok.*;
 public class Pais extends Base {
 
     private String nombre;
-    private boolean eliminado = false;
 }

@@ -29,6 +29,5 @@ public class Direccion extends Base {
     private String observacion;
     @ManyToOne
     private Localidad localidad;
-    private boolean eliminado;
 
 }

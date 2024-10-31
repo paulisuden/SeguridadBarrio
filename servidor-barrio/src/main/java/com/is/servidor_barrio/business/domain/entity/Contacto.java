@@ -21,5 +21,4 @@ public class Contacto extends Base {
   @Enumerated(EnumType.STRING)
   private TipoContacto tipoContacto;
   private String observacion;
-  private Boolean eliminado = false;
 }
