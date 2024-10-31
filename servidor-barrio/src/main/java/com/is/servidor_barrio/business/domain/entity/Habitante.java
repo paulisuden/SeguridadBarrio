@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Habitante extends Persona {
-  // @OneToOne
-  // private Inmueble inmbueble;
+  @OneToOne
+  private Inmbueble inmbueble;
 }
