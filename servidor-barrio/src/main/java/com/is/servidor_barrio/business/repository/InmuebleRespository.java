@@ -2,9 +2,9 @@ package com.is.servidor_barrio.business.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.is.servidor_barrio.business.domain.entity.Inmbueble;
+import com.is.servidor_barrio.business.domain.entity.Inmueble;
 
 @Repository
-public interface InmuebleRespository extends BaseRepository<Inmbueble, Long> {
+public interface InmuebleRespository extends BaseRepository<Inmueble, Long> {
 
 }

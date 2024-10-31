@@ -30,5 +30,5 @@ public class MovimientoVisita extends Base {
   private Visitante visitante;
 
   @OneToMany
-  private List<Inmbueble> inmuebles;
+  private List<Inmueble> inmuebles;
 }

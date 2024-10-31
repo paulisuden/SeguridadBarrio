@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inmbueble extends Base {
+public class Inmueble extends Base {
 
   private String numeracion;
   private String piso;
