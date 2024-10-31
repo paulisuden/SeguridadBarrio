@@ -1,5 +1,7 @@
 package com.is.servidor_barrio.business.domain.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -23,6 +25,6 @@ public class Persona extends Base {
   private Usuario usuario;
 
   @OneToMany
-  private Contacto contacto;
+  private List<Contacto> contactos;
 
 }
