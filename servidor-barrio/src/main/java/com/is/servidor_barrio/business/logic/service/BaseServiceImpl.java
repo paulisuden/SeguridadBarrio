@@ -8,34 +8,33 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class BaseServiceImpl<E, ID extends Serializable> implements BaseService<E, ID> {
-    protected BaseRepository<E,ID> baseRepository;
-    public BaseServiceImpl(BaseRepository<E,ID> baseRepository){
+    protected BaseRepository<E, ID> baseRepository;
+
+    public BaseServiceImpl(BaseRepository<E, ID> baseRepository) {
         this.baseRepository = baseRepository;
     }
+
     @Override
     @Transactional
-    //Hara transacciones con la base de datos esto no ahorra el beggin-commit y rollback (si habia error)
     public List<E> findAll() throws Exception {
         try {
-            List<E> entities = baseRepository.findAll();
+            // Filtrar para devolver solo los registros que no están eliminados
+            List<E> entities = baseRepository.findAllByEliminadoFalse();
             return entities;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
 
-
     @Override
     @Transactional
     public E findById(ID id) throws Exception {
         try {
-            //no sabemos si se va a encontrar en la BD un registro con ese Id por eso optional
-            Optional<E> entityOptional = baseRepository.findById(id);
-            return entityOptional.get();
-
+            // Verificar si el registro está marcado como eliminado
+            Optional<E> entityOptional = baseRepository.findByIdAndEliminadoFalse(id);
+            return entityOptional.orElseThrow(() -> new Exception("Entity not found or marked as deleted"));
         } catch (Exception e) {
             throw new Exception(e.getMessage());
-
         }
     }
 
@@ -54,11 +53,14 @@ public abstract class BaseServiceImpl<E, ID extends Serializable> implements Bas
     @Transactional
     public E update(ID id, E entity) throws Exception {
         try {
-            Optional<E> entityOptional = baseRepository.findById(id);
-            E entityUpdate = entityOptional.get();
-            entityUpdate = baseRepository.save(entity); //actualizamos la persona
-            return entityUpdate;
-
+            Optional<E> entityOptional = baseRepository.findByIdAndEliminadoFalse(id);
+            if (entityOptional.isPresent()) {
+                E entityUpdate = entityOptional.get();
+                entityUpdate = baseRepository.save(entity); // Actualizamos la entidad
+                return entityUpdate;
+            } else {
+                throw new Exception("Entity not found or marked as deleted");
+            }
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -68,15 +70,18 @@ public abstract class BaseServiceImpl<E, ID extends Serializable> implements Bas
     @Transactional
     public boolean delete(ID id) throws Exception {
         try {
-            if (baseRepository.existsById(id)) {
-                baseRepository.deleteById(id);
+            Optional<E> entityOptional = baseRepository.findByIdAndEliminadoFalse(id);
+            if (entityOptional.isPresent()) {
+                E entityToDelete = entityOptional.get();
+                // Marcar como eliminado en lugar de borrarlo físicamente
+                entityToDelete.setEliminado(true);
+                baseRepository.save(entityToDelete);
                 return true;
             } else {
-                throw new Exception();
+                throw new Exception("Entity not found or already marked as deleted");
             }
         } catch (Exception e) {
             throw new Exception(e.getMessage());
-
         }
     }
 }
