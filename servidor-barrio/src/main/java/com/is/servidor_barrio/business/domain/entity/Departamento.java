@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
-public class Departamento implements Serializable {
+public class Departamento extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

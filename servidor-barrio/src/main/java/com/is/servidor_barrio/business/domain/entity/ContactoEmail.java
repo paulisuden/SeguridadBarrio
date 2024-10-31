@@ -2,7 +2,6 @@ package com.is.servidor_barrio.business.domain.entity;
 
 import jakarta.persistence.Entity;
 
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +12,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Provincia extends Base {
-    private String nombre;
-    private boolean eliminado;
-    @ManyToOne
-    private Pais pais;
+public class ContactoEmail extends Contacto {
+  private String email;
 }

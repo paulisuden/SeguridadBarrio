@@ -1,6 +1,12 @@
 package com.is.servidor_barrio;
 
+import com.is.servidor_barrio.business.domain.entity.ContactoEmail;
+import com.is.servidor_barrio.business.domain.entity.ContactoTelefonico;
 import com.is.servidor_barrio.business.domain.entity.Pais;
+import com.is.servidor_barrio.business.enumeration.TipoContacto;
+import com.is.servidor_barrio.business.enumeration.TipoTelefono;
+import com.is.servidor_barrio.business.logic.service.ContactoEmailService;
+import com.is.servidor_barrio.business.logic.service.ContactoTelefonicoService;
 import com.is.servidor_barrio.business.logic.service.PaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,9 +17,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 @SpringBootApplication
 public class ServidorBarrioApplication implements CommandLineRunner {
 
-	@Autowired
-	private PaisService paisService;
-
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
 		SpringApplication.run(ServidorBarrioApplication.class, args);
@@ -22,10 +25,5 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Pais pais = new Pais();
-		pais.setNombre("Argentina");
-
-		paisService.save(pais); // Guardar el país en la base de datos
-		System.out.println("País guardado correctamente.");
 	}
 }
