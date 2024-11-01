@@ -4,12 +4,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.is.servidor_barrio.business.domain.entity.Contacto;
-import com.is.servidor_barrio.business.logic.service.ContactoServiceImpl;
+import com.is.servidor_barrio.business.domain.entity.Usuario;
+import com.is.servidor_barrio.business.logic.service.UsuarioServiceImpl;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/contacto")
-public class ContactoController extends BaseControllerImpl<Contacto, ContactoServiceImpl> {
+@RequestMapping(path = "/api/usuario")
+public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioServiceImpl> {
 
 }

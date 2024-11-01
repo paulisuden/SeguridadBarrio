@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.is.servidor_barrio.business.domain.entity.Base;
 import com.is.servidor_barrio.business.logic.service.BaseServiceImpl;
 
-public abstract class BaseContollerImpl<E extends Base, S extends BaseServiceImpl<E, Long>>
-    implements BaseContoller<E, Long> {
-
+public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>>
+    implements BaseController<E, Long> {
+  @Autowired
   protected S servicio;
 
   @GetMapping("") // solicitudes HTTP GET
