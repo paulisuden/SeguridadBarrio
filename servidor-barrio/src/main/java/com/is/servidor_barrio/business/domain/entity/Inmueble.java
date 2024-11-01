@@ -1,6 +1,8 @@
 package com.is.servidor_barrio.business.domain.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,4 +19,6 @@ public class Inmueble extends Base {
   private String piso;
   private String deparamento;
   // private EstadoInmueble EstadoInmueble;
+  @ManyToOne
+  private UnidadDeNegocio negocio;
 }
