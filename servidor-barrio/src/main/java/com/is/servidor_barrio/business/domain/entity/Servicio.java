@@ -2,11 +2,8 @@ package com.is.servidor_barrio.business.domain.entity;
 
 import java.util.List;
 
-import com.is.servidor_barrio.business.enumeration.TipoEmpleado;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,10 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class Empleado extends Persona {
-  private String legajo;
-  private TipoEmpleado tipoEmpleado;
+public class Servicio extends Base {
+  private String nombre;
   @OneToMany
-  private List<UnidadDeNegocio> negocios;
+  private List<Imagen> imagenes;
 }
