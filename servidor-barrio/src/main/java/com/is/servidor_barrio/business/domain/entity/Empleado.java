@@ -2,7 +2,7 @@ package com.is.servidor_barrio.business.domain.entity;
 
 import java.util.List;
 
-import com.is.servidor_barrio.business.enumeration.TipoEmpleado;
+import com.is.servidor_barrio.business.domain.enumeration.TipoEmpleado;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

@@ -3,8 +3,8 @@ package com.is.servidor_barrio.business.domain.entity;
 import java.sql.Date;
 import java.util.List;
 
-import com.is.servidor_barrio.business.enumeration.EstadoMovimiento;
-import com.is.servidor_barrio.business.enumeration.TipoMovilidad;
+import com.is.servidor_barrio.business.domain.enumeration.EstadoMovimiento;
+import com.is.servidor_barrio.business.domain.enumeration.TipoMovilidad;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

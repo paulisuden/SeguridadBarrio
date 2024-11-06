@@ -1,6 +1,6 @@
 package com.is.servidor_barrio.business.domain.entity;
 
-import com.is.servidor_barrio.business.enumeration.TipoTelefono;
+import com.is.servidor_barrio.business.domain.enumeration.TipoTelefono;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

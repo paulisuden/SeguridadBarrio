@@ -1,6 +1,6 @@
 package com.is.servidor_barrio.business.domain.entity;
 
-import com.is.servidor_barrio.business.enumeration.TipoVisita;
+import com.is.servidor_barrio.business.domain.enumeration.TipoVisita;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;

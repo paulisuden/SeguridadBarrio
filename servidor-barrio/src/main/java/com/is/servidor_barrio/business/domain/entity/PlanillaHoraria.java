@@ -3,7 +3,7 @@ package com.is.servidor_barrio.business.domain.entity;
 import java.sql.Date;
 import java.util.List;
 
-import com.is.servidor_barrio.business.enumeration.EstadoAsistencia;
+import com.is.servidor_barrio.business.domain.enumeration.EstadoAsistencia;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

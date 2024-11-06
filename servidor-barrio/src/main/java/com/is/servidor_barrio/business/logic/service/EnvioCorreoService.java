@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 public class EnvioCorreoService {
 
     private JavaMailSender mailSender;
+    private PersonaService personaService;
 
-    public EnvioCorreoService(JavaMailSender mailSender) {
+    public EnvioCorreoService(JavaMailSender mailSender, PersonaService personaService) {
         this.mailSender = mailSender;
+        this.personaService = personaService;
     }
 
     @Autowired
@@ -25,7 +27,7 @@ public class EnvioCorreoService {
 
     public void sendEmail(Habitante habitante, Visitante visitante) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(habitante.getCorreo());
+        message.setTo(personaService.obtenerContactoEmail(habitante.getContactos()).getEmail());
         String subject = "Aviso de entrada de visitante al barrio";
         message.setSubject(subject);
         String text = "Desde la seguridad del barrio queremos avisarle que ingresó hacia su inmueble: "
