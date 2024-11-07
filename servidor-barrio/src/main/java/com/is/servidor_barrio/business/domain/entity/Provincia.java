@@ -2,6 +2,7 @@ package com.is.servidor_barrio.business.domain.entity;
 
 import jakarta.persistence.Entity;
 
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,5 +17,6 @@ import lombok.Setter;
 public class Provincia extends Base {
     private String nombre;
     @ManyToOne
+    @JoinColumn(name = "pais_id")
     private Pais pais;
 }

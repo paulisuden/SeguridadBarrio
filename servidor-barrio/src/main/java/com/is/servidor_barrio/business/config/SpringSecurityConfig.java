@@ -33,7 +33,8 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/admin/*").hasRole("ADMIN")
                         .requestMatchers("/css/**", "/js/**", "/img/**", "/**", "/registro", "/usuario/login", "usuario/inicio", "/inicio").permitAll()
-                        .anyRequest().authenticated()
+                        //.anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/usuario/login")
