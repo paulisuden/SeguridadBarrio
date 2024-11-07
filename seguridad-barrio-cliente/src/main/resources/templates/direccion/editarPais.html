@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Editar Pais</title>
+    <!--
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    -->
+</head>
+
+<body>
+
+<header>
+    <h5> Este es el header </h5>
+</header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header"><strong>Editar Pais</strong></h4>
+            <div class="card-body">
+
+                <form action="/pais/aceptarEditPais" method="POST">
+
+                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="hidden" name="id" th:value="${pais.id != null ? pais.id : 0}">
+
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" th:value="${pais.nombre}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Escriba el nombre del país" required="required">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="d-grid gap-2 float-right justify-content-md-end">
+                        <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}">
+                            Aceptar
+                        </button>
+
+                        <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}" th:href="@{/pais/cancelarEditPais}">
+                            Cancelar
+                        </button>
+                        <!-- <a class="btn btn-primary" th:href="@{/pais/cancelarEditPais}" role="button">Cancelar</a> -->
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <h5>
+        Este es el footer
+    </h5>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!--
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+-->
+
+</body>
+
+</html>
