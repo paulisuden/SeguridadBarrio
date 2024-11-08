@@ -52,6 +52,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
   public ResponseEntity<?> save(@RequestBody E entity) {
     try {
       // ResponseEntity contiene el status de la respuesta
+      System.out.println(entity);
       return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
     } catch (Exception e) {
       // formato de respuesta json

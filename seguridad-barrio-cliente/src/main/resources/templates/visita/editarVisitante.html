@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="favicon.ico">
+
+        <title>Editar Visitante</title>
+    <!--
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
+    -->
+</head>
+
+<body>
+
+<header>
+    <h5> Este es el header </h5>
+</header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header"><strong>Editar Visitante</strong></h4>
+            <div class="card-body">
+
+                <form action="/visitante/aceptarEditVisitante" method="POST">
+
+                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="hidden" name="id" th:value="${visitante.id != null ? visitante.id : 0}">
+
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" th:value="${visitante.nombre}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Nombre" required="required">
+
+                                <label for="apellido">Apellido</label>
+                                <input type="text" id="apellido" name="apellido" th:value="${visitante.apellido}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Apellido" required="required">
+
+                                <label for="dni">Documento</label>
+                                <input type="text" id="dni" name="numeroDeDocumento" th:value="${visitante.numeroDeDocumento}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Documento" required="required">
+
+                                <div class="form-group">
+                                    <label for="tipoVisitas">Tipo de visita</label>
+                                    <select id="tipoVisitas" class="form-control" name="tipoVisita" th:disabled="${isDisabled}">
+                                        <option th:each="tipoVisita : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoVisita).values()}"
+                                                th:value="${tipoVisita}"
+                                                th:text="${tipoVisita}">
+
+                                        </option>
+                                    </select>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="d-grid gap-2 float-right justify-content-md-end">
+                        <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}">
+                            Aceptar
+                        </button>
+
+                        <button type="submit" title="Cancelar edición." class="btn btn-primary" th:href="@{/visitante/cancelarEditVisitante}">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <h5>
+        Este es el footer
+    </h5>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!--
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+-->
+
+</body>
+
+</html>
+</title>
+</head>
+<body>
+
+
+</body>
+</html>
