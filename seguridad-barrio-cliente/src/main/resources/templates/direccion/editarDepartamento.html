@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Editar Departamento</title>
+</head>
+
+<body>
+
+<header>
+    <h5> Este es el header </h5>
+</header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header"><strong>Editar Departamento</strong></h4>
+            <div class="card-body">
+
+                <form action="/departamento/aceptarEditDepartamento" method="POST">
+
+                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="hidden" name="id" th:value="${departamento.id != null ? departamento.id : 0}">
+
+                                <label for="nombre">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" th:value="${departamento.nombre}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Escriba el nombre del departamento" required="required">
+
+                                <div class="form-group">
+                                    <label for="provincias">Provincia</label>
+                                    <select id="provincias" class="form-control" name="idProvincia" th:disabled="${isDisabled}">
+                                        <option th:each="provincia : ${provincias}" th:value="${provincia.id}" th:text="${provincia.nombre}"></option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="d-grid gap-2 float-right justify-content-md-end">
+                        <button type="submit" title="Guardar el registro." class="btn btn-primary"
+                                th:disabled="${isDisabled}">
+                            Aceptar
+                        </button>
+
+                        <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}" th:href="@{/departamento/cancelarEditDepartamento}">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <h5>
+        Este es el footer
+    </h5>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+</body>
+
+</html>

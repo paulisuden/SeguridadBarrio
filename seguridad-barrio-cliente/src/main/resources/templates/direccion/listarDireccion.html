@@ -1,0 +1,103 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Lista Direcciones</title>
+    <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    <h5> Este es el header </h5>
+</header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header"><strong>Lista direcciones</strong></h4>
+            <div class="card-body">
+                <a class="btn btn-primary" th:href="@{/direccion/altaDireccion}" role="button"><i class="fa fa-plus"
+                                                                                                  aria-hidden="true"></i> </a>
+                <hr>
+                <div th:if="${msgExito != null}" class='alert alert-success' th:text="${msgExito}" role='alert'>
+                </div>
+                <div th:if="${msgError != null}" class='alert alert-danger' th:text="${msgError}" role='alert'>
+                </div>
+
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Acciones</th>
+                        <th scope="col">Localidad</th>
+                        <th scope="col">Barrio</th>
+                        <th scope="col">Calle</th>
+                        <th scope="col">Numeracion</th>
+                        <th scope="col">Observacion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="direccion : ${listaDireccion}">
+                        <td>
+                            <a th:href="@{/direccion/consultar(id=${direccion.id})}"
+                               class="btn btn-success btn-sm" role="button" title="Consultar">
+                                <i class="fas fa-eye" aria-hidden="true"></i>
+                            </a>
+                            <a th:href="@{/direccion/modificar(id=${direccion.id})}"
+                               class="btn btn-success btn-sm" role="button" title="Modificar">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                            </a>
+                            <a th:href="@{/direccion/baja(id=${direccion.id})}"
+                               class="btn btn-success btn-sm confirmar" role="button" title="Eliminar">
+                                <i class="fas fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+
+
+                        <td th:text="${direccion.localidad.nombre}"></td>
+                        <td th:text="${direccion.barrio}"></td>
+                        <td th:text="${direccion.calle}"></td>
+                        <td th:text="${direccion.numeracion}"></td>
+                        <td th:text="${direccion.observacion}"></td>
+
+
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <h5>
+        Este es el footer
+    </h5>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+<script>
+    var dialogoConfirm = function (e) {
+        if (!confirm('¿Está seguro de eliminar la información?'))
+            e.preventDefault();
+    };
+
+    document.querySelectorAll('.confirmar').forEach(function (elemento) {
+        elemento.addEventListener('click', dialogoConfirm, false);
+    });
+</script>
+
+</body>
+
+</html>

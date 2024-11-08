@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Editar Dirección</title>
+</head>
+
+<body>
+
+<header>
+    <h5> Este es el header </h5>
+</header>
+
+<main role="main">
+    <hr>
+    <div class="container">
+
+        <div class="card">
+            <h4 class="card-header"><strong>Editar Dirección</strong></h4>
+            <div class="card-body">
+
+                <form action="/direccion/aceptarEditDireccion" method="POST">
+
+                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <input type="hidden" name="id" th:value="${direccion.id != null ? direccion.id : 0}">
+
+                                <div class="form-group">
+                                    <label for="localidades">Localidad</label>
+                                    <select id="localidades" class="form-control" name="idLocalidad" th:disabled="${isDisabled}">
+                                        <option th:each="localidad : ${localidades}" th:value="${localidad.id}" th:text="${localidad.nombre}"></option>
+                                    </select>
+                                </div>
+
+                                <label for="barrio">Barrio</label>
+                                <input type="text" id="barrio" name="barrio" th:value="${direccion.barrio}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="barrio" required="required">
+
+                                <label for="calle">Calle</label>
+                                <input type="text" id="calle" name="calle" th:value="${direccion.calle}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Calle" required="required">
+
+                                <label for="numeracion">Numeracion</label>
+                                <input type="text" id="numeracion" name="numeracion" th:value="${direccion.numeracion}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="Numeracion" required="required">
+
+                                <label for="observacion">Observación</label>
+                                <input type="text" id="observacion" name="observacion" th:value="${direccion.observacion}"
+                                       th:disabled="${isDisabled}" class="form-control"
+                                       placeholder="¿Alguna observacion?">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="d-grid gap-2 float-right justify-content-md-end">
+                        <button type="submit" title="Guardar el registro." class="btn btn-primary"
+                                th:disabled="${isDisabled}">
+                            Aceptar
+                        </button>
+
+                        <button type="submit" title="Cancelar la edición." class="btn btn-primary" th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <h5>
+        Este es el footer
+    </h5>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+</body>
+
+</html>

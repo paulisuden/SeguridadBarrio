@@ -16,7 +16,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Localidad extends Base {
-
     private String nombre;
     private String codigoPostal;
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.is.servidor_barrio;
 
+import com.is.servidor_barrio.business.domain.entity.Departamento;
 import com.is.servidor_barrio.business.logic.service.EnvioCorreoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -40,6 +41,7 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 		enviarMail.sendEmail(habitante, visitante);
 
 		*/
+
 		System.out.println("Running");
 
 
