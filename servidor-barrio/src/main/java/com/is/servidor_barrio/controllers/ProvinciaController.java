@@ -16,16 +16,4 @@ public class ProvinciaController extends BaseControllerImpl<Provincia, Provincia
     @Autowired
     private ProvinciaServiceImpl servicio;
 
-    @PostMapping("")
-    @Override
-    public ResponseEntity<?> save(@RequestBody Provincia entity) {
-        try {
-            // ResponseEntity contiene el status de la respuesta
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
-        } catch (Exception e) {
-            // formato de respuesta json
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Intente màs tarde.\"}");
-        }
-    }
-
 }

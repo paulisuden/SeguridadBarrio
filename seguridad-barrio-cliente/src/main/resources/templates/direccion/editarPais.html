@@ -1,42 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
-    <title>Editar Pais</title>
-    <!--
-    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-    <link th:href="@{/bootstrap/css/jumbotron.css}" rel="stylesheet">
-    <link th:href="@{/bootstrap/css/sticky-footer-navbar.css}" rel="stylesheet">
-    -->
-</head>
+<head th:replace="~{fragments/head.html :: head_1}"></head>
 
 <body>
+<div class="container-scroller">
 
-<header>
-    <h5> Este es el header </h5>
-</header>
+    <!-- Navbar -->
+    <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
 
-<main role="main">
-    <hr>
-    <div class="container">
+    <!-- Sidebar -->
+    <div class="container-fluid page-body-wrapper">
+        <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
 
-        <div class="card">
-            <h4 class="card-header"><strong>Editar Pais</strong></h4>
-            <div class="card-body">
+        <!-- FORMULARIO -->
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card large-form">
+                <div class="card">
+                    <div class="card-body">
 
-                <form action="/pais/aceptarEditPais" method="POST">
+                        <h5 class="card-title">Pais</h5>
 
-                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+                        <form class="forms-sample" action="/pais/aceptarEditPais" method="POST">
 
-                    <div class="row">
-                        <div class="col-md-6">
+                            <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                            <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
                             <div class="form-group">
 
                                 <input type="hidden" name="id" th:value="${pais.id != null ? pais.id : 0}">
@@ -47,42 +36,30 @@
                                        placeholder="Escriba el nombre del país" required="required">
 
                             </div>
-                        </div>
+
+                            <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2" th:disabled="${isDisabled}">
+                                Aceptar
+                            </button>
+
+                            <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                                Cancelar
+                            </button>
+
+                        </form>
                     </div>
-
-                    <hr>
-                    <div class="d-grid gap-2 float-right justify-content-md-end">
-                        <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}">
-                            Aceptar
-                        </button>
-
-                        <button type="submit" title="Guardar el registro." class="btn btn-primary" th:disabled="${isDisabled}" th:href="@{/pais/cancelarEditPais}">
-                            Cancelar
-                        </button>
-                        <!-- <a class="btn btn-primary" th:href="@{/pais/cancelarEditPais}" role="button">Cancelar</a> -->
-                    </div>
-
-                </form>
-
+                </div>
             </div>
         </div>
     </div>
+</div>
 
-</main>
 
-<footer>
-    <h5>
-        Este es el footer
-    </h5>
-</footer>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<!--
-<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
--->
+<footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
+<!-- JS -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<script th:src="@{/js/off-canvas.js}"></script>
+<script th:src="@{/js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/template.js}"></script>
 
 </body>
 
