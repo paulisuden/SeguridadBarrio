@@ -11,14 +11,15 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia,Long> implements ProvinciaService{
+public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia, Long> implements ProvinciaService {
 
     private ProvinciaRepository provinciaRepository;
 
     private PaisServiceImpl baseService;
 
     @Autowired
-    public ProvinciaServiceImpl(BaseRepository<Provincia, Long> baseRepository, ProvinciaRepository provinciaRepository, PaisServiceImpl baseService) {
+    public ProvinciaServiceImpl(BaseRepository<Provincia, Long> baseRepository, ProvinciaRepository provinciaRepository,
+            PaisServiceImpl baseService) {
         super(baseRepository);
         this.provinciaRepository = provinciaRepository;
         this.baseService = baseService;
@@ -33,10 +34,7 @@ public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia,Long> implem
     @Transactional
     public Provincia save(Provincia entity) throws Exception {
         try {
-            System.out.println("holi");
-            Pais pais = baseService.findById(entity.getPais().getId());
-            System.out.println(pais);
-            entity.setPais(pais);
+            System.out.println(entity.getPais());
             entity = provinciaRepository.save(entity);
             return entity;
         } catch (Exception e) {

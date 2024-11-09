@@ -52,7 +52,6 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, 
   @PostMapping("")
   public ResponseEntity<?> save(@RequestBody DC dto) {
     try {
-
       return ResponseEntity.status(HttpStatus.OK).body(facade.save(dto));
     } catch (Exception e) {
       // formato de respuesta json

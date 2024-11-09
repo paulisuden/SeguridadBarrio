@@ -6,7 +6,6 @@ import lombok.Data;
 public class ProvinciaDTO {
     private Long id;
     private String nombre;
-    private boolean eliminado;
-    private PaisDTO paisDTO;
+    // private boolean eliminado;
+    private Long paisId;
 }
-
