@@ -15,33 +15,15 @@ public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia,Long> implem
 
     private ProvinciaRepository provinciaRepository;
 
-    private PaisServiceImpl baseService;
-
     @Autowired
-    public ProvinciaServiceImpl(BaseRepository<Provincia, Long> baseRepository, ProvinciaRepository provinciaRepository, PaisServiceImpl baseService) {
+    public ProvinciaServiceImpl(BaseRepository<Provincia, Long> baseRepository, ProvinciaRepository provinciaRepository) {
         super(baseRepository);
         this.provinciaRepository = provinciaRepository;
-        this.baseService = baseService;
     }
 
     @Override
     public Optional<Provincia> findByNameAndIdPais(String nombre, Long idPais) {
         return provinciaRepository.findProvinciaByNombreAndPaisId(nombre, idPais);
-    }
-
-    @Override
-    @Transactional
-    public Provincia save(Provincia entity) throws Exception {
-        try {
-            System.out.println("holi");
-            Pais pais = baseService.findById(entity.getPais().getId());
-            System.out.println(pais);
-            entity.setPais(pais);
-            entity = provinciaRepository.save(entity);
-            return entity;
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
     }
 
 }
