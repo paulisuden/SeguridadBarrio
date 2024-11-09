@@ -10,4 +10,6 @@ public class ProvinciaDTO implements Serializable {
     private String nombre;
     private Long paisId;
     private PaisDTO paisDTO;
+    // private boolean eliminado;
+    private Long paisId;
 }
