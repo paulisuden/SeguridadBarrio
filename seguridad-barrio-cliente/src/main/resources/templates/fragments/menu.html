@@ -1,0 +1,58 @@
+<nav th:fragment="sideBar" class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+        <!--DASHBOARD -->
+
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/inicio}">
+                <i class="typcn typcn-home menu-icon"></i>
+                <span class="menu-title">HOME</span>
+            </a>
+        </li>
+
+        <!--DIRECCION -->
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#direccion" aria-expanded="false" aria-controls="direccion">
+                <i class="typcn typcn-location menu-icon"></i>
+                <span class="menu-title">Dirección</span>
+            </a>
+            <div class="collapse" id="direccion">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/pais/listarPais}">País</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/provincia/listarProvincia}">Provincia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/departamento/listarDepartamento}">Departamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/localidad/listarLocalidad}">Localidad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/direccion/listarDireccion}">Dirección</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- VISITAS -->
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#visita" aria-expanded="false" aria-controls="visita">
+                <i class="typcn typcn-user menu-icon"></i>
+                <span class="menu-title">Visitas</span>
+            </a>
+            <div class="collapse" id="visita">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/visita/listarVisitante.html}">Visitas</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+    </ul>
+</nav>

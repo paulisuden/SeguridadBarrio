@@ -90,7 +90,6 @@ public class VisitanteController {
     public String listarVisitante(Model model) {
         try {
             List<VisitanteDTO> listaVisitante = visitanteService.listar();
-            System.out.println(listaVisitante);
             model.addAttribute("listaVisitante", listaVisitante);
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
