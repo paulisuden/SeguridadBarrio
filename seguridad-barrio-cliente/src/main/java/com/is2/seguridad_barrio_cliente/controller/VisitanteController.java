@@ -90,7 +90,7 @@ public class VisitanteController {
     public String listarVisitante(Model model) {
         try {
             List<VisitanteDTO> listaVisitante = visitanteService.listar();
-            model.addAttribute("listaVisitante", listaVisitante);
+            model.addAttribute("listaVisitantes", listaVisitante);
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
         } catch (Exception e) {
@@ -101,9 +101,9 @@ public class VisitanteController {
 
     @PostMapping("/aceptarEditVisitante")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam String nombre, @RequestParam String apellido,
-                              @RequestParam String numeroDeDocumento, @RequestParam TipoVisita tipoVisita,
-                              RedirectAttributes attributes, Model model) {
+            @RequestParam String nombre, @RequestParam String apellido,
+            @RequestParam String numeroDeDocumento, @RequestParam TipoVisita tipoVisita,
+            RedirectAttributes attributes, Model model) {
         try {
 
             if (id == 0)
@@ -129,7 +129,8 @@ public class VisitanteController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String nombre, String apellido, String numeroDeDocumento, TipoVisita tipoVisita) {
+    private String error(String mensaje, Model model, Long id, String nombre, String apellido, String numeroDeDocumento,
+            TipoVisita tipoVisita) {
         try {
 
             model.addAttribute("msgError", mensaje);
