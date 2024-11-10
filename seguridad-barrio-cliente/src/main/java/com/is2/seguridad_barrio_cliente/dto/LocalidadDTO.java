@@ -8,7 +8,6 @@ public class LocalidadDTO {
     private String nombre;
     private boolean eliminado;
     private String codigoPostal;
-    private DepartamentoDTO departamentoDTO;
-
+    private Long departamentoId;
 
 }

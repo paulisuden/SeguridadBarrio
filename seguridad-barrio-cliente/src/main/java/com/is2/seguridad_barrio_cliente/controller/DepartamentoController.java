@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
-
 import com.is2.seguridad_barrio_cliente.dto.ProvinciaDTO;
 import com.is2.seguridad_barrio_cliente.dto.DepartamentoDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
@@ -113,9 +112,9 @@ public class DepartamentoController {
 
     @PostMapping("/aceptarEditDepartamento")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam String nombre,
-                              @RequestParam Long idProvincia,
-                              RedirectAttributes attributes, Model model) {
+            @RequestParam String nombre,
+            @RequestParam Long idProvincia,
+            RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -152,8 +151,7 @@ public class DepartamentoController {
                 departamento = departamentoService.buscar(id);
             } else {
                 departamento.setNombre(nombre);
-                ProvinciaDTO provincia = provinciaService.buscar(idProvincia);
-                departamento.setProvincia(provincia);
+                departamento.setProvinciaId(idProvincia);
             }
 
             model.addAttribute("departamento", departamento);

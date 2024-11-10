@@ -112,8 +112,9 @@ public class DireccionController {
 
     @PostMapping("/aceptarEditDireccion")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam String calle, @RequestParam String numeracion, @RequestParam String barrio,
-                              @RequestParam String observacion, @RequestParam Long idLocalidad, RedirectAttributes attributes, Model model) {
+            @RequestParam String calle, @RequestParam String numeracion, @RequestParam String barrio,
+            @RequestParam String observacion, @RequestParam Long idLocalidad, RedirectAttributes attributes,
+            Model model) {
 
         try {
 
@@ -127,7 +128,7 @@ public class DireccionController {
             return redirectList;
 
         } catch (ErrorServiceException e) {
-            return error(e.getMessage(), model, id, calle, numeracion, barrio,  observacion, idLocalidad);
+            return error(e.getMessage(), model, id, calle, numeracion, barrio, observacion, idLocalidad);
         } catch (Exception e) {
             return error("Error de Sistema", model, id, calle, numeracion, barrio, observacion, idLocalidad);
         }
@@ -140,7 +141,8 @@ public class DireccionController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String calle, String numeracion, String barrio, String observacion, Long idLocalidad) {
+    private String error(String mensaje, Model model, Long id, String calle, String numeracion, String barrio,
+            String observacion, Long idLocalidad) {
         try {
             model.addAttribute("msgError", mensaje);
 
@@ -149,12 +151,11 @@ public class DireccionController {
             if (id != 0) {
                 direccion = direccionService.buscar(id);
             } else {
-                LocalidadDTO localidad = localidadService.buscar(idLocalidad);
                 direccion.setCalle(calle);
                 direccion.setBarrio(barrio);
                 direccion.setNumeracion(numeracion);
                 direccion.setObservacion(observacion);
-                direccion.setLocalidad(localidad);
+                direccion.setLocalidadId(idLocalidad);
             }
 
             model.addAttribute("direccion", direccion);

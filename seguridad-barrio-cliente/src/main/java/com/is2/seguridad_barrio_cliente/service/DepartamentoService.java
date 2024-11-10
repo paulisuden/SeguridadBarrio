@@ -22,14 +22,9 @@ public class DepartamentoService {
 
         try {
 
-            ProvinciaDTO provincia = daoProvincia.buscar(idProvincia);
-            if (provincia == null) {
-                throw new ErrorServiceException("Provincia no encontrada");
-            }
-
             DepartamentoDTO departamento = new DepartamentoDTO();
             departamento.setNombre(nombre);
-            departamento.setProvincia(provincia);
+            departamento.setProvinciaId(idProvincia);
 
             dao.crear(departamento);
 
@@ -66,12 +61,10 @@ public class DepartamentoService {
 
         try {
 
-            ProvinciaDTO provincia = daoProvincia.buscar(idProvincia);
-
             DepartamentoDTO departamento = new DepartamentoDTO();
             departamento.setId(id);
             departamento.setNombre(nombre);
-            departamento.setProvincia(provincia);
+            departamento.setProvinciaId(idProvincia);
 
             dao.actualizar(departamento);
 

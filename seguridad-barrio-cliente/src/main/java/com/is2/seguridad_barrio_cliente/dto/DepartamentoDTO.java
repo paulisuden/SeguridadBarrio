@@ -7,6 +7,6 @@ public class DepartamentoDTO {
     private Long id;
     private String nombre;
     private boolean eliminado;
-    private ProvinciaDTO provincia;
+    private Long provinciaId;
 
 }

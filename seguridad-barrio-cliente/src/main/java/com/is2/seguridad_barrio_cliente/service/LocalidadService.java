@@ -22,15 +22,10 @@ public class LocalidadService {
 
         try {
 
-            DepartamentoDTO departamento = daoDepartamento.buscar(idDepartamento);
-            if (departamento == null) {
-                throw new ErrorServiceException("Departamento no encontrado");
-            }
-
             LocalidadDTO localidad = new LocalidadDTO();
             localidad.setNombre(nombre);
             localidad.setCodigoPostal(codigoPostal);
-            localidad.setDepartamentoDTO(departamento);
+            localidad.setDepartamentoId(idDepartamento);
 
             dao.crear(localidad);
 
@@ -63,17 +58,16 @@ public class LocalidadService {
         }
     }
 
-    public void modificar(Long id, String nombre, String codigoPostal, Long idDepartamento) throws ErrorServiceException {
+    public void modificar(Long id, String nombre, String codigoPostal, Long idDepartamento)
+            throws ErrorServiceException {
 
         try {
-
-            DepartamentoDTO departamento = daoDepartamento.buscar(idDepartamento);
 
             LocalidadDTO localidad = new LocalidadDTO();
             localidad.setId(id);
             localidad.setNombre(nombre);
             localidad.setCodigoPostal(codigoPostal);
-            localidad.setDepartamentoDTO(departamento);
+            localidad.setDepartamentoId(idDepartamento);
 
             dao.actualizar(localidad);
 

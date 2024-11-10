@@ -14,25 +14,19 @@ import java.util.List;
 public class DireccionService {
 
     @Autowired
-    private LocalidadService daoLocalidad;
-    @Autowired
     private DireccionDAORest dao;
 
-    public void crear(String calle, String numeracion, String barrio, String observacion, Long idLocalidad) throws ErrorServiceException {
+    public void crear(String calle, String numeracion, String barrio, String observacion, Long idLocalidad)
+            throws ErrorServiceException {
 
         try {
-
-            LocalidadDTO localidad = daoLocalidad.buscar(idLocalidad);
-            if (localidad == null) {
-                throw new ErrorServiceException("Localidad no encontrada");
-            }
 
             DireccionDTO direccion = new DireccionDTO();
             direccion.setCalle(calle);
             direccion.setBarrio(barrio);
             direccion.setNumeracion(numeracion);
             direccion.setObservacion(observacion);
-            direccion.setLocalidad(localidad);
+            direccion.setLocalidadId(idLocalidad);
 
             dao.crear(direccion);
 
@@ -65,10 +59,10 @@ public class DireccionService {
         }
     }
 
-    public void modificar(Long id, String calle, String numeracion, String barrio, String observacion, Long idLocalidad) throws ErrorServiceException {
+    public void modificar(Long id, String calle, String numeracion, String barrio, String observacion, Long idLocalidad)
+            throws ErrorServiceException {
 
         try {
-            LocalidadDTO localidad = daoLocalidad.buscar(idLocalidad);
 
             DireccionDTO direccion = new DireccionDTO();
             direccion.setId(id);
@@ -76,7 +70,7 @@ public class DireccionService {
             direccion.setBarrio(barrio);
             direccion.setNumeracion(numeracion);
             direccion.setObservacion(observacion);
-            direccion.setLocalidad(localidad);
+            direccion.setLocalidadId(idLocalidad);
 
             dao.actualizar(direccion);
 
