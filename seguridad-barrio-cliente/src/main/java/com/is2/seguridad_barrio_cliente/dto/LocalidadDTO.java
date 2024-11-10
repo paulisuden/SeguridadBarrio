@@ -9,7 +9,7 @@ public class LocalidadDTO implements Serializable {
     private Long id;
     private String nombre;
     private String codigoPostal;
-    private DepartamentoDTO departamentoDTO;
-
+    private Long departamentoId;
+    private DepartamentoDTO departamento;
 
 }

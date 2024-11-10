@@ -22,15 +22,9 @@ public class ProvinciaService {
 
         try {
 
-            PaisDTO pais = daoPais.buscar(idPais);
-            if (pais == null) {
-                throw new ErrorServiceException("País no encontrado");
-            }
-
             ProvinciaDTO provincia = new ProvinciaDTO();
             provincia.setNombre(nombre);
-            provincia.setPaisDTO(pais);
-
+            provincia.setPaisId(idPais);
 
             dao.crear(provincia);
 
@@ -67,12 +61,10 @@ public class ProvinciaService {
 
         try {
 
-            PaisDTO pais = daoPais.buscar(idPais);
-
             ProvinciaDTO provincia = new ProvinciaDTO();
             provincia.setId(id);
             provincia.setNombre(nombre);
-            provincia.setPaisDTO(pais);
+            provincia.setPaisId(idPais);
 
             dao.actualizar(provincia);
 

@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class ProvinciaDTO implements Serializable {
     private Long id;
     private String nombre;
-    private PaisDTO paisDTO;
-}
+    private Long paisId;
+    private PaisDTO pais;
 
+}

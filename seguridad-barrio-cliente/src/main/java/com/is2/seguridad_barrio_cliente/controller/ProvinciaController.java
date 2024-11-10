@@ -113,17 +113,17 @@ public class ProvinciaController {
 
     @PostMapping("/aceptarEditProvincia")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam String nombre,
-                              @RequestParam Long idPais,
-                              RedirectAttributes attributes, Model model) {
+            @RequestParam String nombre,
+            @RequestParam Long idPais,
+            RedirectAttributes attributes, Model model) {
 
         try {
 
             System.out.println(idPais);
 
             if (id == 0) {
-                provinciaService.crear(nombre,idPais);
-            }else{
+                provinciaService.crear(nombre, idPais);
+            } else {
                 provinciaService.modificar(id, nombre, idPais);
             }
 
@@ -154,8 +154,7 @@ public class ProvinciaController {
                 provincia = provinciaService.buscar(id);
             } else {
                 provincia.setNombre(nombre);
-                PaisDTO pais = paisService.buscar(idPais);
-                provincia.setPaisDTO(pais);
+                provincia.setPaisId(idPais);
             }
 
             model.addAttribute("provincia", provincia);

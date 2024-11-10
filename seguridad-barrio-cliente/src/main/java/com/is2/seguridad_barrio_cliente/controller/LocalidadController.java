@@ -112,10 +112,10 @@ public class LocalidadController {
 
     @PostMapping("/aceptarEditLocalidad")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam String nombre,
-                              @RequestParam String codigoPostal,
-                              @RequestParam Long idDepartamento,
-                              RedirectAttributes attributes, Model model) {
+            @RequestParam String nombre,
+            @RequestParam String codigoPostal,
+            @RequestParam Long idDepartamento,
+            RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -152,8 +152,7 @@ public class LocalidadController {
                 localidad = localidadService.buscar(id);
             } else {
                 localidad.setNombre(nombre);
-                DepartamentoDTO departamento = departamentoService.buscar(idDepartamento);
-                localidad.setDepartamentoDTO(departamento);
+                localidad.setDepartamentoId(idDepartamento);
             }
 
             model.addAttribute("localidad", localidad);

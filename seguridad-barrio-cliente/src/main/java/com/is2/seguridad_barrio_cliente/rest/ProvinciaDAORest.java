@@ -18,7 +18,6 @@ public class ProvinciaDAORest {
 
     public void crear(ProvinciaDTO provincia) throws ErrorServiceException {
         try {
-            System.out.println(provincia.getPaisDTO().getNombre());
             System.out.println(provincia);
             String uri = "http://localhost:8081/api/provincia";
             restTemplate.postForEntity(uri, provincia, ProvinciaDTO.class);
@@ -84,6 +83,5 @@ public class ProvinciaDAORest {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
-
 
 }

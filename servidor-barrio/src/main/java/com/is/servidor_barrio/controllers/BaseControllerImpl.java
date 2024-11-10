@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.is.servidor_barrio.business.domain.dto.BaseDto;
 import com.is.servidor_barrio.business.domain.entity.Base;
-import com.is.servidor_barrio.business.logic.service.BaseServiceImpl;
+import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 
-public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceImpl<E, Long>>
-    implements BaseController<E, Long> {
+public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, DE, F extends BaseFacadeImpl<E, D, DC, DE, Long>>
+    implements BaseController<E, D, DC, DE, Long> {
   @Autowired
-  protected S servicio;
+  protected F facade;
 
   @GetMapping("") // solicitudes HTTP GET
 
@@ -25,7 +26,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
   public ResponseEntity<?> getAll() {
     try {
       // ResponseEntity contiene el status de la respuesta
-      return ResponseEntity.status(HttpStatus.OK).body(servicio.findAll());
+      return ResponseEntity.status(HttpStatus.OK).body(facade.findAll());
     } catch (Exception e) {
       // formato de respuesta json
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Intente màs tarde.\"}");
@@ -39,7 +40,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
     // HTTP
     try {
       // ResponseEntity contiene el status de la respuesta
-      return ResponseEntity.status(HttpStatus.OK).body(servicio.findById(id));
+      return ResponseEntity.status(HttpStatus.OK).body(facade.findById(id));
     } catch (Exception e) {
       // formato de respuesta json
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Intente màs tarde.\"}");
@@ -49,11 +50,9 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
   }
 
   @PostMapping("")
-  public ResponseEntity<?> save(@RequestBody E entity) {
+  public ResponseEntity<?> save(@RequestBody DC dto) {
     try {
-      // ResponseEntity contiene el status de la respuesta
-      System.out.println(entity);
-      return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
+      return ResponseEntity.status(HttpStatus.OK).body(facade.save(dto));
     } catch (Exception e) {
       // formato de respuesta json
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Intente màs tarde.\"}");
@@ -61,11 +60,10 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> update(@PathVariable Long id, @RequestBody E entity) {
-    // RequestBody: vincular el cuerpo de la solicitud HTTP con un objeto de Java
+  public ResponseEntity<?> update(@PathVariable Long id, @RequestBody DE dto) {
     try {
       // ResponseEntity contiene el status de la respuesta
-      return ResponseEntity.status(HttpStatus.OK).body(servicio.update(id, entity));
+      return ResponseEntity.status(HttpStatus.OK).body(facade.update(id, dto));
     } catch (Exception e) {
       // formato de respuesta json
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Intente màs tarde.\"}");
@@ -75,8 +73,7 @@ public abstract class BaseControllerImpl<E extends Base, S extends BaseServiceIm
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Long id) {
     try {
-      // ResponseEntity contiene el status de la respuesta
-      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).body(facade.delete(id));
     } catch (Exception e) {
       // formato de respuesta json
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Intente màs tarde.\"}");
