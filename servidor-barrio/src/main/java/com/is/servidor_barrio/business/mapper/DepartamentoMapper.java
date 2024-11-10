@@ -14,4 +14,8 @@ public interface DepartamentoMapper
   @Override
   @Mapping(target = "provincia", ignore = true)
   Departamento toUpdate(@MappingTarget Departamento entity, DepartamentoCreateDto dto);
+
+  @Override
+  @Mapping(target = "provinciaId", ignore = true)
+  DepartamentoDto toDTO(Departamento entity);
 }

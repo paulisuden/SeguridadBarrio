@@ -13,4 +13,8 @@ public interface ProvinciaMapper extends BaseMapper<Provincia, ProvinciaDto, Pro
   @Override
   @Mapping(target = "pais", ignore = true)
   Provincia toUpdate(@MappingTarget Provincia entity, ProvinciaCreateDto dto);
+
+  @Override
+  @Mapping(target = "paisId", ignore = true)
+  ProvinciaDto toDTO(Provincia entity);
 }
