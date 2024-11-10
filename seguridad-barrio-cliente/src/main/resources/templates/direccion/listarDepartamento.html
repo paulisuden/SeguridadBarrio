@@ -6,6 +6,7 @@
 <body>
     <div class="container-scroller" >
 
+
         <!-- Navbar -->
         <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
 
@@ -89,12 +90,45 @@
                     </tbody>
                 </table>
 
+
+
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Acciones</th>
+                                    <th>Nombre</th>
+                                    <th >Provincia</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="departamento : ${listaDepartamento}">
+                                    <td>
+                                        <a th:href="@{/departamento/consultar(id=${departamento.id})}"
+                                           class="btn btn-warning btn-sm btn-icon-text" title="Consultar">
+                                            <i class="typcn typcn-eye-outline btn-icon-append"></i> Consultar
+                                        </a>
+                                        <a th:href="@{/departamento/modificar(id=${departamento.id})}"
+                                           class="btn btn-info btn-sm btn-icon-text mr-3"  title="Modificar">
+                                            <i class="typcn typcn-edit btn-icon-append"></i> Modificar
+                                        </a>
+                                        <a th:href="@{/departamento/baja(id=${departamento.id})}"
+                                           class="btn btn-danger btn-sm btn-icon-text"  title="Eliminar">
+                                            <i class="typcn typcn-delete-outline btn-icon-append"></i> Eliminar
+                                        </a>
+                                    </td>
+                                    <td th:text="${departamento.nombre}"></td>
+                                    <td th:text="${departamento.provincia.nombre}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
+
 
     <!-- JS -->
     <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>

@@ -17,6 +17,7 @@ public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia, Long> imple
     @Autowired
     public ProvinciaServiceImpl(BaseRepository<Provincia, Long> baseRepository, ProvinciaRepository provinciaRepository,
             PaisServiceImpl baseService) {
+
         super(baseRepository);
         this.provinciaRepository = provinciaRepository;
     }

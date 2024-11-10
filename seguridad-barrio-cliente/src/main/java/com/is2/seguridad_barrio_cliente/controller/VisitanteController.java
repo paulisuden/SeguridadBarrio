@@ -91,6 +91,7 @@ public class VisitanteController {
         try {
             List<VisitanteDTO> listaVisitante = visitanteService.listar();
             model.addAttribute("listaVisitantes", listaVisitante);
+
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
         } catch (Exception e) {

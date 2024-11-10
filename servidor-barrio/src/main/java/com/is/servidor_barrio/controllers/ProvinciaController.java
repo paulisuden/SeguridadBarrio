@@ -14,3 +14,4 @@ public class ProvinciaController extends
         BaseControllerImpl<Provincia, ProvinciaDto, ProvinciaCreateDto, ProvinciaCreateDto, ProvinciaFacadeImpl> {
 
 }
+

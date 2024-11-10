@@ -8,5 +8,5 @@ import java.io.Serializable;
 public class PaisDTO implements Serializable {
     private Long id;
     private String nombre;
-    // private boolean eliminado;
+
 }
