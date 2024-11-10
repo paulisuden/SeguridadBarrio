@@ -1,0 +1,160 @@
+<!-- /*
+* Template Name: Learner
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Display+Playfair:wght@400;700&family=Inter:wght@400;700&display=swap"
+    rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/fonts/icomoon/style.css">
+  <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+  <link rel="stylesheet" href="/css/aos.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <title>Seguridad Stop</title>
+</head>
+
+<body>
+
+  <div class="site-mobile-menu">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close">
+        <span class="icofont-close js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div>
+
+  <div th:replace="~{fragments/navbar :: nav_bar}"></div>
+
+  <div class="untree_co-hero overlay" style="background-image: url('/images/laBastillaBarrio.jpg');">
+
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+
+        <div class="col-12">
+
+          <div class="row justify-content-center ">
+
+            <div class="col-lg-6 text-center ">
+              <a href="https://vimeo.com/342333493" data-fancybox data-aos="fade-up" data-aos-delay="0"
+                class="caption mb-4 d-inline-block">Watch the video</a>
+
+              <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Tu tranquilidad es nuestra
+                misión: seguridad a tu medida</h1>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+
+  </div> <!-- /.untree_co-hero -->
+
+  <div class="untree_co-section bg-light">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="0">
+          <h2 class="line-bottom text-center mb-4">Nuestros clientes</h2>
+          <p>Barrios y consorcios que cuentan con nuestro servicio</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+          <div th:replace="~{fragments/tarjetaUnidadDeNegocio :: tarjeta}"></div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+          <div th:replace="~{fragments/tarjetaUnidadDeNegocio :: tarjeta}"></div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+          <div th:replace="~{fragments/tarjetaUnidadDeNegocio :: tarjeta}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="untree_co-section">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5 mb-5">
+          <h2 class="line-bottom mb-4" data-aos="fade-up" data-aos-delay="0">Sobre nosotros</h2>
+          <p data-aos="fade-up" data-aos-delay="100">En un lugar tranquilo, alejado del bullicio de la ciudad y
+            protegido por la solidez de
+            nuestras experiencias, nacen nuestras soluciones. En Stop, nos dedicamos a
+            garantizar la seguridad y tranquilidad de tu barrio, creando un entorno donde cada vecino se
+            siente protegido y respaldado. Lejos de las preocupaciones diarias, nos enfocamos en
+            mantener tus calles seguras, cuidando lo que realmente importa: tu hogar, tu familia, y tu
+            comunidad.</p>
+          <ul class="list-unstyled ul-check mb-5 primary" data-aos="fade-up" data-aos-delay="200">
+            <li>Gestión de entrada y salida</li>
+            <li>Registro de visitas</li>
+            <li>Administración de jornadas laborales</li>
+          </ul>
+
+          <div class="row count-numbers mb-5">
+            <div class="col-4 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+              <span class="counter d-block"><span data-number="3">0</span><span>+</span></span>
+              <span class="caption-2">Cantidad de clientes</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="bg-1"></div>
+
+          <img src="/images/StopLogo.jpeg" alt="Image" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div> <!-- /.untree_co-section -->
+
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+
+  <div id="overlayer"></div>
+  <div class="loader">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/owl.carousel.min.js"></script>
+  <script src="/js/jquery.animateNumber.min.js"></script>
+  <script src="/js/jquery.waypoints.min.js"></script>
+  <script src="/js/jquery.fancybox.min.js"></script>
+  <script src="/js/jquery.sticky.js"></script>
+  <script src="/js/aos.js"></script>
+  <script src="/js/custom.js"></script>
+
+</body>
+
+</html>
