@@ -13,5 +13,6 @@ public class DepartamentoDTO implements Serializable {
     private ProvinciaDTO provincia;
     private Long provinciaId;
     private ProvinciaDTO provincia;
+    private Long provinciaId;
 
 }
