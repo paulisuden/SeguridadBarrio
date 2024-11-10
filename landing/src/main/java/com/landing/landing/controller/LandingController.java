@@ -19,4 +19,11 @@ public class LandingController {
         model.addAttribute("pageTitle", "Learner - Home");
         return "index.html";
     }
+
+    @GetMapping("/consultaUnidadDeNegocio")
+    public String unidadDeNegocio(Model model) {
+        model.addAttribute("nombreUnidad", "Learner - Home");
+        return "consultaUnidadDeNegocio.html";
+    }
+
 }
