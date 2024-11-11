@@ -20,7 +20,8 @@ public class ServicioDAORest {
   public void crear(ServicioDTO servicio) throws ErrorServiceException {
     try {
       String uri = "http://localhost:8081/api/servicio";
-      System.out.println(servicio);
+      System.out.println("Creando servicio: " + servicio.getId() + ", " + servicio.getNombre());
+      System.out.println(servicio.getImagenId());
       restTemplate.postForEntity(uri, servicio, ServicioDTO.class);
     } catch (Exception ex) {
       ex.printStackTrace();

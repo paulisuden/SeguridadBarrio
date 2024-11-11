@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.ServicioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.rest.ServicioDAORest;
@@ -15,13 +17,24 @@ public class ServicioService {
   @Autowired
   private ServicioDAORest dao;
 
-  public void crear(String nombre) throws ErrorServiceException {
+  @Autowired
+  private ImagenService imagenService;
+
+  public void crear(String nombre, MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
 
       ServicioDTO servicio = new ServicioDTO();
       servicio.setNombre(nombre);
+      servicio.setImagenId(0l);
 
+      if (archivoImagen != null && archivoImagen.getSize() > 0) {
+        ImagenDTO img = imagenService.crear(archivoImagen);
+        if (img != null) {
+          servicio.setImagen(img);
+          servicio.setImagenId(img.getId());
+        }
+      }
       dao.crear(servicio);
 
     } catch (ErrorServiceException e) {
@@ -29,7 +42,7 @@ public class ServicioService {
 
     } catch (Exception ex) {
       ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
+      throw new ErrorServiceException("Error de Sistemas. " + ex.toString());
     }
   }
 
@@ -53,21 +66,35 @@ public class ServicioService {
     }
   }
 
-  public void modificar(Long id, String nombre) throws ErrorServiceException {
+  public void modificar(Long id, String nombre, MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
 
-      ServicioDTO servicio = new ServicioDTO();
-      servicio.setId(id);
+      ServicioDTO servicio = dao.buscar(id);
       servicio.setNombre(nombre);
 
+      if (archivoImagen != null && archivoImagen.getSize() > 0) {
+
+        ImagenDTO img = imagenService.crear(archivoImagen);
+
+        if (img != null) {
+
+          // Elimina las imagen anterior
+          if (servicio.getImagen() != null)
+            imagenService.eliminar(servicio.getImagen().getId());
+
+          servicio.setImagen(img);
+          servicio.setImagenId(img.getId());
+        }
+
+      }
       dao.actualizar(servicio);
 
     } catch (ErrorServiceException e) {
       throw e;
     } catch (Exception ex) {
       ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
+      throw new ErrorServiceException("Error de Sistemas. " + ex.toString());
     }
   }
 

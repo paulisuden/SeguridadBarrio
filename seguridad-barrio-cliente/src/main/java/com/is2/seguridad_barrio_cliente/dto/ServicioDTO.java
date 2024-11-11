@@ -1,7 +1,6 @@
 package com.is2.seguridad_barrio_cliente.dto;
 
 import java.io.Serializable;
-import java.util.List;
 
 import lombok.Data;
 
@@ -9,7 +8,7 @@ import lombok.Data;
 public class ServicioDTO implements Serializable {
   private Long id;
   private String nombre;
-  // private Long negocioId;
-  // private List<NegocioDTO> negocios;
 
+  private Long imagenId;
+  private ImagenDTO imagen;
 }
