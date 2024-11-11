@@ -1,16 +1,23 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
+import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.ServicioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.ServicioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -101,15 +108,16 @@ public class ServicioController {
     }
 
     @PostMapping("/aceptarEditServicio")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+    public String aceptarEdit(
+            @RequestParam MultipartFile archivo,
+            @RequestParam(required = false, defaultValue = "0") Long id,
             @RequestParam String nombre,
             RedirectAttributes attributes, Model model) {
         try {
-
             if (id == 0)
-                servicioService.crear(nombre);
+                servicioService.crear(nombre, archivo);
             else
-                servicioService.modificar(id, nombre);
+                servicioService.modificar(id, nombre, archivo);
 
             attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
@@ -118,7 +126,7 @@ public class ServicioController {
             return error(e.getMessage(), model, id, nombre);
 
         } catch (Exception e) {
-            return error("Error de Sistema", model, id, nombre);
+            return error("Error de Sistema. " + e.toString(), model, id, nombre);
         }
 
     }
@@ -146,6 +154,33 @@ public class ServicioController {
             model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
         }
         return viewEdit;
+    }
+
+    @GetMapping("/imagen/{id}")
+    public ResponseEntity<byte[]> fotoServicio(
+            @PathVariable Long id,
+            Model model) {
+
+        try {
+            ServicioDTO servicio = servicioService.buscar(id);
+            if (servicio.getImagen() == null) {
+                System.out.println("Servicio " + id + " no tiene imagen");
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            System.out.println("Servicio " + id + " SI tiene imagen");
+
+            byte[] imgContenido = servicio.getImagen().getContenido();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            System.out.println("Displaying image");
+            return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
+
+        } catch (Exception ex) {
+            model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
 }

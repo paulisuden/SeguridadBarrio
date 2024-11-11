@@ -1,9 +1,7 @@
 package com.is2.seguridad_barrio_cliente.service;
 
-import com.is2.seguridad_barrio_cliente.dto.LocalidadDTO;
 import com.is2.seguridad_barrio_cliente.dto.DireccionDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
-import com.is2.seguridad_barrio_cliente.rest.LocalidadDAORest;
 import com.is2.seguridad_barrio_cliente.rest.DireccionDAORest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

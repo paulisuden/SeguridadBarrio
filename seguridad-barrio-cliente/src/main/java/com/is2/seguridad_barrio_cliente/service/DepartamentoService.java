@@ -1,10 +1,8 @@
 package com.is2.seguridad_barrio_cliente.service;
 
-import com.is2.seguridad_barrio_cliente.dto.ProvinciaDTO;
 import com.is2.seguridad_barrio_cliente.dto.DepartamentoDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.rest.DepartamentoDAORest;
-import com.is2.seguridad_barrio_cliente.rest.ProvinciaDAORest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +13,6 @@ public class DepartamentoService {
 
     @Autowired
     private DepartamentoDAORest dao;
-    @Autowired
-    private ProvinciaDAORest daoProvincia;
 
     public void crear(String nombre, Long idProvincia) throws ErrorServiceException {
 
