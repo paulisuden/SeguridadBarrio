@@ -42,6 +42,9 @@ public class NegocioController {
     List<DireccionDTO> direcciones = direccionService.listar();
     List<ServicioDTO> servicios = servicioService.listar();
 
+    System.out.println(direcciones);
+    System.out.println(servicios);
+
     model.addAttribute("negocio", negocio);
     model.addAttribute("direcciones", direcciones);
     model.addAttribute("servicios", servicios);

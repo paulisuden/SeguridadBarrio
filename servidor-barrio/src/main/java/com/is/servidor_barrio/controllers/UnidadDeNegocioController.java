@@ -11,8 +11,8 @@ import com.is.servidor_barrio.business.facade.impl.UnidadDeNegocioFacadeImp;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/unidadNegocio")
+@RequestMapping(path = "/api/negocio")
 public class UnidadDeNegocioController extends
-    BaseControllerImpl<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto, UnidadDeNegocioFacadeImp> {
+        BaseControllerImpl<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto, UnidadDeNegocioFacadeImp> {
 
 }

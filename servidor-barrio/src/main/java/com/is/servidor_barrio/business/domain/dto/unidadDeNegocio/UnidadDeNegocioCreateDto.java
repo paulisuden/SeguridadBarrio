@@ -1,5 +1,7 @@
 package com.is.servidor_barrio.business.domain.dto.unidadDeNegocio;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,5 +15,5 @@ public class UnidadDeNegocioCreateDto {
   private String nombre;
   // private DireccionDto direccion;
   private Long direccionId;
-  // private List<Servicios> servicios;
+  private List<Long> serviciosId;
 }

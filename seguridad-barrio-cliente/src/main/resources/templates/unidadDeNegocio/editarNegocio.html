@@ -45,9 +45,14 @@
                                 <div class="form-group">
                                     <label for="direcciones">Direccion</label>
                                     <select id="direcciones" class="form-control" name="idDireccion" th:disabled="${isDisabled}">
-                                        <option th:each="direccion : ${direcciones}" th:value="${direccion.id}" th:text="${direccion.barrio} ${direccion.calle} ${direccion.numeracion}"></option>
+                                        <option th:each="direccion : ${direcciones}" 
+                                                th:value="${direccion.id}" 
+                                                th:text="${direccion.barrio + ' ' + direccion.calle + ' ' + direccion.numeracion}"
+                                                th:selected="${negocio?.direccion?.id == direccion.id}">
+                                        </option>
                                     </select>
                                 </div>
+                                
 
                                 
 
