@@ -60,11 +60,9 @@
                     <div class="row justify-content-center ">
 
                         <div class="col-lg-6 text-center ">
-                            <a href="https://vimeo.com/342333493" data-fancybox data-aos="fade-up" data-aos-delay="0"
-                                class="caption mb-4 d-inline-block">Watch the video</a>
 
-                            <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Nombre del
-                                barrio</h1>
+                            <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100"
+                                th:text="${negocio.nombre}"></h1>
                         </div>
 
                     </div>
@@ -75,75 +73,34 @@
         </div> <!-- /.container -->
 
     </div> <!-- /.untree_co-hero -->
-
     <div class="untree_co-section">
         <div class="container">
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-7 text-center" data-aos="fade-up" data-aos-delay="0">
                     <h2 class="line-bottom text-center mb-4">Servicios contratados</h2>
-                    <p>La unidad de negocio cuenta con los siguientes servicios contratados</p>
+                    <p>
+                        <strong th:text="${negocio.nombre}">Negocio Name</strong> cuenta con los siguientes servicios
+                    </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature">
-                        <span class="uil uil-music"></span>
-                        <h3>Music Class</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature">
-                        <span class="uil uil-calculator-alt"></span>
-                        <h3>Math Class</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature">
-                        <span class="uil uil-book-open"></span>
-                        <h3>English Class</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
-                    </div>
-                </div>
 
+            <div class="row justify-content-center">
+                <div th:each="servicio : ${servicios}" class="col-md-4 col-lg-3 d-flex align-items-stretch mb-4">
+                    <div
+                        class="custom-media card h-100 d-flex flex-column justify-content-center align-items-center text-center">
+                        <div class="card-body mt-auto"> <!-- Added margin-top here -->
+                            <h5 class="card-title" th:text="${servicio.nombre}">Card title</h5>
+                        </div>
+                        <img th:src="${'/negocio/servicio/imagen/' + servicio.id}" alt="" class="img-fluid height: 150px;
+                            width: 150px;
+                            border-radius: 15%;
+                            object-fit: cover;">
 
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature">
-                        <span class="uil uil-book-alt"></span>
-                        <h3>Reading for Kids</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature">
-                        <span class="uil uil-history"></span>
-                        <h3>History Class</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature">
-                        <span class="uil uil-headphones"></span>
-                        <h3>Music</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there live the
-                            blind texts.</p>
                     </div>
                 </div>
             </div>
-        </div> <!-- /.container -->
-    </div> <!-- /.untree_co-section -->
+        </div>
+    </div>
 
     <div th:replace="~{fragments/footer :: footer}"></div>
 

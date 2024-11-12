@@ -119,8 +119,6 @@ public class ProvinciaController {
 
         try {
 
-            System.out.println(idPais);
-
             if (id == 0) {
                 provinciaService.crear(nombre, idPais);
             } else {

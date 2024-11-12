@@ -2,7 +2,6 @@ package com.is2.seguridad_barrio_cliente.service;
 
 import com.is2.seguridad_barrio_cliente.dto.LocalidadDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
-import com.is2.seguridad_barrio_cliente.rest.DepartamentoDAORest;
 import com.is2.seguridad_barrio_cliente.rest.LocalidadDAORest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +10,6 @@ import java.util.List;
 
 @Service
 public class LocalidadService {
-
-    @Autowired
-    private DepartamentoDAORest daoDepartamento;
     @Autowired
     private LocalidadDAORest dao;
 

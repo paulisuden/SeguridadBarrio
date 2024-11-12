@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+<div class="container-scroller" >
+
+    <!-- Navbar -->
+    <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+
+    <!-- Sidebar -->
+    <div class="container-fluid page-body-wrapper">
+        <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+
+        <!-- Main Content -->
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Lista Unidad De Negocio</h4>
+                    <a class="btn btn-success btn-sm btn-icon-text" th:href="@{/negocio/altaNegocio}" role="button">
+                        <i class="typcn typcn-plus btn-icon-append"></i>
+                    </a>
+                    <hr>
+                    <div th:if="${msgExito != null}" class="alert alert-success" th:text="${msgExito}" role="alert"></div>
+                    <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}" role="alert"></div>
+                    <table class="table table-hover table-responsive">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Acciones</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Servicios</th>
+                                <th scope="col">DireccionId</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="negocio : ${listaNegocio}">
+                                <td>
+                                    <a th:href="@{/negocio/consultar(id=${negocio.id})}" class="btn btn-warning btn-sm btn-icon-text" title="Consultar">
+                                        <i class="typcn typcn-eye-outline btn-icon-append"></i> Consultar
+                                    </a>
+                                    <a th:href="@{/negocio/modificar(id=${negocio.id})}" class="btn btn-info btn-sm btn-icon-text mr-3" title="Modificar">
+                                        <i class="typcn typcn-edit btn-icon-append"></i> Modificar
+                                    </a>
+                                    <a th:href="@{/negocio/baja(id=${negocio.id})}" class="btn btn-danger btn-sm btn-icon-text" title="Eliminar">
+                                        <i class="typcn typcn-delete-outline btn-icon-append"></i> Eliminar
+                                    </a>
+                                </td>
+                                <td th:text="${negocio.nombre}"></td>
+                                
+                                <!-- Loop through each servicio in negocio.servicios to display the list of services -->
+                                <td>
+                                    <ul>
+                                        <li th:each="servicio : ${negocio.servicios}" th:text="${servicio.nombre}"></li>
+                                    </ul>
+                                </td>
+                                
+                                <td th:text="${negocio.direccion.id}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
+
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+
+</body>
+</html>

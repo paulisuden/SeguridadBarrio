@@ -15,8 +15,6 @@ public class ProvinciaService {
 
     @Autowired
     private ProvinciaDAORest dao;
-    @Autowired
-    private PaisDAORest daoPais;
 
     public void crear(String nombre, Long idPais) throws ErrorServiceException {
 
