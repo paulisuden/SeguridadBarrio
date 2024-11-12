@@ -26,8 +26,8 @@ public class ProvinciaFacadeImpl
   }
 
   public ProvinciaDto save(ProvinciaCreateDto provinciaCreateDto) throws Exception {
+    System.out.println(provinciaCreateDto.getPaisId());
     var provinciaEntity = baseMapper.toEntityCreate(provinciaCreateDto);
-    System.out.println(provinciaCreateDto.getNombre());
     var paisEntity = paisService.findById(provinciaCreateDto.getPaisId());
     provinciaEntity.setPais(paisEntity);
     var entityCreated = baseService.save(provinciaEntity);

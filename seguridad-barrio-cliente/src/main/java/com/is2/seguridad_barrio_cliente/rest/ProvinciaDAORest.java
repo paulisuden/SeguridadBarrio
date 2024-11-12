@@ -18,6 +18,7 @@ public class ProvinciaDAORest {
 
     public void crear(ProvinciaDTO provincia) throws ErrorServiceException {
         try {
+
             String uri = "http://localhost:8081/api/provincia";
             restTemplate.postForEntity(uri, provincia, ProvinciaDTO.class);
         } catch (Exception ex) {

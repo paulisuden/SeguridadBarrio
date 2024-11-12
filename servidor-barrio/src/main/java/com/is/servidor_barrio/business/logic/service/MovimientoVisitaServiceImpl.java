@@ -9,6 +9,7 @@ import com.is.servidor_barrio.business.repository.BaseRepository;
 @Service
 public class MovimientoVisitaServiceImpl extends BaseServiceImpl<MovimientoVisita, Long>
     implements MovimientoVisitaService {
+      
   @Autowired
   public MovimientoVisitaServiceImpl(BaseRepository<MovimientoVisita, Long> baseRepository) {
     super(baseRepository);

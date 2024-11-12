@@ -11,8 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class InmuebleCreateDto {
   private String numeracion;
-  private String piso;
-  private String deparamento;
-  // private EstadoInmueble EstadoInmueble;
-  // private UnidadDeNegocioDto negocio;
+  private String calle;
+  private String manzana;
+  // private Long idUnidadDeNegocio;
 }

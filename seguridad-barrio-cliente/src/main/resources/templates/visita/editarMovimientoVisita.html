@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+<div class="container-scroller">
+
+    <!-- Navbar -->
+    <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+    <!-- Sidebar -->
+    <div class="container-fluid page-body-wrapper">
+        <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+
+        <!-- FORMULARIO -->
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card large-form">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h5 class="card-title">Movimiento de Visita</h5>
+
+                        <form class="forms-sample" action="/movimientoVisita/aceptarEditMovimientoVisita" method="POST">
+
+                            <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                            <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
+                            <div class="form-group">
+                                <!-- Campo oculto para ID -->
+                                <input type="hidden" name="id" th:value="${movimientoVisita.id != null ? movimientoVisita.id : 0}">
+
+                                <!-- Fecha del Movimiento -->
+                                <label for="fechasMovimiento">Fecha del Movimiento</label>
+                                <input type="date" id="fechasMovimiento" name="fechasMovimiento"
+                                    th:value="${#dates.format(movimientoVisita.fechasMovimiento, 'yyyy-MM-dd')}"
+                                    th:disabled="${isDisabled}" class="form-control"
+                                    placeholder="Fecha del Movimiento" required="required">
+
+                                <!-- Observación -->
+                                <label for="observacion">Observación</label>
+                                <textarea id="observacion" name="observacion"
+                                        th:disabled="${isDisabled}" class="form-control"
+                                        placeholder="Observación" required="required"
+                                        rows="3" th:text="${movimientoVisita.observacion}">
+                                </textarea>
+
+                                <!-- Estado del Movimiento -->
+                                <label for="estadoMovimiento">Estado del Movimiento</label>
+                                <select id="estadoMovimiento" class="form-control" name="estadoMovimiento"
+                                        th:disabled="${isDisabled}">
+                                    <option th:each="estado : ${T(com.is2.seguridad_barrio_cliente.enumeration.EstadoMovimiento).values()}"
+                                            th:value="${estado}"
+                                            th:text="${estado}"
+                                            th:selected="${movimientoVisita.estadoMovimiento == estado}">
+                                    </option>
+                                </select>
+
+                                <!-- Tipo de Movilidad -->
+                                <label for="tipoMovilidad">Tipo de Movilidad</label>
+                                <select id="tipoMovilidad" class="form-control" name="tipoMovilidad"
+                                        th:disabled="${isDisabled}">
+                                    <option th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoMovilidad).values()}"
+                                            th:value="${tipo}"
+                                            th:text="${tipo}"
+                                            th:selected="${movimientoVisita.tipoMovilidad == tipo}">
+                                    </option>
+                                </select>
+
+                                <!-- Descripción de Movilidad -->
+                                <label for="descripcionMovilidad">Descripción de Movilidad</label>
+                                <input type="text" id="descripcionMovilidad" name="descripcionMovilidad"
+                                    th:value="${movimientoVisita.descripcionMovilidad}"
+                                    th:disabled="${isDisabled}" class="form-control"
+                                    placeholder="Descripción de Movilidad" required="required">
+
+                                <!-- Visitante -->
+                                <div class="form-group">
+                                    <label for="visitantes">Visitante</label>
+                                    <select id="visitantes" class="form-control" name="idVisitante" th:disabled="${isDisabled}">
+                                        <option 
+                                        th:each="visitante : ${visitantes}" th:value="${visitante.id}" 
+                                        th:text="${visitante.nombre + ' ' + visitante.apellido}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Inmuebles -->
+                                <div class="form-group">
+                                    <label for="inmuebles">Inmuebles</label>
+                                    <select id="inmuebles" class="form-control" name="idInmueble" th:disabled="${isDisabled}">
+                                        <option th:each="inmueble : ${inmuebles}"
+                                                th:value="${inmueble.id}"
+                                                th:text="${inmueble.calle + ' ' + inmueble.manzana + ' ' + inmueble.numeracion}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+                            <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2" th:disabled="${isDisabled}">
+                                Aceptar
+                            </button>
+
+                            <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                                Cancelar
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
+<!-- JS -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<script th:src="@{/js/off-canvas.js}"></script>
+<script th:src="@{/js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/template.js}"></script>
+
+</body>
+
+</html>

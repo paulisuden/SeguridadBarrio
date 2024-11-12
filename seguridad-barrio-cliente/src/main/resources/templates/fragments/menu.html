@@ -5,7 +5,7 @@
 
         <li class="nav-item">
             <a class="nav-link" th:href="@{/inicio}">
-                <i class="typcn typcn-home menu-icon"></i>
+                <i class="typcn typcn-arrow-left-thick menu-icon"></i>
                 <span class="menu-title">HOME</span>
             </a>
         </li>
@@ -48,11 +48,31 @@
             <div class="collapse" id="visita">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/visita/listarVisitante.html}">Visitas</a>
+                        <a class="nav-link" th:href="@{/visitante/listarVisitante}">Visitas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/movimientoVisita/listarMovimientoVisita}">Movimientos</a>
                     </li>
                 </ul>
             </div>
         </li>
+
+        <!-- INMUEBLES -->
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#inmueble" aria-expanded="false" aria-controls="inmueble">
+                <i class="typcn typcn-home menu-icon"></i>
+                <span class="menu-title">Inmuebles</span>
+            </a>
+            <div class="collapse" id="inmueble">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/inmueble/listarInmueble}">Inmuebles</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
 
     </ul>
 </nav>

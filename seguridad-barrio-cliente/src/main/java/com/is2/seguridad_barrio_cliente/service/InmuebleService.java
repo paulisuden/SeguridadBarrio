@@ -1,30 +1,29 @@
 package com.is2.seguridad_barrio_cliente.service;
 
+import java.util.List;
 
-import com.is2.seguridad_barrio_cliente.dto.ProvinciaDTO;
-import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
-import com.is2.seguridad_barrio_cliente.rest.PaisDAORest;
-import com.is2.seguridad_barrio_cliente.rest.ProvinciaDAORest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.is2.seguridad_barrio_cliente.dto.InmuebleDTO;
+import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
+import com.is2.seguridad_barrio_cliente.rest.InmuebleDAORest;
 
 @Service
-public class ProvinciaService {
-
+public class InmuebleService {
     @Autowired
-    private ProvinciaDAORest dao;
+    private InmuebleDAORest dao;
 
-    public void crear(String nombre, Long idPais) throws ErrorServiceException {
+    public void crear(String numeracion, String calle, String manzana) throws ErrorServiceException {
 
         try {
 
-            ProvinciaDTO provincia = new ProvinciaDTO();
-            provincia.setNombre(nombre);
-            provincia.setPaisId(idPais);
-
-            dao.crear(provincia);
+            InmuebleDTO inmueble = new InmuebleDTO();
+            inmueble.setCalle(calle);
+            inmueble.setManzana(manzana);
+            inmueble.setNumeracion(numeracion);
+            //inmueble.setIdNegocio(idNegocio);
+            dao.crear(inmueble);
 
         } catch (ErrorServiceException e) {
             throw e;
@@ -35,17 +34,17 @@ public class ProvinciaService {
         }
     }
 
-    public ProvinciaDTO buscar(Long id) throws ErrorServiceException {
+    public InmuebleDTO buscar(Long id) throws ErrorServiceException {
 
         try {
 
             if (id == 0) {
-                throw new ErrorServiceException("Debe indicar la provincia");
+                throw new ErrorServiceException("Debe indicar la localidad");
             }
 
-            ProvinciaDTO provincia = dao.buscar(id);
+            InmuebleDTO inmueble = dao.buscar(id);
 
-            return provincia;
+            return inmueble;
 
         } catch (ErrorServiceException ex) {
             throw ex;
@@ -55,16 +54,18 @@ public class ProvinciaService {
         }
     }
 
-    public void modificar(Long id, String nombre, Long idPais) throws ErrorServiceException {
+    public void modificar(Long id, String numeracion, String calle, String manzana) throws ErrorServiceException {
 
         try {
 
-            ProvinciaDTO provincia = new ProvinciaDTO();
-            provincia.setId(id);
-            provincia.setNombre(nombre);
-            provincia.setPaisId(idPais);
+            InmuebleDTO inmueble = new InmuebleDTO();
+            inmueble.setId(id);
+            inmueble.setCalle(calle);
+            inmueble.setManzana(manzana);
+            inmueble.setNumeracion(numeracion);
+            //inmueble.setIdNegocio(idNegocio);
 
-            dao.actualizar(provincia);
+            dao.actualizar(inmueble);
 
         } catch (ErrorServiceException e) {
             throw e;
@@ -90,7 +91,7 @@ public class ProvinciaService {
 
     }
 
-    public List<ProvinciaDTO> listar() throws ErrorServiceException {
+    public List<InmuebleDTO> listar() throws ErrorServiceException {
         try {
             return dao.listar();
         } catch (Exception ex) {
@@ -98,4 +99,5 @@ public class ProvinciaService {
             throw new ErrorServiceException("Error de sistema");
         }
     }
+    
 }
