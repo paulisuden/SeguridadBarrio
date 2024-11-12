@@ -164,16 +164,13 @@ public class ServicioController {
         try {
             ServicioDTO servicio = servicioService.buscar(id);
             if (servicio.getImagen() == null) {
-                System.out.println("Servicio " + id + " no tiene imagen");
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-            System.out.println("Servicio " + id + " SI tiene imagen");
 
             byte[] imgContenido = servicio.getImagen().getContenido();
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
-            System.out.println("Displaying image");
             return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
 
         } catch (Exception ex) {

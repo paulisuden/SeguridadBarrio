@@ -1,4 +1,4 @@
-package com.is2.seguridad_barrio_cliente.rest;
+package com.landing.landing.rest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.is2.seguridad_barrio_cliente.dto.ServicioDTO;
-import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
+import com.landing.landing.dto.ServicioDTO;
+import com.landing.landing.error.ErrorServiceException;
 
 @Service
 public class ServicioDAORest {

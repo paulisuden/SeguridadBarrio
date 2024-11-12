@@ -1,13 +1,18 @@
 package com.landing.landing.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
+import com.landing.landing.error.ErrorServiceException;
+import com.landing.landing.service.NegocioService;
 
 @Controller
 public class LandingController {
+
+    @Autowired
+    private NegocioService negocioService;
 
     @GetMapping("/")
     public String enter() {
@@ -16,14 +21,12 @@ public class LandingController {
 
     @GetMapping("/landing")
     public String landing(Model model) {
-        model.addAttribute("pageTitle", "Learner - Home");
+        try {
+            var negocios = negocioService.listar();
+            model.addAttribute("negocios", negocios);
+        } catch (ErrorServiceException e) {
+            return "error.html";
+        }
         return "index.html";
     }
-
-    @GetMapping("/consultaUnidadDeNegocio")
-    public String unidadDeNegocio(Model model) {
-        model.addAttribute("nombreUnidad", "Learner - Home");
-        return "consultaUnidadDeNegocio.html";
-    }
-
 }
