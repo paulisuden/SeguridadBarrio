@@ -41,7 +41,6 @@ public class NegocioController {
     negocio = new NegocioDTO();
     List<DireccionDTO> direcciones = direccionService.listar();
     List<ServicioDTO> servicios = servicioService.listar();
-
     model.addAttribute("negocio", negocio);
     model.addAttribute("direcciones", direcciones);
     model.addAttribute("servicios", servicios);
@@ -68,7 +67,6 @@ public class NegocioController {
       NegocioDTO negocio = negocioService.buscar(id);
       List<DireccionDTO> direcciones = direccionService.listar();
       List<ServicioDTO> servicios = servicioService.listar();
-
       model.addAttribute("negocio", negocio);
       model.addAttribute("direcciones", direcciones);
       model.addAttribute("servicios", servicios);
