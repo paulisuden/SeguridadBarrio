@@ -30,14 +30,4 @@ public class PaisFacadeImp extends BaseFacadeImpl<Pais, PaisDto, PaisCreateDto, 
     return baseMapper.toDTO(entityCreated);
   }
 
-  @Override
-  public PaisDto save(PaisCreateDto request) throws Exception {
-    System.out.println(request);
-    var entityToCreate = baseMapper.toEntityCreate(request);
-    System.out.println(entityToCreate);
-    var entityCreated = baseService.save(entityToCreate);
-    System.out.println(entityCreated);
-    return baseMapper.toDTO(entityCreated);
-  }
-
 }
