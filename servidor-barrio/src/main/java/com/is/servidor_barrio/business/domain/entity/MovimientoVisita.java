@@ -1,14 +1,12 @@
 package com.is.servidor_barrio.business.domain.entity;
 
 import java.sql.Date;
-import java.util.List;
 
 import com.is.servidor_barrio.business.domain.enumeration.EstadoMovimiento;
 import com.is.servidor_barrio.business.domain.enumeration.TipoMovilidad;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,10 +23,8 @@ public class MovimientoVisita extends Base {
   private EstadoMovimiento estadoMovimiento;
   private TipoMovilidad tipoMovilidad;
   private String descripcionMovilidad;
-
   @ManyToOne
   private Visitante visitante;
-
-  @OneToMany
-  private List<Inmueble> inmuebles;
+  @ManyToOne
+  private Inmueble inmueble;
 }

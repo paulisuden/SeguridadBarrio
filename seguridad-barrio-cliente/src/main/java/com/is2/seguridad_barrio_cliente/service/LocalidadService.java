@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.service;
 
-import com.is2.seguridad_barrio_cliente.dto.DepartamentoDTO;
 import com.is2.seguridad_barrio_cliente.dto.LocalidadDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.rest.DepartamentoDAORest;

@@ -13,9 +13,21 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 @Service
 public class PaisFacadeImp extends BaseFacadeImpl<Pais, PaisDto, PaisCreateDto, PaisCreateDto, Long>
     implements PaisFacade {
+
   public PaisFacadeImp(BaseService<Pais, Long> baseService,
       BaseMapper<Pais, PaisDto, PaisCreateDto, PaisCreateDto> baseMapper) {
     super(baseService, baseMapper);
+
+  }
+
+  @Override
+  public PaisDto save(PaisCreateDto request) throws Exception {
+    System.out.println(request.getNombre());
+    var entityToCreate = baseMapper.toEntityCreate(request);
+    System.out.println(entityToCreate.getNombre());
+    var entityCreated = baseService.save(entityToCreate);
+    System.out.println(entityCreated.getNombre());
+    return baseMapper.toDTO(entityCreated);
   }
 
 }
