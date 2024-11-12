@@ -13,7 +13,8 @@
         <!--DIRECCION -->
 
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#direccion" aria-expanded="false" aria-controls="direccion">
+            <a class="nav-link" data-toggle="collapse" href="#direccion" aria-expanded="false"
+                aria-controls="direccion">
                 <i class="typcn typcn-location menu-icon"></i>
                 <span class="menu-title">Dirección</span>
             </a>
@@ -68,6 +69,40 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/inmueble/listarInmueble}">Inmuebles</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- UNIDAD DE NEGOCIO -->
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#unidadDeNegocio" aria-expanded="false"
+                aria-controls="unidadDeNegocio">
+                <i class="typcn typcn-home menu-icon"></i>
+                <span class="menu-title">Uniades de negocio</span>
+            </a>
+            <div class="collapse" id="unidadDeNegocio">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/negocio/listarNegocio}">Unidades de negocios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/servicio/listarServicio}">Servicios</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- PERSONAS -->
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#personas" aria-expanded="false" aria-controls="personas">
+                <i class="typcn typcn-home menu-icon"></i>
+                <span class="menu-title">Personas</span>
+            </a>
+            <div class="collapse" id="personas">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/contacto/listarContacto}">Contactos</a>
                     </li>
                 </ul>
             </div>
