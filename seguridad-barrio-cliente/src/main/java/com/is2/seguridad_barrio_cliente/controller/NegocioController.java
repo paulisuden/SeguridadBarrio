@@ -120,9 +120,6 @@ public class NegocioController {
       @RequestParam Long idDireccion,
       @RequestParam(name = "idServicio[]", required = false) List<Long> idServicios,
       RedirectAttributes attributes, Model model) {
-    System.out.println(nombre);
-    System.out.println(idDireccion);
-    System.out.println(archivo);
     try {
       if (id == 0) {
         negocioService.crear(nombre, idDireccion, idServicios, archivo);
