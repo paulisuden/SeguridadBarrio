@@ -1,5 +1,6 @@
 package com.is.servidor_barrio.business.facade.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.is.servidor_barrio.business.domain.dto.inmueble.InmuebleCreateDto;
@@ -9,7 +10,6 @@ import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class InmuebleFacadeImp

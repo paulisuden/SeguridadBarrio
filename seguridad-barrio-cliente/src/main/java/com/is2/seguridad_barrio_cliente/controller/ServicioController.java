@@ -50,7 +50,7 @@ public class ServicioController {
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
         try {
             servicioService.eliminar(id);
-            redirectAttributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Servicio #" + id + " eliminado correctamente");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -58,39 +58,6 @@ public class ServicioController {
             return redirectList;
         }
     }
-
-    // public String baja(@RequestParam Long id, RedirectAttributes attributes,
-    // Model model) {
-
-    // try {
-
-    // servicioService.eliminar(id);
-    // attributes.addFlashAttribute("msgExito", "La acción fue realizada
-    // correctamente.");
-    // return redirectList;
-
-    // } catch (ErrorServiceException e) {
-    // model.addAttribute("msgError", e.getMessage());
-    // return redirectList;
-    // }
-    // }
-
-    // @GetMapping("/baja")
-    // public String baja(@RequestParam Long id, RedirectAttributes attributes,
-    // Model model) {
-
-    // try {
-
-    // servicioService.eliminar(id);
-    // attributes.addFlashAttribute("msgExito", "La acción fue realizada
-    // correctamente.");
-    // return redirectList;
-
-    // } catch (ErrorServiceException e) {
-    // model.addAttribute("msgError", e.getMessage());
-    // return redirectList;
-    // }
-    // }
 
     @GetMapping("/modificar")
     public String modificar(@RequestParam String id, Model model) {
@@ -146,12 +113,13 @@ public class ServicioController {
             @RequestParam String nombre,
             RedirectAttributes attributes, Model model) {
         try {
-            if ("0".equals(id))
+            if ("0".equals(id)) {
                 servicioService.crear(nombre, archivo);
-            else
+                attributes.addFlashAttribute("msgExito", "Servicio creado correctamente");
+            } else {
                 servicioService.modificar(id, nombre, archivo);
-
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+                attributes.addFlashAttribute("msgExito", "Servicio #" + id + " editado correctamente");
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {

@@ -42,13 +42,13 @@ public class DireccionController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
             direccionService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Direccion #" + id + " eliminada correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -120,11 +120,14 @@ public class DireccionController {
 
             if ("0".equals(id)) {
                 direccionService.crear(calle, numeracion, barrio, observacion, idLocalidad);
+                attributes.addFlashAttribute("msgExito", "Direccion creada correctamente.");
+
             } else {
                 direccionService.modificar(id, calle, numeracion, barrio, observacion, idLocalidad);
+                attributes.addFlashAttribute("msgExito", "Direccion #" + id + " editada correctamente.");
+
             }
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {

@@ -57,6 +57,22 @@ public class DepartamentoController {
         }
     }
 
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+
+        try {
+
+            departamentoService.eliminar(id);
+            redirectAttributes.addFlashAttribute("msgExito", "Departamento #" + id + " eliminado correctamente.");
+
+            return redirectList;
+
+        } catch (ErrorServiceException e) {
+            model.addAttribute("msgError", e.getMessage());
+            return redirectList;
+        }
+    }
+
     @GetMapping("/modificar")
     public String modificar(@RequestParam String id, Model model) {
 
@@ -120,11 +136,13 @@ public class DepartamentoController {
 
             if ("0".equals(id)) {
                 departamentoService.crear(nombre, idProvincia);
+                attributes.addFlashAttribute("msgExito", "Departamento creado correctamente.");
+
             } else {
                 departamentoService.modificar(id, nombre, idProvincia);
+                attributes.addFlashAttribute("msgExito", "Departamento #" + id + " editado correctamente.");
             }
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {

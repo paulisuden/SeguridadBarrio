@@ -31,7 +31,7 @@
 
             <!-- Prepara el popup de delete y le pasa como argumentos el metodo POST y el mensaje -->
             <div
-              th:include="fragments/popup.html :: popupDelete('/servicio/baja', '¿Está seguro de eliminar este servicio?')">
+              th:replace="~{fragments/popup.html :: popupDelete('/servicio/baja', '¿Está seguro de eliminar este servicio?')}">
             </div>
 
             <div class="row">
@@ -41,42 +41,50 @@
                     <table class="table table-striped project-orders-table">
                       <thead>
                         <tr>
+                          <th class="ml-5"></th>
                           <th class="ml-5">ID</th>
                           <th class="ml-5">Nombre</th>
                           <th class="ml-5">Imagen</th>
-                          <th class="ml-5">Acciones</th>
                         </tr>
                       </thead>
 
                       <tbody>
                         <tr th:each="servicio : ${listaServicio}">
+                          <td>
+                            <div class="d-flex align-items-center">
 
+                              <div class="dropdown">
+
+                                <button type="button" class="btn btn-dark btn-rounded btn-icon" data-toggle="dropdown">
+                                  <i class="mdi mdi-dots-vertical"></i>
+                                </button>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3">
+                                  <h6 class="dropdown-header">Acciones</h6>
+                                  <a th:href="@{/servicio/modificar(id=${servicio.id})}" type="button"
+                                    class="dropdown-item">
+                                    Editar
+                                    <i class="typcn typcn-edit btn-icon-append"></i>
+                                  </a>
+                                  <a th:href="@{/servicio/consultar(id=${servicio.id})}" type="button"
+                                    class="dropdown-item">
+                                    Consultar
+                                    <i class="typcn typcn-eye-outline btn-icon-append"></i>
+                                  </a>
+                                  <a href="#" class="dropdown-item" data-toggle="modal" data-target="#popupPanel"
+                                    th:attr="data-id=${servicio.id}">
+                                    Eliminar
+                                    <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
                           <td th:text="'#' + ${servicio.id}"></td>
                           <td th:text="${servicio.nombre}"></td>
                           <td>
                             <img th:src="${'/servicio/imagen/' + servicio.id}" alt=""
                               style="height: 100px; width: 100px; border-radius: 15%">
-                          </td>
-                          <td>
-                            <div class="d-flex align-items-center">
-                              <a th:href="@{/servicio/modificar(id=${servicio.id})}" type="button"
-                                class="btn btn-success btn-sm btn-icon-text mr-3">
-                                Editar
-                                <i class="typcn typcn-edit btn-icon-append"></i>
-                              </a>
-                              <a th:href="@{/servicio/consultar(id=${servicio.id})}" type="button"
-                                class="btn btn-warning btn-sm btn-icon-text mr-3">
-                                Consultar
-                                <i class="typcn typcn-eye-outline btn-icon-append"></i>
-                              </a>
-                              <!-- Botón para abrir el modal -->
-                              <a href="#" class="btn btn-danger btn-sm btn-icon-text mr-3" data-toggle="modal"
-                                data-target="#popupPanel" th:attr="data-id=${servicio.id}">
-                                Eliminar
-                                <i class="typcn typcn-delete-outline btn-icon-append"></i>
-                              </a>
-
-                            </div>
                           </td>
                         </tr>
                       </tbody>

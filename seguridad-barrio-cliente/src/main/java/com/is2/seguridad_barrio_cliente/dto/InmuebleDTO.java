@@ -8,6 +8,6 @@ public class InmuebleDTO {
     private String numeracion;
     private String calle;
     private String manzana;
-    // private Long idNegocio;
-    // private UnidadDeNegocioDTO negocio;
+    private String idUnidadDeNegocio;
+    private NegocioDTO unidadDeNegocio;
 }

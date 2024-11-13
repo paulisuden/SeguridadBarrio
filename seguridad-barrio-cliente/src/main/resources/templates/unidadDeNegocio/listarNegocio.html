@@ -19,7 +19,7 @@
                 <!-- Main Content -->
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Lista Unidad De Negocio</h4>
+                        <h4 class="card-title">Lista Negocio</h4>
                         <a class="btn btn-success btn-sm btn-icon-text" th:href="@{/negocio/altaNegocio}" role="button">
                             <i class="typcn typcn-plus btn-icon-append"></i>
                         </a>
@@ -29,6 +29,11 @@
                         <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}" role="alert">
                         </div>
 
+                        <!-- Prepara el popup de delete y le pasa como argumentos el metodo POST y el mensaje -->
+                        <div
+                            th:replace="~{fragments/popup.html :: popupDelete('/negocio/baja', '¿Está seguro de eliminar este negocio?')}">
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card">
@@ -36,17 +41,52 @@
                                         <table class="table table-striped project-orders-table">
                                             <thead>
                                                 <tr>
+                                                    <th class="ml-5"></th>
                                                     <th class="ml-5">ID</th>
                                                     <th class="ml-5">Nombre</th>
                                                     <th class="ml-5">Servicios</th>
-                                                    <th class="ml-5">Acciones</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
                                                 <tr th:each="negocio : ${listaNegocio}">
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
 
-                                                    <td th:text="${negocio.id}"></td>
+                                                            <div class="dropdown">
+
+                                                                <button type="button"
+                                                                    class="btn btn-dark btn-rounded btn-icon"
+                                                                    data-toggle="dropdown">
+                                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                                </button>
+
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuIconButton3">
+                                                                    <h6 class="dropdown-header">Acciones</h6>
+                                                                    <a th:href="@{/negocio/modificar(id=${negocio.id})}"
+                                                                        type="button" class="dropdown-item">
+                                                                        Editar
+                                                                        <i class="typcn typcn-edit btn-icon-append"></i>
+                                                                    </a>
+                                                                    <a th:href="@{/negocio/consultar(id=${negocio.id})}"
+                                                                        type="button" class="dropdown-item">
+                                                                        Consultar
+                                                                        <i
+                                                                            class="typcn typcn-eye-outline btn-icon-append"></i>
+                                                                    </a>
+                                                                    <a href="#" class="dropdown-item"
+                                                                        data-toggle="modal" data-target="#popupPanel"
+                                                                        th:attr="data-id=${negocio.id}">
+                                                                        Eliminar
+                                                                        <i
+                                                                            class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td th:text="'#' + ${negocio.id}"></td>
                                                     <td th:text="${negocio.nombre}"></td>
                                                     <!-- Loop through each servicio in negocio.servicios to display the list of services -->
                                                     <td>
@@ -55,30 +95,6 @@
                                                                 th:text="${servicio.nombre}">
                                                             </li>
                                                         </ul>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <a th:href="@{/negocio/modificar(id=${negocio.id})}"
-                                                                type="button"
-                                                                class="btn btn-success btn-sm btn-icon-text mr-3">
-                                                                Editar
-                                                                <i class="typcn typcn-edit btn-icon-append"></i>
-                                                            </a>
-                                                            <a th:href="@{/negocio/consultar(id=${negocio.id})}"
-                                                                type="button"
-                                                                class="btn btn-warning btn-sm btn-icon-text mr-3">
-                                                                Consultar
-                                                                <i class="typcn typcn-eye-outline btn-icon-append"></i>
-                                                            </a>
-
-                                                            <a th:href="@{/negocio/baja(id=${negocio.id})}"
-                                                                type="button"
-                                                                class="btn btn-danger btn-sm btn-icon-text mr-3">
-                                                                Eliminar
-                                                                <i
-                                                                    class="typcn typcn-delete-outline btn-icon-append"></i>
-                                                            </a>
-                                                        </div>
                                                     </td>
                                                 </tr>
                                             </tbody>

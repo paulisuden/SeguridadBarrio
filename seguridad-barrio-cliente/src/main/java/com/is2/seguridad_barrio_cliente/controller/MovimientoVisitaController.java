@@ -53,13 +53,13 @@ public class MovimientoVisitaController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
             movimientoVisitaService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Movimiento #" + id + " eliminado correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -132,14 +132,20 @@ public class MovimientoVisitaController {
             RedirectAttributes attributes, Model model) {
         try {
 
-            if ("0".equals(id))
+            if ("0".equals(id)) {
                 movimientoVisitaService.crear(fechasMovimiento, observacion, estadoMovimiento,
                         tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
-            else
+                attributes.addFlashAttribute("msgExito", "Movimiento creado correctamente.");
+
+            }
+
+            else {
                 movimientoVisitaService.modificar(id, fechasMovimiento, observacion, estadoMovimiento,
                         tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
+                attributes.addFlashAttribute("msgExito", "Movimiento #" + id + " editado correctamente.");
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            }
+
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -165,7 +171,7 @@ public class MovimientoVisitaController {
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != "0") {
+            if ("0".equals(id)) {
                 model.addAttribute("movimientoVisita", movimientoVisitaService.buscar(id));
             } else {
                 VisitanteDTO visitante = visitanteServie.buscar(idVisitante);

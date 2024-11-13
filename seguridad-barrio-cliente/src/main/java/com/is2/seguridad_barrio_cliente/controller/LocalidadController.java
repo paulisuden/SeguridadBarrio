@@ -57,6 +57,21 @@ public class LocalidadController {
         }
     }
 
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+
+        try {
+
+            localidadService.eliminar(id);
+            redirectAttributes.addFlashAttribute("msgExito", "Localidad #" + id + " eliminada correctamente.");
+            return redirectList;
+
+        } catch (ErrorServiceException e) {
+            model.addAttribute("msgError", e.getMessage());
+            return redirectList;
+        }
+    }
+
     @GetMapping("/modificar")
     public String modificar(@RequestParam String id, Model model) {
 
@@ -121,11 +136,13 @@ public class LocalidadController {
 
             if ("0".equals(id)) {
                 localidadService.crear(nombre, codigoPostal, idDepartamento);
+                attributes.addFlashAttribute("msgExito", "Localidad creada correctamente.");
+
             } else {
                 localidadService.modificar(id, nombre, codigoPostal, idDepartamento);
+                attributes.addFlashAttribute("msgExito", "Localidad #" + id + " editada correctamente.");
             }
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {

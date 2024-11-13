@@ -37,13 +37,12 @@ public class PaisController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
-
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
         try {
 
             paisService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Pais #" + id + " eliminado correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -105,12 +104,15 @@ public class PaisController {
             RedirectAttributes attributes, Model model) {
         try {
 
-            if ("0".equals(id))
+            if ("0".equals(id)) {
                 paisService.crear(nombre);
-            else
-                paisService.modificar(id, nombre);
+                attributes.addFlashAttribute("msgExito", "Pais creado correctamente");
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            } else {
+                paisService.modificar(id, nombre);
+                attributes.addFlashAttribute("msgExito", "Pais #" + id + " editado correctamente");
+
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {
