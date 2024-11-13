@@ -26,18 +26,18 @@ public class PaisDAORest {
         }
     }
 
-    public PaisDTO buscar(Long id)  throws ErrorServiceException {
+    public PaisDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
             String uri = "http://localhost:8081/api/pais/" + id;
 
-            ResponseEntity<PaisDTO> response = restTemplate.getForEntity(uri,PaisDTO.class);
-            PaisDTO pais  = response.getBody();
+            ResponseEntity<PaisDTO> response = restTemplate.getForEntity(uri, PaisDTO.class);
+            PaisDTO pais = response.getBody();
 
-            return  pais;
+            return pais;
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new ErrorServiceException("Error de Sistemas");
         }
@@ -47,23 +47,23 @@ public class PaisDAORest {
 
         try {
 
-            String uri = "http://localhost:8081/api/pais/"+ pais.getId();
+            String uri = "http://localhost:8081/api/pais/" + pais.getId();
             restTemplate.put(uri, pais);
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
 
-    public void eliminar(Long id)  throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
             String uri = "http://localhost:8081/api/pais/" + id;
             restTemplate.delete(uri);
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new ErrorServiceException("Error de Sistemas");
         }
@@ -82,7 +82,5 @@ public class PaisDAORest {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
-
-
 
 }

@@ -50,7 +50,8 @@ public class NegocioController {
   }
 
   @PostMapping("/baja")
-  public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+  public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
     try {
       negocioService.eliminar(id);
       redirectAttributes.addFlashAttribute("msgExito", "Negocio #" + id + " eliminado correctamente");
@@ -62,7 +63,7 @@ public class NegocioController {
   }
 
   @GetMapping("/modificar")
-  public String modificar(@RequestParam Long id, Model model) {
+  public String modificar(@RequestParam String id, Model model) {
     try {
       NegocioDTO negocio = negocioService.buscar(id);
       List<DireccionDTO> direcciones = direccionService.listar();
@@ -80,7 +81,7 @@ public class NegocioController {
   }
 
   @GetMapping("/consultar")
-  public String consultar(@RequestParam Long id, Model model) {
+  public String consultar(@RequestParam String id, Model model) {
     try {
       NegocioDTO negocio = negocioService.buscar(id);
       List<DireccionDTO> direcciones = direccionService.listar();
@@ -112,13 +113,13 @@ public class NegocioController {
   }
 
   @PostMapping("/aceptarEditNegocio")
-  public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+  public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
       @RequestParam String nombre,
-      @RequestParam Long idDireccion,
-      @RequestParam(name = "idServicio[]", required = false) List<Long> idServicios,
+      @RequestParam String idDireccion,
+      @RequestParam(name = "idServicio[]", required = false) List<String> idServicios,
       RedirectAttributes attributes, Model model) {
     try {
-      if (id == 0) {
+      if ("0".equals(id)) {
         negocioService.crear(nombre, idDireccion, idServicios);
         attributes.addFlashAttribute("msgExito", "Negocio creado correctamente");
       } else {

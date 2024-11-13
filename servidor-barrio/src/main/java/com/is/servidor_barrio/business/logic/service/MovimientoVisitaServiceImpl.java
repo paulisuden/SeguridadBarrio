@@ -7,11 +7,11 @@ import com.is.servidor_barrio.business.domain.entity.MovimientoVisita;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class MovimientoVisitaServiceImpl extends BaseServiceImpl<MovimientoVisita, Long>
+public class MovimientoVisitaServiceImpl extends BaseServiceImpl<MovimientoVisita, String>
     implements MovimientoVisitaService {
-      
+
   @Autowired
-  public MovimientoVisitaServiceImpl(BaseRepository<MovimientoVisita, Long> baseRepository) {
+  public MovimientoVisitaServiceImpl(BaseRepository<MovimientoVisita, String> baseRepository) {
     super(baseRepository);
   }
 

@@ -7,9 +7,9 @@ import com.is.servidor_barrio.business.domain.entity.Inmueble;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class InmuebleServiceImpl extends BaseServiceImpl<Inmueble, Long> implements InmuebleService {
+public class InmuebleServiceImpl extends BaseServiceImpl<Inmueble, String> implements InmuebleService {
   @Autowired
-  public InmuebleServiceImpl(BaseRepository<Inmueble, Long> baseRepository) {
+  public InmuebleServiceImpl(BaseRepository<Inmueble, String> baseRepository) {
     super(baseRepository);
   }
 

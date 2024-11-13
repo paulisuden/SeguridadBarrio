@@ -27,7 +27,7 @@ public class ServicioDAORest {
     }
   }
 
-  public ServicioDTO buscar(Long id) throws ErrorServiceException {
+  public ServicioDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
@@ -57,7 +57,7 @@ public class ServicioDAORest {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 

@@ -9,14 +9,14 @@ import java.sql.Date;
 
 @Data
 public class MovimientoVisitaDTO implements Serializable {
-    private Long id;
+    private String id;
     private Date fechasMovimiento;
     private String observacion;
     private EstadoMovimiento estadoMovimiento;
     private TipoMovilidad tipoMovilidad;
     private String descripcionMovilidad;
     private VisitanteDTO visitante;
-    private Long idVisitante;
+    private String idVisitante;
     private InmuebleDTO inmueble;
-    private Long idInmueble;
+    private String idInmueble;
 }

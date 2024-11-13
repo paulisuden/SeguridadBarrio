@@ -14,8 +14,8 @@ import com.is.servidor_barrio.business.domain.dto.BaseDto;
 import com.is.servidor_barrio.business.domain.entity.Base;
 import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 
-public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, DE, F extends BaseFacadeImpl<E, D, DC, DE, Long>>
-    implements BaseController<E, D, DC, DE, Long> {
+public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, DE, F extends BaseFacadeImpl<E, D, DC, DE, String>>
+    implements BaseController<E, D, DC, DE, String> {
   @Autowired
   protected F facade;
 
@@ -35,7 +35,7 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, 
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<?> getOne(@PathVariable Long id) {
+  public ResponseEntity<?> getOne(@PathVariable String id) {
     // PathVariable: extraer valores de los parámetros de la URL en las solicitudes
     // HTTP
     try {
@@ -61,7 +61,7 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, 
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> update(@PathVariable Long id, @RequestBody DE dto) {
+  public ResponseEntity<?> update(@PathVariable String id, @RequestBody DE dto) {
     try {
       // ResponseEntity contiene el status de la respuesta
       return ResponseEntity.status(HttpStatus.OK).body(facade.update(id, dto));
@@ -72,7 +72,7 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, 
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<?> delete(@PathVariable Long id) {
+  public ResponseEntity<?> delete(@PathVariable String id) {
     try {
       return ResponseEntity.status(HttpStatus.NO_CONTENT).body(facade.delete(id));
     } catch (Exception e) {

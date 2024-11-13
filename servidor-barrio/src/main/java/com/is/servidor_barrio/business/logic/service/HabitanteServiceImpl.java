@@ -7,9 +7,9 @@ import com.is.servidor_barrio.business.domain.entity.Habitante;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class HabitanteServiceImpl extends BaseServiceImpl<Habitante, Long> implements HabitanteService {
+public class HabitanteServiceImpl extends BaseServiceImpl<Habitante, String> implements HabitanteService {
   @Autowired
-  public HabitanteServiceImpl(BaseRepository<Habitante, Long> baseRepository) {
+  public HabitanteServiceImpl(BaseRepository<Habitante, String> baseRepository) {
     super(baseRepository);
   }
 

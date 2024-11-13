@@ -26,7 +26,7 @@ public class DireccionDAORest {
         }
     }
 
-    public DireccionDTO buscar(Long id) throws ErrorServiceException {
+    public DireccionDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -56,7 +56,7 @@ public class DireccionDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
@@ -83,7 +83,8 @@ public class DireccionDAORest {
         }
     }
 
-    public DireccionDTO buscarDireccionPorLocalidadYNombre(Long idLocalidad, String nombre) throws ErrorServiceException {
+    public DireccionDTO buscarDireccionPorLocalidadYNombre(String idLocalidad, String nombre)
+            throws ErrorServiceException {
         try {
 
             String uri = "http://localhost:8081/api/direccion/?localidadId=" + idLocalidad + "&nombre=" + nombre;

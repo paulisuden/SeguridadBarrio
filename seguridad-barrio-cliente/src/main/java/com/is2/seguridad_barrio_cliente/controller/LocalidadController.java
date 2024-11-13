@@ -43,7 +43,7 @@ public class LocalidadController {
     }
 
     @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -58,7 +58,8 @@ public class LocalidadController {
     }
 
     @PostMapping("/baja")
-    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
 
         try {
 
@@ -73,7 +74,7 @@ public class LocalidadController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -92,7 +93,7 @@ public class LocalidadController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -126,15 +127,15 @@ public class LocalidadController {
     }
 
     @PostMapping("/aceptarEditLocalidad")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String nombre,
             @RequestParam String codigoPostal,
-            @RequestParam Long idDepartamento,
+            @RequestParam String idDepartamento,
             RedirectAttributes attributes, Model model) {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 localidadService.crear(nombre, codigoPostal, idDepartamento);
                 attributes.addFlashAttribute("msgExito", "Localidad creada correctamente.");
 
@@ -159,13 +160,13 @@ public class LocalidadController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String nombre, Long idDepartamento) {
+    private String error(String mensaje, Model model, String id, String nombre, String idDepartamento) {
         try {
             model.addAttribute("msgError", mensaje);
 
             LocalidadDTO localidad = new LocalidadDTO();
 
-            if (id != 0) {
+            if (id != "0") {
                 localidad = localidadService.buscar(id);
             } else {
                 localidad.setNombre(nombre);

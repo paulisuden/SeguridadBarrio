@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DepartamentoCreateDto {
   private String nombre;
-  private Long provinciaId;
+  private String provinciaId;
 }

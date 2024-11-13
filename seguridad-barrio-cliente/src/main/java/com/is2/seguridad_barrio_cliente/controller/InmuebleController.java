@@ -43,7 +43,8 @@ public class InmuebleController {
     }
 
     @PostMapping("/baja")
-    public String baja(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+    public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
 
         try {
 
@@ -58,7 +59,7 @@ public class InmuebleController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -77,7 +78,7 @@ public class InmuebleController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -109,14 +110,15 @@ public class InmuebleController {
     }
 
     @PostMapping("/aceptarEditInmueble")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String calle,
             @RequestParam String manzana,
             @RequestParam String numeracion,
-            @RequestParam Long idNegocio,
+            @RequestParam String idNegocio,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0) {
+            if ("0".equals(id)) {
+
                 inmuebleService.crear(numeracion, calle, manzana, idNegocio);
                 attributes.addFlashAttribute("msgExito", "Inmueble creado correctamente.");
             } else {
@@ -142,15 +144,16 @@ public class InmuebleController {
     private String error(
             String mensaje,
             Model model,
-            Long id,
+            String id,
             String numeracion,
             String calle,
             String manzana,
-            Long idNegocio) {
+            String idNegocio) {
+
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (!"0".equals(id)) {
                 model.addAttribute("inmueble", inmuebleService.buscar(id));
             } else {
                 NegocioDTO unidadDeNegocio = unidadDeNegocioService.buscar(idNegocio);

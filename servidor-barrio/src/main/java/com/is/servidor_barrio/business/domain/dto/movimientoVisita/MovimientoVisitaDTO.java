@@ -23,8 +23,8 @@ public class MovimientoVisitaDTO extends BaseDto {
     private EstadoMovimiento estadoMovimiento;
     private TipoMovilidad tipoMovilidad;
     private String descripcionMovilidad;
-    private Long idVisitante;
-    private Long idInmuebles;
+    private String idVisitante;
+    private String idInmuebles;
     private VisitanteDto visitante;
     private InmuebleDto inmueble;
 }

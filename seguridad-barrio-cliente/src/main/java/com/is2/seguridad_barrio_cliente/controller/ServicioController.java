@@ -47,7 +47,8 @@ public class ServicioController {
     }
 
     @PostMapping("/baja")
-    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
         try {
             servicioService.eliminar(id);
             redirectAttributes.addFlashAttribute("msgExito", "Servicio #" + id + " eliminado correctamente");
@@ -60,7 +61,7 @@ public class ServicioController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -77,7 +78,7 @@ public class ServicioController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -109,11 +110,12 @@ public class ServicioController {
     @PostMapping("/aceptarEditServicio")
     public String aceptarEdit(
             @RequestParam MultipartFile archivo,
-            @RequestParam(required = false, defaultValue = "0") Long id,
+            @RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String nombre,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0) {
+            if ("0".equals(id)) {
+
                 servicioService.crear(nombre, archivo);
                 attributes.addFlashAttribute("msgExito", "Servicio creado correctamente");
             } else {
@@ -137,11 +139,11 @@ public class ServicioController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String nombre) {
+    private String error(String mensaje, Model model, String id, String nombre) {
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (id != "0") {
                 model.addAttribute("servicio", servicioService.buscar(id));
             } else {
                 ServicioDTO servicio = new ServicioDTO();
@@ -158,7 +160,7 @@ public class ServicioController {
 
     @GetMapping("/imagen/{id}")
     public ResponseEntity<byte[]> fotoServicio(
-            @PathVariable Long id,
+            @PathVariable String id,
             Model model) {
 
         try {

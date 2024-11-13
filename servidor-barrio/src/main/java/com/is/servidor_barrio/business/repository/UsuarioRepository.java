@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.is.servidor_barrio.business.domain.entity.Usuario;
 
 @Repository
-public interface UsuarioRepository extends BaseRepository<Usuario, Long> {
+public interface UsuarioRepository extends BaseRepository<Usuario, String> {
     Usuario findByEmail(String email);
 }
