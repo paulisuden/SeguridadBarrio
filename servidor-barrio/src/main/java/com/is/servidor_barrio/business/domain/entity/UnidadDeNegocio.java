@@ -21,4 +21,6 @@ public class UnidadDeNegocio extends Base {
   private List<Servicio> servicios;
   @ManyToOne
   private Direccion direccion;
+  @OneToOne
+  private Imagen imagen;
 }

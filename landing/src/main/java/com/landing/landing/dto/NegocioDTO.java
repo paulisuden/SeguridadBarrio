@@ -13,5 +13,6 @@ public class NegocioDTO implements Serializable {
   private List<ServicioDTO> servicios;
   private Long direccionId;
   private DireccionDTO direccion;
-
+  private Long imagenId;
+  private ImagenDTO imagen;
 }

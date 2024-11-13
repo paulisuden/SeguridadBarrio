@@ -35,10 +35,30 @@
                                     <input type="text" id="nombre" name="nombre" th:value="${servicio.nombre}"
                                         th:disabled="${isDisabled}" class="form-control"
                                         placeholder="Escriba el nombre del servicio" required="required">
+                                </div>
 
-                                    <input type="file" class="form-control" name="archivo"
-                                        th:disabled="${isDisabled}" />
+                                <div class="form-group">
+                                    <!-- Botón personalizado para activar el input de archivo -->
+                                    <button type="button" class="btn btn-danger btn-icon-text"
+                                        onclick="document.getElementById('archivo').click();">
+                                        <i class="typcn typcn-upload btn-icon-prepend"></i>
+                                        Subir imagen
+                                    </button>
 
+                                    <!-- Campo de archivo oculto -->
+                                    <input type="file" id="archivo" class="form-control" name="archivo"
+                                        th:disabled="${isDisabled}" required style="display: none;" />
+
+                                    <!-- Muestra el nombre del archivo seleccionado -->
+                                    <span id="file-name" class="ml-2"></span>
+
+                                    <script>
+                                        // Muestra el nombre del archivo seleccionado
+                                        document.getElementById('archivo').addEventListener('change', function () {
+                                            const fileName = this.files[0]?.name || "No file chosen";
+                                            document.getElementById('file-name').textContent = fileName;
+                                        });
+                                    </script>
                                 </div>
 
                                 <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
