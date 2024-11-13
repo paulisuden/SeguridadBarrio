@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ImagenDTO {
-    private Long id;
+    private String id;
     private String name;
     private String mime;
     private byte[] contenido;

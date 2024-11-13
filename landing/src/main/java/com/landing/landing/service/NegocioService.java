@@ -15,7 +15,7 @@ public class NegocioService {
   @Autowired
   private NegocioDAORest dao;
 
-  public void crear(String nombre, Long idDireccion, List<Long> idServicios) throws ErrorServiceException {
+  public void crear(String nombre, String idDireccion, List<String> idServicios) throws ErrorServiceException {
 
     try {
 
@@ -35,11 +35,11 @@ public class NegocioService {
     }
   }
 
-  public NegocioDTO buscar(Long id) throws ErrorServiceException {
+  public NegocioDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
-      if (id == 0) {
+      if (id == null || id.isEmpty()) {
         throw new ErrorServiceException("Debe indicar el Negocio");
       }
 
@@ -55,7 +55,8 @@ public class NegocioService {
     }
   }
 
-  public void modificar(Long id, String nombre, Long idDireccion, List<Long> idServicios) throws ErrorServiceException {
+  public void modificar(String id, String nombre, String idDireccion, List<String> idServicios)
+      throws ErrorServiceException {
 
     try {
 
@@ -75,7 +76,7 @@ public class NegocioService {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 

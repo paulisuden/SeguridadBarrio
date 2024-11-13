@@ -20,6 +20,6 @@ public class UnidadDeNegocioDto extends BaseDto {
   private String nombre;
   private DireccionDto direccion;
   private List<ServicioDto> servicios;
-  private Long imagenId;
+  private String imagenId;
   private ImagenDto imagen;
 }

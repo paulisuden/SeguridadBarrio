@@ -14,11 +14,11 @@ public class DireccionService {
     @Autowired
     private DireccionDAORest dao;
 
-    public DireccionDTO buscar(Long id) throws ErrorServiceException {
+    public DireccionDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if (id == null || id.isEmpty()) {
                 throw new ErrorServiceException("Debe indicar la direccion");
             }
 
