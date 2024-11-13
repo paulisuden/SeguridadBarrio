@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/servicio")
@@ -45,13 +46,11 @@ public class ServicioController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
-
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
         try {
-
             servicioService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -59,6 +58,39 @@ public class ServicioController {
             return redirectList;
         }
     }
+
+    // public String baja(@RequestParam Long id, RedirectAttributes attributes,
+    // Model model) {
+
+    // try {
+
+    // servicioService.eliminar(id);
+    // attributes.addFlashAttribute("msgExito", "La acción fue realizada
+    // correctamente.");
+    // return redirectList;
+
+    // } catch (ErrorServiceException e) {
+    // model.addAttribute("msgError", e.getMessage());
+    // return redirectList;
+    // }
+    // }
+
+    // @GetMapping("/baja")
+    // public String baja(@RequestParam Long id, RedirectAttributes attributes,
+    // Model model) {
+
+    // try {
+
+    // servicioService.eliminar(id);
+    // attributes.addFlashAttribute("msgExito", "La acción fue realizada
+    // correctamente.");
+    // return redirectList;
+
+    // } catch (ErrorServiceException e) {
+    // model.addAttribute("msgError", e.getMessage());
+    // return redirectList;
+    // }
+    // }
 
     @GetMapping("/modificar")
     public String modificar(@RequestParam String id, Model model) {
