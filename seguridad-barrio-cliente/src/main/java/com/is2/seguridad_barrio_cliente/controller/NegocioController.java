@@ -121,7 +121,6 @@ public class NegocioController {
       @RequestParam String idDireccion,
       @RequestParam(name = "idServicio[]", required = false) List<String> idServicios,
       RedirectAttributes attributes, Model model) {
-
     try {
       if ("0".equals(id)) {
         negocioService.crear(nombre, idDireccion, idServicios, archivo);
