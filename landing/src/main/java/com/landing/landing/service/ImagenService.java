@@ -15,7 +15,7 @@ public class ImagenService {
     @Autowired
     private ImagenDAORest dao;
 
-    public ImagenDTO buscar(Long id) throws ErrorServiceException {
+    public ImagenDTO buscar(String id) throws ErrorServiceException {
 
         try {
             ImagenDTO imagen = dao.buscar(id);

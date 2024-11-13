@@ -23,7 +23,7 @@ public class ImagenController {
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> fotoServicio(
-            @PathVariable Long id,
+            @PathVariable String id,
             Model model) {
 
         try {

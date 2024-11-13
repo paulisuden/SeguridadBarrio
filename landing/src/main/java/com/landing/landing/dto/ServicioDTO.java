@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class ServicioDTO implements Serializable {
-  private Long id;
+  private String id;
   private String nombre;
 
-  private Long imagenId;
+  private String imagenId;
   private ImagenDTO imagen;
 }

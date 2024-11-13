@@ -29,7 +29,7 @@ public class NegocioController {
     @GetMapping("/{id}")
     public String unidadDeNegocio(
             Model model,
-            @PathVariable("id") Long id) {
+            @PathVariable("id") String id) {
         try {
             var negocio = negocioService.buscar(id);
             var servicios = negocio.getServicios();
