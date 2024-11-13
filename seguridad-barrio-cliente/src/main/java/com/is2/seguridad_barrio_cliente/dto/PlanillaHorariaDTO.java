@@ -9,13 +9,12 @@ import lombok.Data;
 
 @Data
 public class PlanillaHorariaDTO {
-    private Long id;
+    private String id;
     private LocalDateTime entrada;
     private LocalDateTime salida;
     private EstadoAsistencia estadoAsistencia;
     private String observacionAsistencia;
-    //private EmpleadoDTO empleado;
-
+    // private EmpleadoDTO empleado;
 
     public String getEntradaAsString() {
         return entrada != null ? entrada.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "";
@@ -24,6 +23,5 @@ public class PlanillaHorariaDTO {
     public String getSalidaAsString() {
         return salida != null ? salida.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "";
     }
-
 
 }

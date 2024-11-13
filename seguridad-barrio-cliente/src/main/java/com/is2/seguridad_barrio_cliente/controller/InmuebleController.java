@@ -150,7 +150,7 @@ public class InmuebleController {
         try {
 
             model.addAttribute("msgError", mensaje);
-            if ("0".equals(id)) {
+            if (!"0".equals(id)) {
                 model.addAttribute("inmueble", inmuebleService.buscar(id));
             } else {
                 NegocioDTO unidadDeNegocio = unidadDeNegocioService.buscar(idNegocio);

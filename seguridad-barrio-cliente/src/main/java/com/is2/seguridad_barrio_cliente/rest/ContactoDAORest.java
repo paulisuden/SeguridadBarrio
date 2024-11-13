@@ -29,7 +29,7 @@ public class ContactoDAORest {
         }
     }
 
-    public ContactoDTO buscar(Long id) throws ErrorServiceException {
+    public ContactoDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -55,7 +55,7 @@ public class ContactoDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
             String uri = API_PATH + "/" + id;

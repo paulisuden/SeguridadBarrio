@@ -39,7 +39,7 @@ public class ContactoController {
     }
 
     @PostMapping("/baja")
-    public String baja(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+    public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
         try {
             contactoService.eliminar(id);
             redirectAttributes.addFlashAttribute("msgExito", "Contacto #" + id + " eliminado correctamente");
@@ -52,7 +52,7 @@ public class ContactoController {
 
     @GetMapping("/modificar")
     public String modificar(
-            @RequestParam Long id,
+            @RequestParam String id,
             Model model) {
 
         try {
@@ -71,7 +71,7 @@ public class ContactoController {
 
     @GetMapping("/consultar")
     public String consultar(
-            @RequestParam long id,
+            @RequestParam String id,
             Model model) {
 
         try {
@@ -101,7 +101,7 @@ public class ContactoController {
 
     @PostMapping("/aceptarEditContacto")
     public String aceptarEdit(
-            @RequestParam(required = false, defaultValue = "0") Long id,
+            @RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam TipoContacto tipoContacto,
             @RequestParam String observacion,
             @RequestParam(required = false) String email,
@@ -109,7 +109,7 @@ public class ContactoController {
             @RequestParam(required = false) TipoTelefono tipoTelefono,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0) {
+            if ("0".equals(id)) {
                 contactoService.crear(
                         tipoContacto,
                         observacion,
@@ -162,7 +162,7 @@ public class ContactoController {
     private String error(
             String mensaje,
             Model model,
-            Long id,
+            String id,
             TipoContacto tipo,
             String observacion,
             String email,
@@ -170,7 +170,7 @@ public class ContactoController {
             TipoTelefono tipoTelefono) {
         try {
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (!"0".equals(id)) {
                 model.addAttribute("contacto", contactoService.buscar(id));
             } else {
                 ContactoDTO contacto = new ContactoDTO();

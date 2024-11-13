@@ -18,7 +18,8 @@ public class PlanillaHorariaService {
     @Autowired
     private PlanillaHorariaDAORest dao;
 
-    public void crear(LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia, String observacion) throws ErrorServiceException {
+    public void crear(LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia,
+            String observacion) throws ErrorServiceException {
 
         try {
 
@@ -27,7 +28,7 @@ public class PlanillaHorariaService {
             planillaHoraria.setEstadoAsistencia(estadoAsistencia);
             planillaHoraria.setObservacionAsistencia(observacion);
             planillaHoraria.setSalida(salida);
-            //planillaHoraria.setEmpleadoId(idEmpleado);
+            // planillaHoraria.setEmpleadoId(idEmpleado);
 
             dao.crear(planillaHoraria);
 
@@ -40,11 +41,11 @@ public class PlanillaHorariaService {
         }
     }
 
-    public PlanillaHorariaDTO buscar(Long id) throws ErrorServiceException {
+    public PlanillaHorariaDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar la planilla horaria");
             }
 
@@ -60,7 +61,8 @@ public class PlanillaHorariaService {
         }
     }
 
-    public void modificar(Long id, LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia, String observacion) throws ErrorServiceException {
+    public void modificar(String id, LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia,
+            String observacion) throws ErrorServiceException {
 
         try {
 
@@ -70,7 +72,7 @@ public class PlanillaHorariaService {
             planillaHoraria.setEstadoAsistencia(estadoAsistencia);
             planillaHoraria.setObservacionAsistencia(observacion);
             planillaHoraria.setSalida(salida);
-            //planillaHoraria.setEmpleadoId(idEmpleado);
+            // planillaHoraria.setEmpleadoId(idEmpleado);
 
             dao.actualizar(planillaHoraria);
 
@@ -82,7 +84,7 @@ public class PlanillaHorariaService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

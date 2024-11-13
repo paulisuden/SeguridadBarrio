@@ -40,7 +40,7 @@ public class ContactoService {
         }
     }
 
-    public ContactoDTO buscar(Long id) throws ErrorServiceException {
+    public ContactoDTO buscar(String id) throws ErrorServiceException {
 
         try {
             return dao.buscar(id);
@@ -53,7 +53,7 @@ public class ContactoService {
     }
 
     public void modificar(
-            Long id,
+            String id,
             TipoContacto tipo,
             String observacion,
             String email,
@@ -77,7 +77,7 @@ public class ContactoService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
             dao.eliminar(id);

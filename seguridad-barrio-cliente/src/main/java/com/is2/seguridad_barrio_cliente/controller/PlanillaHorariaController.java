@@ -26,7 +26,7 @@ public class PlanillaHorariaController {
 
     @Autowired
     private PlanillaHorariaService planillaHorariaService;
-    //@Autowired private EmpleadoService empleadoService;
+    // @Autowired private EmpleadoService empleadoService;
 
     private String viewList = "horarios/listarPlanillaHoraria.html";
     private String redirectList = "redirect:/planillaHoraria/listarPlanillaHoraria";
@@ -37,16 +37,16 @@ public class PlanillaHorariaController {
 
         planillaHoraria = new PlanillaHorariaDTO();
 
-        //List<EmpleadoDTO> empleados = empleadoService.listar();
+        // List<EmpleadoDTO> empleados = empleadoService.listar();
         model.addAttribute("planillaHoraria", planillaHoraria);
-        //model.addAttribute("empleados", empleados);
+        // model.addAttribute("empleados", empleados);
         model.addAttribute("isDisabled", false);
 
         return viewEdit;
     }
 
     @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -61,14 +61,14 @@ public class PlanillaHorariaController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
             PlanillaHorariaDTO planillaHoraria = planillaHorariaService.buscar(id);
-            //List<EmpleadoDTO> empleados = empleadoService.listar();
+            // List<EmpleadoDTO> empleados = empleadoService.listar();
             model.addAttribute("planillaHoraria", planillaHoraria);
-            //model.addAttribute("empleados", empleados);
+            // model.addAttribute("empleados", empleados);
             model.addAttribute("isDisabled", false);
 
             return viewEdit;
@@ -80,14 +80,14 @@ public class PlanillaHorariaController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
             PlanillaHorariaDTO planillaHoraria = planillaHorariaService.buscar(id);
-            //List<EmpleadoDTO> empleados = empleadoService.listar();
+            // List<EmpleadoDTO> empleados = empleadoService.listar();
             model.addAttribute("planillaHoraria", planillaHoraria);
-            //model.addAttribute("empleados", empleados);
+            // model.addAttribute("empleados", empleados);
             model.addAttribute("isDisabled", true);
 
             return viewEdit;
@@ -103,8 +103,8 @@ public class PlanillaHorariaController {
         try {
             List<PlanillaHorariaDTO> listaPlanillaHoraria = planillaHorariaService.listar();
             model.addAttribute("listaPlanillaHoraria", listaPlanillaHoraria);
-            //List<EmpleadoDTO> listaEmpleado = empleadoService.listar();
-            //model.addAttribute("listaEmpleado", listaEmpleado);
+            // List<EmpleadoDTO> listaEmpleado = empleadoService.listar();
+            // model.addAttribute("listaEmpleado", listaEmpleado);
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
         } catch (Exception e) {
@@ -115,9 +115,9 @@ public class PlanillaHorariaController {
 
     @PostMapping("/aceptarEditPlanillaHoraria")
     public String aceptarEdit(
-        @RequestParam(required = false, defaultValue = "0") Long id, @RequestParam("entrada") String entradaStr,
-        @RequestParam("salida") String salidaStr, @RequestParam EstadoAsistencia estadoAsistencia,
-        @RequestParam String observacion, RedirectAttributes attributes, Model model) {
+            @RequestParam(required = false, defaultValue = "0") String id, @RequestParam("entrada") String entradaStr,
+            @RequestParam("salida") String salidaStr, @RequestParam EstadoAsistencia estadoAsistencia,
+            @RequestParam String observacion, RedirectAttributes attributes, Model model) {
 
         LocalDateTime entrada = null;
         LocalDateTime salida = null;
@@ -128,8 +128,7 @@ public class PlanillaHorariaController {
             entrada = LocalDateTime.parse(entradaStr, formatter);
             salida = LocalDateTime.parse(salidaStr, formatter);
 
-            
-            if (id == 0) {
+            if ("0".equals(id)) {
                 planillaHorariaService.crear(entrada, salida, estadoAsistencia, observacion);
             } else {
                 planillaHorariaService.modificar(id, entrada, salida, estadoAsistencia, observacion);
@@ -145,28 +144,28 @@ public class PlanillaHorariaController {
         }
     }
 
-
     @GetMapping("/cancelarEditPlanillaHoraria")
     public String cancelarEdit() {
 
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia, String observacion) {
-        
+    private String error(String mensaje, Model model, String id, LocalDateTime entrada, LocalDateTime salida,
+            EstadoAsistencia estadoAsistencia, String observacion) {
+
         try {
             model.addAttribute("msgError", mensaje);
 
             PlanillaHorariaDTO planillaHoraria = new PlanillaHorariaDTO();
 
-            if (id != 0) {
+            if (!"0".equals(id)) {
                 planillaHoraria = planillaHorariaService.buscar(id);
             } else {
                 planillaHoraria.setEntrada(entrada);
                 planillaHoraria.setEstadoAsistencia(estadoAsistencia);
                 planillaHoraria.setObservacionAsistencia(observacion);
                 planillaHoraria.setSalida(salida);
-                //planillaHoraria.setEmpleadoId(idEmpleado);
+                // planillaHoraria.setEmpleadoId(idEmpleado);
             }
 
             model.addAttribute("planillaHoraria", planillaHoraria);

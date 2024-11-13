@@ -58,7 +58,7 @@ public class DepartamentoController {
     }
 
     @PostMapping("/baja")
-    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
