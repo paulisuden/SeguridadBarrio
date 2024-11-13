@@ -22,9 +22,10 @@ public class NegocioService {
 
   public void crear(
       String nombre,
-      Long idDireccion,
-      List<Long> idServicios,
+      String idDireccion,
+      List<String> idServicios,
       MultipartFile archivoImagen) throws ErrorServiceException {
+
 
     try {
 
@@ -52,11 +53,11 @@ public class NegocioService {
     }
   }
 
-  public NegocioDTO buscar(Long id) throws ErrorServiceException {
+  public NegocioDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
-      if (id == 0) {
+      if ("0".equals(id)) {
         throw new ErrorServiceException("Debe indicar el Negocio");
       }
 
@@ -73,10 +74,10 @@ public class NegocioService {
   }
 
   public void modificar(
-      Long id,
+      String id,
       String nombre,
-      Long idDireccion,
-      List<Long> idServicios,
+      String idDireccion,
+      List<String> idServicios,
       MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
@@ -104,7 +105,7 @@ public class NegocioService {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 

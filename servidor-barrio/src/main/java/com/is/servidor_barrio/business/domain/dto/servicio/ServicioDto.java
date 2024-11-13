@@ -14,6 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ServicioDto extends BaseDto {
   private String nombre;
-  private Long imagenId;
+  private String imagenId;
   private ImagenDto imagen;
 }

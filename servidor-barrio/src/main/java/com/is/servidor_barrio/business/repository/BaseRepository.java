@@ -10,5 +10,6 @@ import java.util.Optional;
 @NoRepositoryBean
 public interface BaseRepository<E, ID extends Serializable> extends JpaRepository<E, ID> {
   List<E> findAllByEliminadoFalse(); // Para obtener solo registros no eliminados
+
   Optional<E> findByIdAndEliminadoFalse(ID id); // Para obtener solo registros no eliminados por ID
 }

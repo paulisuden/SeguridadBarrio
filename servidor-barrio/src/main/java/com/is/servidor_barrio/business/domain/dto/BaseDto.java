@@ -10,5 +10,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BaseDto {
-  private Long id;
+  private String id;
 }

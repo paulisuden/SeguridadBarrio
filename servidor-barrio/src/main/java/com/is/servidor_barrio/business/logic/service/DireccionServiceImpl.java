@@ -5,8 +5,8 @@ import com.is.servidor_barrio.business.repository.BaseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DireccionServiceImpl extends BaseServiceImpl<Direccion, Long> implements DireccionService{
-    public DireccionServiceImpl(BaseRepository<Direccion, Long> baseRepository) {
+public class DireccionServiceImpl extends BaseServiceImpl<Direccion, String> implements DireccionService {
+    public DireccionServiceImpl(BaseRepository<Direccion, String> baseRepository) {
         super(baseRepository);
     }
 }

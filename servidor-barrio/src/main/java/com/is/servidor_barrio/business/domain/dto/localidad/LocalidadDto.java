@@ -15,6 +15,6 @@ import lombok.Setter;
 public class LocalidadDto extends BaseDto {
   private String nombre;
   private String codigoPostal;
-  private Long departamentoId;
+  private String departamentoId;
   private DepartamentoDto departamento;
 }

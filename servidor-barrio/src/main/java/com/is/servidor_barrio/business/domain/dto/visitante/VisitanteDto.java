@@ -3,7 +3,6 @@ package com.is.servidor_barrio.business.domain.dto.visitante;
 import com.is.servidor_barrio.business.domain.dto.BaseDto;
 import com.is.servidor_barrio.business.domain.enumeration.TipoVisita;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

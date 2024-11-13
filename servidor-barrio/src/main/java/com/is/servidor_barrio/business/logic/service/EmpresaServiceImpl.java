@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmpresaServiceImpl extends BaseServiceImpl<Empresa,Long> implements EmpresaService {
+public class EmpresaServiceImpl extends BaseServiceImpl<Empresa, String> implements EmpresaService {
 
     @Autowired
-    public EmpresaServiceImpl(BaseRepository<Empresa, Long> baseRepository) {
+    public EmpresaServiceImpl(BaseRepository<Empresa, String> baseRepository) {
         super(baseRepository);
     }
 }

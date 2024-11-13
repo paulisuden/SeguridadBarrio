@@ -36,7 +36,7 @@ public class ImagenService {
         }
     }
 
-    public ImagenDTO buscar(Long id) throws ErrorServiceException {
+    public ImagenDTO buscar(String id) throws ErrorServiceException {
 
         try {
             ImagenDTO imagen = dao.buscar(id);
@@ -51,7 +51,7 @@ public class ImagenService {
         }
     }
 
-    public void modificar(Long id, MultipartFile archivo) throws ErrorServiceException {
+    public void modificar(String id, MultipartFile archivo) throws ErrorServiceException {
 
         try {
             ImagenDTO imagen = new ImagenDTO();
@@ -70,7 +70,7 @@ public class ImagenService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
             dao.eliminar(id);

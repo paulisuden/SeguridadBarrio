@@ -1,9 +1,7 @@
 package com.is2.seguridad_barrio_cliente.service;
 
-
 import com.is2.seguridad_barrio_cliente.dto.ProvinciaDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
-import com.is2.seguridad_barrio_cliente.rest.PaisDAORest;
 import com.is2.seguridad_barrio_cliente.rest.ProvinciaDAORest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +14,15 @@ public class ProvinciaService {
     @Autowired
     private ProvinciaDAORest dao;
 
-    public void crear(String nombre, Long idPais) throws ErrorServiceException {
+    public void crear(String nombre, String idPais) throws ErrorServiceException {
 
         try {
 
             ProvinciaDTO provincia = new ProvinciaDTO();
             provincia.setNombre(nombre);
             provincia.setPaisId(idPais);
+
+            System.out.println(nombre);
 
             dao.crear(provincia);
 
@@ -35,11 +35,11 @@ public class ProvinciaService {
         }
     }
 
-    public ProvinciaDTO buscar(Long id) throws ErrorServiceException {
+    public ProvinciaDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar la provincia");
             }
 
@@ -55,7 +55,7 @@ public class ProvinciaService {
         }
     }
 
-    public void modificar(Long id, String nombre, Long idPais) throws ErrorServiceException {
+    public void modificar(String id, String nombre, String idPais) throws ErrorServiceException {
 
         try {
 
@@ -74,7 +74,7 @@ public class ProvinciaService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

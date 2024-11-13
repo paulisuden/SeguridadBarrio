@@ -4,7 +4,7 @@ import com.is.servidor_barrio.business.domain.entity.Provincia;
 
 import java.util.Optional;
 
-public interface ProvinciaService extends BaseService<Provincia, Long>{
+public interface ProvinciaService extends BaseService<Provincia, String> {
 
-    Optional<Provincia> findByNameAndIdPais(String nombre, Long idPais);
+    Optional<Provincia> findByNameAndIdPais(String nombre, String idPais);
 }

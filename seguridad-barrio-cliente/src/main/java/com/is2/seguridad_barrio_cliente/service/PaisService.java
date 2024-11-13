@@ -32,11 +32,11 @@ public class PaisService {
         }
     }
 
-    public PaisDTO buscar (Long id) throws ErrorServiceException {
+    public PaisDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar el autor");
             }
 
@@ -52,7 +52,7 @@ public class PaisService {
         }
     }
 
-    public void modificar(Long id, String nombre) throws ErrorServiceException {
+    public void modificar(String id, String nombre) throws ErrorServiceException {
 
         try {
 
@@ -70,11 +70,11 @@ public class PaisService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar el país");
             }
 
@@ -98,7 +98,5 @@ public class PaisService {
             throw new ErrorServiceException("Error de sistema");
         }
     }
-
-
 
 }

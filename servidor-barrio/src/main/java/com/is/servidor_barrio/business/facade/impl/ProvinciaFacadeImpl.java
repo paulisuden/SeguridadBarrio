@@ -14,13 +14,13 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
 public class ProvinciaFacadeImpl
-    extends BaseFacadeImpl<Provincia, ProvinciaDto, ProvinciaCreateDto, ProvinciaCreateDto, Long>
+    extends BaseFacadeImpl<Provincia, ProvinciaDto, ProvinciaCreateDto, ProvinciaCreateDto, String>
     implements ProvinciaFacade {
 
   @Autowired
   private PaisServiceImpl paisService;
 
-  public ProvinciaFacadeImpl(BaseService<Provincia, Long> baseService,
+  public ProvinciaFacadeImpl(BaseService<Provincia, String> baseService,
       BaseMapper<Provincia, ProvinciaDto, ProvinciaCreateDto, ProvinciaCreateDto> baseMapper) {
     super(baseService, baseMapper);
   }
@@ -35,7 +35,7 @@ public class ProvinciaFacadeImpl
   }
 
   @Override
-  public ProvinciaDto update(Long id, ProvinciaCreateDto provinciaCreateDto) throws Exception {
+  public ProvinciaDto update(String id, ProvinciaCreateDto provinciaCreateDto) throws Exception {
     var provinciaEntity = baseService.findById(id);
     baseMapper.toUpdate(provinciaEntity, provinciaCreateDto);
 

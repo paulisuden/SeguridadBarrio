@@ -43,7 +43,8 @@ public class DireccionController {
     }
 
     @PostMapping("/baja")
-    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
 
         try {
 
@@ -58,7 +59,7 @@ public class DireccionController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -77,7 +78,7 @@ public class DireccionController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -111,14 +112,14 @@ public class DireccionController {
     }
 
     @PostMapping("/aceptarEditDireccion")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String calle, @RequestParam String numeracion, @RequestParam String barrio,
-            @RequestParam String observacion, @RequestParam Long idLocalidad, RedirectAttributes attributes,
+            @RequestParam String observacion, @RequestParam String idLocalidad, RedirectAttributes attributes,
             Model model) {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 direccionService.crear(calle, numeracion, barrio, observacion, idLocalidad);
                 attributes.addFlashAttribute("msgExito", "Direccion creada correctamente.");
 
@@ -144,14 +145,14 @@ public class DireccionController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String calle, String numeracion, String barrio,
-            String observacion, Long idLocalidad) {
+    private String error(String mensaje, Model model, String id, String calle, String numeracion, String barrio,
+            String observacion, String idLocalidad) {
         try {
             model.addAttribute("msgError", mensaje);
 
             DireccionDTO direccion = new DireccionDTO();
 
-            if (id != 0) {
+            if (id != "0") {
                 direccion = direccionService.buscar(id);
             } else {
                 direccion.setCalle(calle);

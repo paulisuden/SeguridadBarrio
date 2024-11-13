@@ -28,7 +28,7 @@ public class InmuebleDAORest {
         }
     }
 
-    public InmuebleDTO buscar(Long id) throws ErrorServiceException {
+    public InmuebleDTO buscar(String id) throws ErrorServiceException {
 
         try {
             String uri = "http://localhost:8081/api/inmueble/" + id;
@@ -56,7 +56,7 @@ public class InmuebleDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
             String uri = "http://localhost:8081/api/inmueble/" + id;

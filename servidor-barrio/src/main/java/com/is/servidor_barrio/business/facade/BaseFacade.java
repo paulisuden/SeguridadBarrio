@@ -9,11 +9,11 @@ Incluye métodos como createNew, getById, getAll, deleteById y update.*/
 public interface BaseFacade<D, DC, DE, ID extends Serializable> {
   public D save(DC request) throws Exception;
 
-  public D findById(Long id) throws Exception;
+  public D findById(String id) throws Exception;
 
   public List<D> findAll() throws Exception;
 
-  public boolean delete(Long id) throws Exception;
+  public boolean delete(String id) throws Exception;
 
-  public D update(Long id, DE request) throws Exception;
+  public D update(String id, DE request) throws Exception;
 }

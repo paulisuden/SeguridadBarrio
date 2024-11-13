@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProvinciaCreateDto {
   private String nombre;
-  private Long paisId;
+  private String paisId;
 }

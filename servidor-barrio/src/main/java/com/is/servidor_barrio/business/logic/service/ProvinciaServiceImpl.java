@@ -10,12 +10,13 @@ import com.is.servidor_barrio.business.repository.BaseRepository;
 import com.is.servidor_barrio.business.repository.ProvinciaRepository;
 
 @Service
-public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia, Long> implements ProvinciaService {
+public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia, String> implements ProvinciaService {
 
     private ProvinciaRepository provinciaRepository;
 
     @Autowired
-    public ProvinciaServiceImpl(BaseRepository<Provincia, Long> baseRepository, ProvinciaRepository provinciaRepository,
+    public ProvinciaServiceImpl(BaseRepository<Provincia, String> baseRepository,
+            ProvinciaRepository provinciaRepository,
             PaisServiceImpl baseService) {
 
         super(baseRepository);
@@ -23,7 +24,7 @@ public class ProvinciaServiceImpl extends BaseServiceImpl<Provincia, Long> imple
     }
 
     @Override
-    public Optional<Provincia> findByNameAndIdPais(String nombre, Long idPais) {
+    public Optional<Provincia> findByNameAndIdPais(String nombre, String idPais) {
         return provinciaRepository.findProvinciaByNombreAndPaisId(nombre, idPais);
     }
 

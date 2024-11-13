@@ -18,7 +18,8 @@ public class InmuebleService {
             String numeracion,
             String calle,
             String manzana,
-            Long idNegocio) throws ErrorServiceException {
+            String idNegocio) throws ErrorServiceException {
+
 
         try {
 
@@ -38,11 +39,11 @@ public class InmuebleService {
         }
     }
 
-    public InmuebleDTO buscar(Long id) throws ErrorServiceException {
+    public InmuebleDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar la localidad");
             }
 
@@ -59,11 +60,12 @@ public class InmuebleService {
     }
 
     public void modificar(
-            Long id,
+            String id,
             String numeracion,
             String calle,
             String manzana,
-            Long idNegocio) throws ErrorServiceException {
+            String idNegocio) throws ErrorServiceException {
+
 
         try {
 
@@ -83,7 +85,7 @@ public class InmuebleService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

@@ -15,8 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UnidadDeNegocioCreateDto {
   private String nombre;
-  private Long direccionId;
-  private List<Long> serviciosId;
-  private Long imagenId;
+  private String direccionId;
+  private List<String> serviciosId;
+  private String imagenId;
   private ImagenDto imagen;
 }

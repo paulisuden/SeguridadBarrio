@@ -10,10 +10,11 @@ import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
-public class ImagenFacade extends BaseFacadeImpl<Imagen, ImagenDto, ImagenCreateDto, ImagenCreateDto, Long> {
+public class ImagenFacade extends BaseFacadeImpl<Imagen, ImagenDto, ImagenCreateDto, ImagenCreateDto, String> {
 
-    public ImagenFacade(BaseService<Imagen, Long> baseService,
+    public ImagenFacade(BaseService<Imagen, String> baseService,
             BaseMapper<Imagen, ImagenDto, ImagenCreateDto, ImagenCreateDto> baseMapper) {
         super(baseService, baseMapper);
     }
+
 }

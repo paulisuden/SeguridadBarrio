@@ -28,7 +28,8 @@ public class PlanillaHorariaDAORest {
         }
     }
 
-    public PlanillaHorariaDTO buscar(Long id) throws ErrorServiceException {
+    public PlanillaHorariaDTO buscar(String id) throws ErrorServiceException {
+
 
         try {
 
@@ -58,7 +59,7 @@ public class PlanillaHorariaDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

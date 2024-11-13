@@ -28,7 +28,8 @@
 
                             <div class="form-group">
 
-                                <input type="hidden" name="id" th:value="${pais.id != null ? pais.id : 0}">
+                                <input type="hidden" name="id" th:value="${pais.id != null ? pais.id : '0'}">
+
 
                                 <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre" name="nombre" th:value="${pais.nombre}"

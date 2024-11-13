@@ -27,7 +27,7 @@ public class MovimientoVisitaDAORest {
         }
     }
 
-    public MovimientoVisitaDTO buscar(Long id) throws ErrorServiceException {
+    public MovimientoVisitaDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -57,7 +57,7 @@ public class MovimientoVisitaDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
@@ -74,7 +74,8 @@ public class MovimientoVisitaDAORest {
         try {
             String uri = "http://localhost:8081/api/movimientoVisita";
 
-            ResponseEntity<MovimientoVisitaDTO[]> response = restTemplate.getForEntity(uri, MovimientoVisitaDTO[].class);
+            ResponseEntity<MovimientoVisitaDTO[]> response = restTemplate.getForEntity(uri,
+                    MovimientoVisitaDTO[].class);
             MovimientoVisitaDTO[] movimientos = response.getBody();
             List<MovimientoVisitaDTO> listaMovimientos = Arrays.asList(movimientos);
             return listaMovimientos;
@@ -85,4 +86,3 @@ public class MovimientoVisitaDAORest {
     }
 
 }
-

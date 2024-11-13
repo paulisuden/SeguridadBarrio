@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.service;
 
-
 import com.is2.seguridad_barrio_cliente.dto.MovimientoVisitaDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.EstadoMovimiento;
 import com.is2.seguridad_barrio_cliente.enumeration.TipoMovilidad;
@@ -19,7 +18,8 @@ public class MovimientoVisitaService {
     private MovimientoVisitaDAORest dao;
 
     public void crear(Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
-                    TipoMovilidad tipoMovilidad, String descripcionMovilidad, Long  idVisitante, Long idInmueble) throws ErrorServiceException {
+            TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble)
+            throws ErrorServiceException {
 
         try {
 
@@ -43,11 +43,11 @@ public class MovimientoVisitaService {
         }
     }
 
-    public MovimientoVisitaDTO buscar(Long id) throws ErrorServiceException {
+    public MovimientoVisitaDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar la localidad");
             }
 
@@ -63,8 +63,9 @@ public class MovimientoVisitaService {
         }
     }
 
-    public void modificar(Long id, Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
-                        TipoMovilidad tipoMovilidad, String descripcionMovilidad, Long  idVisitante, Long idInmueble) throws ErrorServiceException {
+    public void modificar(String id, Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
+            TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble)
+            throws ErrorServiceException {
 
         try {
 
@@ -88,7 +89,7 @@ public class MovimientoVisitaService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
