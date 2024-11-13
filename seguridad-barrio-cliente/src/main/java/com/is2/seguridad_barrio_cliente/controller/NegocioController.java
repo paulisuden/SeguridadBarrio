@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.is2.seguridad_barrio_cliente.dto.DireccionDTO;
@@ -112,19 +113,23 @@ public class NegocioController {
   }
 
   @PostMapping("/aceptarEditNegocio")
-  public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+  public String aceptarEdit(
+      @RequestParam MultipartFile archivo,
+      @RequestParam(required = false, defaultValue = "0") Long id,
       @RequestParam String nombre,
       @RequestParam Long idDireccion,
       @RequestParam(name = "idServicio[]", required = false) List<Long> idServicios,
       RedirectAttributes attributes, Model model) {
+    System.out.println(nombre);
+    System.out.println(idDireccion);
+    System.out.println(archivo);
     try {
       if (id == 0) {
-        negocioService.crear(nombre, idDireccion, idServicios);
+        negocioService.crear(nombre, idDireccion, idServicios, archivo);
         attributes.addFlashAttribute("msgExito", "Negocio creado correctamente");
       } else {
-        negocioService.modificar(id, nombre, idDireccion, idServicios);
+        negocioService.modificar(id, nombre, idDireccion, idServicios, archivo);
         attributes.addFlashAttribute("msgExito", "Negocio #" + id + " editado correctamente");
-
       }
       return redirectList;
     } catch (ErrorServiceException e) {

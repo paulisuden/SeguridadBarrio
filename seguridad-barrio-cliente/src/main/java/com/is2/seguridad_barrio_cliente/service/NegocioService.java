@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.NegocioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.rest.NegocioDAORest;
@@ -15,7 +17,14 @@ public class NegocioService {
   @Autowired
   private NegocioDAORest dao;
 
-  public void crear(String nombre, Long idDireccion, List<Long> idServicios) throws ErrorServiceException {
+  @Autowired
+  private ImagenService imagenService;
+
+  public void crear(
+      String nombre,
+      Long idDireccion,
+      List<Long> idServicios,
+      MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
 
@@ -23,6 +32,14 @@ public class NegocioService {
       negocio.setNombre(nombre);
       negocio.setServiciosId(idServicios);
       negocio.setDireccionId(idDireccion);
+
+      if (archivoImagen != null && archivoImagen.getSize() > 0) {
+        ImagenDTO img = imagenService.crear(archivoImagen);
+        if (img != null) {
+          negocio.setImagen(img);
+          negocio.setImagenId(img.getId());
+        }
+      }
 
       dao.crear(negocio);
 
@@ -55,7 +72,12 @@ public class NegocioService {
     }
   }
 
-  public void modificar(Long id, String nombre, Long idDireccion, List<Long> idServicios) throws ErrorServiceException {
+  public void modificar(
+      Long id,
+      String nombre,
+      Long idDireccion,
+      List<Long> idServicios,
+      MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
 
@@ -65,6 +87,13 @@ public class NegocioService {
       negocio.setServiciosId(idServicios);
       negocio.setDireccionId(idDireccion);
 
+      if (archivoImagen != null && archivoImagen.getSize() > 0) {
+        ImagenDTO img = imagenService.crear(archivoImagen);
+        if (img != null) {
+          negocio.setImagen(img);
+          negocio.setImagenId(img.getId());
+        }
+      }
       dao.actualizar(negocio);
 
     } catch (ErrorServiceException e) {

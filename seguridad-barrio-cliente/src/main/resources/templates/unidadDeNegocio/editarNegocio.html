@@ -21,7 +21,8 @@
 
                             <h5 class="card-title">Unidad De Negocio</h5>
 
-                            <form class="forms-sample" action="/negocio/aceptarEditNegocio" method="POST">
+                            <form class="forms-sample" action="/negocio/aceptarEditNegocio" method="POST"
+                                enctype="multipart/form-data">
 
                                 <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
                                 <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
@@ -36,27 +37,27 @@
                                         th:disabled="${isDisabled}" class="form-control"
                                         placeholder="Escriba el nombre de la negocio" required="required">
 
+                                    <label for="archivo">Imagen</label>
+                                    <input type="file" class="form-control" name="archivo" required
+                                        th:disabled="${isDisabled}" />
+
                                     <div class="form-group">
                                         <label for="servicios">Servicios</label>
                                         <select id="servicios" class="form-control" name="idServicio[]"
-                                            th:disabled="${isDisabled}" multiple>
+                                            th:disabled="${isDisabled}" multiple required>
                                             <option th:each="servicio : ${servicios}" th:value="${servicio.id}"
                                                 th:text="${servicio.nombre}"></option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="direcciones">Direccion</label>
-                                        <select id="direcciones" class="form-control" name="idDireccion"
-                                            th:disabled="${isDisabled}">
-                                            <option th:each="direccion : ${direcciones}" th:value="${direccion.id}"
-                                                th:text="${direccion.barrio + ' ' + direccion.calle + ' ' + direccion.numeracion}"
-                                                th:selected="${negocio?.direccion?.id == direccion.id}">
-                                            </option>
-                                        </select>
-                                    </div>
-
-
+                                    <select id="direcciones" class="form-control" name="idDireccion"
+                                        th:disabled="${isDisabled}" required="required">
+                                        <option value="" disabled selected>Seleccionar dirección</option>
+                                        <option th:each="direccion : ${direcciones}" th:value="${direccion.id}"
+                                            th:text="${direccion.barrio + ' ' + direccion.calle + ' ' + direccion.numeracion}"
+                                            th:selected="${negocio?.direccion?.id == direccion.id}">
+                                        </option>
+                                    </select>
 
 
                                 </div>

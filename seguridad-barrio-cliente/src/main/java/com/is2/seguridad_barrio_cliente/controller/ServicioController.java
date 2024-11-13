@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
-import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.ServicioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.ServicioService;
@@ -21,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/servicio")
@@ -155,29 +153,4 @@ public class ServicioController {
         }
         return viewEdit;
     }
-
-    @GetMapping("/imagen/{id}")
-    public ResponseEntity<byte[]> fotoServicio(
-            @PathVariable Long id,
-            Model model) {
-
-        try {
-            ServicioDTO servicio = servicioService.buscar(id);
-            if (servicio.getImagen() == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
-            byte[] imgContenido = servicio.getImagen().getContenido();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
-
-        } catch (Exception ex) {
-            model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }
-
 }
