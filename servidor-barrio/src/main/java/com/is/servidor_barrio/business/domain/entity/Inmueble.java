@@ -16,7 +16,7 @@ public class Inmueble extends Base {
   private String numeracion;
   private String calle;
   private String manzana;
-  
-  //@ManyToOne
-  //private UnidadDeNegocio unidadDeNegocio;
+
+  @ManyToOne
+  private UnidadDeNegocio unidadDeNegocio;
 }

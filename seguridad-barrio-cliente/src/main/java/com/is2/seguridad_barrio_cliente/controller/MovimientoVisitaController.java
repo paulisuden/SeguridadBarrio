@@ -53,13 +53,13 @@ public class MovimientoVisitaController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String baja(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
             movimientoVisitaService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Movimiento #" + id + " eliminado correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -78,7 +78,7 @@ public class MovimientoVisitaController {
 
             List<VisitanteDTO> visitantes = visitanteServie.listar();
             model.addAttribute("visitantes", visitantes);
-            
+
             List<InmuebleDTO> inmuebles = inmuebleService.listar();
             model.addAttribute("inmuebles", inmuebles);
 
@@ -122,23 +122,29 @@ public class MovimientoVisitaController {
         return viewList;
     }
 
-    /////////FALTA AGREGAR EL INMUEBLE
+    ///////// FALTA AGREGAR EL INMUEBLE
     @PostMapping("/aceptarEditMovimientoVisita")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam Date fechasMovimiento, @RequestParam String observacion,
-                              @RequestParam EstadoMovimiento estadoMovimiento, @RequestParam TipoMovilidad tipoMovilidad,
-                              @RequestParam String descripcionMovilidad, @RequestParam Long idVisitante, @RequestParam Long idInmueble,
-                              RedirectAttributes attributes, Model model) {
+            @RequestParam Date fechasMovimiento, @RequestParam String observacion,
+            @RequestParam EstadoMovimiento estadoMovimiento, @RequestParam TipoMovilidad tipoMovilidad,
+            @RequestParam String descripcionMovilidad, @RequestParam Long idVisitante, @RequestParam Long idInmueble,
+            RedirectAttributes attributes, Model model) {
         try {
 
-            if (id == 0)
-                movimientoVisitaService.crear( fechasMovimiento,  observacion,  estadoMovimiento,
-                         tipoMovilidad,  descripcionMovilidad,   idVisitante, idInmueble);
-            else
+            if (id == 0) {
+                movimientoVisitaService.crear(fechasMovimiento, observacion, estadoMovimiento,
+                        tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
+                attributes.addFlashAttribute("msgExito", "Movimiento creado correctamente.");
+
+            }
+
+            else {
                 movimientoVisitaService.modificar(id, fechasMovimiento, observacion, estadoMovimiento,
                         tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
+                attributes.addFlashAttribute("msgExito", "Movimiento #" + id + " editado correctamente.");
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            }
+
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -158,8 +164,9 @@ public class MovimientoVisitaController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
-                         TipoMovilidad tipoMovilidad, String descripcionMovilidad, Long  idVisitante, Long idInmueble) {
+    private String error(String mensaje, Model model, Long id, Date fechasMovimiento, String observacion,
+            EstadoMovimiento estadoMovimiento,
+            TipoMovilidad tipoMovilidad, String descripcionMovilidad, Long idVisitante, Long idInmueble) {
         try {
 
             model.addAttribute("msgError", mensaje);
