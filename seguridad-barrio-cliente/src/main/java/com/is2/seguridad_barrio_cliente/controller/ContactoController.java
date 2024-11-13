@@ -1,8 +1,6 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,15 +38,11 @@ public class ContactoController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(
-            @RequestParam Long id,
-            RedirectAttributes attributes,
-            Model model) {
-
+    @PostMapping("/baja")
+    public String baja(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
         try {
             contactoService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Contacto #" + id + " eliminado correctamente");
             return redirectList;
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
@@ -115,14 +109,17 @@ public class ContactoController {
             @RequestParam(required = false) TipoTelefono tipoTelefono,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0)
+            if (id == 0) {
                 contactoService.crear(
                         tipoContacto,
                         observacion,
                         email,
                         telefono,
                         tipoTelefono);
-            else
+                attributes.addFlashAttribute("msgExito", "Contacto creado correctamente");
+            }
+
+            else {
                 contactoService.modificar(
                         id,
                         tipoContacto,
@@ -131,7 +128,9 @@ public class ContactoController {
                         telefono,
                         tipoTelefono);
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+                attributes.addFlashAttribute("msgExito", "Contacto #" + id + " editado correctamente");
+            }
+
             return redirectList;
 
         } catch (ErrorServiceException e) {

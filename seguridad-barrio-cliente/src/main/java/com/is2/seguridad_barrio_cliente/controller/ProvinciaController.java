@@ -43,13 +43,13 @@ public class ProvinciaController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
-
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
         try {
 
             provinciaService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Provincia #" + id + " eliminado correctamente.");
+
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -121,11 +121,13 @@ public class ProvinciaController {
 
             if (id == 0) {
                 provinciaService.crear(nombre, idPais);
+                attributes.addFlashAttribute("msgExito", "Provincia creada correctamente");
+
             } else {
                 provinciaService.modificar(id, nombre, idPais);
-            }
+                attributes.addFlashAttribute("msgExito", "Provincia #" + id + " editada correctamente");
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {

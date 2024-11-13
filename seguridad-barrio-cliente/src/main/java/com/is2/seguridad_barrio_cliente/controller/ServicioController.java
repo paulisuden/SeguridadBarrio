@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/servicio")
@@ -45,13 +46,11 @@ public class ServicioController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
-
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
         try {
-
             servicioService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Servicio #" + id + " eliminado correctamente");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -114,12 +113,13 @@ public class ServicioController {
             @RequestParam String nombre,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0)
+            if (id == 0) {
                 servicioService.crear(nombre, archivo);
-            else
+                attributes.addFlashAttribute("msgExito", "Servicio creado correctamente");
+            } else {
                 servicioService.modificar(id, nombre, archivo);
-
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+                attributes.addFlashAttribute("msgExito", "Servicio #" + id + " editado correctamente");
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {

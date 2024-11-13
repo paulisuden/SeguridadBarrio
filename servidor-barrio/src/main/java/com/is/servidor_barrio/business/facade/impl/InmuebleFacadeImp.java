@@ -11,7 +11,6 @@ import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 @Service
 public class InmuebleFacadeImp
     extends BaseFacadeImpl<Inmueble, InmuebleDto, InmuebleCreateDto, InmuebleCreateDto, Long> {
@@ -24,36 +23,32 @@ public class InmuebleFacadeImp
     super(baseService, baseMapper);
   }
 
-  /* 
   @Override
-    public InmuebleDto save(InmuebleCreateDto inmuebleCreateDto) throws Exception {
-        
-        var inmuebleEntity = baseMapper.toEntityCreate(inmuebleCreateDto);
+  public InmuebleDto save(InmuebleCreateDto inmuebleCreateDto) throws Exception {
+    System.out.println("Creando imueble de unidad: " + inmuebleCreateDto.getIdUnidadDeNegocio() + " calle "
+        + inmuebleCreateDto.getCalle());
+    var inmuebleEntity = baseMapper.toEntityCreate(inmuebleCreateDto);
 
-        var unidadDeNegocioEntity = unidadDeNegocioServiceImpl.findById(inmuebleCreateDto.getIdUnidadDeNegocio());
-        inmuebleEntity.setUnidadDeNegocio(unidadDeNegocioEntity);
+    var unidadDeNegocioEntity = unidadDeNegocioServiceImpl.findById(inmuebleCreateDto.getIdUnidadDeNegocio());
+    inmuebleEntity.setUnidadDeNegocio(unidadDeNegocioEntity);
 
-        var entityCreated = baseService.save(inmuebleEntity);
-        return baseMapper.toDTO(entityCreated);
+    var entityCreated = baseService.save(inmuebleEntity);
+    return baseMapper.toDTO(entityCreated);
+  }
+
+  @Override
+  public InmuebleDto update(Long id, InmuebleCreateDto inmuebleCreateDto) throws Exception {
+    var inmuebleEntity = baseService.findById(id);
+    baseMapper.toUpdate(inmuebleEntity, inmuebleCreateDto);
+
+    // UNIDAD DE NEGOCIO
+    if (!inmuebleEntity.getUnidadDeNegocio().getId().equals(inmuebleCreateDto.getIdUnidadDeNegocio())) {
+      var unidadDeNegocioEntity = unidadDeNegocioServiceImpl.findById(inmuebleCreateDto.getIdUnidadDeNegocio());
+      inmuebleEntity.setUnidadDeNegocio(unidadDeNegocioEntity);
     }
 
-
-    @Override
-    public InmuebleDto update(Long id, InmuebleCreateDto inmuebleCreateDto) throws Exception {
-        var inmuebleEntity = baseService.findById(id);
-        baseMapper.toUpdate(inmuebleEntity, inmuebleCreateDto);
-
-        //UNIDAD DE NEGOCIO
-        if (!inmuebleEntity.getIdUnidadDeNegocio().getId().equals(inmuebleCreateDto.getIdUnidadDeNegocio())) {
-        var unidadDeNegocioEntity = unidadDeNegocioServiceImpl.findById(inmuebleCreateDto.getIdUnidadDeNegocio());
-        inmuebleEntity.setUnidadDeNegocio(unidadDeNegocioEntity);
-        }
-
-
-        var updatedEntity = baseService.update(id, inmuebleEntity);
-        return baseMapper.toDTO(updatedEntity);
-    }
-
-  */
+    var updatedEntity = baseService.update(id, inmuebleEntity);
+    return baseMapper.toDTO(updatedEntity);
+  }
 
 }
