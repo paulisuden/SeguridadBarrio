@@ -20,6 +20,7 @@ public class InmuebleService {
             String manzana,
             String idNegocio) throws ErrorServiceException {
 
+
         try {
 
             InmuebleDTO inmueble = new InmuebleDTO();
@@ -64,6 +65,7 @@ public class InmuebleService {
             String calle,
             String manzana,
             String idNegocio) throws ErrorServiceException {
+
 
         try {
 

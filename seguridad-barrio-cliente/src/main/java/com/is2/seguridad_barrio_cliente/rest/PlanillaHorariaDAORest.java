@@ -30,6 +30,7 @@ public class PlanillaHorariaDAORest {
 
     public PlanillaHorariaDTO buscar(String id) throws ErrorServiceException {
 
+
         try {
 
             String uri = "http://localhost:8081/api/planilla/" + id;

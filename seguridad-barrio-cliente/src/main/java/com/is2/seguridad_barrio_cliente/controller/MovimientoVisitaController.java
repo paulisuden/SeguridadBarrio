@@ -56,6 +56,7 @@ public class MovimientoVisitaController {
     @PostMapping("/baja")
     public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
+
         try {
 
             movimientoVisitaService.eliminar(id);
@@ -133,6 +134,7 @@ public class MovimientoVisitaController {
         try {
 
             if ("0".equals(id)) {
+
                 movimientoVisitaService.crear(fechasMovimiento, observacion, estadoMovimiento,
                         tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
                 attributes.addFlashAttribute("msgExito", "Movimiento creado correctamente.");
@@ -168,6 +170,7 @@ public class MovimientoVisitaController {
     private String error(String mensaje, Model model, String id, Date fechasMovimiento, String observacion,
             EstadoMovimiento estadoMovimiento,
             TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble) {
+
         try {
 
             model.addAttribute("msgError", mensaje);

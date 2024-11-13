@@ -51,6 +51,7 @@ public class NegocioController {
 
   @PostMapping("/baja")
   public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
     try {
       negocioService.eliminar(id);
       redirectAttributes.addFlashAttribute("msgExito", "Negocio #" + id + " eliminado correctamente");

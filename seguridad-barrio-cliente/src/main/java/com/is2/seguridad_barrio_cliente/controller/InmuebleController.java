@@ -45,6 +45,7 @@ public class InmuebleController {
     @PostMapping("/baja")
     public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
+
         try {
 
             inmuebleService.eliminar(id);
@@ -117,6 +118,7 @@ public class InmuebleController {
             RedirectAttributes attributes, Model model) {
         try {
             if ("0".equals(id)) {
+
                 inmuebleService.crear(numeracion, calle, manzana, idNegocio);
                 attributes.addFlashAttribute("msgExito", "Inmueble creado correctamente.");
             } else {
@@ -147,6 +149,7 @@ public class InmuebleController {
             String calle,
             String manzana,
             String idNegocio) {
+
         try {
 
             model.addAttribute("msgError", mensaje);

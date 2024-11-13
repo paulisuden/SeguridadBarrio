@@ -9,6 +9,7 @@ import com.is.servidor_barrio.business.repository.BaseRepository;
 public class ContactoServiceImpl extends BaseServiceImpl<Contacto, String> implements ContactoService {
   @Autowired
   public ContactoServiceImpl(BaseRepository<Contacto, String> baseRepository) {
+
     super(baseRepository);
   }
 

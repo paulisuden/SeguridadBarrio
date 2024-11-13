@@ -40,6 +40,7 @@ public class ContactoController {
 
     @PostMapping("/baja")
     public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
         try {
             contactoService.eliminar(id);
             redirectAttributes.addFlashAttribute("msgExito", "Contacto #" + id + " eliminado correctamente");
@@ -53,6 +54,7 @@ public class ContactoController {
     @GetMapping("/modificar")
     public String modificar(
             @RequestParam String id,
+
             Model model) {
 
         try {
@@ -72,6 +74,7 @@ public class ContactoController {
     @GetMapping("/consultar")
     public String consultar(
             @RequestParam String id,
+
             Model model) {
 
         try {
@@ -102,6 +105,7 @@ public class ContactoController {
     @PostMapping("/aceptarEditContacto")
     public String aceptarEdit(
             @RequestParam(required = false, defaultValue = "0") String id,
+
             @RequestParam TipoContacto tipoContacto,
             @RequestParam String observacion,
             @RequestParam(required = false) String email,
@@ -110,6 +114,7 @@ public class ContactoController {
             RedirectAttributes attributes, Model model) {
         try {
             if ("0".equals(id)) {
+
                 contactoService.crear(
                         tipoContacto,
                         observacion,
@@ -163,6 +168,7 @@ public class ContactoController {
             String mensaje,
             Model model,
             String id,
+
             TipoContacto tipo,
             String observacion,
             String email,
@@ -171,6 +177,7 @@ public class ContactoController {
         try {
             model.addAttribute("msgError", mensaje);
             if (!"0".equals(id)) {
+
                 model.addAttribute("contacto", contactoService.buscar(id));
             } else {
                 ContactoDTO contacto = new ContactoDTO();

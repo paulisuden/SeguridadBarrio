@@ -40,6 +40,7 @@ public class VisitanteController {
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
+
         try {
 
             visitanteService.eliminar(id);
@@ -108,6 +109,7 @@ public class VisitanteController {
         try {
 
             if ("0".equals(id)) {
+
                 visitanteService.crear(nombre, apellido, numeroDeDocumento, tipoVisita);
                 attributes.addFlashAttribute("msgExito", "Visitante creado correctamente.");
 

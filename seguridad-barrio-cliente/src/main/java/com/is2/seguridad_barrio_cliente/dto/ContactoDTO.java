@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Data
 public class ContactoDTO implements Serializable {
     private String id;
+
     private TipoContacto tipoContacto;
     private String observacion;
     private String email;

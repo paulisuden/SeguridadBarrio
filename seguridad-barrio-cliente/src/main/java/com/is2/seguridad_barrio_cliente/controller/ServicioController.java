@@ -48,6 +48,7 @@ public class ServicioController {
 
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
         try {
             servicioService.eliminar(id);
             redirectAttributes.addFlashAttribute("msgExito", "Servicio #" + id + " eliminado correctamente");
@@ -114,6 +115,7 @@ public class ServicioController {
             RedirectAttributes attributes, Model model) {
         try {
             if ("0".equals(id)) {
+
                 servicioService.crear(nombre, archivo);
                 attributes.addFlashAttribute("msgExito", "Servicio creado correctamente");
             } else {

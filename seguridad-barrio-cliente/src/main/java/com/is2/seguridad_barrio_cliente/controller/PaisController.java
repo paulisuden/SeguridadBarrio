@@ -39,6 +39,7 @@ public class PaisController {
 
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
         try {
 
             paisService.eliminar(id);
@@ -100,11 +101,13 @@ public class PaisController {
 
     @PostMapping("/aceptarEditPais")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
+
             @RequestParam String nombre,
             RedirectAttributes attributes, Model model) {
         try {
 
             if ("0".equals(id)) {
+
                 paisService.crear(nombre);
                 attributes.addFlashAttribute("msgExito", "Pais creado correctamente");
 
@@ -131,6 +134,7 @@ public class PaisController {
     }
 
     private String error(String mensaje, Model model, String id, String nombre) {
+
         try {
 
             model.addAttribute("msgError", mensaje);

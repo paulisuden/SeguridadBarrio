@@ -21,6 +21,7 @@ public class PlanillaHorariaService {
     public void crear(LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia,
             String observacion) throws ErrorServiceException {
 
+
         try {
 
             PlanillaHorariaDTO planillaHoraria = new PlanillaHorariaDTO();
@@ -29,6 +30,7 @@ public class PlanillaHorariaService {
             planillaHoraria.setObservacionAsistencia(observacion);
             planillaHoraria.setSalida(salida);
             // planillaHoraria.setEmpleadoId(idEmpleado);
+
 
             dao.crear(planillaHoraria);
 
@@ -46,6 +48,7 @@ public class PlanillaHorariaService {
         try {
 
             if ("0".equals(id)) {
+
                 throw new ErrorServiceException("Debe indicar la planilla horaria");
             }
 
@@ -63,6 +66,7 @@ public class PlanillaHorariaService {
 
     public void modificar(String id, LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia,
             String observacion) throws ErrorServiceException {
+
 
         try {
 
