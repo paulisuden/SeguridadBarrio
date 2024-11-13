@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+<div class="container-scroller" >
+
+    <!-- Navbar -->
+    <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+    <!-- Sidebar -->
+    <div class="container-fluid page-body-wrapper">
+        <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+
+        <!-- Main Content -->
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Planilla Horaria</h4>
+                    <a class="btn btn-success btn-sm btn-icon-text" th:href="@{/planillaHoraria/altaPlanillaHoraria}" role="button">
+                        <i class="typcn typcn-plus btn-icon-append"></i>
+                    </a>
+                    <hr>
+                    <div th:if="${msgExito != null}" class="alert alert-success" th:text="${msgExito}" role="alert"></div>
+                    <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}" role="alert"></div>
+                    <table class="table table-hover table-responsive">
+
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Acciones</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Salida</th>
+                        <th scope="col">Estado asistencia</th>
+                        <!--<th scope="col">Empleado</th>-->
+                        <th scope="col">Observacion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="planillaHoraria : ${listaPlanillaHoraria}">
+                        <td>
+                            <a th:href="@{/planillaHoraria/consultar(id=${planillaHoraria.id})}"
+                                class="btn btn-warning btn-sm btn-icon-text" title="Consultar">
+                                <i class="typcn typcn-eye-outline btn-icon-append"></i> Consultar
+                            </a>
+                            <a th:href="@{/planillaHoraria/modificar(id=${planillaHoraria.id})}"
+                                class="btn btn-info btn-sm btn-icon-text mr-3" title="Modificar">
+                                <i class="typcn typcn-edit btn-icon-append"></i> Modificar
+                            </a>
+                            <a th:href="@{/planillaHoraria/baja(id=${planillaHoraria.id})}"
+                                class="btn btn-danger btn-sm btn-icon-text" title="Eliminar">
+                                <i class="typcn typcn-delete-outline btn-icon-append"></i> Eliminar
+                            </a>
+                        </td>
+                        <td th:text="${planillaHoraria.entrada}"></td>
+                        <td th:text="${planillaHoraria.salida}"></td>
+                        <td th:text="${planillaHoraria.estadoAsistencia}"></td>
+                        <!-- <td th:text="${planillaHoraria.empleado.nombre}"></td> -->
+                        <td th:text="${planillaHoraria.observacionAsistencia}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
+
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+
+</body>
+</html>
