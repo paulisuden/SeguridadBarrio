@@ -37,13 +37,13 @@ public class VisitanteController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
             visitanteService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Visitante #" + id + " eliminado correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -107,12 +107,16 @@ public class VisitanteController {
             RedirectAttributes attributes, Model model) {
         try {
 
-            if (id == 0)
+            if (id == 0) {
                 visitanteService.crear(nombre, apellido, numeroDeDocumento, tipoVisita);
-            else
-                visitanteService.modificar(id, nombre, apellido, numeroDeDocumento, tipoVisita);
+                attributes.addFlashAttribute("msgExito", "Visitante creado correctamente.");
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            } else {
+
+                visitanteService.modificar(id, nombre, apellido, numeroDeDocumento, tipoVisita);
+                attributes.addFlashAttribute("msgExito", "Visitante #" + id + " editado correctamente.");
+
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {

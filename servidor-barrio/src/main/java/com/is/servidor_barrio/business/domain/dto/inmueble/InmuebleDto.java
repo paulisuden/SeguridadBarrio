@@ -1,6 +1,7 @@
 package com.is.servidor_barrio.business.domain.dto.inmueble;
 
 import com.is.servidor_barrio.business.domain.dto.BaseDto;
+import com.is.servidor_barrio.business.domain.dto.unidadDeNegocio.UnidadDeNegocioDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,6 @@ public class InmuebleDto extends BaseDto {
   private String numeracion;
   private String calle;
   private String manzana;
-  // private Long idUnidadDeNegocio;
-  // private UnidadDeNegocioDto unidadDeNegocio;
+  private Long idUnidadDeNegocio;
+  private UnidadDeNegocioDto unidadDeNegocio;
 }

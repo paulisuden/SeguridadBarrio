@@ -49,11 +49,11 @@ public class NegocioController {
     return viewEdit;
   }
 
-  @GetMapping("/baja")
-  public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+  @PostMapping("/baja")
+  public String eliminarServicio(@RequestParam("id") Long id, RedirectAttributes redirectAttributes, Model model) {
     try {
       negocioService.eliminar(id);
-      attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+      redirectAttributes.addFlashAttribute("msgExito", "Negocio #" + id + " eliminado correctamente");
       return redirectList;
     } catch (ErrorServiceException e) {
       model.addAttribute("msgError", e.getMessage());
@@ -120,10 +120,12 @@ public class NegocioController {
     try {
       if (id == 0) {
         negocioService.crear(nombre, idDireccion, idServicios);
+        attributes.addFlashAttribute("msgExito", "Negocio creado correctamente");
       } else {
         negocioService.modificar(id, nombre, idDireccion, idServicios);
+        attributes.addFlashAttribute("msgExito", "Negocio #" + id + " editado correctamente");
+
       }
-      attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
       return redirectList;
     } catch (ErrorServiceException e) {
       model.addAttribute("msgError", e.getMessage());

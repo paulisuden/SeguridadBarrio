@@ -14,7 +14,11 @@ public class InmuebleService {
     @Autowired
     private InmuebleDAORest dao;
 
-    public void crear(String numeracion, String calle, String manzana) throws ErrorServiceException {
+    public void crear(
+            String numeracion,
+            String calle,
+            String manzana,
+            Long idNegocio) throws ErrorServiceException {
 
         try {
 
@@ -22,7 +26,7 @@ public class InmuebleService {
             inmueble.setCalle(calle);
             inmueble.setManzana(manzana);
             inmueble.setNumeracion(numeracion);
-            //inmueble.setIdNegocio(idNegocio);
+            inmueble.setIdUnidadDeNegocio(idNegocio);
             dao.crear(inmueble);
 
         } catch (ErrorServiceException e) {
@@ -54,7 +58,12 @@ public class InmuebleService {
         }
     }
 
-    public void modificar(Long id, String numeracion, String calle, String manzana) throws ErrorServiceException {
+    public void modificar(
+            Long id,
+            String numeracion,
+            String calle,
+            String manzana,
+            Long idNegocio) throws ErrorServiceException {
 
         try {
 
@@ -63,8 +72,7 @@ public class InmuebleService {
             inmueble.setCalle(calle);
             inmueble.setManzana(manzana);
             inmueble.setNumeracion(numeracion);
-            //inmueble.setIdNegocio(idNegocio);
-
+            inmueble.setIdUnidadDeNegocio(idNegocio);
             dao.actualizar(inmueble);
 
         } catch (ErrorServiceException e) {
@@ -99,5 +107,5 @@ public class InmuebleService {
             throw new ErrorServiceException("Error de sistema");
         }
     }
-    
+
 }
