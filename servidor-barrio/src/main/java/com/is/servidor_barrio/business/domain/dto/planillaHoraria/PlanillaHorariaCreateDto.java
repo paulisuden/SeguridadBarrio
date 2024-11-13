@@ -1,6 +1,6 @@
 package com.is.servidor_barrio.business.domain.dto.planillaHoraria;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.is.servidor_barrio.business.domain.enumeration.EstadoAsistencia;
 
@@ -14,9 +14,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlanillaHorariaCreateDto {
-  private Date entrada;
-  private Date salida;
+  private LocalDateTime entrada;
+  private LocalDateTime salida;
   private EstadoAsistencia estadoAsistencia;
   private String observacionAsistencia;
-  private Long empleadoId;
+  //private Long empleadoId;
 }

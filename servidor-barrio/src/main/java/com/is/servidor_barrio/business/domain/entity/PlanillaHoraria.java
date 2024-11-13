@@ -1,12 +1,11 @@
 package com.is.servidor_barrio.business.domain.entity;
 
-import java.sql.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import com.is.servidor_barrio.business.domain.enumeration.EstadoAsistencia;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +18,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PlanillaHoraria extends Base {
 
-  private Date entrada;
-  private Date salida;
+  private LocalDateTime entrada;
+  private LocalDateTime salida;
   private EstadoAsistencia estadoAsistencia;
   private String observacionAsistencia;
 
-  @OneToMany
-  private List<Empleado> empleados;
+  //@ManyToOne
+  //private Empleado empleado;
 
 }

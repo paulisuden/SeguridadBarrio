@@ -1,6 +1,6 @@
 package com.is.servidor_barrio.business.domain.dto.planillaHoraria;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.is.servidor_barrio.business.domain.dto.BaseDto;
 import com.is.servidor_barrio.business.domain.enumeration.EstadoAsistencia;
@@ -15,9 +15,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PlanillaHorariaDto extends BaseDto {
-  private Date entrada;
-  private Date salida;
+  private LocalDateTime entrada;
+  private LocalDateTime salida;
   private EstadoAsistencia estadoAsistencia;
   private String observacionAsistencia;
-  // private List<EmpleadoDto> empleados;
+  // private EmpleadoDto empleados;
+  // private Long idEmpleado;
 }
