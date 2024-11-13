@@ -13,5 +13,6 @@ public class NegocioDTO implements Serializable {
   private List<ServicioDTO> servicios;
   private String direccionId;
   private DireccionDTO direccion;
-
+  private String imagenId;
+  private ImagenDTO imagen;
 }

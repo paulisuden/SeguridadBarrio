@@ -44,6 +44,7 @@
                                                     <th class="ml-5"></th>
                                                     <th class="ml-5">ID</th>
                                                     <th class="ml-5">Nombre</th>
+                                                    <th class="ml-5">Imagen</th>
                                                     <th class="ml-5">Servicios</th>
                                                 </tr>
                                             </thead>
@@ -88,6 +89,10 @@
                                                     </td>
                                                     <td th:text="'#' + ${negocio.id}"></td>
                                                     <td th:text="${negocio.nombre}"></td>
+                                                    <td>
+                                                        <img th:src="${'/imagen/' + negocio.imagen.id}" alt=""
+                                                            style="height: 100px; width: 100px; border-radius: 15%">
+                                                    </td>
                                                     <!-- Loop through each servicio in negocio.servicios to display the list of services -->
                                                     <td>
                                                         <ul>

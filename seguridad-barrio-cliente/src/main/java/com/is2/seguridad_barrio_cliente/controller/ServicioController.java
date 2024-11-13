@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
-import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.ServicioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.ServicioService;
@@ -21,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/servicio")
