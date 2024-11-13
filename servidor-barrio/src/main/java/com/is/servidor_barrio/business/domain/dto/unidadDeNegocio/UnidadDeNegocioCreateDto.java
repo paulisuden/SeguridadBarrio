@@ -14,6 +14,6 @@ import lombok.Setter;
 public class UnidadDeNegocioCreateDto {
   private String nombre;
   // private DireccionDto direccion;
-  private Long direccionId;
-  private List<Long> serviciosId;
+  private String direccionId;
+  private List<String> serviciosId;
 }

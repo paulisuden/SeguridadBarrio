@@ -28,7 +28,7 @@ public class EmpleadoDAORest {
     }
   }
 
-  public PersonaDTO buscar(Long id) throws ErrorServiceException {
+  public PersonaDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
@@ -58,7 +58,7 @@ public class EmpleadoDAORest {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 

@@ -18,5 +18,5 @@ public class PlanillaHorariaCreateDto {
   private Date salida;
   private EstadoAsistencia estadoAsistencia;
   private String observacionAsistencia;
-  private Long empleadoId;
+  private String empleadoId;
 }

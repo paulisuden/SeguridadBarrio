@@ -28,7 +28,7 @@
 
                             <div class="form-group">
                                 <!-- Campo oculto para ID -->
-                                <input type="hidden" name="id" th:value="${movimientoVisita.id != null ? movimientoVisita.id : 0}">
+                                <input type="hidden" name="id" th:value="${movimientoVisita.id != null and !movimientoVisita.id.isEmpty() ? movimientoVisita.id : '0'}">
 
                                 <!-- Fecha del Movimiento -->
                                 <label for="fechasMovimiento">Fecha del Movimiento</label>

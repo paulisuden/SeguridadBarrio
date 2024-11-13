@@ -28,7 +28,7 @@
 
                             <div class="form-group">
                                 <!-- Campo oculto para ID -->
-                                <input type="hidden" name="id" th:value="${inmueble.id != null ? inmueble.id : 0}">
+                                <input type="hidden" name="id" th:value="${inmueble.id != null and !inmueble.id.isEmpty() ? inmueble.id : '0'}">
 
                                 <!-- Calle -->
                                 <label for="calle">Calle</label>

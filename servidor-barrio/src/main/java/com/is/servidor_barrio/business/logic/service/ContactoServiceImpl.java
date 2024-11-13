@@ -7,9 +7,9 @@ import com.is.servidor_barrio.business.domain.entity.Contacto;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class ContactoServiceImpl extends BaseServiceImpl<Contacto, Long> implements ContactoService {
+public class ContactoServiceImpl extends BaseServiceImpl<Contacto, String> implements ContactoService {
   @Autowired
-  public ContactoServiceImpl(BaseRepository<Contacto, Long> baseRepository) {
+  public ContactoServiceImpl(BaseRepository<Contacto, String> baseRepository) {
     super(baseRepository);
   }
 

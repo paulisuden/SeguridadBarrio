@@ -7,10 +7,10 @@ import com.is.servidor_barrio.business.domain.entity.PlanillaHoraria;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class PlanillaHorariaServiceImpl extends BaseServiceImpl<PlanillaHoraria, Long>
+public class PlanillaHorariaServiceImpl extends BaseServiceImpl<PlanillaHoraria, String>
     implements PlanillaHorariaService {
   @Autowired
-  public PlanillaHorariaServiceImpl(BaseRepository<PlanillaHoraria, Long> baseRepository) {
+  public PlanillaHorariaServiceImpl(BaseRepository<PlanillaHoraria, String> baseRepository) {
     super(baseRepository);
   }
 

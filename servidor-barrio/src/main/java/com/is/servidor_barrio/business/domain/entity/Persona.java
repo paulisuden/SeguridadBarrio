@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Persona extends Base implements Serializable {
+public class Persona extends Base {
 
   private String nombre;
   private String apellido;
@@ -24,4 +24,3 @@ public class Persona extends Base implements Serializable {
   @ManyToMany
   private List<Contacto> contactos;
 }
-

@@ -12,5 +12,5 @@ import lombok.Setter;
 public class LocalidadCreateDto {
   private String nombre;
   private String codigoPostal;
-  private Long departamentoId;
+  private String departamentoId;
 }

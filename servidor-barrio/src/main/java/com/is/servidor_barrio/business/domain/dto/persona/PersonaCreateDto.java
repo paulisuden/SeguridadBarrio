@@ -17,6 +17,6 @@ public class PersonaCreateDto {
   // private Long usuarioId;
   private String legajo;
   private TipoEmpleado tipoEmpleado;
-  private Long[] negociosId;
-  private Long inmuebleId;
+  private String[] negociosId;
+  private String inmuebleId;
 }

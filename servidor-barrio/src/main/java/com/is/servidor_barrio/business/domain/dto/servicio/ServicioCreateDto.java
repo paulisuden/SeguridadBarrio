@@ -13,6 +13,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ServicioCreateDto {
   private String nombre;
-  private Long imagenId;
+  private String imagenId;
   private ImagenDto imagen;
 }

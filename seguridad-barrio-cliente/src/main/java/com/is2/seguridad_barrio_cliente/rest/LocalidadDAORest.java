@@ -26,7 +26,7 @@ public class LocalidadDAORest {
         }
     }
 
-    public LocalidadDTO buscar(Long id) throws ErrorServiceException {
+    public LocalidadDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -56,7 +56,7 @@ public class LocalidadDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
@@ -83,7 +83,8 @@ public class LocalidadDAORest {
         }
     }
 
-    public LocalidadDTO buscarLocalidadPorDepartamentoYNombre(Long idDepartamento, String nombre) throws ErrorServiceException {
+    public LocalidadDTO buscarLocalidadPorDepartamentoYNombre(String idDepartamento, String nombre)
+            throws ErrorServiceException {
         try {
 
             String uri = "http://localhost:8081/api/localidad/?departamentoId=" + idDepartamento + "&nombre=" + nombre;

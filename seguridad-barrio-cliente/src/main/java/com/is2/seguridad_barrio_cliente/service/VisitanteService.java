@@ -15,7 +15,8 @@ public class VisitanteService {
     @Autowired
     private VisitanteDAORest dao;
 
-    public void crear(String nombre, String apellido, String numeroDeDocumento, TipoVisita tipoVisita) throws ErrorServiceException {
+    public void crear(String nombre, String apellido, String numeroDeDocumento, TipoVisita tipoVisita)
+            throws ErrorServiceException {
 
         try {
 
@@ -36,11 +37,11 @@ public class VisitanteService {
         }
     }
 
-    public VisitanteDTO buscar(Long id) throws ErrorServiceException {
+    public VisitanteDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar el visitante");
             }
 
@@ -56,7 +57,8 @@ public class VisitanteService {
         }
     }
 
-    public void modificar(Long id, String nombre, String apellido, String numeroDeDocumento, TipoVisita tipoVisita) throws ErrorServiceException {
+    public void modificar(String id, String nombre, String apellido, String numeroDeDocumento, TipoVisita tipoVisita)
+            throws ErrorServiceException {
 
         try {
 
@@ -77,11 +79,11 @@ public class VisitanteService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar el visitante");
             }
 

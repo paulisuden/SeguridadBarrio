@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public class PersonaDTO {
-  private Long id;
+  private String id;
   private String nombre;
   private String apellido;
-  // private Long usuarioId;
+  // private String usuarioId;
   // private UsuarioDTO usuario;
   private String legajo;
   private TipoEmpleado tipoEmpleado;
-  private Long[] negociosId;
-  private Long inmuebleId;
-  // private Long contactoId;
+  private String[] negociosId;
+  private String inmuebleId;
+  // private String contactoId;
   // private ContactoDTO contacto;
 }

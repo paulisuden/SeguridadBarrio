@@ -29,7 +29,7 @@
                                 <div class="form-group">
 
                                     <input type="hidden" th:name="id"
-                                        th:value="${negocio != null and negocio.id != null ? negocio.id : 0}" />
+                                        th:value="${negocio.id != null and !negocio.id.isEmpty() ? negocio.id : '0'}"/>
 
                                     <label for="nombre">Nombre</label>
                                     <input type="text" id="nombre" name="nombre" th:value="${negocio.nombre}"

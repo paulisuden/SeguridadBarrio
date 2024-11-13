@@ -5,9 +5,8 @@ import com.is.servidor_barrio.business.domain.entity.ContactoEmail;
 import com.is.servidor_barrio.business.domain.entity.Persona;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface PersonaService extends BaseService<Persona, Long> {
+public interface PersonaService extends BaseService<Persona, String> {
     public ContactoEmail obtenerContactoEmail(List<Contacto> contactos);
 
 }

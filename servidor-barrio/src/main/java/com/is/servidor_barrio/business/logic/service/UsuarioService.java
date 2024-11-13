@@ -1,6 +1,5 @@
 package com.is.servidor_barrio.business.logic.service;
 
-
 import com.is.servidor_barrio.business.domain.enumeration.Rol;
 import com.is.servidor_barrio.business.logic.error.ErrorServiceException;
 import com.is.servidor_barrio.business.repository.UsuarioRepository;
@@ -30,7 +29,6 @@ public class UsuarioService implements UserDetailsService {
   @Autowired
   private UsuarioRepository repository;
 
-
   public void validar(String email, String clave) throws ErrorServiceException {
     try {
 
@@ -42,9 +40,9 @@ public class UsuarioService implements UserDetailsService {
         throw new ErrorServiceException("Debe indicar la clave");
       }
 
-    }catch(ErrorServiceException e) {
+    } catch (ErrorServiceException e) {
       throw e;
-    }catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ErrorServiceException("Error del sistema");
     }
@@ -65,17 +63,17 @@ public class UsuarioService implements UserDetailsService {
 
       return repository.save(usuario);
 
-    }catch(ErrorServiceException e) {
+    } catch (ErrorServiceException e) {
       throw e;
 
-    }catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ErrorServiceException("Error del sistema");
     }
   }
 
   @Transactional
-  public Usuario update(Long idUsuario,String email, String clave) throws ErrorServiceException {
+  public Usuario update(String idUsuario, String email, String clave) throws ErrorServiceException {
 
     try {
 
@@ -87,17 +85,17 @@ public class UsuarioService implements UserDetailsService {
 
       return repository.save(usuario);
 
-    }catch(ErrorServiceException e) {
+    } catch (ErrorServiceException e) {
       throw e;
 
-    }catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ErrorServiceException("Error del sistema");
     }
   }
 
   @Transactional
-  public void delete(Long idUsuario) throws ErrorServiceException {
+  public void delete(String idUsuario) throws ErrorServiceException {
 
     try {
 
@@ -106,10 +104,10 @@ public class UsuarioService implements UserDetailsService {
 
       repository.save(usuario);
 
-    }catch(ErrorServiceException e) {
+    } catch (ErrorServiceException e) {
       throw e;
 
-    }catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ErrorServiceException("Error del sistema");
     }
@@ -117,7 +115,7 @@ public class UsuarioService implements UserDetailsService {
   }
 
   @Transactional
-  public void changeRol(Long idUsuario, Rol rol) throws ErrorServiceException {
+  public void changeRol(String idUsuario, Rol rol) throws ErrorServiceException {
 
     try {
 
@@ -127,10 +125,10 @@ public class UsuarioService implements UserDetailsService {
 
       repository.save(usuario);
 
-    }catch(ErrorServiceException e) {
+    } catch (ErrorServiceException e) {
       throw e;
 
-    }catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ErrorServiceException("Error del sistema");
     }
@@ -138,7 +136,7 @@ public class UsuarioService implements UserDetailsService {
   }
 
   @Transactional
-  public Usuario findById(Long idUsuario) throws ErrorServiceException {
+  public Usuario findById(String idUsuario) throws ErrorServiceException {
 
     try {
 
@@ -149,8 +147,8 @@ public class UsuarioService implements UserDetailsService {
       Optional<Usuario> optional = repository.findById(idUsuario);
       Usuario usuario = null;
       if (optional.isPresent()) {
-        usuario= optional.get();
-        if (usuario == null || usuario.getEliminado()){
+        usuario = optional.get();
+        if (usuario == null || usuario.getEliminado()) {
           throw new ErrorServiceException("No se encuentra el usuario indicado");
         }
       }
@@ -167,7 +165,7 @@ public class UsuarioService implements UserDetailsService {
 
   }
 
-  public Usuario findByEmail (String email) throws ErrorServiceException {
+  public Usuario findByEmail(String email) throws ErrorServiceException {
 
     try {
 
@@ -186,13 +184,13 @@ public class UsuarioService implements UserDetailsService {
     }
   }
 
-  public List<Usuario> findAll()throws ErrorServiceException {
+  public List<Usuario> findAll() throws ErrorServiceException {
 
     try {
 
       return repository.findAll();
 
-    }catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       throw new ErrorServiceException("Error del sistema");
     }
@@ -261,7 +259,5 @@ public class UsuarioService implements UserDetailsService {
       throw new ErrorServiceException("Error del sistema");
     }
   }
-
-
 
 }

@@ -4,5 +4,5 @@ import com.is.servidor_barrio.business.domain.entity.Departamento;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DepartamentoRepository extends BaseRepository<Departamento, Long> {
+public interface DepartamentoRepository extends BaseRepository<Departamento, String> {
 }

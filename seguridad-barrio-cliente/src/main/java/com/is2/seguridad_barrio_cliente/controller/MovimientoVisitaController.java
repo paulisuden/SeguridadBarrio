@@ -54,7 +54,7 @@ public class MovimientoVisitaController {
     }
 
     @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -69,7 +69,7 @@ public class MovimientoVisitaController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -78,7 +78,7 @@ public class MovimientoVisitaController {
 
             List<VisitanteDTO> visitantes = visitanteServie.listar();
             model.addAttribute("visitantes", visitantes);
-            
+
             List<InmuebleDTO> inmuebles = inmuebleService.listar();
             model.addAttribute("inmuebles", inmuebles);
 
@@ -93,7 +93,7 @@ public class MovimientoVisitaController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -122,18 +122,19 @@ public class MovimientoVisitaController {
         return viewList;
     }
 
-    /////////FALTA AGREGAR EL INMUEBLE
+    ///////// FALTA AGREGAR EL INMUEBLE
     @PostMapping("/aceptarEditMovimientoVisita")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam Date fechasMovimiento, @RequestParam String observacion,
-                              @RequestParam EstadoMovimiento estadoMovimiento, @RequestParam TipoMovilidad tipoMovilidad,
-                              @RequestParam String descripcionMovilidad, @RequestParam Long idVisitante, @RequestParam Long idInmueble,
-                              RedirectAttributes attributes, Model model) {
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
+            @RequestParam Date fechasMovimiento, @RequestParam String observacion,
+            @RequestParam EstadoMovimiento estadoMovimiento, @RequestParam TipoMovilidad tipoMovilidad,
+            @RequestParam String descripcionMovilidad, @RequestParam String idVisitante,
+            @RequestParam String idInmueble,
+            RedirectAttributes attributes, Model model) {
         try {
 
-            if (id == 0)
-                movimientoVisitaService.crear( fechasMovimiento,  observacion,  estadoMovimiento,
-                         tipoMovilidad,  descripcionMovilidad,   idVisitante, idInmueble);
+            if ("0".equals(id))
+                movimientoVisitaService.crear(fechasMovimiento, observacion, estadoMovimiento,
+                        tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
             else
                 movimientoVisitaService.modificar(id, fechasMovimiento, observacion, estadoMovimiento,
                         tipoMovilidad, descripcionMovilidad, idVisitante, idInmueble);
@@ -158,12 +159,13 @@ public class MovimientoVisitaController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
-                         TipoMovilidad tipoMovilidad, String descripcionMovilidad, Long  idVisitante, Long idInmueble) {
+    private String error(String mensaje, Model model, String id, Date fechasMovimiento, String observacion,
+            EstadoMovimiento estadoMovimiento,
+            TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble) {
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (id != "0") {
                 model.addAttribute("movimientoVisita", movimientoVisitaService.buscar(id));
             } else {
                 VisitanteDTO visitante = visitanteServie.buscar(idVisitante);

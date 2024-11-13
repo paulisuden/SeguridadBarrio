@@ -16,7 +16,7 @@ public class EmpleadoService {
   @Autowired
   private EmpleadoDAORest dao;
 
-  public void crear(String nombre, String apellido, String legajo, TipoEmpleado tipoEmpelado, Long[] negociosId)
+  public void crear(String nombre, String apellido, String legajo, TipoEmpleado tipoEmpelado, String[] negociosId)
       throws ErrorServiceException {
 
     try {
@@ -39,11 +39,11 @@ public class EmpleadoService {
     }
   }
 
-  public PersonaDTO buscar(Long id) throws ErrorServiceException {
+  public PersonaDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
-      if (id == 0) {
+      if ("0".equals(id)) {
         throw new ErrorServiceException("Debe indicar la Empleado");
       }
 
@@ -59,8 +59,8 @@ public class EmpleadoService {
     }
   }
 
-  public void modificar(Long id, String nombre, String apellido, String legajo, TipoEmpleado tipoEmpelado,
-      Long[] negociosId)
+  public void modificar(String id, String nombre, String apellido, String legajo, TipoEmpleado tipoEmpelado,
+      String[] negociosId)
       throws ErrorServiceException {
 
     try {
@@ -83,7 +83,7 @@ public class EmpleadoService {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 

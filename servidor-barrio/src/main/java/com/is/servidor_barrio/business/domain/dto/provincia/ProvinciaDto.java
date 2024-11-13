@@ -14,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class ProvinciaDto extends BaseDto {
   private String nombre;
-  private Long paisId;
+  private String paisId;
   private PaisDto pais;
 }

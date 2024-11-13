@@ -14,13 +14,13 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
 public class DepartamentoFacadeImpl
-    extends BaseFacadeImpl<Departamento, DepartamentoDto, DepartamentoCreateDto, DepartamentoCreateDto, Long>
+    extends BaseFacadeImpl<Departamento, DepartamentoDto, DepartamentoCreateDto, DepartamentoCreateDto, String>
     implements DepartamentoFacade {
 
   @Autowired
   private ProvinciaServiceImpl serviceImpl;
 
-  public DepartamentoFacadeImpl(BaseService<Departamento, Long> baseService,
+  public DepartamentoFacadeImpl(BaseService<Departamento, String> baseService,
       BaseMapper<Departamento, DepartamentoDto, DepartamentoCreateDto, DepartamentoCreateDto> baseMapper) {
     super(baseService, baseMapper);
   }
@@ -34,7 +34,7 @@ public class DepartamentoFacadeImpl
   }
 
   @Override
-  public DepartamentoDto update(Long id, DepartamentoCreateDto createDto) throws Exception {
+  public DepartamentoDto update(String id, DepartamentoCreateDto createDto) throws Exception {
     var departamentoEntity = baseService.findById(id);
     baseMapper.toUpdate(departamentoEntity, createDto);
 

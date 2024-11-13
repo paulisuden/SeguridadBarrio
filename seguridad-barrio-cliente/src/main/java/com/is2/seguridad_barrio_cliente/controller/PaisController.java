@@ -38,7 +38,7 @@ public class PaisController {
     }
 
     @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -53,7 +53,7 @@ public class PaisController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -70,7 +70,7 @@ public class PaisController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -86,8 +86,6 @@ public class PaisController {
         }
     }
 
-
-
     @GetMapping("/listarPais")
     public String listarPais(Model model) {
         try {
@@ -101,15 +99,13 @@ public class PaisController {
         return viewList;
     }
 
-
-
     @PostMapping("/aceptarEditPais")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                              @RequestParam String nombre,
-                              RedirectAttributes attributes, Model model) {
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
+            @RequestParam String nombre,
+            RedirectAttributes attributes, Model model) {
         try {
 
-            if (id == 0)
+            if ("0".equals(id))
                 paisService.crear(nombre);
             else
                 paisService.modificar(id, nombre);
@@ -132,13 +128,11 @@ public class PaisController {
         return redirectList;
     }
 
-
-
-    private String error(String mensaje, Model model, Long id, String nombre) {
+    private String error(String mensaje, Model model, String id, String nombre) {
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (id != "0") {
                 model.addAttribute("pais", paisService.buscar(id));
             } else {
                 PaisDTO pais = new PaisDTO();
@@ -152,6 +146,5 @@ public class PaisController {
         }
         return viewEdit;
     }
-
 
 }

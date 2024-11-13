@@ -28,7 +28,7 @@ public class EmpleadoController {
   private NegocioService negocioService;
 
   private String viewList = "persona/listarEmpleado.html";
-  private String redirectList = "redirect:/persona/listarEmpleado";
+  private String redirectList = "redirect:/empleado/listarEmpleado";
   private String viewEdit = "persona/editarEmpleado.html";
 
   @GetMapping("/altaEmpleado")
@@ -47,7 +47,7 @@ public class EmpleadoController {
   }
 
   @GetMapping("/baja")
-  public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+  public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
 
     try {
 
@@ -62,7 +62,7 @@ public class EmpleadoController {
   }
 
   @GetMapping("/modificar")
-  public String modificar(@RequestParam Long id, Model model) {
+  public String modificar(@RequestParam String id, Model model) {
 
     try {
 
@@ -84,7 +84,7 @@ public class EmpleadoController {
   }
 
   @GetMapping("/consultar")
-  public String consultar(@RequestParam long id, Model model) {
+  public String consultar(@RequestParam String id, Model model) {
 
     try {
 
@@ -108,6 +108,7 @@ public class EmpleadoController {
   public String listarEmpleado(Model model) {
     try {
       List<PersonaDTO> listaEmpleado = empleadoService.listar();
+      System.out.println(listaEmpleado.getFirst().getLegajo());
       model.addAttribute("listaEmpleado", listaEmpleado);
 
     } catch (ErrorServiceException e) {
@@ -119,17 +120,17 @@ public class EmpleadoController {
   }
 
   @PostMapping("/aceptarEditEmpleado")
-  public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+  public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
       @RequestParam String nombre,
       @RequestParam String apellido,
       @RequestParam String legajo,
       @RequestParam TipoEmpleado tipoEmpleado,
-      @RequestParam Long[] negociosId,
+      @RequestParam String[] negociosId,
       RedirectAttributes attributes, Model model) {
 
     try {
 
-      if (id == 0) {
+      if ("0".equals(id)) {
         empleadoService.crear(nombre, apellido, legajo, tipoEmpleado, negociosId);
       } else {
         empleadoService.modificar(id, nombre, apellido, legajo, tipoEmpleado, negociosId);
@@ -152,14 +153,14 @@ public class EmpleadoController {
     return redirectList;
   }
 
-  private String error(String mensaje, Model model, Long id, String nombre, String apellido, String legajo,
-      TipoEmpleado tipoEmpleado, Long[] negociosId) {
+  private String error(String mensaje, Model model, String id, String nombre, String apellido, String legajo,
+      TipoEmpleado tipoEmpleado, String[] negociosId) {
     try {
       model.addAttribute("msgError", mensaje);
 
       PersonaDTO empleado = new PersonaDTO();
 
-      if (id != 0) {
+      if (id != "0") {
         empleado = empleadoService.buscar(id);
       } else {
         empleado.setNombre(nombre);

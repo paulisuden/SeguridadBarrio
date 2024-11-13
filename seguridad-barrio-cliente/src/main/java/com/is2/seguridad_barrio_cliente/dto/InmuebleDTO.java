@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class InmuebleDTO {
-    private Long id;
+    private String id;
     private String numeracion;
     private String calle;
     private String manzana;

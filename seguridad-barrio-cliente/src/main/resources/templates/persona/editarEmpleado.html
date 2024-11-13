@@ -28,7 +28,7 @@
 
                             <div class="form-group">
 
-                                <input type="hidden" name="id" th:value="${empleado.id != null ? empleado.id : 0}">
+                                <input type="hidden" name="id" th:value="${empleado.id != null ? empleado.id : '0'}">
 
                                 <label for="nombre">Nombre</label>
                                 <input type="text" id="nombre" name="nombre" th:value="${empleado.nombre}"
@@ -70,7 +70,7 @@
                                 Aceptar
                             </button>
 
-                            <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                            <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/empelado/cancelarEditEmpelado}">
                                 Cancelar
                             </button>
 

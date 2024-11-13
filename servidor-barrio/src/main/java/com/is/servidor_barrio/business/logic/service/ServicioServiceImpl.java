@@ -7,10 +7,10 @@ import com.is.servidor_barrio.business.domain.entity.Servicio;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class ServicioServiceImpl extends BaseServiceImpl<Servicio, Long>
+public class ServicioServiceImpl extends BaseServiceImpl<Servicio, String>
     implements ServicioService {
   @Autowired
-  public ServicioServiceImpl(BaseRepository<Servicio, Long> baseRepository) {
+  public ServicioServiceImpl(BaseRepository<Servicio, String> baseRepository) {
     super(baseRepository);
   }
 

@@ -19,7 +19,7 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
 public class UnidadDeNegocioFacadeImp extends
-    BaseFacadeImpl<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto, Long> {
+    BaseFacadeImpl<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto, String> {
 
   @Autowired
   private DireccionServiceImpl direccionService;
@@ -27,7 +27,7 @@ public class UnidadDeNegocioFacadeImp extends
   @Autowired
   private ServicioServiceImpl servicioService;
 
-  public UnidadDeNegocioFacadeImp(BaseService<UnidadDeNegocio, Long> baseService,
+  public UnidadDeNegocioFacadeImp(BaseService<UnidadDeNegocio, String> baseService,
       BaseMapper<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto> baseMapper) {
     super(baseService, baseMapper);
   }
@@ -55,7 +55,7 @@ public class UnidadDeNegocioFacadeImp extends
   }
 
   @Override
-  public UnidadDeNegocioDto update(Long id, UnidadDeNegocioCreateDto unidadDeNegocioCreateDto) throws Exception {
+  public UnidadDeNegocioDto update(String id, UnidadDeNegocioCreateDto unidadDeNegocioCreateDto) throws Exception {
     var negocioEntity = baseService.findById(id);
     baseMapper.toUpdate(negocioEntity, unidadDeNegocioCreateDto);
 

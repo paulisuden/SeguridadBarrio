@@ -20,12 +20,11 @@ import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.InmuebleServiceImpl;
 import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
-import com.is.servidor_barrio.business.mapper.EmpleadoMapper;
-import com.is.servidor_barrio.business.mapper.HabitanteMapper;
-import com.is.servidor_barrio.business.mapper.PersonaMapper;
+import com.is.servidor_barrio.business.mapper.EmpleadoMapperImpl;
+import com.is.servidor_barrio.business.mapper.HabitanteMapperImpl;
 
 @Service
-public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, PersonaCreateDto, PersonaCreateDto, Long> {
+public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, PersonaCreateDto, PersonaCreateDto, String> {
 
   @Autowired
   private InmuebleServiceImpl inmuebleService;
@@ -33,18 +32,14 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
   @Autowired
   private UnidadDeNegocioServiceImpl negocioService;
 
-  @Autowired
-  private EmpleadoMapper empleadoMapper;
+  private BaseMapper<Empleado, PersonaDto, PersonaCreateDto, PersonaCreateDto> empleadoMapper;
+  private BaseMapper<Habitante, PersonaDto, PersonaCreateDto, PersonaCreateDto> habitanteMapper;
 
-  @Autowired
-  private HabitanteMapper habitanteMapper;
-
-  @Autowired
-  private PersonaMapper personaMapper;
-
-  public PersonaFacadeImpl(BaseService<Persona, Long> baseService,
+  public PersonaFacadeImpl(BaseService<Persona, String> baseService,
       BaseMapper<Persona, PersonaDto, PersonaCreateDto, PersonaCreateDto> baseMapper) {
     super(baseService, baseMapper);
+    empleadoMapper = new EmpleadoMapperImpl();
+    habitanteMapper = new HabitanteMapperImpl();
   }
 
   public PersonaDto save(PersonaCreateDto personaCreateDto) throws Exception {
@@ -90,7 +85,7 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
   }
 
   @Override
-  public PersonaDto update(Long id, PersonaCreateDto personaCreateDto) throws Exception {
+  public PersonaDto update(String id, PersonaCreateDto personaCreateDto) throws Exception {
     // Buscar la entidad existente
     Persona personaEntity = baseService.findById(id);
 
@@ -129,4 +124,41 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
     var updatedEntity = baseService.update(id, personaEntity);
     return baseMapper.toDTO(updatedEntity); // Convertir la entidad actualizada a DTO
   }
+
+  @Override
+  public PersonaDto findById(String id) throws Exception {
+    // Llama al servicio base para obtener la entidad Persona
+    Persona personaEntity = baseService.findById(id);
+
+    // Determina el tipo de Persona y convierte la entidad al DTO correspondiente
+    if (personaEntity instanceof Empleado) {
+      return empleadoMapper.toDTO((Empleado) personaEntity);
+    } else if (personaEntity instanceof Habitante) {
+      return habitanteMapper.toDTO((Habitante) personaEntity);
+    }
+
+    // Si no es ni Empleado ni Habitante, lanza una excepción
+    throw new Exception("Tipo de persona no reconocido");
+  }
+
+  @Override
+  public List<PersonaDto> findAll() throws Exception {
+    // Llama al servicio base para obtener todas las entidades Persona
+    List<Persona> personas = baseService.findAll();
+
+    // Convierte cada entidad Persona a su respectivo DTO
+    return personas.stream()
+        .map(persona -> {
+          if (persona instanceof Empleado) {
+            return empleadoMapper.toDTO((Empleado) persona);
+          } else if (persona instanceof Habitante) {
+            return habitanteMapper.toDTO((Habitante) persona);
+          } else {
+            return null; // En caso de un tipo no reconocido
+          }
+        })
+        .filter(Objects::nonNull) // Filtra posibles nulos si existen tipos no reconocidos
+        .collect(Collectors.toList());
+  }
+
 }
