@@ -12,52 +12,55 @@
         <!-- Sidebar -->
         <div class="container-fluid page-body-wrapper">
             <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+            <div class="content-wrapper">
 
-            <!-- FORMULARIO -->
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card large-form">
-                    <div class="card">
-                        <div class="card-body">
+                <!-- FORMULARIO -->
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card large-form">
+                        <div class="card">
+                            <div class="card-body">
 
-                            <h5 class="card-title">Provincia</h5>
+                                <h5 class="card-title">Provincia</h5>
 
-                            <form class="forms-sample" action="/provincia/aceptarEditProvincia" method="POST">
+                                <form class="forms-sample" action="/provincia/aceptarEditProvincia" method="POST">
 
-                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
-
-                                <div class="form-group">
-
-                                    <input type="hidden" name="id"
-                                        th:value="${provincia.id != null ? provincia.id : '0'}">
-
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" th:value="${provincia.nombre}"
-                                        th:disabled="${isDisabled}" class="form-control"
-                                        placeholder="Escriba el nombre de la provincia" required="required">
+                                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
                                     <div class="form-group">
-                                        <label for="paises">Pais</label>
-                                        <select id="paises" class="form-control" name="idPais"
-                                            th:disabled="${isDisabled}">
-                                            <option th:each="pais : ${paises}" th:value="${pais.id}"
-                                                th:text="${pais.nombre}"></option>
-                                        </select>
+
+                                        <input type="hidden" name="id"
+                                            th:value="${provincia.id != null ? provincia.id : '0'}">
+
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" id="nombre" name="nombre" th:value="${provincia.nombre}"
+                                            th:disabled="${isDisabled}" class="form-control"
+                                            placeholder="Escriba el nombre de la provincia" required="required">
+
+                                        <div class="form-group">
+                                            <label for="paises">Pais</label>
+                                            <select id="paises" class="form-control" name="idPais"
+                                                th:disabled="${isDisabled}">
+                                                <option th:each="pais : ${paises}" th:value="${pais.id}"
+                                                    th:text="${pais.nombre}"></option>
+                                            </select>
+                                        </div>
+
                                     </div>
 
-                                </div>
-
-                                <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
-                                    th:disabled="${isDisabled}">
-                                    Aceptar
-                                </button>
+                                    <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                        th:disabled="${isDisabled}">
+                                        Aceptar
+                                    </button>
 
 
-                                <a th:href="@{/provincia/cancelar}" class="btn btn-light" title="Cancelar la edición.">
-                                    Cancelar
-                                </a>
+                                    <a th:href="@{/provincia/cancelar}" class="btn btn-light"
+                                        title="Cancelar la edición.">
+                                        Cancelar
+                                    </a>
 
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
