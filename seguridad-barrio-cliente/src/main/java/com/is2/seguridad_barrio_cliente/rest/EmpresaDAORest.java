@@ -19,9 +19,9 @@ public class EmpresaDAORest {
 
     static final String API_PATH = "http://localhost:8081/api/empresa";
 
-    public EmpresaDTO crear(EmpresaDTO imagen) throws ErrorServiceException {
+    public EmpresaDTO crear(EmpresaDTO empresa) throws ErrorServiceException {
         try {
-            var res = restTemplate.postForEntity(API_PATH, imagen, EmpresaDTO.class);
+            var res = restTemplate.postForEntity(API_PATH, empresa, EmpresaDTO.class);
             return res.getBody();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -36,22 +36,22 @@ public class EmpresaDAORest {
             String uri = API_PATH + "/" + id;
 
             ResponseEntity<EmpresaDTO> response = restTemplate.getForEntity(uri, EmpresaDTO.class);
-            EmpresaDTO imagen = response.getBody();
+            EmpresaDTO empresa = response.getBody();
 
-            return imagen;
+            return empresa;
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            throw new ErrorServiceException("Error de Sistemas");
+            throw new ErrorServiceException("Error de Sistemas. " + ex.toString());
         }
     }
 
-    public void actualizar(EmpresaDTO imagen) throws ErrorServiceException {
+    public void actualizar(EmpresaDTO empresa) throws ErrorServiceException {
 
         try {
 
-            String uri = API_PATH + "/" + imagen.getId();
-            restTemplate.put(uri, imagen);
+            String uri = API_PATH + "/" + empresa.getId();
+            restTemplate.put(uri, empresa);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -75,9 +75,9 @@ public class EmpresaDAORest {
         try {
 
             ResponseEntity<EmpresaDTO[]> response = restTemplate.getForEntity(API_PATH, EmpresaDTO[].class);
-            EmpresaDTO[] imagenes = response.getBody();
-            List<EmpresaDTO> listaimagenes = Arrays.asList(imagenes);
-            return listaimagenes;
+            EmpresaDTO[] empresaes = response.getBody();
+            List<EmpresaDTO> listaempresaes = Arrays.asList(empresaes);
+            return listaempresaes;
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ErrorServiceException("Error de Sistemas");

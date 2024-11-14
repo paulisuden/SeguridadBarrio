@@ -21,7 +21,8 @@
 
                             <h5 class="card-title">Empresa</h5>
 
-                            <form class="forms-sample" action="/empresa/aceptarEditEmpresa" method="POST">
+                            <form class="forms-sample" action="/empresa/aceptarEditEmpresa" method="POST"
+                                enctype="multipart/form-data">
 
                                 <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
                                 <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
@@ -50,6 +51,9 @@
                                             th:selected="${negocio?.direccion?.id == direccion.id}">
                                         </option>
                                     </select>
+
+                                </div>
+                                <div class="form-group">
                                     <!-- Botón personalizado para activar el input de archivo -->
                                     <button type="button" class="btn btn-danger btn-icon-text"
                                         onclick="document.getElementById('archivo').click();">
@@ -77,12 +81,10 @@
                                     th:disabled="${isDisabled}">
                                     Aceptar
                                 </button>
-
-                                <button type="submit" title="Cancelar la edición." class="btn btn-light"
-                                    th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditEmpresa}">
+                                <a title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}"
+                                    th:href="@{/empresa/cancelarEditEmpresa}">
                                     Cancelar
-                                </button>
-
+                                </a>
                             </form>
                         </div>
                     </div>
