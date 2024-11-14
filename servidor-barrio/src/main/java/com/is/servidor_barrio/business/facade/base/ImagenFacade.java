@@ -17,4 +17,16 @@ public class ImagenFacade extends BaseFacadeImpl<Imagen, ImagenDto, ImagenCreate
         super(baseService, baseMapper);
     }
 
+    public ImagenDto update(String id, ImagenCreateDto request) throws Exception {
+        var entityToUpdate = baseService.findById(id);
+        System.out.println(entityToUpdate.getContenido().length);
+
+        var entityUpdatedByMapper = baseMapper.toUpdate(entityToUpdate, request);
+        var entityUpdatedByService = baseService.update(id, entityUpdatedByMapper);
+        var mapped = baseMapper.toDTO(entityUpdatedByService);
+        System.out.println(request.getContenido().length);
+        System.out.println(mapped.getContenido().length);
+        return mapped;
+    }
+
 }

@@ -40,7 +40,6 @@ public class NegocioService {
           negocio.setImagenId(img.getId());
         }
       }
-
       dao.crear(negocio);
 
     } catch (ErrorServiceException e) {
@@ -80,20 +79,15 @@ public class NegocioService {
       MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
-
-      NegocioDTO negocio = new NegocioDTO();
+      NegocioDTO negocio = dao.buscar(id);
       negocio.setId(id);
       negocio.setNombre(nombre);
       negocio.setServiciosId(idServicios);
       negocio.setDireccionId(idDireccion);
-
       if (archivoImagen != null && archivoImagen.getSize() > 0) {
-        ImagenDTO img = imagenService.crear(archivoImagen);
-        if (img != null) {
-          negocio.setImagen(img);
-          negocio.setImagenId(img.getId());
-        }
+        imagenService.modificar(negocio.getImagen().getId(), archivoImagen);
       }
+      negocio.setImagenId(negocio.getImagen().getId());
       dao.actualizar(negocio);
 
     } catch (ErrorServiceException e) {
