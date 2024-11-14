@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.net.Authenticator;
 import java.util.List;
 
 @Controller
@@ -29,20 +28,26 @@ public class VisitanteController {
     private String viewEdit = "visita/editarVisitante.html";
 
     @GetMapping("/altaVisitante")
-    public String alta(VisitanteDTO visitante, Model model, Authentication authentication) {
+    public String alta(VisitanteDTO visitante, Model model, Authentication authentication)
+            throws ErrorServiceException {
 
-        visitante = new VisitanteDTO();
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+
+            visitante = new VisitanteDTO();
+            model.addAttribute("visitante", visitante);
+            model.addAttribute("isDisabled", false);
+
             if (hasHabitanteRole) {
+                return "habitante/editarVisitante";
+            } else { // ADMIN O PERSONAL
+                return viewEdit;
             }
+        } else {
+            throw new ErrorServiceException("El usuario no se encuentra logueado");
         }
 
-        model.addAttribute("visitante", visitante);
-        model.addAttribute("isDisabled", false);
-
-        return viewEdit;
     }
 
     @PostMapping("/baja")
@@ -95,10 +100,24 @@ public class VisitanteController {
     }
 
     @GetMapping("/listarVisitante")
-    public String listarVisitante(Model model) {
+    public String listarVisitante(Model model, Authentication authentication) {
         try {
-            List<VisitanteDTO> listaVisitante = visitanteService.listar();
-            model.addAttribute("listaVisitantes", listaVisitante);
+            if (authentication != null) {
+                boolean hasHabitanteRole = authentication.getAuthorities().stream()
+                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+                if (hasHabitanteRole) {
+                    //
+
+                    return "habitante/listarVisitante";
+
+                } else { // ADMIN O PERSONAL
+                    List<VisitanteDTO> listaVisitante = visitanteService.listar();
+                    model.addAttribute("listaVisitantes", listaVisitante);
+                    return viewList;
+                }
+            } else {
+                throw new ErrorServiceException("El usuario no se encuentra logueado");
+            }
 
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
