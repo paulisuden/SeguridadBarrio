@@ -72,9 +72,6 @@ public class UnidadDeNegocioFacadeImp extends
       negocioEntity.setDireccion(direccionEntity);
     }
 
-    for (String idService : unidadDeNegocioCreateDto.getServiciosId())
-      System.out.println("Buscando servicio de ID: " + idService);
-
     // Update Servicios list based on serviciosId in the DTO
     List<Servicio> servicios = unidadDeNegocioCreateDto.getServiciosId().stream()
         .map(idService -> {

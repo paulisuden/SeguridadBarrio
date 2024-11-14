@@ -18,16 +18,6 @@ public class ImagenDAORest {
 
     static final String API_PATH = "http://localhost:8081/api/imagen";
 
-    public ImagenDTO crear(ImagenDTO imagen) throws ErrorServiceException {
-        try {
-            var res = restTemplate.postForEntity(API_PATH, imagen, ImagenDTO.class);
-            return res.getBody();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new ErrorServiceException("Error de Sistemas");
-        }
-    }
-
     public ImagenDTO buscar(String id) throws ErrorServiceException {
 
         try {
@@ -38,31 +28,6 @@ public class ImagenDAORest {
             ImagenDTO imagen = response.getBody();
 
             return imagen;
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new ErrorServiceException("Error de Sistemas");
-        }
-    }
-
-    public void actualizar(ImagenDTO imagen) throws ErrorServiceException {
-
-        try {
-
-            String uri = API_PATH + "/" + imagen.getId();
-            restTemplate.put(uri, imagen);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new ErrorServiceException("Error de Sistemas");
-        }
-    }
-
-    public void eliminar(String id) throws ErrorServiceException {
-
-        try {
-            String uri = API_PATH + "/" + id;
-            restTemplate.delete(uri);
 
         } catch (Exception ex) {
             ex.printStackTrace();

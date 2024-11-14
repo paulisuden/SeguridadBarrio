@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class UsuarioDTO{
+public class UsuarioDTO {
     public String id;
     public String email;
     public String clave;
     public Rol rol;
+    public String imagenId;
+    public ImagenDTO imagen;
 }

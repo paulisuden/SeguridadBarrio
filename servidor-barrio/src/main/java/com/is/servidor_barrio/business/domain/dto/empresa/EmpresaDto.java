@@ -1,8 +1,8 @@
-package com.is.servidor_barrio.business.domain.dto.usuario;
+package com.is.servidor_barrio.business.domain.dto.empresa;
 
 import com.is.servidor_barrio.business.domain.dto.BaseDto;
+import com.is.servidor_barrio.business.domain.dto.direccion.DireccionDto;
 import com.is.servidor_barrio.business.domain.dto.imagen.ImagenDto;
-import com.is.servidor_barrio.business.domain.enumeration.Rol;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,10 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UsuarioDTO extends BaseDto {
-    private String email;
-    private String clave;
-    private Rol rol;
-    private ImagenDto imagen;
-
+public class EmpresaDto extends BaseDto {
+  private String nombre;
+  private String descripcion;
+  private ImagenDto imagen;
+  private DireccionDto direccion;
 }

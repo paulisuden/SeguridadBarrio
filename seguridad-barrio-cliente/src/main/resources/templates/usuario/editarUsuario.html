@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+    <div class="container-scroller">
+
+        <!-- Navbar -->
+        <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+        <!-- Sidebar -->
+        <div class="container-fluid page-body-wrapper">
+            <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+
+            <!-- FORMULARIO -->
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card large-form">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h5 class="card-title">Usuario</h5>
+
+                            <form class="forms-sample" action="/usuario/aceptarEditUsuario" method="POST"
+                                enctype="multipart/form-data" th:object="${usuario}">
+
+                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+
+                                <div class="form-group">
+
+                                    <input type="hidden" th:name="id"
+                                        th:value="${usuario.id != null and !usuario.id.isEmpty() ? usuario.id : '0'}" />
+
+                                    <label for="email">Email</label>
+                                    <input type="text" id="email" name="email" th:value="${usuario.email}"
+                                        th:disabled="${isDisabled}" class="form-control"
+                                        placeholder="Escriba el email del usuario" required="required">
+
+                                    <label for="clave">Clave</label>
+                                    <input type="password" id="clave" name="clave" th:value="${usuario.clave}"
+                                        th:disabled="${isDisabled}" class="form-control"
+                                        placeholder="Escriba la clave del usuario" required="required">
+
+                                    <div class="form-group">
+                                        <!-- Botón personalizado para activar el input de archivo -->
+                                        <button type="button" class="btn btn-danger btn-icon-text"
+                                            onclick="document.getElementById('archivo').click();">
+                                            <i class="typcn typcn-upload btn-icon-prepend"></i>
+                                            Subir imagen
+                                        </button>
+
+                                        <!-- Campo de archivo oculto -->
+                                        <input type="file" id="archivo" class="form-control" name="archivo"
+                                            th:disabled="${isDisabled}" required style="display: none;" />
+
+                                        <!-- Muestra el nombre del archivo seleccionado -->
+                                        <span id="file-name" class="ml-2"></span>
+
+                                        <script>
+                                            // Muestra el nombre del archivo seleccionado
+                                            document.getElementById('archivo').addEventListener('change', function () {
+                                                const fileName = this.files[0]?.name || "No file chosen";
+                                                document.getElementById('file-name').textContent = fileName;
+                                            });
+                                        </script>
+                                    </div>
+
+                                    <label for="rol">Rol</label>
+                                    <select id="rol" th:field="*{rol}" th:disabled="${isDisabled}" class="form-control"
+                                        required>
+                                        <option value="" disabled selected>Seleccione un tipo</option>
+                                        <option th:each="rol : ${tiposRol}" th:value="${rol}" th:text="${rol.name()}">
+                                        </option>
+                                        </option>
+                                    </select>
+
+                                </div>
+
+                                <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                    th:disabled="${isDisabled}">
+                                    Aceptar
+                                </button>
+
+                                <button type="submit" title="Cancelar la edición." class="btn btn-light"
+                                    th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                                    Cancelar
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+
+</body>
+
+</html>

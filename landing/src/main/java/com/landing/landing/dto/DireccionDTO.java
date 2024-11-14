@@ -14,4 +14,9 @@ public class DireccionDTO implements Serializable {
     private String observacion;
     private String localidadId;
     private LocalidadDTO localidad;
+
+    @Override
+    public String toString() {
+        return barrio + " " + calle + " " + numeracion;
+    }
 }
