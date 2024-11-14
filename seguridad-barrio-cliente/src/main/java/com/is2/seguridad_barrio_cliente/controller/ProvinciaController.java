@@ -120,9 +120,6 @@ public class ProvinciaController {
 
         try {
 
-            System.out.println(nombre);
-            System.out.println(id);
-
             if ("0".equals(id)) {
                 provinciaService.crear(nombre, idPais);
                 attributes.addFlashAttribute("msgExito", "Provincia creada correctamente");

@@ -14,5 +14,5 @@ public class UsuarioCreateDTO {
     private String email;
     private String clave;
     private Rol rol;
-    
+    private String imagenId;
 }

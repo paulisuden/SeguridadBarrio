@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+    <div class="container-scroller">
+
+        <!-- Navbar -->
+        <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+
+        <!-- Sidebar -->
+        <div class="container-fluid page-body-wrapper">
+            <div th:replace="~{fragments/menu.html :: sideBar}"></div>
+
+            <div class="content-wrapper">
+
+                <!-- Main Content -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Lista Usuario</h4>
+                        <a class="btn btn-success btn-sm btn-icon-text" th:href="@{/usuario/altaUsuario}" role="button">
+                            <i class="typcn typcn-plus btn-icon-append"></i>
+                        </a>
+                        <hr>
+                        <div th:if="${msgExito != null}" class="alert alert-success" th:text="${msgExito}" role="alert">
+                        </div>
+                        <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}" role="alert">
+                        </div>
+
+                        <!-- Prepara el popup de delete y le pasa como argumentos el metodo POST y el mensaje -->
+                        <div
+                            th:replace="~{fragments/popup.html :: popupDelete('/usuario/baja', '¿Está seguro de eliminar este usuario?')}">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="table-responsive pt-3">
+                                        <table class="table table-striped project-orders-table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="ml-5"></th>
+                                                    <th class="ml-5">ID</th>
+                                                    <th class="ml-5">Email</th>
+                                                    <th class="ml-5">Rol</th>
+                                                    <th class="ml-5">Imagen</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr th:each="usuario : ${listaUsuario}">
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="dropdown">
+
+                                                                <button type="button"
+                                                                    class="btn btn-dark btn-rounded btn-icon"
+                                                                    data-toggle="dropdown">
+                                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                                </button>
+
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuIconButton3">
+                                                                    <h6 class="dropdown-header">Acciones</h6>
+                                                                    <a th:href="@{/usuario/modificar(id=${usuario.id})}"
+                                                                        type="button" class="dropdown-item">
+                                                                        Editar
+                                                                        <i class="typcn typcn-edit btn-icon-append"></i>
+                                                                    </a>
+                                                                    <a th:href="@{/usuario/consultar(id=${usuario.id})}"
+                                                                        type="button" class="dropdown-item">
+                                                                        Consultar
+                                                                        <i
+                                                                            class="typcn typcn-eye-outline btn-icon-append"></i>
+                                                                    </a>
+                                                                    <a href="#" class="dropdown-item"
+                                                                        data-toggle="modal" data-target="#popupPanel"
+                                                                        th:attr="data-id=${usuario.id}">
+                                                                        Eliminar
+                                                                        <i
+                                                                            class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td th:text="'#' + ${usuario.id}"></td>
+                                                    <td th:text="${usuario.email}"></td>
+                                                    <td th:text="${usuario.rol}"></td>
+                                                    <td>
+                                                        <img th:if="${usuario.imagen != null}"
+                                                            th:src="${'/imagen/' + usuario.imagen.id}" alt=""
+                                                            style="height: 100px; width: 100px; border-radius: 15%">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
+
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+
+</body>
+
+</html>

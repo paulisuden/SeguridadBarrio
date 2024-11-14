@@ -32,7 +32,7 @@ public class UsuarioDAORest {
             throw new ErrorServiceException(error);
         } catch (RestClientException ex) {
             //
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
@@ -49,7 +49,7 @@ public class UsuarioDAORest {
             error = error.replace("{\"error\":\"", "").replace("\"}", "");
             error = error.replace("\"", "");
             throw new ErrorServiceException(error);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
@@ -66,16 +66,16 @@ public class UsuarioDAORest {
             error = error.replace("{\"error\":\"", "").replace("\"}", "");
             error = error.replace("\"", "");
             throw new ErrorServiceException(error);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
 
-    public UsuarioDTO buscar( String id)  throws ErrorServiceException {
+    public UsuarioDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            String uri = "http://localhost:8081/api/usuario/" + id;
+            String uri = "http://localhost:8081/api/usuario/buscarId/" + id;
             ResponseEntity<UsuarioDTO> response = restTemplate.getForEntity(uri, UsuarioDTO.class);
             UsuarioDTO usuarioDTO = response.getBody();
             return usuarioDTO;
@@ -99,7 +99,7 @@ public class UsuarioDAORest {
             ResponseEntity<UsuarioDTO[]> response = restTemplate.getForEntity(uri, UsuarioDTO[].class);
             UsuarioDTO[] usuarios = response.getBody();
             List<UsuarioDTO> listaUsuarios = Arrays.asList(usuarios);
-            return  listaUsuarios;
+            return listaUsuarios;
 
         } catch (HttpClientErrorException e) {
             String error = e.getMessage();
@@ -107,11 +107,10 @@ public class UsuarioDAORest {
             error = error.replace("{\"error\":\"", "").replace("\"}", "");
             error = error.replace("\"", "");
             throw new ErrorServiceException(error);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
-
 
     public void registrar(UsuarioDTO usuario) throws ErrorServiceException {
         try {
@@ -123,7 +122,7 @@ public class UsuarioDAORest {
         }
     }
 
-    public UsuarioDTO buscarCuenta(String cuenta)  throws ErrorServiceException {
+    public UsuarioDTO buscarCuenta(String cuenta) throws ErrorServiceException {
 
         try {
             String uri = "http://localhost:8081/api/usuario/buscar/" + cuenta;
@@ -132,7 +131,7 @@ public class UsuarioDAORest {
             UsuarioDTO entity = response.getBody();
             return entity;
 
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new ErrorServiceException("Error de Sistemas");
         }
