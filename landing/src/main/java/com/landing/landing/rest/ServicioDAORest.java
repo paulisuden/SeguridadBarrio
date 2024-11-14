@@ -17,16 +17,6 @@ public class ServicioDAORest {
   @Autowired
   private RestTemplate restTemplate;
 
-  public void crear(ServicioDTO servicio) throws ErrorServiceException {
-    try {
-      String uri = "http://localhost:8081/api/servicio";
-      restTemplate.postForEntity(uri, servicio, ServicioDTO.class);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
-    }
-  }
-
   public ServicioDTO buscar(String id) throws ErrorServiceException {
 
     try {
@@ -37,32 +27,6 @@ public class ServicioDAORest {
       ServicioDTO servicio = response.getBody();
 
       return servicio;
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
-    }
-  }
-
-  public void actualizar(ServicioDTO servicio) throws ErrorServiceException {
-
-    try {
-
-      String uri = "http://localhost:8081/api/servicio/" + servicio.getId();
-      restTemplate.put(uri, servicio);
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
-    }
-  }
-
-  public void eliminar(String id) throws ErrorServiceException {
-
-    try {
-
-      String uri = "http://localhost:8081/api/servicio/" + id;
-      restTemplate.delete(uri);
 
     } catch (Exception ex) {
       ex.printStackTrace();
