@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+    <div class="container-scroller">
+
+        <!-- Navbar -->
+        <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+
+        <!-- Sidebar -->
+        <div class="container-fluid page-body-wrapper">
+            <div th:replace="~{fragments/menu.html :: sideBar}"></div>
+
+            <div class="content-wrapper">
+                <div class="card">
+
+                    <!-- Main Content -->
+                    <div class="card-body">
+                        <div class="dropdown">
+
+                            <button type="button" class="btn btn-dark btn-rounded btn-icon" data-toggle="dropdown">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuIconButton3">
+                                <h6 class="dropdown-header">Acciones</h6>
+                                <a th:href="@{/empresa/modificar(id=${empresa.id})}" type="button"
+                                    class="dropdown-item">
+                                    Editar
+                                    <i class="typcn typcn-edit btn-icon-append"></i>
+                                </a>
+                                <a th:href="@{/empresa/consultar(id=${empresa.id})}" type="button"
+                                    class="dropdown-item">
+                                    Consultar
+                                    <i class="typcn typcn-eye-outline btn-icon-append"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                        </br>
+                        <div class="d-flex align-items-center">
+                            <img th:if="${empresa.imagen != null}" th:src="${'/imagen/' + empresa.imagen.id}"
+                                alt="Logo de la empresa"
+                                style="width: 150px; height: 150px; border-radius: 50%; margin-right: 15px;">
+                            <h4 class="card-title" style="font-size: 48px; margin: 0;" th:text="${empresa.nombre}">
+                                Empresa</h4>
+                        </div>
+
+                        <hr>
+                        <div th:if="${msgExito != null}" class="alert alert-success" th:text="${msgExito}" role="alert">
+                        </div>
+                        <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}" role="alert">
+                        </div>
+
+                        <div class="row">
+                            <div class="card-body">
+                                <h4 th:text="${empresa.descripcion}"></h4>
+                                <h6 th:if="${empresa.imagen != null}"
+                                    th:text="${'Nos encontramos en: ' + empresa.direccion.toString()}"></h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
+
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+
+</body>
+
+</html>
