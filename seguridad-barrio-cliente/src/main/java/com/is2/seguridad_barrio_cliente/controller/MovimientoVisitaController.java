@@ -53,6 +53,8 @@ public class MovimientoVisitaController {
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+                List<VisitanteDTO> visitantes = visitanteServie.listar();
+                model.addAttribute("listaVisitantes", visitantes);
             if (hasHabitanteRole){
                 String name = authentication.getName(); //email
                 UsuarioDTO usuarioDTO = usuarioService.buscarCuenta(name);
@@ -64,20 +66,14 @@ public class MovimientoVisitaController {
                 //traigo una lista de los movimientos que se hayan realizado en ese inmueble
                 List<MovimientoVisitaDTO> movimientos = movimientoVisitaService.listarPorInmuebleId(inmueble.getId());
                 //traigo los visitantes vinculados con ese inmueble
-                List<VisitanteDTO> listaVisitantes = listarVisitantes(movimientos);
                 model.addAttribute("movimientos", movimientos);
-                model.addAttribute("listaVisitantes", listaVisitantes);
                 //para que el inmueble quede preseleccionado sin ninguna otra opcion
                 movimientoVisita.setInmueble(inmueble);
                 model.addAttribute("movimientoVisita", movimientoVisita);
-
                 return "habitante/editarMovimientoVisita";
-
             } else { //PERSONAL O ADMIN
 
-                List<VisitanteDTO> visitantes = visitanteServie.listar();
                 List<InmuebleDTO> inmuebles = inmuebleService.listar();
-                model.addAttribute("visitantes", visitantes);
                 model.addAttribute("inmuebles", inmuebles);
                 model.addAttribute("movimientoVisita", movimientoVisita);
                 model.addAttribute("isDisabled", false);
@@ -250,20 +246,5 @@ public class MovimientoVisitaController {
         return viewEdit;
     }
 
-
-    public List<VisitanteDTO> listarVisitantes(List<MovimientoVisitaDTO> movimientos) {
-        List<VisitanteDTO> visitantesUnicos = movimientos.stream()
-        .map(MovimientoVisitaDTO::getVisitante) // Extraer el visitante de cada movimiento
-        .filter(visitante -> visitante != null && visitante.getId() != null) // Evitar visitantes nulos
-        .collect(Collectors.toMap(
-            VisitanteDTO::getId, // Usar el ID del visitante como clave
-            visitante -> visitante, // Mantener el visitante como valor
-            (v1, v2) -> v1 // En caso de duplicados, conservar el primero
-        ))
-        .values()
-        .stream()
-        .collect(Collectors.toList());
-        return visitantesUnicos;
-    }
 
 }

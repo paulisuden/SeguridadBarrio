@@ -1,8 +1,16 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
+import com.is2.seguridad_barrio_cliente.dto.InmuebleDTO;
+import com.is2.seguridad_barrio_cliente.dto.MovimientoVisitaDTO;
+import com.is2.seguridad_barrio_cliente.dto.PersonaDTO;
+import com.is2.seguridad_barrio_cliente.dto.UsuarioDTO;
 import com.is2.seguridad_barrio_cliente.dto.VisitanteDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.TipoVisita;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
+import com.is2.seguridad_barrio_cliente.service.HabitanteService;
+import com.is2.seguridad_barrio_cliente.service.InmuebleService;
+import com.is2.seguridad_barrio_cliente.service.MovimientoVisitaService;
+import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 import com.is2.seguridad_barrio_cliente.service.VisitanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -14,36 +22,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.net.Authenticator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/visitante")
 public class VisitanteController {
 
-    @Autowired
-    private VisitanteService visitanteService;
+    @Autowired private VisitanteService visitanteService;
 
     private String viewList = "visita/listarVisitante.html";
     private String redirectList = "redirect:/visitante/listarVisitante";
     private String viewEdit = "visita/editarVisitante.html";
 
     @GetMapping("/altaVisitante")
-    public String alta(VisitanteDTO visitante, Model model, Authentication authentication) {
+    public String alta(VisitanteDTO visitante, Model model, Authentication authentication) throws ErrorServiceException {
 
-        visitante = new VisitanteDTO();
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
-            if (hasHabitanteRole) {
+
+
+            visitante = new VisitanteDTO();
+            model.addAttribute("visitante", visitante);
+            model.addAttribute("isDisabled", false);
+
+            if (hasHabitanteRole){
+                return "habitante/editarVisitante";
+            } else { //ADMIN O PERSONAL
+                return viewEdit;
             }
+        } else {
+            throw new ErrorServiceException("El usuario no se encuentra logueado");
         }
 
-        model.addAttribute("visitante", visitante);
-        model.addAttribute("isDisabled", false);
-
-        return viewEdit;
     }
+
 
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
@@ -95,10 +109,21 @@ public class VisitanteController {
     }
 
     @GetMapping("/listarVisitante")
-    public String listarVisitante(Model model) {
+    public String listarVisitante(Model model, Authentication authentication) {
         try {
-            List<VisitanteDTO> listaVisitante = visitanteService.listar();
-            model.addAttribute("listaVisitantes", listaVisitante);
+            if (authentication != null) {
+                boolean hasHabitanteRole = authentication.getAuthorities().stream()
+                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+                    List<VisitanteDTO> listaVisitante = visitanteService.listar();
+                    model.addAttribute("listaVisitantes", listaVisitante);
+                if (hasHabitanteRole){
+                    return "habitante/listarVisitante";
+                } else { //ADMIN O PERSONAL
+                    return viewList;
+                }
+            } else {
+                throw new ErrorServiceException("El usuario no se encuentra logueado");
+            }
 
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
@@ -163,5 +188,7 @@ public class VisitanteController {
         }
         return viewEdit;
     }
+
+
 
 }
