@@ -1,7 +1,6 @@
 package com.is2.seguridad_barrio_cliente.service;
 
 import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
-import com.is2.seguridad_barrio_cliente.dto.PaisDTO;
 import com.is2.seguridad_barrio_cliente.dto.UsuarioDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.Rol;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
@@ -57,7 +56,7 @@ public class UsuarioService implements UserDetailsService {
             // validaciones
             UsuarioDTO usuario = new UsuarioDTO();
             usuario.setEmail(correo);
-            usuario.setClave(clave);
+            usuario.setClave(new BCryptPasswordEncoder().encode(clave));
             usuario.setRol(rol);
             dao.registrar(usuario);
             return usuario;
@@ -127,7 +126,7 @@ public class UsuarioService implements UserDetailsService {
             // validaciones
             UsuarioDTO usuario = buscar(id);
             usuario.setEmail(correo);
-            usuario.setClave(clave);
+            usuario.setClave(new BCryptPasswordEncoder().encode(clave));
             usuario.setRol(rol);
 
             if (archivoImagen != null && archivoImagen.getSize() > 0) {

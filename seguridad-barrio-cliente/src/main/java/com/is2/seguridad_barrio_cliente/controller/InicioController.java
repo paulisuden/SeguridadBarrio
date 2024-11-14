@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
-
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,7 +24,10 @@ public class InicioController {
     private EmpleadoController empleadoController;
 
     @GetMapping("/inicio")
-    public String inicio(Model model, Authentication authentication, @RequestParam(name="error", required = false) String error) throws Exception {
+    public String inicio(
+            Model model,
+            Authentication authentication,
+            @RequestParam(name = "error", required = false) String error) throws Exception {
         try {
             if (error != null) {
                 error = URLDecoder.decode(error, StandardCharsets.UTF_8);
@@ -49,12 +51,11 @@ public class InicioController {
             } else {
                 throw new ErrorServiceException("El usuario no se encuentra logueado");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("mensajeError", e.getMessage());
             return "visita/listarMovimientoVisita";
         }
     }
-
 
     @GetMapping("/")
     public String ini2(Model model) throws Exception {

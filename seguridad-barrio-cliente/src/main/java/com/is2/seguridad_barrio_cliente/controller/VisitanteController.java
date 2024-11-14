@@ -35,7 +35,9 @@ public class VisitanteController {
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
-            if (hasHabitanteRole){
+            if (hasHabitanteRole) {
+            }
+        }
 
         model.addAttribute("visitante", visitante);
         model.addAttribute("isDisabled", false);
@@ -45,7 +47,6 @@ public class VisitanteController {
 
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
-
 
         try {
 
