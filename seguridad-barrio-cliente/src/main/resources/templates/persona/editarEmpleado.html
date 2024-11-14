@@ -50,18 +50,25 @@
                                 <div class="form-group">
                                     <label for="tipoEmpleados">Tipo Empleado</label>
                                     <select id="tipoEmpleados" class="form-control" name="tipoEmpleado" th:disabled="${isDisabled}">
-                                        <option th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoEmpleado).values()}" 
-                                                th:value="${tipo.name()}" 
-                                                th:text="${tipo.name()}"></option>
+                                        <option th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoEmpleado).values()}"
+                                                th:value="${tipo.name()}"
+                                                th:text="${tipo.name()}"
+                                                th:selected="${tipo.name() == empleado.tipoEmpleado.name()}">
+                                        </option>
                                     </select>
                                 </div>
                                                 
                                 <div class="form-group">
                                     <label for="negocios">Negocios</label>
                                     <select id="negocios" class="form-control" name="negociosId[]" th:disabled="${isDisabled}" multiple>
-                                        <option th:each="negocio : ${negocios}" th:value="${negocio.id}" th:text="${negocio.nombre}"></option>
+                                        <option th:each="negocio : ${negocios}" 
+                                                th:value="${negocio.id}" 
+                                                th:text="${negocio.nombre}" 
+                                                th:selected="${empleado.negocios.contains(negocio)}">
+                                        </option>
                                     </select>
                                 </div>
+                                
                                 
 
                             </div>

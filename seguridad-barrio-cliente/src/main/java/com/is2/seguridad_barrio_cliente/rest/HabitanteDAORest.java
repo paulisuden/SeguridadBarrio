@@ -12,16 +12,16 @@ import com.is2.seguridad_barrio_cliente.dto.PersonaDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 
 @Service
-public class EmpleadoDAORest {
+public class HabitanteDAORest {
 
   @Autowired
   private RestTemplate restTemplate;
 
-  public void crear(PersonaDTO empleado) throws ErrorServiceException {
+  public void crear(PersonaDTO habitante) throws ErrorServiceException {
     try {
 
       String uri = "http://localhost:8081/api/persona";
-      restTemplate.postForEntity(uri, empleado, PersonaDTO.class);
+      restTemplate.postForEntity(uri, habitante, PersonaDTO.class);
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ErrorServiceException("Error de Sistemas");
@@ -35,9 +35,9 @@ public class EmpleadoDAORest {
       String uri = "http://localhost:8081/api/persona/" + id;
 
       ResponseEntity<PersonaDTO> response = restTemplate.getForEntity(uri, PersonaDTO.class);
-      PersonaDTO empleado = response.getBody();
+      PersonaDTO habitante = response.getBody();
 
-      return empleado;
+      return habitante;
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -45,12 +45,12 @@ public class EmpleadoDAORest {
     }
   }
 
-  public void actualizar(PersonaDTO empleado) throws ErrorServiceException {
+  public void actualizar(PersonaDTO habitante) throws ErrorServiceException {
 
     try {
 
-      String uri = "http://localhost:8081/api/persona/" + empleado.getId();
-      restTemplate.put(uri, empleado);
+      String uri = "http://localhost:8081/api/persona/" + habitante.getId();
+      restTemplate.put(uri, habitante);
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -73,12 +73,12 @@ public class EmpleadoDAORest {
 
   public List<PersonaDTO> listar() throws ErrorServiceException {
     try {
-      String uri = "http://localhost:8081/api/persona/empleados";
+      String uri = "http://localhost:8081/api/persona/habitantes";
 
       ResponseEntity<PersonaDTO[]> response = restTemplate.getForEntity(uri, PersonaDTO[].class);
-      PersonaDTO[] empleados = response.getBody();
-      List<PersonaDTO> listaEmpleados = Arrays.asList(empleados);
-      return listaEmpleados;
+      PersonaDTO[] habitantes = response.getBody();
+      List<PersonaDTO> listahabitantes = Arrays.asList(habitantes);
+      return listahabitantes;
     } catch (Exception ex) {
       ex.printStackTrace();
       throw new ErrorServiceException("Error de Sistemas");

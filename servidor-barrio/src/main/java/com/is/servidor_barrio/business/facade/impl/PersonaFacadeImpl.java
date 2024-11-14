@@ -17,6 +17,8 @@ import com.is.servidor_barrio.business.domain.entity.Persona;
 import com.is.servidor_barrio.business.domain.entity.UnidadDeNegocio;
 import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 import com.is.servidor_barrio.business.logic.service.BaseService;
+import com.is.servidor_barrio.business.logic.service.EmpleadoServiceImpl;
+import com.is.servidor_barrio.business.logic.service.HabitanteServiceImpl;
 import com.is.servidor_barrio.business.logic.service.InmuebleServiceImpl;
 import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
@@ -31,6 +33,12 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
 
   @Autowired
   private UnidadDeNegocioServiceImpl negocioService;
+
+  @Autowired
+  private EmpleadoServiceImpl empleadoService;
+
+  @Autowired
+  private HabitanteServiceImpl habitanteService;
 
   private BaseMapper<Empleado, PersonaDto, PersonaCreateDto, PersonaCreateDto> empleadoMapper;
   private BaseMapper<Habitante, PersonaDto, PersonaCreateDto, PersonaCreateDto> habitanteMapper;
@@ -119,34 +127,27 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
         empleado.setNegocios(negocios);
       }
     }
-
-    // Guardar la entidad actualizada
     var updatedEntity = baseService.update(id, personaEntity);
-    return baseMapper.toDTO(updatedEntity); // Convertir la entidad actualizada a DTO
+    return baseMapper.toDTO(updatedEntity);
   }
 
   @Override
   public PersonaDto findById(String id) throws Exception {
-    // Llama al servicio base para obtener la entidad Persona
     Persona personaEntity = baseService.findById(id);
 
-    // Determina el tipo de Persona y convierte la entidad al DTO correspondiente
     if (personaEntity instanceof Empleado) {
       return empleadoMapper.toDTO((Empleado) personaEntity);
     } else if (personaEntity instanceof Habitante) {
       return habitanteMapper.toDTO((Habitante) personaEntity);
     }
 
-    // Si no es ni Empleado ni Habitante, lanza una excepción
     throw new Exception("Tipo de persona no reconocido");
   }
 
   @Override
   public List<PersonaDto> findAll() throws Exception {
-    // Llama al servicio base para obtener todas las entidades Persona
     List<Persona> personas = baseService.findAll();
 
-    // Convierte cada entidad Persona a su respectivo DTO
     return personas.stream()
         .map(persona -> {
           if (persona instanceof Empleado) {
@@ -154,10 +155,26 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
           } else if (persona instanceof Habitante) {
             return habitanteMapper.toDTO((Habitante) persona);
           } else {
-            return null; // En caso de un tipo no reconocido
+            return null;
           }
         })
-        .filter(Objects::nonNull) // Filtra posibles nulos si existen tipos no reconocidos
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+  }
+
+  public List<PersonaDto> findAllEmpleados() throws Exception {
+    List<Empleado> empleados = empleadoService.findAll();
+
+    return empleados.stream()
+        .map(empleadoMapper::toDTO)
+        .collect(Collectors.toList());
+  }
+
+  public List<PersonaDto> findAllHabitantes() throws Exception {
+    List<Habitante> habitantes = habitanteService.findAll();
+
+    return habitantes.stream()
+        .map(habitanteMapper::toDTO)
         .collect(Collectors.toList());
   }
 
