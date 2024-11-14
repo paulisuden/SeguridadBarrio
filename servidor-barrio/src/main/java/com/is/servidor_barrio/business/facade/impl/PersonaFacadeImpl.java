@@ -20,6 +20,7 @@ import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.EmpleadoServiceImpl;
 import com.is.servidor_barrio.business.logic.service.HabitanteServiceImpl;
 import com.is.servidor_barrio.business.logic.service.InmuebleServiceImpl;
+import com.is.servidor_barrio.business.logic.service.PersonaServiceImpl;
 import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 import com.is.servidor_barrio.business.mapper.EmpleadoMapperImpl;
@@ -39,6 +40,8 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
 
   @Autowired
   private HabitanteServiceImpl habitanteService;
+
+  @Autowired PersonaServiceImpl personaServiceImpl;
 
   private BaseMapper<Empleado, PersonaDto, PersonaCreateDto, PersonaCreateDto> empleadoMapper;
   private BaseMapper<Habitante, PersonaDto, PersonaCreateDto, PersonaCreateDto> habitanteMapper;
@@ -176,6 +179,18 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
     return habitantes.stream()
         .map(habitanteMapper::toDTO)
         .collect(Collectors.toList());
+  }
+
+  public PersonaDto findByUsuarioId(String id) throws Exception {
+    Persona personaEntity = personaServiceImpl.findByUsuarioId(id);
+
+    if (personaEntity instanceof Empleado) {
+      return empleadoMapper.toDTO((Empleado) personaEntity);
+    } else if (personaEntity instanceof Habitante) {
+      return habitanteMapper.toDTO((Habitante) personaEntity);
+    }
+
+    throw new Exception("Tipo de persona no reconocido");
   }
 
 }

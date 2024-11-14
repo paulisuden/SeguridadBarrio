@@ -15,24 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SeguridadWeb{
-    @Autowired
-    private UsuarioService usuarioService;
+        @Autowired
+        private UsuarioService usuarioService;
 
-    @Autowired
-    private CustomAuthenticationProvider authProvider;
+        @Autowired
+        private CustomAuthenticationProvider authProvider;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider);
         auth.userDetailsService(usuarioService)
                 .passwordEncoder(new BCryptPasswordEncoder());
-    }
+        }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/css/**", "/js/**", "/assets/**", "/login").permitAll()
+                        //.requestMatchers("/").hasAnyRole("")
+                        //.requestMatchers("/movimientoVisita/**", "/visitante/**").hasAnyRole("HABITANTE", "ADMIN", "PERSONAL")
                         .anyRequest().authenticated())
 
                 /*.authorizeHttpRequests((authz) -> authz
@@ -60,6 +62,6 @@ public class SeguridadWeb{
                 .csrf(csrf -> csrf.disable());
 
         return http.build();
-    }
+        }
 
 }

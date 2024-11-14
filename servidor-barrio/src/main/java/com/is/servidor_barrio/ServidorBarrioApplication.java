@@ -45,10 +45,16 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		/**Usuario usuario = new Usuario();
-		usuario.setEmail("test@gmail.com");
+		usuario.setEmail("habitante@gmail.com");
 		usuario.setClave(new BCryptPasswordEncoder().encode("1234"));
-		usuario.setRol(Rol.ADMIN);
-		UsuarioService.save(usuario);**/
+		usuario.setRol(Rol.HABITANTE);
+		UsuarioService.save(usuario);
+
+		Usuario usuario2 = new Usuario();
+		usuario2.setEmail("personal@gmail.com");
+		usuario2.setClave(new BCryptPasswordEncoder().encode("1234"));
+		usuario2.setRol(Rol.PERSONAL);
+		UsuarioService.save(usuario2); **/
 
 		/*
 		Habitante habitante = new Habitante();

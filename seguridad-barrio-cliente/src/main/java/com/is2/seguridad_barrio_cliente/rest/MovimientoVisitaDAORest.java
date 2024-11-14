@@ -18,7 +18,6 @@ public class MovimientoVisitaDAORest {
 
     public void crear(MovimientoVisitaDTO movimiento) throws ErrorServiceException {
         try {
-            System.out.println(movimiento);
             String uri = "http://localhost:8081/api/movimientoVisita";
             restTemplate.postForEntity(uri, movimiento, MovimientoVisitaDTO.class);
         } catch (Exception ex) {
@@ -81,6 +80,26 @@ public class MovimientoVisitaDAORest {
             return listaMovimientos;
         } catch (Exception ex) {
             ex.printStackTrace();
+            throw new ErrorServiceException("Error de Sistemas");
+        }
+    }
+
+    public List<MovimientoVisitaDTO> listarPorInmuebleId(String id) throws ErrorServiceException {
+        try {
+            String uri = "http://localhost:8081/api/movimientoVisita/listarPorInmueble/" + id;
+
+            ResponseEntity<MovimientoVisitaDTO[]> response = restTemplate.getForEntity(uri,MovimientoVisitaDTO[].class);
+
+            MovimientoVisitaDTO[] movimientos = response.getBody();
+
+            List<MovimientoVisitaDTO> listaMovimientos = Arrays.asList(movimientos);
+
+            return listaMovimientos;
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+            
             throw new ErrorServiceException("Error de Sistemas");
         }
     }

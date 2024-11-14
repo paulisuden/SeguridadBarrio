@@ -85,4 +85,21 @@ public class HabitanteDAORest {
     }
   }
 
+  public PersonaDTO buscarPorUsuarioId(String id)throws ErrorServiceException {
+    try {
+
+      String uri = "http://localhost:8081/api/persona/usuario/" + id;
+
+      ResponseEntity<PersonaDTO> response = restTemplate.getForEntity(uri, PersonaDTO.class);
+      PersonaDTO habitante = response.getBody();
+
+      return habitante;
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      throw new ErrorServiceException("Error de Sistemas");
+    }
+
+  }
+
 }
