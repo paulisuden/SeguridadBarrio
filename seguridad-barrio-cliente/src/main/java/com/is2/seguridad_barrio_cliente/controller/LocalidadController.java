@@ -60,7 +60,6 @@ public class LocalidadController {
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
-
         try {
 
             localidadService.eliminar(id);
@@ -154,7 +153,7 @@ public class LocalidadController {
 
     }
 
-    @GetMapping("/cancelarEditLocalidad")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

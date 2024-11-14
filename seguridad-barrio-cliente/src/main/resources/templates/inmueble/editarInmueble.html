@@ -68,11 +68,9 @@
                                     Aceptar
                                 </button>
 
-                                <button type="submit" title="Cancelar" class="btn btn-light" th:disabled="${isDisabled}"
-                                    th:href="@{/inmueble/cancelarEditInmueble}">
+                                <a th:href="@{/inmueble/cancelar}" class="btn btn-light" title="Cancelar la edición.">
                                     Cancelar
-                                </button>
-
+                                </a>
                             </form>
                         </div>
                     </div>

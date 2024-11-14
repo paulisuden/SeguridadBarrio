@@ -29,7 +29,8 @@
 
                                 <div class="form-group">
 
-                                    <input type="hidden" name="id" th:value="${servicio.id != null and !servicio.id.isEmpty() ? servicio.id : '0'}">
+                                    <input type="hidden" name="id"
+                                        th:value="${servicio.id != null and !servicio.id.isEmpty() ? servicio.id : '0'}">
 
                                     <label for="nombre">Nombre</label>
                                     <input type="text" id="nombre" name="nombre" th:value="${servicio.nombre}"
@@ -65,11 +66,9 @@
                                     th:disabled="${isDisabled}">
                                     Aceptar
                                 </button>
-
-                                <button type="submit" title="Cancelar la edición." class="btn btn-light"
-                                    th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                                <a th:href="@{/servicio/cancelar}" class="btn btn-light" title="Cancelar la edición.">
                                     Cancelar
-                                </button>
+                                </a>
 
                             </form>
                         </div>

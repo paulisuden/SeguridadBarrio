@@ -45,7 +45,6 @@ public class InmuebleController {
     @PostMapping("/baja")
     public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
-
         try {
 
             inmuebleService.eliminar(id);
@@ -135,7 +134,7 @@ public class InmuebleController {
         }
     }
 
-    @GetMapping("/cancelarEditInmueble")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

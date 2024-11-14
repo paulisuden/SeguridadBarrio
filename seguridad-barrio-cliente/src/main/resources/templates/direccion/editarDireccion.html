@@ -16,76 +16,81 @@
             <!-- FORMULARIO -->
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card large-form">
-                <div class="card">
-                    <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
 
-                        <h5 class="card-title">Direccion</h5>
+                            <h5 class="card-title">Direccion</h5>
 
-                        <form class="forms-sample" action="/direccion/aceptarEditDireccion" method="POST">
+                            <form class="forms-sample" action="/direccion/aceptarEditDireccion" method="POST">
 
-                            <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                            <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
-
-                            <div class="form-group">
-
-                                <input type="hidden" name="id" th:value="${direccion.id != null and !direccion.id.isEmpty() ? direccion.id : '0'}">
+                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
                                 <div class="form-group">
-                                    <label for="localidades">Localidad</label>
-                                    <select id="localidades" class="form-control" name="idLocalidad" th:disabled="${isDisabled}">
-                                        <option th:each="localidad : ${localidades}" th:value="${localidad.id}" th:text="${localidad.nombre}"></option>
-                                    </select>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="barrio">Barrio</label>
-                                    <input type="text" id="barrio" name="barrio" th:value="${direccion.barrio}"
-                                           th:disabled="${isDisabled}" class="form-control"
-                                           placeholder="Barrio" required="required">
-                                </div>
+                                    <input type="hidden" name="id"
+                                        th:value="${direccion.id != null and !direccion.id.isEmpty() ? direccion.id : '0'}">
 
-                                <div class="form-group">
-                                    <label for="calle">Calle</label>
-                                    <input type="text" id="calle" name="calle" th:value="${direccion.calle}"
-                                           th:disabled="${isDisabled}" class="form-control"
-                                           placeholder="Calle" required="required">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="localidades">Localidad</label>
+                                        <select id="localidades" class="form-control" name="idLocalidad"
+                                            th:disabled="${isDisabled}">
+                                            <option th:each="localidad : ${localidades}" th:value="${localidad.id}"
+                                                th:text="${localidad.nombre}"></option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="numeracion">Numeracion</label>
-                                    <input type="text" id="numeracion" name="numeracion" th:value="${direccion.numeracion}"
-                                           th:disabled="${isDisabled}" class="form-control"
-                                           placeholder="Numeracion" required="required">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="barrio">Barrio</label>
+                                        <input type="text" id="barrio" name="barrio" th:value="${direccion.barrio}"
+                                            th:disabled="${isDisabled}" class="form-control" placeholder="Barrio"
+                                            required="required">
+                                    </div>
 
-                                <div class="form-group">
-                                    <label for="observacion">Observación</label>
-                                    <input type="text" id="observacion" name="observacion" th:value="${direccion.observacion}"
-                                           th:disabled="${isDisabled}" class="form-control"
-                                           placeholder="¿Alguna observacion?">
-                                </div>
+                                    <div class="form-group">
+                                        <label for="calle">Calle</label>
+                                        <input type="text" id="calle" name="calle" th:value="${direccion.calle}"
+                                            th:disabled="${isDisabled}" class="form-control" placeholder="Calle"
+                                            required="required">
+                                    </div>
 
-                                <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2" th:disabled="${isDisabled}">
+                                    <div class="form-group">
+                                        <label for="numeracion">Numeracion</label>
+                                        <input type="text" id="numeracion" name="numeracion"
+                                            th:value="${direccion.numeracion}" th:disabled="${isDisabled}"
+                                            class="form-control" placeholder="Numeracion" required="required">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="observacion">Observación</label>
+                                        <input type="text" id="observacion" name="observacion"
+                                            th:value="${direccion.observacion}" th:disabled="${isDisabled}"
+                                            class="form-control" placeholder="¿Alguna observacion?">
+                                    </div>
+
+                                    <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                        th:disabled="${isDisabled}">
                                         Aceptar
-                                </button>
+                                    </button>
 
-                                <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
-                                    Cancelar
-                                </button>
+                                    <a th:href="@{/direccion/cancelar}" class="btn btn-light"
+                                        title="Cancelar la edición.">
+                                        Cancelar
+                                    </a>
 
-                            </div>
+                                </div>
 
-                        </form>
+                            </form>
 
+                        </div>
                     </div>
                 </div>
             </div>
-                </div>
         </div>
     </div>
 
 
-    <footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
     <!-- JS -->
     <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
     <script th:src="@{/js/off-canvas.js}"></script>
@@ -94,4 +99,5 @@
 
 
 </body>
+
 </html>

@@ -155,7 +155,7 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/cancelarEditUsuario")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
