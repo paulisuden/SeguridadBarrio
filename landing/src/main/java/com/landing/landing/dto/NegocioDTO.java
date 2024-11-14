@@ -7,11 +7,12 @@ import lombok.Data;
 
 @Data
 public class NegocioDTO implements Serializable {
-  private Long id;
+  private String id;
   private String nombre;
-  private List<Long> serviciosId;
+  private List<String> serviciosId;
   private List<ServicioDTO> servicios;
-  private Long direccionId;
+  private String direccionId;
   private DireccionDTO direccion;
-
+  private String imagenId;
+  private ImagenDTO imagen;
 }

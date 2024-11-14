@@ -21,7 +21,8 @@
 
                             <h5 class="card-title">Unidad De Negocio</h5>
 
-                            <form class="forms-sample" action="/negocio/aceptarEditNegocio" method="POST">
+                            <form class="forms-sample" action="/negocio/aceptarEditNegocio" method="POST"
+                                enctype="multipart/form-data">
 
                                 <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
                                 <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
@@ -29,12 +30,36 @@
                                 <div class="form-group">
 
                                     <input type="hidden" th:name="id"
-                                        th:value="${negocio != null and negocio.id != null ? negocio.id : 0}" />
+                                        th:value="${negocio.id != null and !negocio.id.isEmpty() ? negocio.id : '0'}"/>
 
                                     <label for="nombre">Nombre</label>
                                     <input type="text" id="nombre" name="nombre" th:value="${negocio.nombre}"
                                         th:disabled="${isDisabled}" class="form-control"
                                         placeholder="Escriba el nombre de la negocio" required="required">
+
+                                    <div class="form-group">
+                                        <!-- Botón personalizado para activar el input de archivo -->
+                                        <button type="button" class="btn btn-danger btn-icon-text"
+                                            onclick="document.getElementById('archivo').click();">
+                                            <i class="typcn typcn-upload btn-icon-prepend"></i>
+                                            Subir imagen
+                                        </button>
+
+                                        <!-- Campo de archivo oculto -->
+                                        <input type="file" id="archivo" class="form-control" name="archivo"
+                                            th:disabled="${isDisabled}" required style="display: none;" />
+
+                                        <!-- Muestra el nombre del archivo seleccionado -->
+                                        <span id="file-name" class="ml-2"></span>
+
+                                        <script>
+                                            // Muestra el nombre del archivo seleccionado
+                                            document.getElementById('archivo').addEventListener('change', function () {
+                                                const fileName = this.files[0]?.name || "No file chosen";
+                                                document.getElementById('file-name').textContent = fileName;
+                                            });
+                                        </script>
+                                    </div>
 
                                     <div class="form-group">
                                         <label for="servicios">Servicios</label>
@@ -45,18 +70,14 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="direcciones">Direccion</label>
-                                        <select id="direcciones" class="form-control" name="idDireccion"
-                                            th:disabled="${isDisabled}">
-                                            <option th:each="direccion : ${direcciones}" th:value="${direccion.id}"
-                                                th:text="${direccion.barrio + ' ' + direccion.calle + ' ' + direccion.numeracion}"
-                                                th:selected="${negocio?.direccion?.id == direccion.id}">
-                                            </option>
-                                        </select>
-                                    </div>
-
-
+                                    <select id="direcciones" class="form-control" name="idDireccion"
+                                        th:disabled="${isDisabled}" required="required">
+                                        <option value="" disabled selected>Seleccionar dirección</option>
+                                        <option th:each="direccion : ${direcciones}" th:value="${direccion.id}"
+                                            th:text="${direccion.barrio + ' ' + direccion.calle + ' ' + direccion.numeracion}"
+                                            th:selected="${negocio?.direccion?.id == direccion.id}">
+                                        </option>
+                                    </select>
 
 
                                 </div>

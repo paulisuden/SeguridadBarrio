@@ -1,8 +1,6 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,15 +38,12 @@ public class ContactoController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(
-            @RequestParam Long id,
-            RedirectAttributes attributes,
-            Model model) {
+    @PostMapping("/baja")
+    public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
             contactoService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Contacto #" + id + " eliminado correctamente");
             return redirectList;
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
@@ -58,7 +53,8 @@ public class ContactoController {
 
     @GetMapping("/modificar")
     public String modificar(
-            @RequestParam Long id,
+            @RequestParam String id,
+
             Model model) {
 
         try {
@@ -77,7 +73,8 @@ public class ContactoController {
 
     @GetMapping("/consultar")
     public String consultar(
-            @RequestParam long id,
+            @RequestParam String id,
+
             Model model) {
 
         try {
@@ -107,7 +104,8 @@ public class ContactoController {
 
     @PostMapping("/aceptarEditContacto")
     public String aceptarEdit(
-            @RequestParam(required = false, defaultValue = "0") Long id,
+            @RequestParam(required = false, defaultValue = "0") String id,
+
             @RequestParam TipoContacto tipoContacto,
             @RequestParam String observacion,
             @RequestParam(required = false) String email,
@@ -115,14 +113,18 @@ public class ContactoController {
             @RequestParam(required = false) TipoTelefono tipoTelefono,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0)
+            if ("0".equals(id)) {
+
                 contactoService.crear(
                         tipoContacto,
                         observacion,
                         email,
                         telefono,
                         tipoTelefono);
-            else
+                attributes.addFlashAttribute("msgExito", "Contacto creado correctamente");
+            }
+
+            else {
                 contactoService.modificar(
                         id,
                         tipoContacto,
@@ -131,7 +133,9 @@ public class ContactoController {
                         telefono,
                         tipoTelefono);
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+                attributes.addFlashAttribute("msgExito", "Contacto #" + id + " editado correctamente");
+            }
+
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -163,7 +167,8 @@ public class ContactoController {
     private String error(
             String mensaje,
             Model model,
-            Long id,
+            String id,
+
             TipoContacto tipo,
             String observacion,
             String email,
@@ -171,7 +176,8 @@ public class ContactoController {
             TipoTelefono tipoTelefono) {
         try {
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (!"0".equals(id)) {
+
                 model.addAttribute("contacto", contactoService.buscar(id));
             } else {
                 ContactoDTO contacto = new ContactoDTO();

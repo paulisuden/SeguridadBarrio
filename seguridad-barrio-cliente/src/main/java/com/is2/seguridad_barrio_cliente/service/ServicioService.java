@@ -26,7 +26,7 @@ public class ServicioService {
 
       ServicioDTO servicio = new ServicioDTO();
       servicio.setNombre(nombre);
-      servicio.setImagenId(0l);
+      servicio.setImagenId("0l");
 
       if (archivoImagen != null && archivoImagen.getSize() > 0) {
         ImagenDTO img = imagenService.crear(archivoImagen);
@@ -46,11 +46,11 @@ public class ServicioService {
     }
   }
 
-  public ServicioDTO buscar(Long id) throws ErrorServiceException {
+  public ServicioDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
-      if (id == 0) {
+      if ("0".equals(id)) {
         throw new ErrorServiceException("Debe indicar el autor");
       }
 
@@ -66,7 +66,7 @@ public class ServicioService {
     }
   }
 
-  public void modificar(Long id, String nombre, MultipartFile archivoImagen) throws ErrorServiceException {
+  public void modificar(String id, String nombre, MultipartFile archivoImagen) throws ErrorServiceException {
 
     try {
 
@@ -98,11 +98,11 @@ public class ServicioService {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 
-      if (id == 0) {
+      if ("0".equals(id)) {
         throw new ErrorServiceException("Debe indicar el país");
       }
 

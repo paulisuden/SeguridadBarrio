@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PaisServiceImpl extends BaseServiceImpl<Pais,Long> implements PaisService{
+public class PaisServiceImpl extends BaseServiceImpl<Pais, String> implements PaisService {
     @Autowired
-    public PaisServiceImpl(BaseRepository<Pais, Long> baseRepository) {
+    public PaisServiceImpl(BaseRepository<Pais, String> baseRepository) {
         super(baseRepository);
     }
 }

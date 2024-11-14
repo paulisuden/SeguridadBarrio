@@ -14,11 +14,11 @@ public class ServicioService {
   @Autowired
   private ServicioDAORest dao;
 
-  public ServicioDTO buscar(Long id) throws ErrorServiceException {
+  public ServicioDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
-      if (id == 0) {
+      if (id == null || id.isEmpty()) {
         throw new ErrorServiceException("Debe indicar el autor");
       }
 

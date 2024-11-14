@@ -26,7 +26,7 @@ public class DireccionDAORest {
         }
     }
 
-    public DireccionDTO buscar(Long id) throws ErrorServiceException {
+    public DireccionDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -56,7 +56,7 @@ public class DireccionDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
@@ -83,7 +83,7 @@ public class DireccionDAORest {
         }
     }
 
-    public DireccionDTO buscarDireccionPorLocalidadYNombre(Long idLocalidad, String nombre)
+    public DireccionDTO buscarDireccionPorLocalidadYNombre(String idLocalidad, String nombre)
             throws ErrorServiceException {
         try {
 

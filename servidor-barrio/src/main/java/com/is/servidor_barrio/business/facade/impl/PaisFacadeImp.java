@@ -11,10 +11,10 @@ import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
-public class PaisFacadeImp extends BaseFacadeImpl<Pais, PaisDto, PaisCreateDto, PaisCreateDto, Long>
+public class PaisFacadeImp extends BaseFacadeImpl<Pais, PaisDto, PaisCreateDto, PaisCreateDto, String>
     implements PaisFacade {
 
-  public PaisFacadeImp(BaseService<Pais, Long> baseService,
+  public PaisFacadeImp(BaseService<Pais, String> baseService,
       BaseMapper<Pais, PaisDto, PaisCreateDto, PaisCreateDto> baseMapper) {
     super(baseService, baseMapper);
 

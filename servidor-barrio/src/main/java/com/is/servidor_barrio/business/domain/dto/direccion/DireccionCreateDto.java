@@ -14,5 +14,5 @@ public class DireccionCreateDto {
   private String numeracion;
   private String barrio;
   private String observacion;
-  private Long localidadId;
+  private String localidadId;
 }

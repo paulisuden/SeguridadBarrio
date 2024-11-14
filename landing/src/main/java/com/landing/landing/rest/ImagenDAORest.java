@@ -28,7 +28,7 @@ public class ImagenDAORest {
         }
     }
 
-    public ImagenDTO buscar(Long id) throws ErrorServiceException {
+    public ImagenDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -58,7 +58,7 @@ public class ImagenDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
             String uri = API_PATH + "/" + id;

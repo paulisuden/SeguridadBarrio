@@ -14,7 +14,7 @@ public class DireccionService {
     @Autowired
     private DireccionDAORest dao;
 
-    public void crear(String calle, String numeracion, String barrio, String observacion, Long idLocalidad)
+    public void crear(String calle, String numeracion, String barrio, String observacion, String idLocalidad)
             throws ErrorServiceException {
 
         try {
@@ -37,11 +37,11 @@ public class DireccionService {
         }
     }
 
-    public DireccionDTO buscar(Long id) throws ErrorServiceException {
+    public DireccionDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar la direccion");
             }
 
@@ -57,7 +57,8 @@ public class DireccionService {
         }
     }
 
-    public void modificar(Long id, String calle, String numeracion, String barrio, String observacion, Long idLocalidad)
+    public void modificar(String id, String calle, String numeracion, String barrio, String observacion,
+            String idLocalidad)
             throws ErrorServiceException {
 
         try {
@@ -80,7 +81,7 @@ public class DireccionService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

@@ -13,21 +13,22 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 import com.is.servidor_barrio.business.logic.service.InmuebleServiceImpl;
 
 @Service
-public class MovimientoVisitaFacadeImpl extends BaseFacadeImpl<MovimientoVisita, MovimientoVisitaDTO, MovimientoVisitaCreateDTO, MovimientoVisitaCreateDTO, Long> {
+public class MovimientoVisitaFacadeImpl extends
+        BaseFacadeImpl<MovimientoVisita, MovimientoVisitaDTO, MovimientoVisitaCreateDTO, MovimientoVisitaCreateDTO, String> {
 
     @Autowired
     private VisitanteServiceImpl visitanteServiceImpl;
     @Autowired
     private InmuebleServiceImpl inmuebleServiceImpl;
 
-    public MovimientoVisitaFacadeImpl(BaseService<MovimientoVisita, Long> baseService,
-        BaseMapper<MovimientoVisita, MovimientoVisitaDTO, MovimientoVisitaCreateDTO, MovimientoVisitaCreateDTO> baseMapper) {
+    public MovimientoVisitaFacadeImpl(BaseService<MovimientoVisita, String> baseService,
+            BaseMapper<MovimientoVisita, MovimientoVisitaDTO, MovimientoVisitaCreateDTO, MovimientoVisitaCreateDTO> baseMapper) {
         super(baseService, baseMapper);
     }
 
     @Override
     public MovimientoVisitaDTO save(MovimientoVisitaCreateDTO movimientoVisitaCreateDTO) throws Exception {
-        
+
         var movimientoVisitaEntity = baseMapper.toEntityCreate(movimientoVisitaCreateDTO);
 
         var visitanteEntity = visitanteServiceImpl.findById(movimientoVisitaCreateDTO.getIdVisitante());
@@ -39,23 +40,22 @@ public class MovimientoVisitaFacadeImpl extends BaseFacadeImpl<MovimientoVisita,
         return baseMapper.toDTO(entityCreated);
     }
 
-
     @Override
-    public MovimientoVisitaDTO update(Long id, MovimientoVisitaCreateDTO movimientoVisitaCreateDTO) throws Exception {
+    public MovimientoVisitaDTO update(String id, MovimientoVisitaCreateDTO movimientoVisitaCreateDTO) throws Exception {
         var movimientoVisitaEntity = baseService.findById(id);
         baseMapper.toUpdate(movimientoVisitaEntity, movimientoVisitaCreateDTO);
 
-        //VISITANTE
+        // VISITANTE
         if (!movimientoVisitaEntity.getVisitante().getId().equals(movimientoVisitaCreateDTO.getIdVisitante())) {
-        var visitanteEntity = visitanteServiceImpl.findById(movimientoVisitaCreateDTO.getIdVisitante());
-        movimientoVisitaEntity.setVisitante(visitanteEntity);
+            var visitanteEntity = visitanteServiceImpl.findById(movimientoVisitaCreateDTO.getIdVisitante());
+            movimientoVisitaEntity.setVisitante(visitanteEntity);
         }
 
-        //INMUEBLE
+        // INMUEBLE
         if (!movimientoVisitaEntity.getInmueble().getId().equals(movimientoVisitaCreateDTO.getIdInmueble())) {
             var inmuebleEntity = inmuebleServiceImpl.findById(movimientoVisitaCreateDTO.getIdInmueble());
             movimientoVisitaEntity.setInmueble(inmuebleEntity);
-            }
+        }
 
         var updatedEntity = baseService.update(id, movimientoVisitaEntity);
         return baseMapper.toDTO(updatedEntity);

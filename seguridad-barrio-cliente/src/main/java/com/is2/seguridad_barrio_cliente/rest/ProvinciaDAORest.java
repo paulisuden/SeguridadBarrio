@@ -27,7 +27,7 @@ public class ProvinciaDAORest {
         }
     }
 
-    public ProvinciaDTO buscar(Long id) throws ErrorServiceException {
+    public ProvinciaDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -57,7 +57,7 @@ public class ProvinciaDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

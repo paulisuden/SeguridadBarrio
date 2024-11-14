@@ -86,7 +86,8 @@
         <div th:each="negocio : ${negocios}" class="col-md-4 col-lg-3 d-flex align-items-stretch mb-4">
           <a th:href="@{/negocio/{id}(id=${negocio.id})}">
             <div class="custom-media card text-center">
-              <img src="/images/rinconDeArraozBarrio.jpg" alt="Image" class="img-fluid"
+
+              <img th:src="${'/imagen/' + negocio.imagen.id}" alt="Image" class="img-fluid"
                 style="width: 300px; height: 300px; object-fit: cover;">
               <div class="card-body">
                 <h5 class="card-title" th:text="${negocio.nombre}">Card title</h5>

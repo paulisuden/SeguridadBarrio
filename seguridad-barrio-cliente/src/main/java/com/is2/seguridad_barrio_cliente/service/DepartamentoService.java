@@ -14,7 +14,7 @@ public class DepartamentoService {
     @Autowired
     private DepartamentoDAORest dao;
 
-    public void crear(String nombre, Long idProvincia) throws ErrorServiceException {
+    public void crear(String nombre, String idProvincia) throws ErrorServiceException {
 
         try {
 
@@ -33,11 +33,11 @@ public class DepartamentoService {
         }
     }
 
-    public DepartamentoDTO buscar(Long id) throws ErrorServiceException {
+    public DepartamentoDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar el departamento");
             }
 
@@ -53,7 +53,7 @@ public class DepartamentoService {
         }
     }
 
-    public void modificar(Long id, String nombre, Long idProvincia) throws ErrorServiceException {
+    public void modificar(String id, String nombre, String idProvincia) throws ErrorServiceException {
 
         try {
 
@@ -72,7 +72,7 @@ public class DepartamentoService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 

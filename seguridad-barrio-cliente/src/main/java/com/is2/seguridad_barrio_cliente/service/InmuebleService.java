@@ -14,7 +14,12 @@ public class InmuebleService {
     @Autowired
     private InmuebleDAORest dao;
 
-    public void crear(String numeracion, String calle, String manzana) throws ErrorServiceException {
+    public void crear(
+            String numeracion,
+            String calle,
+            String manzana,
+            String idNegocio) throws ErrorServiceException {
+
 
         try {
 
@@ -22,7 +27,7 @@ public class InmuebleService {
             inmueble.setCalle(calle);
             inmueble.setManzana(manzana);
             inmueble.setNumeracion(numeracion);
-            //inmueble.setIdNegocio(idNegocio);
+            inmueble.setIdUnidadDeNegocio(idNegocio);
             dao.crear(inmueble);
 
         } catch (ErrorServiceException e) {
@@ -34,11 +39,11 @@ public class InmuebleService {
         }
     }
 
-    public InmuebleDTO buscar(Long id) throws ErrorServiceException {
+    public InmuebleDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 throw new ErrorServiceException("Debe indicar la localidad");
             }
 
@@ -54,7 +59,13 @@ public class InmuebleService {
         }
     }
 
-    public void modificar(Long id, String numeracion, String calle, String manzana) throws ErrorServiceException {
+    public void modificar(
+            String id,
+            String numeracion,
+            String calle,
+            String manzana,
+            String idNegocio) throws ErrorServiceException {
+
 
         try {
 
@@ -63,8 +74,7 @@ public class InmuebleService {
             inmueble.setCalle(calle);
             inmueble.setManzana(manzana);
             inmueble.setNumeracion(numeracion);
-            //inmueble.setIdNegocio(idNegocio);
-
+            inmueble.setIdUnidadDeNegocio(idNegocio);
             dao.actualizar(inmueble);
 
         } catch (ErrorServiceException e) {
@@ -75,7 +85,7 @@ public class InmuebleService {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
@@ -99,5 +109,5 @@ public class InmuebleService {
             throw new ErrorServiceException("Error de sistema");
         }
     }
-    
+
 }

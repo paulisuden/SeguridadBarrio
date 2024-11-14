@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PersonaServiceImpl extends BaseServiceImpl<Persona, Long> implements PersonaService {
+public class PersonaServiceImpl extends BaseServiceImpl<Persona, String> implements PersonaService {
   @Autowired
-  public PersonaServiceImpl(BaseRepository<Persona, Long> baseRepository) {
+  public PersonaServiceImpl(BaseRepository<Persona, String> baseRepository) {
     super(baseRepository);
   }
 

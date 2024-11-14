@@ -1,6 +1,5 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
-import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.ServicioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.ServicioService;
@@ -45,13 +44,12 @@ public class ServicioController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
-
             servicioService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Servicio #" + id + " eliminado correctamente");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -61,7 +59,7 @@ public class ServicioController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -78,7 +76,7 @@ public class ServicioController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -110,16 +108,18 @@ public class ServicioController {
     @PostMapping("/aceptarEditServicio")
     public String aceptarEdit(
             @RequestParam MultipartFile archivo,
-            @RequestParam(required = false, defaultValue = "0") Long id,
+            @RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String nombre,
             RedirectAttributes attributes, Model model) {
         try {
-            if (id == 0)
-                servicioService.crear(nombre, archivo);
-            else
-                servicioService.modificar(id, nombre, archivo);
+            if ("0".equals(id)) {
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+                servicioService.crear(nombre, archivo);
+                attributes.addFlashAttribute("msgExito", "Servicio creado correctamente");
+            } else {
+                servicioService.modificar(id, nombre, archivo);
+                attributes.addFlashAttribute("msgExito", "Servicio #" + id + " editado correctamente");
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -137,11 +137,11 @@ public class ServicioController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String nombre) {
+    private String error(String mensaje, Model model, String id, String nombre) {
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (id != "0") {
                 model.addAttribute("servicio", servicioService.buscar(id));
             } else {
                 ServicioDTO servicio = new ServicioDTO();
@@ -154,30 +154,6 @@ public class ServicioController {
             model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
         }
         return viewEdit;
-    }
-
-    @GetMapping("/imagen/{id}")
-    public ResponseEntity<byte[]> fotoServicio(
-            @PathVariable Long id,
-            Model model) {
-
-        try {
-            ServicioDTO servicio = servicioService.buscar(id);
-            if (servicio.getImagen() == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
-            byte[] imgContenido = servicio.getImagen().getContenido();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
-
-        } catch (Exception ex) {
-            model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
     }
 
 }

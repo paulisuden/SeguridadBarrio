@@ -9,17 +9,19 @@ import org.springframework.stereotype.Service;
 
 import com.is.servidor_barrio.business.domain.dto.unidadDeNegocio.UnidadDeNegocioCreateDto;
 import com.is.servidor_barrio.business.domain.dto.unidadDeNegocio.UnidadDeNegocioDto;
+import com.is.servidor_barrio.business.domain.entity.Imagen;
 import com.is.servidor_barrio.business.domain.entity.Servicio;
 import com.is.servidor_barrio.business.domain.entity.UnidadDeNegocio;
 import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.DireccionServiceImpl;
+import com.is.servidor_barrio.business.logic.service.ImagenServiceImpl;
 import com.is.servidor_barrio.business.logic.service.ServicioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
 public class UnidadDeNegocioFacadeImp extends
-    BaseFacadeImpl<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto, Long> {
+    BaseFacadeImpl<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto, String> {
 
   @Autowired
   private DireccionServiceImpl direccionService;
@@ -27,7 +29,9 @@ public class UnidadDeNegocioFacadeImp extends
   @Autowired
   private ServicioServiceImpl servicioService;
 
-  public UnidadDeNegocioFacadeImp(BaseService<UnidadDeNegocio, Long> baseService,
+  @Autowired
+  private ImagenServiceImpl imagenService;
+  public UnidadDeNegocioFacadeImp(BaseService<UnidadDeNegocio, String> baseService,
       BaseMapper<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto> baseMapper) {
     super(baseService, baseMapper);
   }
@@ -50,12 +54,14 @@ public class UnidadDeNegocioFacadeImp extends
         .filter(Objects::nonNull) // Filtrar los nulos
         .collect(Collectors.toList());
     negocioEntity.setServicios(servicios);
+    Imagen imagen = imagenService.findById(unidadDeNegocioCreateDto.getImagenId());
+    negocioEntity.setImagen(imagen);
     var entityCreated = baseService.save(negocioEntity);
     return baseMapper.toDTO(entityCreated);
   }
 
   @Override
-  public UnidadDeNegocioDto update(Long id, UnidadDeNegocioCreateDto unidadDeNegocioCreateDto) throws Exception {
+  public UnidadDeNegocioDto update(String id, UnidadDeNegocioCreateDto unidadDeNegocioCreateDto) throws Exception {
     var negocioEntity = baseService.findById(id);
     baseMapper.toUpdate(negocioEntity, unidadDeNegocioCreateDto);
 

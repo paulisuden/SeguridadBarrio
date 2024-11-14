@@ -27,7 +27,7 @@ public class NegocioDAORest {
     }
   }
 
-  public NegocioDTO buscar(Long id) throws ErrorServiceException {
+  public NegocioDTO buscar(String id) throws ErrorServiceException {
 
     try {
 
@@ -57,7 +57,7 @@ public class NegocioDAORest {
     }
   }
 
-  public void eliminar(Long id) throws ErrorServiceException {
+  public void eliminar(String id) throws ErrorServiceException {
 
     try {
 

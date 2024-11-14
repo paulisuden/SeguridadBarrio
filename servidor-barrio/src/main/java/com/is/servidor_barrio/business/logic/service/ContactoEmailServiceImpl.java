@@ -7,10 +7,10 @@ import com.is.servidor_barrio.business.domain.entity.ContactoEmail;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 
 @Service
-public class ContactoEmailServiceImpl extends BaseServiceImpl<ContactoEmail, Long>
+public class ContactoEmailServiceImpl extends BaseServiceImpl<ContactoEmail, String>
     implements ContactoEmailService {
   @Autowired
-  public ContactoEmailServiceImpl(BaseRepository<ContactoEmail, Long> baseRepository) {
+  public ContactoEmailServiceImpl(BaseRepository<ContactoEmail, String> baseRepository) {
     super(baseRepository);
   }
 

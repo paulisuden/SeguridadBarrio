@@ -6,10 +6,9 @@ import java.io.Serializable;
 
 @Data
 public class DepartamentoDTO implements Serializable {
-    private Long id;
+    private String id;
     private String nombre;
     private boolean eliminado;
-    private Long provinciaId;
+    private String provinciaId;
     private ProvinciaDTO provincia;
-
 }

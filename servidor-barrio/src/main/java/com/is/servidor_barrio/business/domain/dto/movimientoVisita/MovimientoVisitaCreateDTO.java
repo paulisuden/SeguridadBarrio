@@ -20,6 +20,6 @@ public class MovimientoVisitaCreateDTO {
     private EstadoMovimiento estadoMovimiento;
     private TipoMovilidad tipoMovilidad;
     private String descripcionMovilidad;
-    private Long idVisitante;
-    private Long idInmueble;
+    private String idVisitante;
+    private String idInmueble;
 }

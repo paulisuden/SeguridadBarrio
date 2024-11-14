@@ -91,7 +91,7 @@
                         <div class="card-body mt-auto"> <!-- Added margin-top here -->
                             <h5 class="card-title" th:text="${servicio.nombre}">Card title</h5>
                         </div>
-                        <img th:src="${'/negocio/servicio/imagen/' + servicio.id}" alt="" class="img-fluid height: 150px;
+                        <img th:src="${'/imagen/' + servicio.imagen.id}" alt="" class="img-fluid height: 150px;
                             width: 150px;
                             border-radius: 15%;
                             object-fit: cover;">

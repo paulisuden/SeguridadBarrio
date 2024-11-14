@@ -43,7 +43,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
 
         try {
 
@@ -57,8 +57,25 @@ public class DepartamentoController {
         }
     }
 
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
+
+        try {
+
+            departamentoService.eliminar(id);
+            redirectAttributes.addFlashAttribute("msgExito", "Departamento #" + id + " eliminado correctamente.");
+
+            return redirectList;
+
+        } catch (ErrorServiceException e) {
+            model.addAttribute("msgError", e.getMessage());
+            return redirectList;
+        }
+    }
+
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -77,7 +94,7 @@ public class DepartamentoController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -111,20 +128,22 @@ public class DepartamentoController {
     }
 
     @PostMapping("/aceptarEditDepartamento")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String nombre,
-            @RequestParam Long idProvincia,
+            @RequestParam String idProvincia,
             RedirectAttributes attributes, Model model) {
 
         try {
 
-            if (id == 0) {
+            if ("0".equals(id)) {
                 departamentoService.crear(nombre, idProvincia);
+                attributes.addFlashAttribute("msgExito", "Departamento creado correctamente.");
+
             } else {
                 departamentoService.modificar(id, nombre, idProvincia);
+                attributes.addFlashAttribute("msgExito", "Departamento #" + id + " editado correctamente.");
             }
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -141,13 +160,13 @@ public class DepartamentoController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String nombre, Long idProvincia) {
+    private String error(String mensaje, Model model, String id, String nombre, String idProvincia) {
         try {
             model.addAttribute("msgError", mensaje);
 
             DepartamentoDTO departamento = new DepartamentoDTO();
 
-            if (id != 0) {
+            if (id != "0") {
                 departamento = departamentoService.buscar(id);
             } else {
                 departamento.setNombre(nombre);

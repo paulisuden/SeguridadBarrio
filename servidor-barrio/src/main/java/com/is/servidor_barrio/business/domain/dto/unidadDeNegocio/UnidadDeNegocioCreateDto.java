@@ -2,6 +2,8 @@ package com.is.servidor_barrio.business.domain.dto.unidadDeNegocio;
 
 import java.util.List;
 
+import com.is.servidor_barrio.business.domain.dto.imagen.ImagenDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UnidadDeNegocioCreateDto {
   private String nombre;
-  // private DireccionDto direccion;
-  private Long direccionId;
-  private List<Long> serviciosId;
+  private String direccionId;
+  private List<String> serviciosId;
+  private String imagenId;
+  private ImagenDto imagen;
 }

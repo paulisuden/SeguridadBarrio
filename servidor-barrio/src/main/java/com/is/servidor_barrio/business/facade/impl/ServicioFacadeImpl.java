@@ -11,9 +11,9 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
 public class ServicioFacadeImpl extends
-    BaseFacadeImpl<Servicio, ServicioDto, ServicioCreateDto, ServicioCreateDto, Long> {
+    BaseFacadeImpl<Servicio, ServicioDto, ServicioCreateDto, ServicioCreateDto, String> {
 
-  public ServicioFacadeImpl(BaseService<Servicio, Long> baseService,
+  public ServicioFacadeImpl(BaseService<Servicio, String> baseService,
       BaseMapper<Servicio, ServicioDto, ServicioCreateDto, ServicioCreateDto> baseMapper) {
     super(baseService, baseMapper);
   }

@@ -1,8 +1,11 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
 import com.is2.seguridad_barrio_cliente.dto.InmuebleDTO;
+import com.is2.seguridad_barrio_cliente.dto.NegocioDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.InmuebleService;
+import com.is2.seguridad_barrio_cliente.service.NegocioService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +23,8 @@ public class InmuebleController {
 
     @Autowired
     private InmuebleService inmuebleService;
-    //@Autowired private UnidadDeNegocioService unidadDeNegocioService;
+    @Autowired
+    private NegocioService unidadDeNegocioService;
 
     private String viewList = "inmueble/listarInmueble.html";
     private String redirectList = "redirect:/inmueble/listarInmueble";
@@ -30,21 +34,22 @@ public class InmuebleController {
     public String alta(InmuebleDTO inmueble, Model model) throws ErrorServiceException {
 
         inmueble = new InmuebleDTO();
-        //List<UnidadDeNegocioDTO> unidadesDeNegocio = unidadDeNegocioService.listar();
-        //model.addAttribute("unidadesDeNegocio", unidadesDeNegocio);
+        List<NegocioDTO> unidadesDeNegocio = unidadDeNegocioService.listar();
+        model.addAttribute("unidadesDeNegocio", unidadesDeNegocio);
         model.addAttribute("inmueble", inmueble);
         model.addAttribute("isDisabled", false);
 
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
+
 
         try {
 
             inmuebleService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Inmueble #" + id + " eliminado correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -54,14 +59,14 @@ public class InmuebleController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
             InmuebleDTO inmueble = inmuebleService.buscar(id);
             model.addAttribute("inmueble", inmueble);
-            /*List<UnidadDeNegocioDTO> unidadesDeNegocio = unidadDeNegocioService.listar();
-            model.addAttribute("unidadesDeNegocio", unidadesDeNegocio);*/
+            List<NegocioDTO> unidadesDeNegocio = unidadDeNegocioService.listar();
+            model.addAttribute("unidadesDeNegocio", unidadesDeNegocio);
             model.addAttribute("isDisabled", false);
 
             return viewEdit;
@@ -73,11 +78,13 @@ public class InmuebleController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
             InmuebleDTO inmueble = inmuebleService.buscar(id);
+            List<NegocioDTO> unidadesDeNegocio = unidadDeNegocioService.listar();
+            model.addAttribute("unidadesDeNegocio", unidadesDeNegocio);
             model.addAttribute("inmueble", inmueble);
             model.addAttribute("isDisabled", true);
 
@@ -103,25 +110,28 @@ public class InmuebleController {
     }
 
     @PostMapping("/aceptarEditInmueble")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
-                            @RequestParam String calle,
-                            @RequestParam String manzana, @RequestParam String numeracion,
-                            RedirectAttributes attributes, Model model) { //@RequestParam Long idUnidadDeNegocio
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
+            @RequestParam String calle,
+            @RequestParam String manzana,
+            @RequestParam String numeracion,
+            @RequestParam String idNegocio,
+            RedirectAttributes attributes, Model model) {
         try {
+            if ("0".equals(id)) {
 
-            if (id == 0)
-                inmuebleService.crear(numeracion, calle, manzana);
-            else
-                inmuebleService.modificar(id, numeracion, calle, manzana);
-
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+                inmuebleService.crear(numeracion, calle, manzana, idNegocio);
+                attributes.addFlashAttribute("msgExito", "Inmueble creado correctamente.");
+            } else {
+                inmuebleService.modificar(id, numeracion, calle, manzana, idNegocio);
+                attributes.addFlashAttribute("msgExito", "Inmueble #" + id + " editado correctamente.");
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {
-            return error(e.getMessage(), model, id, numeracion, calle, manzana);
+            return error(e.getMessage(), model, id, numeracion, calle, manzana, idNegocio);
 
         } catch (Exception e) {
-            return error("Error de Sistema", model, id, numeracion, calle, manzana);
+            return error("Error de Sistema", model, id, numeracion, calle, manzana, idNegocio);
         }
     }
 
@@ -131,19 +141,28 @@ public class InmuebleController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String numeracion, String calle, String manzana) {
+    private String error(
+            String mensaje,
+            Model model,
+            String id,
+            String numeracion,
+            String calle,
+            String manzana,
+            String idNegocio) {
+
         try {
 
             model.addAttribute("msgError", mensaje);
-            if (id != 0) {
+            if (!"0".equals(id)) {
                 model.addAttribute("inmueble", inmuebleService.buscar(id));
             } else {
-                //UnidadDeNegocioDTO unidadDeNegocio = unidadDeNegocioService.buscar(idUnidadDeNegocio);
+                NegocioDTO unidadDeNegocio = unidadDeNegocioService.buscar(idNegocio);
                 InmuebleDTO inmueble = new InmuebleDTO();
                 inmueble.setCalle(calle);
                 inmueble.setManzana(manzana);
                 inmueble.setNumeracion(numeracion);
-                //inmueble.setIdNegocio(idNegocio);
+                inmueble.setIdUnidadDeNegocio(idNegocio);
+                inmueble.setUnidadDeNegocio(unidadDeNegocio);
                 model.addAttribute("inmueble", inmueble);
             }
 

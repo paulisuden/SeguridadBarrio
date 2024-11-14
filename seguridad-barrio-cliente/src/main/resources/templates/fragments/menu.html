@@ -2,7 +2,6 @@
     <ul class="nav">
 
         <!--DASHBOARD -->
-
         <li class="nav-item">
             <a class="nav-link" th:href="@{/inicio}">
                 <i class="typcn typcn-arrow-left-thick menu-icon"></i>
@@ -17,6 +16,7 @@
                 aria-controls="direccion">
                 <i class="typcn typcn-location menu-icon"></i>
                 <span class="menu-title">Dirección</span>
+                <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="direccion">
                 <ul class="nav flex-column sub-menu">
@@ -45,6 +45,8 @@
             <a class="nav-link" data-toggle="collapse" href="#visita" aria-expanded="false" aria-controls="visita">
                 <i class="typcn typcn-user menu-icon"></i>
                 <span class="menu-title">Visitas</span>
+                <i class="menu-arrow"></i>
+
             </a>
             <div class="collapse" id="visita">
                 <ul class="nav flex-column sub-menu">
@@ -64,6 +66,8 @@
             <a class="nav-link" data-toggle="collapse" href="#inmueble" aria-expanded="false" aria-controls="inmueble">
                 <i class="typcn typcn-home menu-icon"></i>
                 <span class="menu-title">Inmuebles</span>
+                <i class="menu-arrow"></i>
+
             </a>
             <div class="collapse" id="inmueble">
                 <ul class="nav flex-column sub-menu">
@@ -79,12 +83,13 @@
             <a class="nav-link" data-toggle="collapse" href="#unidadDeNegocio" aria-expanded="false"
                 aria-controls="unidadDeNegocio">
                 <i class="typcn typcn-home menu-icon"></i>
-                <span class="menu-title">Uniades de negocio</span>
+                <span class="menu-title">Negocio</span>
+                <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="unidadDeNegocio">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/negocio/listarNegocio}">Unidades de negocios</a>
+                        <a class="nav-link" th:href="@{/negocio/listarNegocio}">Negocios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/servicio/listarServicio}">Servicios</a>
@@ -98,6 +103,8 @@
             <a class="nav-link" data-toggle="collapse" href="#personas" aria-expanded="false" aria-controls="personas">
                 <i class="typcn typcn-home menu-icon"></i>
                 <span class="menu-title">Personas</span>
+                <i class="menu-arrow"></i>
+
             </a>
             <div class="collapse" id="personas">
                 <ul class="nav flex-column sub-menu">

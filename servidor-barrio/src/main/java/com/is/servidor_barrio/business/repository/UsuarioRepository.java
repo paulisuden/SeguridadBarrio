@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.is.servidor_barrio.business.domain.entity.Usuario;
 
 @Repository
-public interface UsuarioRepository extends BaseRepository<Usuario, Long> {
+public interface UsuarioRepository extends BaseRepository<Usuario, String> {
     Usuario findByEmailAndClaveAndEliminadoFalse(String email, String clave);
     Usuario findByEmail(String email);
     @Query("SELECT u FROM Usuario u WHERE u.id = (SELECT p.usuario.id FROM Persona p WHERE p.id = :personaId)")

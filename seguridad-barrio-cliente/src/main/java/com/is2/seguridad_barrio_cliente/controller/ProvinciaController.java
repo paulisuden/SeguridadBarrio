@@ -43,13 +43,14 @@ public class ProvinciaController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam Long id, RedirectAttributes attributes, Model model) {
+    @PostMapping("/baja")
+    public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
             provinciaService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Provincia #" + id + " eliminado correctamente.");
+
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -59,7 +60,7 @@ public class ProvinciaController {
     }
 
     @GetMapping("/modificar")
-    public String modificar(@RequestParam Long id, Model model) {
+    public String modificar(@RequestParam String id, Model model) {
 
         try {
 
@@ -78,7 +79,7 @@ public class ProvinciaController {
     }
 
     @GetMapping("/consultar")
-    public String consultar(@RequestParam long id, Model model) {
+    public String consultar(@RequestParam String id, Model model) {
 
         try {
 
@@ -112,20 +113,25 @@ public class ProvinciaController {
     }
 
     @PostMapping("/aceptarEditProvincia")
-    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") Long id,
+    public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String nombre,
-            @RequestParam Long idPais,
+            @RequestParam String idPais,
             RedirectAttributes attributes, Model model) {
 
         try {
 
-            if (id == 0) {
+            System.out.println(nombre);
+            System.out.println(id);
+
+            if ("0".equals(id)) {
                 provinciaService.crear(nombre, idPais);
+                attributes.addFlashAttribute("msgExito", "Provincia creada correctamente");
+
             } else {
                 provinciaService.modificar(id, nombre, idPais);
-            }
+                attributes.addFlashAttribute("msgExito", "Provincia #" + id + " editada correctamente");
 
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            }
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -142,13 +148,13 @@ public class ProvinciaController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, Long id, String nombre, Long idPais) {
+    private String error(String mensaje, Model model, String id, String nombre, String idPais) {
         try {
             model.addAttribute("msgError", mensaje);
 
             ProvinciaDTO provincia = new ProvinciaDTO();
 
-            if (id != 0) {
+            if (id != "0") {
                 provincia = provinciaService.buscar(id);
             } else {
                 provincia.setNombre(nombre);

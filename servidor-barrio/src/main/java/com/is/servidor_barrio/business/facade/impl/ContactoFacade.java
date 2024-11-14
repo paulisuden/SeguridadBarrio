@@ -19,13 +19,13 @@ import com.is.servidor_barrio.business.mapper.ContactoTelefonoMapperImpl;
 
 @Service
 public class ContactoFacade
-    extends BaseFacadeImpl<Contacto, ContactoDto, ContactoCreateDto, ContactoCreateDto, Long> {
+    extends BaseFacadeImpl<Contacto, ContactoDto, ContactoCreateDto, ContactoCreateDto, String> {
 
   // Usa los mappers de cada subclase de contacto
   private BaseMapper<ContactoEmail, ContactoDto, ContactoCreateDto, ContactoCreateDto> emailMapper;
   private BaseMapper<ContactoTelefonico, ContactoDto, ContactoCreateDto, ContactoCreateDto> telefonoMapper;
 
-  public ContactoFacade(BaseService<Contacto, Long> baseService,
+  public ContactoFacade(BaseService<Contacto, String> baseService,
       BaseMapper<Contacto, ContactoDto, ContactoCreateDto, ContactoCreateDto> baseMapper) {
     super(baseService, baseMapper);
     emailMapper = new ContactoEmailMapperImpl();
@@ -47,7 +47,7 @@ public class ContactoFacade
   }
 
   @Override
-  public ContactoDto update(Long id, ContactoCreateDto createDto) throws Exception {
+  public ContactoDto update(String id, ContactoCreateDto createDto) throws Exception {
 
     // Busca el contacto
     Contacto contacto = baseService.findById(id);
@@ -66,7 +66,7 @@ public class ContactoFacade
   }
 
   @Override
-  public ContactoDto findById(Long id) throws Exception {
+  public ContactoDto findById(String id) throws Exception {
     var entity = baseService.findById(id);
     if (entity instanceof ContactoEmail)
       return emailMapper.toDTO((ContactoEmail) entity);

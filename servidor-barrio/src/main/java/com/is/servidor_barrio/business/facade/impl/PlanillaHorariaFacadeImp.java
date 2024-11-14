@@ -11,8 +11,8 @@ import com.is.servidor_barrio.business.mapper.BaseMapper;
 
 @Service
 public class PlanillaHorariaFacadeImp extends
-    BaseFacadeImpl<PlanillaHoraria, PlanillaHorariaDto, PlanillaHorariaCreateDto, PlanillaHorariaCreateDto, Long> {
-  public PlanillaHorariaFacadeImp(BaseService<PlanillaHoraria, Long> baseService,
+    BaseFacadeImpl<PlanillaHoraria, PlanillaHorariaDto, PlanillaHorariaCreateDto, PlanillaHorariaCreateDto, String> {
+  public PlanillaHorariaFacadeImp(BaseService<PlanillaHoraria, String> baseService,
       BaseMapper<PlanillaHoraria, PlanillaHorariaDto, PlanillaHorariaCreateDto, PlanillaHorariaCreateDto> baseMapper) {
     super(baseService, baseMapper);
   }

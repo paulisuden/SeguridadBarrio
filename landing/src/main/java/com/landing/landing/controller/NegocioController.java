@@ -29,7 +29,7 @@ public class NegocioController {
     @GetMapping("/{id}")
     public String unidadDeNegocio(
             Model model,
-            @PathVariable("id") Long id) {
+            @PathVariable("id") String id) {
         try {
             var negocio = negocioService.buscar(id);
             var servicios = negocio.getServicios();
@@ -41,28 +41,4 @@ public class NegocioController {
         }
         return "consultaUnidadDeNegocio.html";
     }
-
-    @GetMapping("/servicio/imagen/{id}")
-    public ResponseEntity<byte[]> fotoServicio(
-            Model model,
-            @PathVariable Long id) {
-
-        try {
-            ServicioDTO servicio = servicioService.buscar(id);
-            if (servicio.getImagen() == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-
-            byte[] imgContenido = servicio.getImagen().getContenido();
-
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-            return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
-
-        } catch (Exception ex) {
-            model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
 }

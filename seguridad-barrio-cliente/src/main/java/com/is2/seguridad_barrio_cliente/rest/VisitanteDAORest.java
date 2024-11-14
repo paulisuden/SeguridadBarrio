@@ -26,7 +26,7 @@ public class VisitanteDAORest {
         }
     }
 
-    public VisitanteDTO buscar(Long id) throws ErrorServiceException {
+    public VisitanteDTO buscar(String id) throws ErrorServiceException {
 
         try {
 
@@ -56,7 +56,7 @@ public class VisitanteDAORest {
         }
     }
 
-    public void eliminar(Long id) throws ErrorServiceException {
+    public void eliminar(String id) throws ErrorServiceException {
 
         try {
 
@@ -82,6 +82,5 @@ public class VisitanteDAORest {
             throw new ErrorServiceException("Error de Sistemas");
         }
     }
-
 
 }
