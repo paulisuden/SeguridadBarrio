@@ -1,0 +1,76 @@
+package com.is2.seguridad_barrio_cliente.controller;
+
+
+import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+
+@Controller
+public class InicioController {
+
+    @Autowired
+    private MovimientoVisitaController movimientoVisitaController;
+
+    @Autowired
+    private PlanillaHorariaController planillaHorariaController;
+
+    @Autowired
+    private EmpleadoController empleadoController;
+
+    @GetMapping("/inicio")
+    public String inicio(Model model, Authentication authentication, @RequestParam(name="error", required = false) String error) throws Exception {
+        try {
+            if (error != null) {
+                error = URLDecoder.decode(error, StandardCharsets.UTF_8);
+                model.addAttribute("mensajeError", error);
+            }
+            /*if (authentication != null) {
+
+                boolean hasAdminRole = authentication.getAuthorities().stream()
+                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+                boolean hasSuperAdminRole = authentication.getAuthorities().stream()
+                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_SUPERADMIN"));
+                boolean hasPersonalRole = authentication.getAuthorities().stream()
+                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_PERSONAL"));
+                boolean hasHabitanteRole = authentication.getAuthorities().stream()
+                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+                if (hasPersonalRole) {
+                    movimientoVisitaController.listarMovimientoVisita(model);
+                    planillaHorariaController.listarPlanillaHoraria(model);
+                    model.addAttribute("condicionEspecial", true);
+                    return "persona/listarEmpleado";
+                } else if (hasHabitanteRole) {
+                    movimientoVisitaController.listarMovimientoVisita(model);
+                    return "persona/listarEmpleado";
+                    //return "persona/habitante/listarHabitante";
+                } else {
+                    empleadoController.listarEmpleado(model);
+                    return "indexAdmin";
+                }
+            } else {
+                throw new ErrorServiceException("El usuario no se encuentra logueado");
+            }*/
+            return "inicio";
+        /*} catch (ErrorServiceException ex) {
+            model.addAttribute("mensajeError", ex.getMessage());
+            return "visita/listarMovimientoVisita";
+        }*/
+        }catch (Exception e){
+            model.addAttribute("mensajeError", e.getMessage());
+            return "visita/listarMovimientoVisita";
+        }
+    }
+
+
+    @GetMapping("/")
+    public String ini2(Model model) throws Exception {
+        return "redirect:/inicio";
+    }
+}
