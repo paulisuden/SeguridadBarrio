@@ -7,15 +7,21 @@ import org.springframework.stereotype.Service;
 
 import com.is.servidor_barrio.business.domain.entity.Persona;
 import com.is.servidor_barrio.business.repository.BaseRepository;
+import com.is.servidor_barrio.business.repository.PersonaRepository;
+
+import jakarta.transaction.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PersonaServiceImpl extends BaseServiceImpl<Persona, String> implements PersonaService {
+  
+  private final PersonaRepository personaRepository;
+
   @Autowired
-  public PersonaServiceImpl(BaseRepository<Persona, String> baseRepository) {
+  public PersonaServiceImpl(BaseRepository<Persona, String> baseRepository, PersonaRepository personaRepository) {
     super(baseRepository);
+    this.personaRepository = personaRepository;
   }
 
   @Override
@@ -40,5 +46,12 @@ public class PersonaServiceImpl extends BaseServiceImpl<Persona, String> impleme
     }
     return null; // Si no se encuentra un ContactoEmail o si ocurre una excepción
   }
+
+  @Override
+  @Transactional
+  public Persona findByUsuarioId(String id) {
+    return personaRepository.findByUsuarioId(id);
+  }
+
 
 }

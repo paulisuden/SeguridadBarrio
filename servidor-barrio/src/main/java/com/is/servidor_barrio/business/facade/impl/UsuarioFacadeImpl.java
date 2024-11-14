@@ -26,28 +26,7 @@ public class UsuarioFacadeImpl extends BaseFacadeImpl<Usuario, UsuarioDTO, Usuar
         this.baseService = baseService;
         this.baseMapper = baseMapper;
     }
-
-    /*
-    public UsuarioDTO searchByCuenta(String cuenta) throws Exception {
-        Optional<Usuario> usuario = baseService.searchByCuenta(cuenta);
-        
-        // Verifica si el usuario está presente y conviértelo a DTO, o lanza una excepción si no está
-        return usuario
-                .map(baseMapper::toDTO) // Llama a toDTO solo si el usuario está presente
-                .orElseThrow(() -> new Exception("Usuario no encontrado con la cuenta: " + cuenta));
-    }
     
-    
-    public UsuarioDTO searchByCuentaAndClave(String cuenta, String clave) throws Exception {
-        Optional<Usuario> usuario = baseService.buscarPorEmail(cuenta);
-    
-        // Verifica si el usuario existe y que la clave sea correcta
-        return usuario
-                .filter(u -> u.getClave().equals(clave)) // Filtra por clave si el usuario está presente
-                .map(baseMapper::toDTO) // Convierte a DTO si el usuario está presente y la clave coincide
-                .orElseThrow(() -> new Exception("Usuario no encontrado o clave incorrecta"));
-    }*/
-
     public UsuarioDTO crear(UsuarioCreateDTO usuarioCreateDTO) throws Exception {
         try {
             Usuario usuarioEntity = baseMapper.toEntityCreate(usuarioCreateDTO);

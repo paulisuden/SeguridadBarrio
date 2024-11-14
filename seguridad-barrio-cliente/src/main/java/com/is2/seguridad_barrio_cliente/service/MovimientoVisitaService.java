@@ -31,7 +31,7 @@ public class MovimientoVisitaService {
             movimiento.setDescripcionMovilidad(descripcionMovilidad);
             movimiento.setIdVisitante(idVisitante);
             movimiento.setIdInmueble(idInmueble);
-
+            System.out.println("ENTRO A SERVICE");
             dao.crear(movimiento);
 
         } catch (ErrorServiceException e) {
@@ -108,6 +108,15 @@ public class MovimientoVisitaService {
     public List<MovimientoVisitaDTO> listar() throws ErrorServiceException {
         try {
             return dao.listar();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ErrorServiceException("Error de sistema");
+        }
+    }
+
+    public List<MovimientoVisitaDTO> listarPorInmuebleId(String id) throws ErrorServiceException {
+        try {
+            return dao.listarPorInmuebleId(id);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ErrorServiceException("Error de sistema");
