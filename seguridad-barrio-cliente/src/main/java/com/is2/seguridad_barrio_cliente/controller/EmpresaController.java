@@ -153,7 +153,7 @@ public class EmpresaController {
 
     }
 
-    @GetMapping("/cancelarEditEmpresa")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
         return redirectList;
     }

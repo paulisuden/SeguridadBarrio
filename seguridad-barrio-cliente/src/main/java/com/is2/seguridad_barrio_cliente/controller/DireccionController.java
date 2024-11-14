@@ -45,7 +45,6 @@ public class DireccionController {
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
-
         try {
 
             direccionService.eliminar(id);
@@ -139,7 +138,7 @@ public class DireccionController {
 
     }
 
-    @GetMapping("/cancelarEditDireccion")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

@@ -4,59 +4,62 @@
 <head th:replace="~{fragments/head.html :: head_1}"></head>
 
 <body>
-<div class="container-scroller">
+    <div class="container-scroller">
 
-    <!-- Navbar -->
-    <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+        <!-- Navbar -->
+        <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
 
-    <!-- Sidebar -->
-    <div class="container-fluid page-body-wrapper">
-        <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+        <!-- Sidebar -->
+        <div class="container-fluid page-body-wrapper">
+            <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
 
-        <!-- FORMULARIO -->
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card large-form">
-                <div class="card">
-                    <div class="card-body">
+            <!-- FORMULARIO -->
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card large-form">
+                    <div class="card">
+                        <div class="card-body">
 
-                        <h5 class="card-title">Planilla Horaria</h5>
+                            <h5 class="card-title">Planilla Horaria</h5>
 
-                        <form class="forms-sample" action="/planillaHoraria/aceptarEditPlanillaHoraria" method="POST">
+                            <form class="forms-sample" action="/planillaHoraria/aceptarEditPlanillaHoraria"
+                                method="POST">
 
-                            <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                            <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
-                            <div class="form-group">
+                                <div class="form-group">
 
-                                <input type="hidden" name="id" th:value="${planillaHoraria.id != null ? planillaHoraria.id : 0}">
-                                
-                                <!-- Entrada -->
-                                <label for="entrada">Entrada</label>
-                                <input type="text" id="entrada" name="entrada" 
-                                    th:value="${planillaHoraria.entradaAsString}" 
-                                    class="form-control datetimepicker" placeholder="Selecciona la fecha y hora" required="required">
+                                    <input type="hidden" name="id"
+                                        th:value="${planillaHoraria.id != null ? planillaHoraria.id : 0}">
 
-                                <!-- Salida -->
-                                <label for="salida">Salida</label>
-                                <input type="text" id="salida" name="salida" 
-                                    th:value="${planillaHoraria.salidaAsString}"
-                                    class="form-control datetimepicker" placeholder="Selecciona la fecha y hora" required="required">
+                                    <!-- Entrada -->
+                                    <label for="entrada">Entrada</label>
+                                    <input type="text" id="entrada" name="entrada"
+                                        th:value="${planillaHoraria.entradaAsString}"
+                                        class="form-control datetimepicker" placeholder="Selecciona la fecha y hora"
+                                        required="required">
+
+                                    <!-- Salida -->
+                                    <label for="salida">Salida</label>
+                                    <input type="text" id="salida" name="salida"
+                                        th:value="${planillaHoraria.salidaAsString}" class="form-control datetimepicker"
+                                        placeholder="Selecciona la fecha y hora" required="required">
 
 
-                                
-                                <!-- Estado Asistencia -->
-                                <label for="estadoAsistencia">Estado asistencia</label>
-                                <select id="estadoAsistencia" class="form-control" name="estadoAsistencia"
+
+                                    <!-- Estado Asistencia -->
+                                    <label for="estadoAsistencia">Estado asistencia</label>
+                                    <select id="estadoAsistencia" class="form-control" name="estadoAsistencia"
                                         th:disabled="${isDisabled}">
-                                    <option th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.EstadoAsistencia).values()}"
-                                            th:value="${tipo}"
-                                            th:text="${tipo}"
+                                        <option
+                                            th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.EstadoAsistencia).values()}"
+                                            th:value="${tipo}" th:text="${tipo}"
                                             th:selected="${planillaHoraria.estadoAsistencia == tipo}">
-                                    </option>
-                                </select>
+                                        </option>
+                                    </select>
 
-                                
-                                <!-- Empleado
+
+                                    <!-- Empleado
                                 <div class="form-group">
                                     <label for="empleados">Empleado</label>
                                     <select id="empleados" class="form-control" name="idEmpleado" th:disabled="${isDisabled}">
@@ -65,47 +68,49 @@
                                 </div>
                                 -->
 
-                                <!-- Observación -->
-                                <label for="observacion">Observación</label>
-                                <textarea id="observacion" name="observacion"
-                                        th:disabled="${isDisabled}" class="form-control"
-                                        placeholder="Observación" required="required"
-                                        rows="3" th:text="${planillaHoraria.observacionAsistencia}">
+                                    <!-- Observación -->
+                                    <label for="observacion">Observación</label>
+                                    <textarea id="observacion" name="observacion" th:disabled="${isDisabled}"
+                                        class="form-control" placeholder="Observación" required="required" rows="3"
+                                        th:text="${planillaHoraria.observacionAsistencia}">
                                 </textarea>
 
-                            </div>
+                                </div>
 
-                            <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2" th:disabled="${isDisabled}">
-                                Aceptar
-                            </button>
+                                <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                    th:disabled="${isDisabled}">
+                                    Aceptar
+                                </button>
 
-                            <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
-                                Cancelar
-                            </button>
+                                <a th:href="@{/planillaHoraria/cancelar}" class="btn btn-light"
+                                    title="Cancelar la edición.">
+                                    Cancelar
+                                </a>
 
-                        </form></div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
-<!-- JS -->
-<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
-<script th:src="@{/js/off-canvas.js}"></script>
-<script th:src="@{/js/hoverable-collapse.js}"></script>
-<script th:src="@{/js/template.js}"></script>
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        flatpickr(".datetimepicker", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i", // Formato compatible con tu backend
-            time_24hr: true
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr(".datetimepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i", // Formato compatible con tu backend
+                time_24hr: true
+            });
         });
-    });
-</script>
+    </script>
 
 
 </body>

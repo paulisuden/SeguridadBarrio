@@ -140,7 +140,7 @@ public class HabitanteController {
 
   }
 
-  @GetMapping("/cancelarEditHabitante")
+  @GetMapping("/cancelar")
   public String cancelarEdit() {
 
     return redirectList;

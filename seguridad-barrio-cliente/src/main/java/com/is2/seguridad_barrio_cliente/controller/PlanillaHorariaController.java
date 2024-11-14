@@ -28,7 +28,6 @@ public class PlanillaHorariaController {
     private PlanillaHorariaService planillaHorariaService;
     // @Autowired private EmpleadoService empleadoService;
 
-
     private String viewList = "horarios/listarPlanillaHoraria.html";
     private String redirectList = "redirect:/planillaHoraria/listarPlanillaHoraria";
     private String viewEdit = "horarios/editarPlanillaHoraria.html";
@@ -49,7 +48,6 @@ public class PlanillaHorariaController {
 
     @GetMapping("/baja")
     public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
-
 
         try {
 
@@ -85,7 +83,6 @@ public class PlanillaHorariaController {
 
     @GetMapping("/consultar")
     public String consultar(@RequestParam String id, Model model) {
-
 
         try {
 
@@ -126,7 +123,6 @@ public class PlanillaHorariaController {
             @RequestParam("salida") String salidaStr, @RequestParam EstadoAsistencia estadoAsistencia,
             @RequestParam String observacion, RedirectAttributes attributes, Model model) {
 
-
         LocalDateTime entrada = null;
         LocalDateTime salida = null;
 
@@ -153,7 +149,7 @@ public class PlanillaHorariaController {
         }
     }
 
-    @GetMapping("/cancelarEditPlanillaHoraria")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
@@ -161,7 +157,6 @@ public class PlanillaHorariaController {
 
     private String error(String mensaje, Model model, String id, LocalDateTime entrada, LocalDateTime salida,
             EstadoAsistencia estadoAsistencia, String observacion) {
-
 
         try {
             model.addAttribute("msgError", mensaje);

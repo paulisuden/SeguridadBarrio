@@ -147,7 +147,7 @@ public class EmpleadoController {
 
   }
 
-  @GetMapping("/cancelarEditEmpleado")
+  @GetMapping("/cancelar")
   public String cancelarEdit() {
 
     return redirectList;

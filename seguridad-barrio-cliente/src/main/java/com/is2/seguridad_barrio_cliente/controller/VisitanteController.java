@@ -162,7 +162,7 @@ public class VisitanteController {
 
     }
 
-    @GetMapping("/cancelarEditVisitante")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
