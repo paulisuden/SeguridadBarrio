@@ -1,6 +1,7 @@
 package com.is.servidor_barrio.business.logic.service;
 
 import com.is.servidor_barrio.business.domain.entity.Base;
+import com.is.servidor_barrio.business.domain.entity.Usuario;
 import com.is.servidor_barrio.business.repository.BaseRepository;
 import jakarta.transaction.Transactional;
 

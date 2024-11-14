@@ -14,8 +14,8 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, String> impleme
 
     private final UsuarioRepository repository;
 
-    public UsuarioServiceImpl(BaseRepository<Usuario, String> baserepository, UsuarioRepository usuarioRepository) {
-        super(baserepository);
+    public UsuarioServiceImpl(BaseRepository<Usuario,String> baseRepository, UsuarioRepository usuarioRepository) {
+        super(baseRepository); 
         this.repository = usuarioRepository;
     }
 

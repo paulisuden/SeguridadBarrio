@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.*;
 import com.is.servidor_barrio.business.domain.dto.usuario.UsuarioCreateDTO;
 import com.is.servidor_barrio.business.domain.dto.usuario.UsuarioDTO;
 import com.is.servidor_barrio.business.domain.entity.Usuario;
-import com.is.servidor_barrio.business.facade.impl.UsuarioFacade;
+import com.is.servidor_barrio.business.facade.impl.UsuarioFacadeImpl;
 import com.is.servidor_barrio.business.logic.service.UsuarioServiceImpl;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/usuario")
-public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO, UsuarioCreateDTO, UsuarioCreateDTO, UsuarioFacade>{
+@RequestMapping(path = "api/usuario")
+public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO, UsuarioCreateDTO, UsuarioCreateDTO, UsuarioFacadeImpl>{
 
     @Autowired
-    protected UsuarioFacade facade;
+    protected UsuarioFacadeImpl facade;
 
     @PostMapping("/crear")
-    public ResponseEntity<?> crearUsuario (@RequestBody UsuarioDTO usuarioDto){
+    public ResponseEntity<?> crearUsuario (@RequestBody UsuarioCreateDTO usuarioDto){
         try{
-            return ResponseEntity.status(HttpStatus.OK).body(facade.);
+            return ResponseEntity.status(HttpStatus.OK).body(facade.crear(usuarioDto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\""+e.getMessage()+"\"}");
         }
@@ -31,7 +31,7 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO, U
     @GetMapping("/buscar/{nombre}")
     public ResponseEntity<?> getOne(@PathVariable String nombre) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.convertToDto(service.searchByCuenta(nombre)));
+            return ResponseEntity.status(HttpStatus.OK).body(facade.searchByCuenta(nombre));
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
@@ -40,7 +40,7 @@ public class UsuarioController extends BaseControllerImpl<Usuario, UsuarioDTO, U
     @GetMapping("/buscar/per/{idUsuario}")
     public ResponseEntity<?> getPorPersonaId(@PathVariable String idUsuario) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(service.convertToDto(service.searchByIdPersona(idUsuario)));
+            return ResponseEntity.status(HttpStatus.OK).body(facade.searchByIdPersona(idUsuario));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }

@@ -7,13 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import com.is.servidor_barrio.security.UserPrincipal;
 import com.is.servidor_barrio.business.logic.error.ErrorServiceException;
 import com.is.servidor_barrio.business.logic.service.UsuarioServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
