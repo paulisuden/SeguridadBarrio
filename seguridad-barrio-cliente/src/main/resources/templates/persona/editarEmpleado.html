@@ -63,8 +63,7 @@
                                         <select id="negocios" class="form-control" name="negociosId[]"
                                             th:disabled="${isDisabled}" multiple required>
                                             <option th:each="negocio : ${negocios}" th:value="${negocio.id}"
-                                                th:text="${negocio.nombre}"
-                                                th:selected="${empleado.negocios.contains(negocio)}">
+                                                th:text="${negocio.nombre}">
                                             </option>
                                         </select>
                                     </div>
