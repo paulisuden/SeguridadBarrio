@@ -108,7 +108,6 @@ public class EmpresaController {
             if (listaEmpresa.size() >= 1) {
                 model.addAttribute("empresa", listaEmpresa.get(0));
             } else {
-                System.out.println("Creando empresa");
                 // Se crea una empresa vacia
                 EmpresaDTO empresa = empresaService.crear(
                         "Sin nombre",

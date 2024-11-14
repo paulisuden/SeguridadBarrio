@@ -18,7 +18,6 @@ public class MovimientoVisitaDAORest {
 
     public void crear(MovimientoVisitaDTO movimiento) throws ErrorServiceException {
         try {
-            System.out.println(movimiento);
             String uri = "http://localhost:8081/api/movimientoVisita";
             restTemplate.postForEntity(uri, movimiento, MovimientoVisitaDTO.class);
         } catch (Exception ex) {
