@@ -1,8 +1,16 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
+import com.is2.seguridad_barrio_cliente.dto.InmuebleDTO;
+import com.is2.seguridad_barrio_cliente.dto.MovimientoVisitaDTO;
+import com.is2.seguridad_barrio_cliente.dto.PersonaDTO;
+import com.is2.seguridad_barrio_cliente.dto.UsuarioDTO;
 import com.is2.seguridad_barrio_cliente.dto.VisitanteDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.TipoVisita;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
+import com.is2.seguridad_barrio_cliente.service.HabitanteService;
+import com.is2.seguridad_barrio_cliente.service.InmuebleService;
+import com.is2.seguridad_barrio_cliente.service.MovimientoVisitaService;
+import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 import com.is2.seguridad_barrio_cliente.service.VisitanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/visitante")
@@ -105,14 +114,11 @@ public class VisitanteController {
             if (authentication != null) {
                 boolean hasHabitanteRole = authentication.getAuthorities().stream()
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+                List<VisitanteDTO> listaVisitante = visitanteService.listar();
+                model.addAttribute("listaVisitantes", listaVisitante);
                 if (hasHabitanteRole) {
-                    //
-
                     return "habitante/listarVisitante";
-
                 } else { // ADMIN O PERSONAL
-                    List<VisitanteDTO> listaVisitante = visitanteService.listar();
-                    model.addAttribute("listaVisitantes", listaVisitante);
                     return viewList;
                 }
             } else {
