@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="~{fragments/head.html :: head_1}"></head>
+
+<body>
+    <div class="container-scroller">
+
+        <!-- Navbar -->
+        <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+
+
+        <!-- Sidebar -->
+        <div class="container-fluid page-body-wrapper">
+            <nav th:fragment="sideBar" class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+            
+                    <!--DASHBOARD -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/inicio}">
+                            <i class="typcn typcn-arrow-left-thick menu-icon"></i>
+                            <span class="menu-title">HOME</span>
+                        </a>
+                    </li>
+
+                    <!-- VISITAS -->
+            
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#visita" aria-expanded="false" aria-controls="visita">
+                            <i class="typcn typcn-user menu-icon"></i>
+                            <span class="menu-title">Visitas</span>
+                            <i class="menu-arrow"></i>
+            
+                        </a>
+                        <div class="collapse" id="visita">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/visitante/listarVisitante}">Visitas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/movimientoVisita/listarMovimientoVisita}">Movimientos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+
+            <div class="content-wrapper">
+
+                <!-- Main Content -->
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Movimientos</h4>
+                        <a class="btn btn-success btn-sm btn-icon-text"
+                            th:href="@{/movimientoVisita/altaMovimientoVisita}" role="button">
+                            <i class="typcn typcn-plus btn-icon-append"></i>
+                        </a>
+                        <hr>
+                        <div th:if="${msgExito != null}" class="alert alert-success" th:text="${msgExito}" role="alert">
+                        </div>
+                        <div th:if="${msgError != null}" class="alert alert-danger" th:text="${msgError}" role="alert">
+                        </div>
+
+                        <!-- Prepara el popup de delete y le pasa como argumentos el metodo POST y el mensaje -->
+                        <div
+                            th:replace="~{fragments/popup.html :: popupDelete('/movimientoVisita/baja', '¿Está seguro de eliminar este movimiento?')}">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="table-responsive pt-3">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Fecha</th>
+                                                    <th>Estado</th>
+                                                    <th>Tipo de Movilidad</th>
+                                                    <th>Descripción</th>
+                                                    <th>Visitante</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr th:each="movimiento, iterStat : ${movimientos}">
+                                                    <td th:text="${iterStat.count}"></td>
+                                                    <td th:text="${#dates.format(movimiento.fechasMovimiento, 'dd/MM/yyyy')}"></td>
+                                                    <td th:text="${movimiento.estadoMovimiento}"></td>
+                                                    <td th:text="${movimiento.tipoMovilidad}"></td>
+                                                    <td th:text="${movimiento.descripcionMovilidad}"></td>
+                                                    <td th:text="${movimiento.visitante.nombre + ' ' + movimiento.visitante.apellido}"></td>
+                                                </tr>
+                                                <tr th:if="${movimientos.size() == 0}">
+                                                    <td colspan="6" class="text-center">No hay movimientos realizados.</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
+
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+
+</body>
+
+</html>
