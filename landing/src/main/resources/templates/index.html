@@ -106,13 +106,7 @@
       <div class="row justify-content-between">
         <div class="col-lg-5 mb-5">
           <h2 class="line-bottom mb-4" data-aos="fade-up" data-aos-delay="0">Sobre nosotros</h2>
-          <p data-aos="fade-up" data-aos-delay="100">En un lugar tranquilo, alejado del bullicio de la ciudad y
-            protegido por la solidez de
-            nuestras experiencias, nacen nuestras soluciones. En Stop, nos dedicamos a
-            garantizar la seguridad y tranquilidad de tu barrio, creando un entorno donde cada vecino se
-            siente protegido y respaldado. Lejos de las preocupaciones diarias, nos enfocamos en
-            mantener tus calles seguras, cuidando lo que realmente importa: tu hogar, tu familia, y tu
-            comunidad.</p>
+          <p data-aos="fade-up" data-aos-delay="100" th:text="${empresa.descripcion}"></p>
           <ul class="list-unstyled ul-check mb-5 primary" data-aos="fade-up" data-aos-delay="200">
             <li>Gestión de entrada y salida</li>
             <li>Registro de visitas</li>
@@ -121,8 +115,9 @@
 
           <div class="row count-numbers mb-5">
             <div class="col-4 col-lg-4" data-aos="fade-up" data-aos-delay="0">
-              <span class="counter d-block"><span data-number="3">0</span><span>+</span></span>
-              <span class="caption-2">Cantidad de clientes</span>
+              <span class="counter d-block">
+                <span th:text="${cantidadNegocios}">0</span> </span>
+              <span class="caption-2">Clientes</span>
             </div>
           </div>
 
@@ -130,7 +125,8 @@
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
           <div class="bg-1"></div>
 
-          <img src="/images/StopLogo.jpeg" alt="Image" class="img-fluid">
+
+          <img th:src="${'/imagen/' + empresa.imagen.id}" alt="Image" class="img-fluid">
         </div>
       </div>
     </div>

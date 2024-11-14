@@ -15,26 +15,6 @@ public class NegocioService {
   @Autowired
   private NegocioDAORest dao;
 
-  public void crear(String nombre, String idDireccion, List<String> idServicios) throws ErrorServiceException {
-
-    try {
-
-      NegocioDTO negocio = new NegocioDTO();
-      negocio.setNombre(nombre);
-      negocio.setServiciosId(idServicios);
-      negocio.setDireccionId(idDireccion);
-
-      dao.crear(negocio);
-
-    } catch (ErrorServiceException e) {
-      throw e;
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
-    }
-  }
-
   public NegocioDTO buscar(String id) throws ErrorServiceException {
 
     try {
@@ -53,43 +33,6 @@ public class NegocioService {
       ex.printStackTrace();
       throw new ErrorServiceException("Error de sistema");
     }
-  }
-
-  public void modificar(String id, String nombre, String idDireccion, List<String> idServicios)
-      throws ErrorServiceException {
-
-    try {
-
-      NegocioDTO negocio = new NegocioDTO();
-      negocio.setId(id);
-      negocio.setNombre(nombre);
-      negocio.setServiciosId(idServicios);
-      negocio.setDireccionId(idDireccion);
-
-      dao.actualizar(negocio);
-
-    } catch (ErrorServiceException e) {
-      throw e;
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw new ErrorServiceException("Error de Sistemas");
-    }
-  }
-
-  public void eliminar(String id) throws ErrorServiceException {
-
-    try {
-
-      dao.eliminar(id);
-
-    } catch (ErrorServiceException ex) {
-      throw ex;
-
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      throw new ErrorServiceException("Error de sistema");
-    }
-
   }
 
   public List<NegocioDTO> listar() throws ErrorServiceException {
