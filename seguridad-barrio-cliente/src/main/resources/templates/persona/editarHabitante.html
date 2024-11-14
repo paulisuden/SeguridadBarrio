@@ -12,64 +12,68 @@
         <!-- Sidebar -->
         <div class="container-fluid page-body-wrapper">
             <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+            <div class="content-wrapper">
 
-            <!-- FORMULARIO -->
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card large-form">
-                    <div class="card">
-                        <div class="card-body">
+                <!-- FORMULARIO -->
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card large-form">
+                        <div class="card">
+                            <div class="card-body">
 
-                            <h5 class="card-title">Habitante</h5>
+                                <h5 class="card-title">Habitante</h5>
 
-                            <form class="forms-sample" action="/habitante/aceptarEditHabitante" method="POST">
+                                <form class="forms-sample" action="/habitante/aceptarEditHabitante" method="POST">
 
-                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
-
-                                <div class="form-group">
-
-                                    <input type="hidden" name="id"
-                                        th:value="${habitante.id != null ? habitante.id : '0'}">
-
-
-
-
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" th:value="${habitante.nombre}"
-                                        th:disabled="${isDisabled}" class="form-control"
-                                        placeholder="Escriba el nombre de la habitante" required="required">
-
-                                    <label for="nombre">Apellido</label>
-                                    <input type="text" id="apellido" name="apellido" th:value="${habitante.apellido}"
-                                        th:disabled="${isDisabled}" class="form-control"
-                                        placeholder="Escriba el apellido de la habitante" required="required">
-
-
+                                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
                                     <div class="form-group">
-                                        <label for="inmuebles">Inmueble</label>
-                                        <select id="inmuebles" class="form-control" name="inmuebleId"
-                                            th:disabled="${isDisabled}">
-                                            <option th:each="inmueble : ${inmuebles}" th:value="${inmueble.id}"
-                                                th:text="${inmueble.manzana + ' ' + inmueble.numeracion + ' ' + inmueble.unidadDeNegocio.nombre}">
-                                            </option>
-                                        </select>
+
+                                        <input type="hidden" name="id"
+                                            th:value="${habitante.id != null ? habitante.id : '0'}">
+
+
+
+
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" id="nombre" name="nombre" th:value="${habitante.nombre}"
+                                            th:disabled="${isDisabled}" class="form-control"
+                                            placeholder="Escriba el nombre de la habitante" required="required">
+
+                                        <label for="nombre">Apellido</label>
+                                        <input type="text" id="apellido" name="apellido"
+                                            th:value="${habitante.apellido}" th:disabled="${isDisabled}"
+                                            class="form-control" placeholder="Escriba el apellido de la habitante"
+                                            required="required">
+
+
+
+                                        <div class="form-group">
+                                            <label for="inmuebles">Inmueble</label>
+                                            <select id="inmuebles" class="form-control" name="inmuebleId"
+                                                th:disabled="${isDisabled}">
+                                                <option th:each="inmueble : ${inmuebles}" th:value="${inmueble.id}"
+                                                    th:text="${inmueble.manzana + ' ' + inmueble.numeracion + ' ' + inmueble.unidadDeNegocio.nombre}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+
+
                                     </div>
 
+                                    <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                        th:disabled="${isDisabled}">
+                                        Aceptar
+                                    </button>
 
+                                    <a th:href="@{/habitante/cancelar}" class="btn btn-light"
+                                        title="Cancelar la edición.">
+                                        Cancelar
+                                    </a>
 
-                                </div>
-
-                                <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
-                                    th:disabled="${isDisabled}">
-                                    Aceptar
-                                </button>
-
-                                <a th:href="@{/habitante/cancelar}" class="btn btn-light" title="Cancelar la edición.">
-                                    Cancelar
-                                </a>
-
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
