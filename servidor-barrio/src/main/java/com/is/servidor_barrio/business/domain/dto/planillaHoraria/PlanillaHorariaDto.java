@@ -3,6 +3,7 @@ package com.is.servidor_barrio.business.domain.dto.planillaHoraria;
 import java.time.LocalDateTime;
 
 import com.is.servidor_barrio.business.domain.dto.BaseDto;
+//import com.is.servidor_barrio.business.domain.dto.empleado.EmpleadoDto;
 import com.is.servidor_barrio.business.domain.enumeration.EstadoAsistencia;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +20,6 @@ public class PlanillaHorariaDto extends BaseDto {
   private LocalDateTime salida;
   private EstadoAsistencia estadoAsistencia;
   private String observacionAsistencia;
-  // private EmpleadoDto empleados;
-  // private Long idEmpleado;
+  //private EmpleadoDto empleado;
+  private Long idEmpleado;
 }

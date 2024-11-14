@@ -45,4 +45,7 @@ public class InmuebleFacadeImp
     return baseMapper.toDTO(updatedEntity);
   }
 
+
+
+
 }

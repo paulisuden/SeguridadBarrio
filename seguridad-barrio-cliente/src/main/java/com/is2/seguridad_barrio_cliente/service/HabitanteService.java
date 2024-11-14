@@ -102,4 +102,13 @@ public class HabitanteService {
       throw new ErrorServiceException("Error de sistema");
     }
   }
+
+  public PersonaDTO buscarPorUsuarioId(String id) throws ErrorServiceException {
+    try {
+      return dao.buscarPorUsuarioId(id);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      throw new ErrorServiceException("Error de sistema");
+    }
+  }
 }

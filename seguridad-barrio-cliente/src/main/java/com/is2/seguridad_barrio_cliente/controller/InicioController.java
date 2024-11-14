@@ -31,37 +31,24 @@ public class InicioController {
                 error = URLDecoder.decode(error, StandardCharsets.UTF_8);
                 model.addAttribute("mensajeError", error);
             }
-            /*if (authentication != null) {
+            if (authentication != null) {
 
                 boolean hasAdminRole = authentication.getAuthorities().stream()
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
-                boolean hasSuperAdminRole = authentication.getAuthorities().stream()
-                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_SUPERADMIN"));
                 boolean hasPersonalRole = authentication.getAuthorities().stream()
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_PERSONAL"));
                 boolean hasHabitanteRole = authentication.getAuthorities().stream()
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
                 if (hasPersonalRole) {
-                    movimientoVisitaController.listarMovimientoVisita(model);
-                    planillaHorariaController.listarPlanillaHoraria(model);
-                    model.addAttribute("condicionEspecial", true);
-                    return "persona/listarEmpleado";
+                    return "inicio";
                 } else if (hasHabitanteRole) {
-                    movimientoVisitaController.listarMovimientoVisita(model);
-                    return "persona/listarEmpleado";
-                    //return "persona/habitante/listarHabitante";
+                    return "habitante/inicio";
                 } else {
-                    empleadoController.listarEmpleado(model);
-                    return "indexAdmin";
+                    return "inicio";
                 }
             } else {
                 throw new ErrorServiceException("El usuario no se encuentra logueado");
-            }*/
-            return "inicio";
-        /*} catch (ErrorServiceException ex) {
-            model.addAttribute("mensajeError", ex.getMessage());
-            return "visita/listarMovimientoVisita";
-        }*/
+            }
         }catch (Exception e){
             model.addAttribute("mensajeError", e.getMessage());
             return "visita/listarMovimientoVisita";

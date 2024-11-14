@@ -9,10 +9,10 @@ import com.is.servidor_barrio.business.domain.dto.inmueble.InmuebleDto;
 import com.is.servidor_barrio.business.domain.entity.Inmueble;
 import com.is.servidor_barrio.business.facade.impl.InmuebleFacadeImp;
 
+
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/inmueble")
 public class InmuebleController
     extends BaseControllerImpl<Inmueble, InmuebleDto, InmuebleCreateDto, InmuebleCreateDto, InmuebleFacadeImp> {
-
 }

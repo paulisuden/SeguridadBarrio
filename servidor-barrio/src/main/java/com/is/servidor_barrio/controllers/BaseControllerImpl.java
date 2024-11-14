@@ -52,7 +52,7 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, 
   @PostMapping("")
   public ResponseEntity<?> save(@RequestBody DC dto) {
     try {
-      System.out.println(dto.getClass());
+      System.out.println("ENTRO A CONTOLLER SERVIDOR " + dto.getClass());
       return ResponseEntity.status(HttpStatus.OK).body(facade.save(dto));
     } catch (Exception e) {
       // formato de respuesta json

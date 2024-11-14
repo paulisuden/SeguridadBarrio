@@ -84,4 +84,24 @@ public class MovimientoVisitaDAORest {
         }
     }
 
+    public List<MovimientoVisitaDTO> listarPorInmuebleId(String id) throws ErrorServiceException {
+        try {
+            String uri = "http://localhost:8081/api/movimientoVisita/listarPorInmueble/" + id;
+
+            ResponseEntity<MovimientoVisitaDTO[]> response = restTemplate.getForEntity(uri,MovimientoVisitaDTO[].class);
+
+            MovimientoVisitaDTO[] movimientos = response.getBody();
+
+            List<MovimientoVisitaDTO> listaMovimientos = Arrays.asList(movimientos);
+
+            return listaMovimientos;
+
+        } catch (Exception ex) {
+
+            ex.printStackTrace();
+            
+            throw new ErrorServiceException("Error de Sistemas");
+        }
+    }
+
 }

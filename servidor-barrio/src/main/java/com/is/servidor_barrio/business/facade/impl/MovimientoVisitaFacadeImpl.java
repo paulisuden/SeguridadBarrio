@@ -1,5 +1,8 @@
 package com.is.servidor_barrio.business.facade.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.VisitanteServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 import com.is.servidor_barrio.business.logic.service.InmuebleServiceImpl;
+import com.is.servidor_barrio.business.logic.service.MovimientoVisitaServiceImpl;
 
 @Service
 public class MovimientoVisitaFacadeImpl extends
@@ -20,6 +24,9 @@ public class MovimientoVisitaFacadeImpl extends
     private VisitanteServiceImpl visitanteServiceImpl;
     @Autowired
     private InmuebleServiceImpl inmuebleServiceImpl;
+
+    @Autowired
+    private MovimientoVisitaServiceImpl movimientoVisitaServiceImpl;
 
     public MovimientoVisitaFacadeImpl(BaseService<MovimientoVisita, String> baseService,
             BaseMapper<MovimientoVisita, MovimientoVisitaDTO, MovimientoVisitaCreateDTO, MovimientoVisitaCreateDTO> baseMapper) {
@@ -59,6 +66,14 @@ public class MovimientoVisitaFacadeImpl extends
 
         var updatedEntity = baseService.update(id, movimientoVisitaEntity);
         return baseMapper.toDTO(updatedEntity);
+    }
+
+    public List<MovimientoVisitaDTO> listarPorInmuebleId(String id) throws Exception {
+    var entities = movimientoVisitaServiceImpl.listarPorInmuebleId(id);
+    return entities
+        .stream()
+        .map(baseMapper::toDTO)
+        .collect(Collectors.toList());
     }
 
 }

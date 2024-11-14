@@ -31,8 +31,8 @@ public class UsuarioFacadeImpl extends BaseFacadeImpl<Usuario, UsuarioDTO, Usuar
         this.baseMapper = baseMapper;
     }
 
-    @Override
     public UsuarioDTO save(UsuarioCreateDTO usuarioCreateDTO) throws Exception {
+
         try {
             Usuario usuarioEntity = baseMapper.toEntityCreate(usuarioCreateDTO);
 
