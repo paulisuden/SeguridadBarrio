@@ -31,6 +31,7 @@ public class UnidadDeNegocioFacadeImp extends
 
   @Autowired
   private ImagenServiceImpl imagenService;
+
   public UnidadDeNegocioFacadeImp(BaseService<UnidadDeNegocio, String> baseService,
       BaseMapper<UnidadDeNegocio, UnidadDeNegocioDto, UnidadDeNegocioCreateDto, UnidadDeNegocioCreateDto> baseMapper) {
     super(baseService, baseMapper);
@@ -71,6 +72,9 @@ public class UnidadDeNegocioFacadeImp extends
       negocioEntity.setDireccion(direccionEntity);
     }
 
+    for (String idService : unidadDeNegocioCreateDto.getServiciosId())
+      System.out.println("Buscando servicio de ID: " + idService);
+
     // Update Servicios list based on serviciosId in the DTO
     List<Servicio> servicios = unidadDeNegocioCreateDto.getServiciosId().stream()
         .map(idService -> {
@@ -84,7 +88,8 @@ public class UnidadDeNegocioFacadeImp extends
         .filter(Objects::nonNull) // Remove nulls from the list
         .collect(Collectors.toList());
     negocioEntity.setServicios(servicios);
-
+    Imagen imagen = imagenService.findById(unidadDeNegocioCreateDto.getImagenId());
+    negocioEntity.setImagen(imagen);
     var updatedEntity = baseService.update(id, negocioEntity);
     return baseMapper.toDTO(updatedEntity);
   }

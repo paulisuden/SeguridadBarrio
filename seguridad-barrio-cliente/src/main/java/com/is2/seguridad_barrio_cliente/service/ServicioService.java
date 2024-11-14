@@ -26,7 +26,7 @@ public class ServicioService {
 
       ServicioDTO servicio = new ServicioDTO();
       servicio.setNombre(nombre);
-      servicio.setImagenId("0l");
+      servicio.setImagenId(null);
 
       if (archivoImagen != null && archivoImagen.getSize() > 0) {
         ImagenDTO img = imagenService.crear(archivoImagen);
@@ -74,20 +74,10 @@ public class ServicioService {
       servicio.setNombre(nombre);
 
       if (archivoImagen != null && archivoImagen.getSize() > 0) {
-
-        ImagenDTO img = imagenService.crear(archivoImagen);
-
-        if (img != null) {
-
-          // Elimina las imagen anterior
-          if (servicio.getImagen() != null)
-            imagenService.eliminar(servicio.getImagen().getId());
-
-          servicio.setImagen(img);
-          servicio.setImagenId(img.getId());
-        }
-
+        imagenService.modificar(servicio.getImagen().getId(), archivoImagen);
       }
+      servicio.setImagenId(servicio.getImagen().getId());
+
       dao.actualizar(servicio);
 
     } catch (ErrorServiceException e) {

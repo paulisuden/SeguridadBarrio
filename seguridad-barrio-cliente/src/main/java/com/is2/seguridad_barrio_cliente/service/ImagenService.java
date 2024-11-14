@@ -56,10 +56,10 @@ public class ImagenService {
         try {
             ImagenDTO imagen = new ImagenDTO();
             imagen.setId(id);
-            imagen.setMime(archivo.getContentType());
             imagen.setName(archivo.getOriginalFilename());
             imagen.setContenido(archivo.getBytes());
-
+            imagen.setMime(archivo.getContentType());
+            System.out.println(archivo.getBytes().length);
             dao.actualizar(imagen);
 
         } catch (ErrorServiceException e) {
