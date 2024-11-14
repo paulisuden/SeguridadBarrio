@@ -8,6 +8,22 @@
                 <span class="menu-title">HOME</span>
             </a>
         </li>
+        <!--EMPRESA -->
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#empresa" aria-expanded="false" aria-controls="empresa">
+                <i class="typcn typcn-location menu-icon"></i>
+                <span class="menu-title">Empresa</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="empresa">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/empresa/listarEmpresa}">Empresa</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
 
         <!--DIRECCION -->
 
@@ -117,7 +133,8 @@
 
         <!-- PLANILLA HORARIA -->
         <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#planillas" aria-expanded="false" aria-controls="planillas">
+            <a class="nav-link" data-toggle="collapse" href="#planillas" aria-expanded="false"
+                aria-controls="planillas">
                 <i class="typcn typcn-time menu-icon"></i>
                 <span class="menu-title">Horarios</span>
             </a>
@@ -129,7 +146,7 @@
                 </ul>
             </div>
         </li>
-        
+
 
     </ul>
 </nav>

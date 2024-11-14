@@ -16,6 +16,12 @@ import lombok.Setter;
 public class Empresa extends Base {
 
     private String nombre;
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //la direccion es unica para la empresa
+
+    private String descripcion;
+
+    @OneToOne
+    private Imagen imagen;
+
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }) // la direccion es unica para la empresa
     private Direccion direccion;
 }
