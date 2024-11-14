@@ -34,7 +34,7 @@ public class SeguridadWeb{
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/css/**", "/js/**", "/assets/**", "/login").permitAll()
                         //.requestMatchers("/").hasAnyRole("")
-                        //.requestMatchers("/movimientoVisita/**", "/visitante/**").hasAnyRole("HABITANTE", "ADMIN", "PERSONAL")
+                        .requestMatchers("/movimientoVisita/**", "/visitante/**", "/inicio/**").hasAnyRole("HABITANTE", "ADMIN", "PERSONAL")
                         .anyRequest().authenticated())
 
                 /*.authorizeHttpRequests((authz) -> authz
