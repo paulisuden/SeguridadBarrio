@@ -105,7 +105,19 @@ public class EmpresaController {
     public String listarEmpresa(Model model) {
         try {
             List<EmpresaDTO> listaEmpresa = empresaService.listar();
-            model.addAttribute("listaEmpresa", listaEmpresa);
+            if (listaEmpresa.size() >= 1) {
+                model.addAttribute("empresa", listaEmpresa.get(0));
+            } else {
+                System.out.println("Creando empresa");
+                // Se crea una empresa vacia
+                EmpresaDTO empresa = empresaService.crear(
+                        "Sin nombre",
+                        "Sin descipcion",
+                        null,
+                        null);
+                model.addAttribute("empresa", empresa);
+            }
+
         } catch (ErrorServiceException e) {
             model.addAttribute("msgError", e.getMessage());
         } catch (Exception e) {
@@ -116,7 +128,7 @@ public class EmpresaController {
 
     @PostMapping("/aceptarEditEmpresa")
     public String aceptarEdit(
-            MultipartFile archivo,
+            @RequestParam MultipartFile archivo,
             @RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam String nombre,
             @RequestParam String descripcion,

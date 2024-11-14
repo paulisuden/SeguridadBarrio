@@ -66,14 +66,16 @@ public class EmpresaService {
             MultipartFile archivoImagen) throws ErrorServiceException {
 
         try {
-
             EmpresaDTO empresa = dao.buscar(id);
             empresa.setNombre(nombre);
             empresa.setDescripcion(descripcion);
             empresa.setDireccionId(direccionId);
-
             if (archivoImagen != null && archivoImagen.getSize() > 0) {
-                imagenService.modificar(empresa.getImagen().getId(), archivoImagen);
+                if (empresa.getImagen() == null) {
+                    ImagenDTO imagen = imagenService.crear(archivoImagen);
+                    empresa.setImagen(imagen);
+                } else
+                    imagenService.modificar(empresa.getImagen().getId(), archivoImagen);
             }
             empresa.setImagenId(empresa.getImagen().getId());
             dao.actualizar(empresa);

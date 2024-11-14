@@ -31,28 +31,45 @@ public class EmpresaFacadeImpl extends
     @Override
     public EmpresaDto save(EmpresaCreateDto empresaCreateDto) throws Exception {
         var empresaEntity = baseMapper.toEntityCreate(empresaCreateDto);
-        var direccionEntity = direccionService.findById(empresaCreateDto.getDireccionId());
-        empresaEntity.setDireccion(direccionEntity);
-        Imagen imagen = imagenService.findById(empresaCreateDto.getImagenId());
-        empresaEntity.setImagen(imagen);
+
+        if (empresaCreateDto.getDireccionId() != null) {
+            var direccionEntity = direccionService.findById(empresaCreateDto.getDireccionId());
+            empresaEntity.setDireccion(direccionEntity);
+        }
+
+        if (empresaCreateDto.getImagenId() != null) {
+            Imagen imagen = imagenService.findById(empresaCreateDto.getImagenId());
+            empresaEntity.setImagen(imagen);
+        }
         var entityCreated = baseService.save(empresaEntity);
         return baseMapper.toDTO(entityCreated);
     }
 
     @Override
     public EmpresaDto update(String id, EmpresaCreateDto empresaCreateDto) throws Exception {
+
+        System.out.println("Actualizando empresa");
         var empresaEntity = baseService.findById(id);
         baseMapper.toUpdate(empresaEntity, empresaCreateDto);
 
+        System.out.println("Direcion");
+
         // Update Direccion if it has changed
-        if (!empresaEntity.getDireccion().getId().equals(empresaCreateDto.getDireccionId())) {
+        if (empresaEntity.getDireccion() == null
+                || !empresaEntity.getDireccion().getId().equals(empresaCreateDto.getDireccionId())) {
             var direccionEntity = direccionService.findById(empresaCreateDto.getDireccionId());
             empresaEntity.setDireccion(direccionEntity);
         }
 
+        System.out.println("Imagen");
         Imagen imagen = imagenService.findById(empresaCreateDto.getImagenId());
         empresaEntity.setImagen(imagen);
+
+        System.out.println("Update");
+
         var updatedEntity = baseService.update(id, empresaEntity);
+        System.out.println("Fin");
+
         return baseMapper.toDTO(updatedEntity);
     }
 
