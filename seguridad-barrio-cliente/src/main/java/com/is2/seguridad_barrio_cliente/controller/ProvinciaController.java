@@ -139,7 +139,7 @@ public class ProvinciaController {
 
     }
 
-    @GetMapping("/cancelarEditProvincia")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

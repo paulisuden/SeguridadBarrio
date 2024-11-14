@@ -139,7 +139,7 @@ public class NegocioController {
     }
   }
 
-  @GetMapping("/cancelarEditNegocio")
+  @GetMapping("/cancelar")
   public String cancelarEdit() {
     return redirectList;
   }

@@ -1,10 +1,8 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
-//import com.is2.seguridad_barrio_cliente.dto.EmpleadoDTO;
 import com.is2.seguridad_barrio_cliente.dto.PlanillaHorariaDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.EstadoAsistencia;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
-//import com.is2.seguridad_barrio_cliente.service.EmpleadoService;
 import com.is2.seguridad_barrio_cliente.service.PlanillaHorariaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,7 +24,6 @@ public class PlanillaHorariaController {
     @Autowired
     private PlanillaHorariaService planillaHorariaService;
     // @Autowired private EmpleadoService empleadoService;
-
 
     private String viewList = "horarios/listarPlanillaHoraria.html";
     private String redirectList = "redirect:/planillaHoraria/listarPlanillaHoraria";
@@ -47,14 +43,13 @@ public class PlanillaHorariaController {
         return viewEdit;
     }
 
-    @GetMapping("/baja")
-    public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
-
+    @PostMapping("/baja")
+    public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
         try {
 
             planillaHorariaService.eliminar(id);
-            attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+            redirectAttributes.addFlashAttribute("msgExito", "Horario #" + id + " eliminado correctamente.");
             return redirectList;
 
         } catch (ErrorServiceException e) {
@@ -85,7 +80,6 @@ public class PlanillaHorariaController {
 
     @GetMapping("/consultar")
     public String consultar(@RequestParam String id, Model model) {
-
 
         try {
 
@@ -126,7 +120,6 @@ public class PlanillaHorariaController {
             @RequestParam("salida") String salidaStr, @RequestParam EstadoAsistencia estadoAsistencia,
             @RequestParam String observacion, RedirectAttributes attributes, Model model) {
 
-
         LocalDateTime entrada = null;
         LocalDateTime salida = null;
 
@@ -153,7 +146,7 @@ public class PlanillaHorariaController {
         }
     }
 
-    @GetMapping("/cancelarEditPlanillaHoraria")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
@@ -161,7 +154,6 @@ public class PlanillaHorariaController {
 
     private String error(String mensaje, Model model, String id, LocalDateTime entrada, LocalDateTime salida,
             EstadoAsistencia estadoAsistencia, String observacion) {
-
 
         try {
             model.addAttribute("msgError", mensaje);

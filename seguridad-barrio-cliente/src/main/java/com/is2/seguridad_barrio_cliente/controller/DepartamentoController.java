@@ -60,7 +60,6 @@ public class DepartamentoController {
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
-
         try {
 
             departamentoService.eliminar(id);
@@ -154,7 +153,7 @@ public class DepartamentoController {
 
     }
 
-    @GetMapping("/cancelarEditDepartamento")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

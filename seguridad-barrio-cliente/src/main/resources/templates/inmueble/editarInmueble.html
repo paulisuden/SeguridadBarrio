@@ -12,68 +12,70 @@
         <!-- Sidebar -->
         <div class="container-fluid page-body-wrapper">
             <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+            <div class="content-wrapper">
 
-            <!-- FORMULARIO -->
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card large-form">
-                    <div class="card">
-                        <div class="card-body">
+                <!-- FORMULARIO -->
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card large-form">
+                        <div class="card">
+                            <div class="card-body">
 
-                            <h5 class="card-title">Inmueble</h5>
+                                <h5 class="card-title">Inmueble</h5>
 
-                            <form class="forms-sample" action="/inmueble/aceptarEditInmueble" method="POST">
+                                <form class="forms-sample" action="/inmueble/aceptarEditInmueble" method="POST">
 
-                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
-
-                                <div class="form-group">
-                                    <!-- Campo oculto para ID -->
-                                    <input type="hidden" name="id" th:value="${inmueble.id != null ? inmueble.id : 0}">
-
-                                    <!-- Calle -->
-                                    <label for="calle">Calle</label>
-                                    <input type="text" id="calle" name="calle" th:value="${inmueble.calle}"
-                                        th:disabled="${isDisabled}" class="form-control" placeholder="Calle"
-                                        required="required">
-
-                                    <!-- Manzana -->
-                                    <label for="manzana">Manzana</label>
-                                    <input type="text" id="manzana" name="manzana" th:value="${inmueble.manzana}"
-                                        th:disabled="${isDisabled}" class="form-control" placeholder="Manzana"
-                                        required="required">
-
-
-                                    <!-- Numeracion -->
-                                    <label for="numeracion">Numeracion</label>
-                                    <input type="text" id="numeracion" name="numeracion"
-                                        th:value="${inmueble.numeracion}" th:disabled="${isDisabled}"
-                                        class="form-control" placeholder="Numeracion" required="required">
-
-                                    <!-- Unidad De negocio-->
+                                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
                                     <div class="form-group">
-                                        <label for="negocios">Unidad de negocio</label>
-                                        <select id="negocios" class="form-control" name="idNegocio"
-                                            th:disabled="${isDisabled}">
-                                            <option th:each="negocio : ${unidadesDeNegocio}" th:value="${negocio.id}"
-                                                th:text="${negocio.nombre}">
-                                            </option>
-                                        </select>
+                                        <!-- Campo oculto para ID -->
+                                        <input type="hidden" name="id"
+                                            th:value="${inmueble.id != null ? inmueble.id : 0}">
+
+                                        <!-- Calle -->
+                                        <label for="calle">Calle</label>
+                                        <input type="text" id="calle" name="calle" th:value="${inmueble.calle}"
+                                            th:disabled="${isDisabled}" class="form-control" placeholder="Calle"
+                                            required="required">
+
+                                        <!-- Manzana -->
+                                        <label for="manzana">Manzana</label>
+                                        <input type="text" id="manzana" name="manzana" th:value="${inmueble.manzana}"
+                                            th:disabled="${isDisabled}" class="form-control" placeholder="Manzana"
+                                            required="required">
+
+
+                                        <!-- Numeracion -->
+                                        <label for="numeracion">Numeracion</label>
+                                        <input type="text" id="numeracion" name="numeracion"
+                                            th:value="${inmueble.numeracion}" th:disabled="${isDisabled}"
+                                            class="form-control" placeholder="Numeracion" required="required">
+
+                                        <!-- Unidad De negocio-->
+
+                                        <div class="form-group">
+                                            <label for="negocios">Unidad de negocio</label>
+                                            <select id="negocios" class="form-control" name="idNegocio"
+                                                th:disabled="${isDisabled}">
+                                                <option th:each="negocio : ${unidadesDeNegocio}"
+                                                    th:value="${negocio.id}" th:text="${negocio.nombre}">
+                                                </option>
+                                            </select>
+                                        </div>
+
                                     </div>
 
-                                </div>
+                                    <button type="submit" title="Guardar" class="btn btn-primary mr-2"
+                                        th:disabled="${isDisabled}">
+                                        Aceptar
+                                    </button>
 
-                                <button type="submit" title="Guardar" class="btn btn-primary mr-2"
-                                    th:disabled="${isDisabled}">
-                                    Aceptar
-                                </button>
-
-                                <button type="submit" title="Cancelar" class="btn btn-light" th:disabled="${isDisabled}"
-                                    th:href="@{/inmueble/cancelarEditInmueble}">
-                                    Cancelar
-                                </button>
-
-                            </form>
+                                    <a th:href="@{/inmueble/cancelar}" class="btn btn-light"
+                                        title="Cancelar la edición.">
+                                        Cancelar
+                                    </a>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

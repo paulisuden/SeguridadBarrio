@@ -44,13 +44,13 @@ public class HabitanteController {
     return viewEdit;
   }
 
-  @GetMapping("/baja")
-  public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
+  @PostMapping("/baja")
+  public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
     try {
 
       habitanteService.eliminar(id);
-      attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+      redirectAttributes.addFlashAttribute("msgExito", "Habitante #" + id + " eliminado correctamente.");
       return redirectList;
 
     } catch (ErrorServiceException e) {
@@ -140,7 +140,7 @@ public class HabitanteController {
 
   }
 
-  @GetMapping("/cancelarEditHabitante")
+  @GetMapping("/cancelar")
   public String cancelarEdit() {
 
     return redirectList;
