@@ -8,6 +8,6 @@ import com.is.servidor_barrio.business.domain.entity.Contacto;
 
 @Mapper(componentModel = "spring")
 public interface ContactoMapper
-                extends BaseMapper<Contacto, ContactoDto, ContactoCreateDto, ContactoCreateDto> {
+        extends BaseMapper<Contacto, ContactoDto, ContactoCreateDto, ContactoCreateDto> {
 
 }

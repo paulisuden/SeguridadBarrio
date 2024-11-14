@@ -10,15 +10,15 @@ import com.is.servidor_barrio.business.domain.entity.Direccion;
 
 @Mapper(componentModel = "spring")
 public interface DireccionMapper extends BaseMapper<Direccion, DireccionDto, DireccionCreateDto, DireccionCreateDto> {
-  @Override
-  @Mapping(target = "localidad", ignore = true)
-  Direccion toUpdate(@MappingTarget Direccion entity, DireccionCreateDto dto);
+  // @Override
+  // @Mapping(target = "localidad", ignore = true)
+  // Direccion toUpdate(@MappingTarget Direccion entity, DireccionCreateDto dto);
 
-  @Override
-  @Mapping(target = "localidad", ignore = true)
-  Direccion toEntityCreate(DireccionCreateDto dto);
+  // @Override
+  // @Mapping(target = "localidad", ignore = true)
+  // Direccion toEntityCreate(DireccionCreateDto dto);
 
-  @Override
-  @Mapping(target = "localidadId", ignore = true)
-  DireccionDto toDTO(Direccion entity);
+  // @Override
+  // @Mapping(target = "localidadId", ignore = true)
+  // DireccionDto toDTO(Direccion entity);
 }

@@ -10,7 +10,8 @@ import com.is.servidor_barrio.business.domain.entity.Localidad;
 
 @Mapper(componentModel = "spring")
 public interface LocalidadMapper extends BaseMapper<Localidad, LocalidadDto, LocalidadCreateDto, LocalidadCreateDto> {
-  @Override
-  @Mapping(target = "departamento", ignore = true)
-  Localidad toUpdate(@MappingTarget Localidad entity, LocalidadCreateDto dto);
+  // @Override
+  // @Mapping(target = "departamento", ignore = true)
+  // Localidad toUpdate(@MappingTarget Localidad entity, LocalidadCreateDto dto);
+
 }

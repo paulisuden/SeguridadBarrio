@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  landing:
+      build: ./landing
+      mem_limit: 512m
+      ports:
+        - "8083:8083"
+      restart: always
+  cliente:
+    build: ./seguridad-barrio-cliente
+    mem_limit: 512m
+    ports:
+      - "8082:8082"
+    restart: always
+  servidor:
+    build: ./servidor-barrio
+    mem_limit: 512m
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: jdbc:mysql://seguridadBarrioDB:3306/seguridadBarrio?createDatabaseIfNotExist=true&serverTimezone=UTC
+      DB_USERNAME: root
+      DB_PASSWORD: thor
+      GMAIL_PASSWORD: fpvubokffvolhlus
+    restart: always
+    depends_on:
+      seguridadBarrioDB:
+          condition: service_healthy
+  seguridadBarrioDB:
+    image: mysql:8.0.33 
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: thor
+      MYSQL_PASSWORD: thor
+      MYSQL_DATABASE: seguridadBarrio
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10

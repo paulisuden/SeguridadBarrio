@@ -8,4 +8,5 @@ import com.is.servidor_barrio.business.domain.entity.Empleado;
 
 @Mapper(componentModel = "spring")
 public interface EmpleadoMapper extends BaseMapper<Empleado, PersonaDto, PersonaCreateDto, PersonaCreateDto> {
+
 }

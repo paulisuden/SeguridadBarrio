@@ -11,11 +11,12 @@ import com.is.servidor_barrio.business.domain.entity.Departamento;
 @Mapper(componentModel = "spring")
 public interface DepartamentoMapper
     extends BaseMapper<Departamento, DepartamentoDto, DepartamentoCreateDto, DepartamentoCreateDto> {
-  @Override
-  @Mapping(target = "provincia", ignore = true)
-  Departamento toUpdate(@MappingTarget Departamento entity, DepartamentoCreateDto dto);
+  // @Override
+  // @Mapping(target = "provincia", ignore = true)
+  // Departamento toUpdate(@MappingTarget Departamento entity,
+  // DepartamentoCreateDto dto);
 
-  @Override
-  @Mapping(target = "provinciaId", ignore = true)
-  DepartamentoDto toDTO(Departamento entity);
+  // @Override
+  // @Mapping(target = "provinciaId", ignore = true)
+  // DepartamentoDto toDTO(Departamento entity);
 }
