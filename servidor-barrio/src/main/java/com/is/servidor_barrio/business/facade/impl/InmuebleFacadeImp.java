@@ -11,7 +11,6 @@ import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 
-
 @Service
 public class InmuebleFacadeImp
     extends BaseFacadeImpl<Inmueble, InmuebleDto, InmuebleCreateDto, InmuebleCreateDto, String> {
@@ -24,6 +23,26 @@ public class InmuebleFacadeImp
     super(baseService, baseMapper);
   }
 
+  public InmuebleDto save(InmuebleCreateDto inmueblCreateDto) throws Exception {
+    var inmuebleEntity = baseMapper.toEntityCreate(inmueblCreateDto);
+    var negocioEntity = unidadDeNegocioServiceImpl.findById(inmueblCreateDto.getIdUnidadDeNegocio());
+    inmuebleEntity.setUnidadDeNegocio(negocioEntity);
+    var entityCreated = baseService.save(inmuebleEntity);
+    return baseMapper.toDTO(entityCreated);
+  }
 
+  @Override
+  public InmuebleDto update(String id, InmuebleCreateDto inmueblCreateDto) throws Exception {
+    var inmuebleEntity = baseService.findById(id);
+    baseMapper.toUpdate(inmuebleEntity, inmueblCreateDto);
+
+    if (!inmuebleEntity.getUnidadDeNegocio().getId().equals(inmueblCreateDto.getIdUnidadDeNegocio())) {
+      var negocioEntity = unidadDeNegocioServiceImpl.findById(inmueblCreateDto.getIdUnidadDeNegocio());
+      inmuebleEntity.setUnidadDeNegocio(negocioEntity);
+    }
+
+    var updatedEntity = baseService.update(id, inmuebleEntity);
+    return baseMapper.toDTO(updatedEntity);
+  }
 
 }

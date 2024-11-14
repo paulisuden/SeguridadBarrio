@@ -13,5 +13,5 @@ public class InmuebleCreateDto {
   private String numeracion;
   private String calle;
   private String manzana;
-  private Long idUnidadDeNegocio;
+  private String idUnidadDeNegocio;
 }
