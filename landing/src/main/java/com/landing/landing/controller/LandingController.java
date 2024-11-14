@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.landing.landing.error.ErrorServiceException;
+import com.landing.landing.service.EmpresaService;
 import com.landing.landing.service.NegocioService;
 
 @Controller
@@ -13,6 +14,9 @@ public class LandingController {
 
     @Autowired
     private NegocioService negocioService;
+
+    @Autowired
+    private EmpresaService empresaService;
 
     @GetMapping("/")
     public String enter() {
@@ -24,6 +28,8 @@ public class LandingController {
         try {
             var negocios = negocioService.listar();
             model.addAttribute("negocios", negocios);
+            model.addAttribute("cantidadNegocios", negocios.size());
+            model.addAttribute("empresa", empresaService.buscarEmpresa());
         } catch (ErrorServiceException e) {
             return "error.html";
         }
