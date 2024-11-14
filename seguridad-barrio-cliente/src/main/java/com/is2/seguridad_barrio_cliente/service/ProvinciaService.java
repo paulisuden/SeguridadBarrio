@@ -22,8 +22,6 @@ public class ProvinciaService {
             provincia.setNombre(nombre);
             provincia.setPaisId(idPais);
 
-            System.out.println(nombre);
-
             dao.crear(provincia);
 
         } catch (ErrorServiceException e) {

@@ -19,7 +19,6 @@ public class InmuebleDAORest {
 
     public void crear(InmuebleDTO inmueble) throws ErrorServiceException {
         try {
-            System.out.println(inmueble);
             String uri = "http://localhost:8081/api/inmueble";
             restTemplate.postForEntity(uri, inmueble, InmuebleDTO.class);
         } catch (Exception ex) {

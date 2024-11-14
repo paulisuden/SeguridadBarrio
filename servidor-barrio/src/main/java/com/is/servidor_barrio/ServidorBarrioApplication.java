@@ -34,8 +34,8 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 	@Autowired
 	private HabitanteService habitanteService;
 
-	@Autowired private UsuarioService UsuarioService;
-
+	@Autowired
+	private UsuarioService UsuarioService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServidorBarrioApplication.class, args);
@@ -44,54 +44,55 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		/**Usuario usuario = new Usuario();
-		usuario.setEmail("habitante@gmail.com");
-		usuario.setClave(new BCryptPasswordEncoder().encode("1234"));
-		usuario.setRol(Rol.HABITANTE);
-		UsuarioService.save(usuario);
-
-		Usuario usuario2 = new Usuario();
-		usuario2.setEmail("personal@gmail.com");
-		usuario2.setClave(new BCryptPasswordEncoder().encode("1234"));
-		usuario2.setRol(Rol.PERSONAL);
-		UsuarioService.save(usuario2); **/
+		/**
+		 * Usuario usuario = new Usuario();
+		 * usuario.setEmail("habitante@gmail.com");
+		 * usuario.setClave(new BCryptPasswordEncoder().encode("1234"));
+		 * usuario.setRol(Rol.HABITANTE);
+		 * UsuarioService.save(usuario);
+		 * 
+		 * Usuario usuario2 = new Usuario();
+		 * usuario2.setEmail("personal@gmail.com");
+		 * usuario2.setClave(new BCryptPasswordEncoder().encode("1234"));
+		 * usuario2.setRol(Rol.PERSONAL);
+		 * UsuarioService.save(usuario2);
+		 **/
 
 		/*
-		Habitante habitante = new Habitante();
-		Visitante visitante = new Visitante();
-		ContactoEmail contactoEmail = new ContactoEmail();
-		ContactoTelefonico contactoTelefonico = new ContactoTelefonico();
-
-		contactoEmail.setEmail("paulisuden2@gmail.com");
-		contactoEmail.setTipoContacto(TipoContacto.PERSONAL);
-
-		contactoTelefonico.setTelefono("2613068240");
-		contactoTelefonico.setTipoTelefono(TipoTelefono.CELULAR);
-		contactoTelefonico.setTipoContacto(TipoContacto.LABORAL);
-
-		List<Contacto> contactos = new ArrayList<>();
-		contactos.add(contactoEmail);
-		contactos.add(contactoTelefonico);
-
-		habitante.setNombre("Pauli");
-		habitante.setApellido("Suden");
-		habitante.setContactos(contactos);
-
-		contactoService.save(contactoTelefonico);
-		contactoService.save(contactoEmail);
-		habitanteService.save(habitante);
-
-		visitante.setNombre("Pepito");
-		visitante.setApellido("sanchez");
-		visitante.setTipoVisita(DELIVERY);
-
-		//enviarMail.sendEmail(habitante, visitante);
-
-
-		*/
+		 * Habitante habitante = new Habitante();
+		 * Visitante visitante = new Visitante();
+		 * ContactoEmail contactoEmail = new ContactoEmail();
+		 * ContactoTelefonico contactoTelefonico = new ContactoTelefonico();
+		 * 
+		 * contactoEmail.setEmail("paulisuden2@gmail.com");
+		 * contactoEmail.setTipoContacto(TipoContacto.PERSONAL);
+		 * 
+		 * contactoTelefonico.setTelefono("2613068240");
+		 * contactoTelefonico.setTipoTelefono(TipoTelefono.CELULAR);
+		 * contactoTelefonico.setTipoContacto(TipoContacto.LABORAL);
+		 * 
+		 * List<Contacto> contactos = new ArrayList<>();
+		 * contactos.add(contactoEmail);
+		 * contactos.add(contactoTelefonico);
+		 * 
+		 * habitante.setNombre("Pauli");
+		 * habitante.setApellido("Suden");
+		 * habitante.setContactos(contactos);
+		 * 
+		 * contactoService.save(contactoTelefonico);
+		 * contactoService.save(contactoEmail);
+		 * habitanteService.save(habitante);
+		 * 
+		 * visitante.setNombre("Pepito");
+		 * visitante.setApellido("sanchez");
+		 * visitante.setTipoVisita(DELIVERY);
+		 * 
+		 * //enviarMail.sendEmail(habitante, visitante);
+		 * 
+		 * 
+		 */
 
 		System.out.println("Running");
-
 
 	}
 }
