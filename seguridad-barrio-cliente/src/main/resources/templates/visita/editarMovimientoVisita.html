@@ -41,12 +41,12 @@
                                             required="required">
 
                                         <!-- Estado del Movimiento -->
-                                        <label for="estadoMovimiento">Estado del Movimiento</label>
-                                        <select id="estadoMovimiento" class="form-control" name="estadoMovimiento"
-                                            th:disabled="${isDisabled}">
-                                            <option
-                                                th:each="estado : ${T(com.is2.seguridad_barrio_cliente.enumeration.EstadoMovimiento).values()}"
-                                                th:value="${estado}" th:text="${estado}"
+                                        <label sec:authorize="hasAnyRole('ADMIN', 'PERSONAL')"
+                                            for="estadoMovimiento">Estado del Movimiento</label>
+                                        <select sec:authorize="hasAnyRole('ADMIN', 'PERSONAL')" id="estadoMovimiento"
+                                            class="form-control" name="estadoMovimiento" th:disabled="${isDisabled}">
+                                            <option th:each="estado : ${estadosMovimiento}" th:value="${estado}"
+                                                th:text="${estado.name()}"
                                                 th:selected="${movimientoVisita.estadoMovimiento == estado}">
                                             </option>
                                         </select>

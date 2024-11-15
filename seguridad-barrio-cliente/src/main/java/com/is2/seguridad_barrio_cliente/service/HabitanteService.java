@@ -16,7 +16,11 @@ public class HabitanteService {
   @Autowired
   private HabitanteDAORest dao;
 
-  public void crear(String nombre, String apellido, String inmuebleId)
+  public void crear(
+      String nombre,
+      String apellido,
+      String inmuebleId,
+      String usuarioId)
       throws ErrorServiceException {
 
     try {
@@ -25,6 +29,7 @@ public class HabitanteService {
       empleado.setNombre(nombre);
       empleado.setApellido(apellido);
       empleado.setInmuebleId(inmuebleId);
+      empleado.setUsuarioId(usuarioId);
 
       dao.crear(empleado);
 
@@ -57,7 +62,12 @@ public class HabitanteService {
     }
   }
 
-  public void modificar(String id, String nombre, String apellido, String inmuebleId)
+  public void modificar(
+      String id,
+      String nombre,
+      String apellido,
+      String inmuebleId,
+      String usuarioId)
       throws ErrorServiceException {
 
     try {
@@ -67,6 +77,7 @@ public class HabitanteService {
       empleado.setNombre(nombre);
       empleado.setApellido(apellido);
       empleado.setInmuebleId(inmuebleId);
+      empleado.setUsuarioId(usuarioId);
 
       dao.actualizar(empleado);
 
