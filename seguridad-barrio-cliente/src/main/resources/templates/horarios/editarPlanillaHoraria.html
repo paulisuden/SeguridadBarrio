@@ -61,14 +61,13 @@
                                         </select>
 
 
-                                        <!-- Empleado
-                                <div class="form-group">
-                                    <label for="empleados">Empleado</label>
-                                    <select id="empleados" class="form-control" name="idEmpleado" th:disabled="${isDisabled}">
-                                        <option th:each="empleado : ${empleados}" th:value="${empleado.id}" th:text="${empleado.nombre}"></option>
-                                    </select>
-                                </div>
-                                -->
+                                        <!-- Empleado -->
+                                        <div class="form-group">
+                                            <label for="empleados">Empleado</label>
+                                            <select id="empleados" class="form-control" name="empleadoId" th:disabled="${isDisabled}">
+                                                <option th:each="empleado : ${empleados}" th:value="${empleado.id}" th:text="${empleado.nombre}"></option>
+                                            </select>
+                                        </div>
 
                                         <!-- Observación -->
                                         <label for="observacion">Observación</label>

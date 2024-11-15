@@ -21,7 +21,7 @@ public class PlanillaHorariaFacadeImp extends
     super(baseService, baseMapper);
   }
 
-  /**@Autowired private EmpleadoServiceImpl empleado;
+@Autowired private EmpleadoServiceImpl empleado;
 
   public PlanillaHorariaDto save(PlanillaHorariaCreateDto planillaHorariaCreateDto) throws Exception {
     var planillaHorariaEntity = baseMapper.toEntityCreate(planillaHorariaCreateDto);
@@ -44,6 +44,6 @@ public class PlanillaHorariaFacadeImp extends
     var updatedEntity = baseService.update(id, planillaHorariaEntity);
     return baseMapper.toDTO(updatedEntity);
   }
-    **/
+
 
 }

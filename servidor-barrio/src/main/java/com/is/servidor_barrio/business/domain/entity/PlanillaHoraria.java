@@ -32,7 +32,7 @@ public class PlanillaHoraria extends Base {
   private EstadoAsistencia estadoAsistencia;
   private String observacionAsistencia;
 
-  //@ManyToOne
-  //private Empleado empleado;
+  @ManyToOne
+  private Empleado empleado;
 
 }

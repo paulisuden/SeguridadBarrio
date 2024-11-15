@@ -15,7 +15,7 @@ import com.is.servidor_barrio.business.domain.entity.PlanillaHoraria;
 public interface PlanillaHorariaMapper
     extends BaseMapper<PlanillaHoraria, PlanillaHorariaDto, PlanillaHorariaCreateDto, PlanillaHorariaCreateDto> {
 
-    /**
+    
     @Override
     @Mapping(target = "empleado", ignore = true)
     PlanillaHoraria toUpdate(@MappingTarget PlanillaHoraria entity, PlanillaHorariaCreateDto dto);
@@ -23,5 +23,5 @@ public interface PlanillaHorariaMapper
     @Override
     @Mapping(target = "empleadoId", ignore = true)
     PlanillaHorariaDto toDTO(PlanillaHoraria entity);
-    **/
+    
     }
