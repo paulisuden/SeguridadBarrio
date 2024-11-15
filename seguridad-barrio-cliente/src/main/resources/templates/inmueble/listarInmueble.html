@@ -20,8 +20,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Inmuebles</h4>
-                        <a class="btn btn-success btn-sm btn-icon-text" th:href="@{/inmueble/altaInmueble}"
-                            role="button">
+                        <a sec:authorize="hasAnyRole('ADMIN')" class="btn btn-success btn-sm btn-icon-text"
+                            th:href="@{/inmueble/altaInmueble}" role="button">
                             <i class="typcn typcn-plus btn-icon-append"></i>
                         </a>
                         <hr>
@@ -67,7 +67,8 @@
                                                                 <div class="dropdown-menu"
                                                                     aria-labelledby="dropdownMenuIconButton3">
                                                                     <h6 class="dropdown-header">Acciones</h6>
-                                                                    <a th:href="@{/inmueble/modificar(id=${inmueble.id})}"
+                                                                    <a sec:authorize="hasAnyRole('ADMIN')"
+                                                                        th:href="@{/inmueble/modificar(id=${inmueble.id})}"
                                                                         type="button" class="dropdown-item">
                                                                         Editar
                                                                         <i class="typcn typcn-edit btn-icon-append"></i>
@@ -78,8 +79,9 @@
                                                                         <i
                                                                             class="typcn typcn-eye-outline btn-icon-append"></i>
                                                                     </a>
-                                                                    <a href="#" class="dropdown-item"
-                                                                        data-toggle="modal" data-target="#popupPanel"
+                                                                    <a sec:authorize="hasAnyRole('ADMIN')" href="#"
+                                                                        class="dropdown-item" data-toggle="modal"
+                                                                        data-target="#popupPanel"
                                                                         th:attr="data-id=${inmueble.id}">
                                                                         Eliminar
                                                                         <i

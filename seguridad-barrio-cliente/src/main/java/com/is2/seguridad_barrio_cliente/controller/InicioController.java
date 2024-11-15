@@ -14,15 +14,6 @@ import java.nio.charset.StandardCharsets;
 @Controller
 public class InicioController {
 
-    @Autowired
-    private MovimientoVisitaController movimientoVisitaController;
-
-    @Autowired
-    private PlanillaHorariaController planillaHorariaController;
-
-    @Autowired
-    private EmpleadoController empleadoController;
-
     @GetMapping("/inicio")
     public String inicio(
             Model model,
@@ -33,32 +24,10 @@ public class InicioController {
                 error = URLDecoder.decode(error, StandardCharsets.UTF_8);
                 model.addAttribute("mensajeError", error);
             }
-            if (authentication != null) {
-
-                boolean hasAdminRole = authentication.getAuthorities().stream()
-                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
-                boolean hasPersonalRole = authentication.getAuthorities().stream()
-                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_PERSONAL"));
-                boolean hasHabitanteRole = authentication.getAuthorities().stream()
-                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
-                if (hasPersonalRole) {
-                    return "inicio";
-                } else if (hasHabitanteRole) {
-                    return "habitante/inicio";
-                } else {
-                    return "inicio";
-                }
-            } else {
-                throw new ErrorServiceException("El usuario no se encuentra logueado");
-            }
+            return "redirect:/empresa/listarEmpresa";
         } catch (Exception e) {
             model.addAttribute("mensajeError", e.getMessage());
-            return "visita/listarMovimientoVisita";
+            return "redirect:/empresa/listarEmpresa";
         }
-    }
-
-    @GetMapping("/")
-    public String ini2(Model model) throws Exception {
-        return "redirect:/inicio";
     }
 }

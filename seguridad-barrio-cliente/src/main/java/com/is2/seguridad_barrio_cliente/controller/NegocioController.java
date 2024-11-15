@@ -3,6 +3,7 @@ package com.is2.seguridad_barrio_cliente.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -100,6 +101,7 @@ public class NegocioController {
     }
   }
 
+  @PreAuthorize("hasRole('ADMIN') or hasRole('PERSONAL')") // Solo permite acceso a usuarios con rol ADMIN
   @GetMapping("/listarNegocio")
   public String listarNegocio(Model model) {
     try {
