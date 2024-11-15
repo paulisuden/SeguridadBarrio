@@ -6,6 +6,7 @@ import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.DepartamentoService;
 import com.is2.seguridad_barrio_cliente.service.LocalidadService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/localidad")
 public class LocalidadController {
 

@@ -3,6 +3,7 @@ package com.is2.seguridad_barrio_cliente.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.ContactoService;
 
 @Controller
+@PreAuthorize("hasRole('ADMIN') or hasRole('PERSONAL')")
 @RequestMapping("/contacto")
 public class ContactoController {
 

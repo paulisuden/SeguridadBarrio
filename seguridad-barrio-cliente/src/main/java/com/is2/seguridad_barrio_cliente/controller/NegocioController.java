@@ -22,6 +22,7 @@ import com.is2.seguridad_barrio_cliente.service.NegocioService;
 import com.is2.seguridad_barrio_cliente.service.ServicioService;
 
 @Controller
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/negocio")
 public class NegocioController {
 
@@ -101,7 +102,6 @@ public class NegocioController {
     }
   }
 
-  @PreAuthorize("hasRole('ADMIN') or hasRole('PERSONAL')") // Solo permite acceso a usuarios con rol ADMIN
   @GetMapping("/listarNegocio")
   public String listarNegocio(Model model) {
     try {

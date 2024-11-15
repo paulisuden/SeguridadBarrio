@@ -19,6 +19,11 @@
                     <span class="nav-profile-name" th:text="${#authentication.name}"></span>
                 </a>
             </li>
+            <li class="nav-item nav-user-status dropdown">
+                <p class="mb-0">
+                    <span th:each="role : ${#authentication.authorities}" th:text="${role.getAuthority()} + ' '"></span>
+                </p>
+            </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">

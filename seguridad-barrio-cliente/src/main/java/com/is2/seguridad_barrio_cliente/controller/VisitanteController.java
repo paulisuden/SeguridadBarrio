@@ -40,23 +40,13 @@ public class VisitanteController {
     public String alta(VisitanteDTO visitante, Model model, Authentication authentication)
             throws ErrorServiceException {
 
-        if (authentication != null) {
-            boolean hasHabitanteRole = authentication.getAuthorities().stream()
-                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
-
-            visitante = new VisitanteDTO();
-            model.addAttribute("visitante", visitante);
-            model.addAttribute("isDisabled", false);
-
-            if (hasHabitanteRole) {
-                return "habitante/editarVisitante";
-            } else { // ADMIN O PERSONAL
-                return viewEdit;
-            }
-        } else {
+        if (authentication == null)
             throw new ErrorServiceException("El usuario no se encuentra logueado");
-        }
 
+        visitante = new VisitanteDTO();
+        model.addAttribute("visitante", visitante);
+        model.addAttribute("isDisabled", false);
+        return viewEdit;
     }
 
     @PostMapping("/baja")
@@ -116,11 +106,13 @@ public class VisitanteController {
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
                 List<VisitanteDTO> listaVisitante = visitanteService.listar();
                 model.addAttribute("listaVisitantes", listaVisitante);
-                if (hasHabitanteRole) {
-                    return "habitante/listarVisitante";
-                } else { // ADMIN O PERSONAL
-                    return viewList;
-                }
+                return viewList;
+
+                // if (hasHabitanteRole) {
+                // return "habitante/listarVisitante";
+                // } else { // ADMIN O PERSONAL
+                // return viewList;
+                // }
             } else {
                 throw new ErrorServiceException("El usuario no se encuentra logueado");
             }

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/pais")
 public class PaisController {
 
@@ -27,7 +28,6 @@ public class PaisController {
     private String viewEdit = "direccion/editarPais.html";
 
     @GetMapping("/altaPais")
-    @PreAuthorize("hasRole('ADMIN')")
     public String alta(PaisDTO pais, Model model) {
 
         pais = new PaisDTO();
