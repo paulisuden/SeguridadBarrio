@@ -18,6 +18,7 @@ import com.is2.seguridad_barrio_cliente.enumeration.TipoEmpleado;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.EmpleadoService;
 import com.is2.seguridad_barrio_cliente.service.NegocioService;
+import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 
 @Controller
 @PreAuthorize("hasRole('ADMIN')")
@@ -28,6 +29,9 @@ public class EmpleadoController {
   private EmpleadoService empleadoService;
   @Autowired
   private NegocioService negocioService;
+
+  @Autowired
+  private UsuarioService usuarioService;
 
   private String viewList = "persona/listarEmpleado.html";
   private String redirectList = "redirect:/empleado/listarEmpleado";
@@ -44,6 +48,7 @@ public class EmpleadoController {
     model.addAttribute("tipoEmpleados", TipoEmpleado.values());
     model.addAttribute("negocios", negocios);
     model.addAttribute("isDisabled", false);
+    model.addAttribute("usuarios", usuarioService.listar());
 
     return viewEdit;
   }
@@ -76,6 +81,7 @@ public class EmpleadoController {
       model.addAttribute("tipoEmpleados", TipoEmpleado.values());
       model.addAttribute("negocios", negocios);
       model.addAttribute("isDisabled", false);
+      model.addAttribute("usuarios", usuarioService.listar());
 
       return viewEdit;
 
@@ -98,6 +104,8 @@ public class EmpleadoController {
       model.addAttribute("tipoEmpleados", TipoEmpleado.values());
       model.addAttribute("negocios", negocios);
       model.addAttribute("isDisabled", true);
+      model.addAttribute("usuarios", usuarioService.listar());
+
       return viewEdit;
 
     } catch (ErrorServiceException e) {
@@ -128,14 +136,15 @@ public class EmpleadoController {
       @RequestParam String legajo,
       @RequestParam TipoEmpleado tipoEmpleado,
       @RequestParam String[] negociosId,
+      @RequestParam String idUsuario,
       RedirectAttributes attributes, Model model) {
 
     try {
 
       if ("0".equals(id)) {
-        empleadoService.crear(nombre, apellido, legajo, tipoEmpleado, negociosId);
+        empleadoService.crear(nombre, apellido, legajo, tipoEmpleado, negociosId, idUsuario);
       } else {
-        empleadoService.modificar(id, nombre, apellido, legajo, tipoEmpleado, negociosId);
+        empleadoService.modificar(id, nombre, apellido, legajo, tipoEmpleado, negociosId, idUsuario);
       }
 
       attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");

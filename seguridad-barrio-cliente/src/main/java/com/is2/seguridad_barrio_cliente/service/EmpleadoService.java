@@ -16,7 +16,13 @@ public class EmpleadoService {
   @Autowired
   private EmpleadoDAORest dao;
 
-  public void crear(String nombre, String apellido, String legajo, TipoEmpleado tipoEmpelado, String[] negociosId)
+  public void crear(
+      String nombre,
+      String apellido,
+      String legajo,
+      TipoEmpleado tipoEmpelado,
+      String[] negociosId,
+      String usuarioId)
       throws ErrorServiceException {
 
     try {
@@ -27,6 +33,7 @@ public class EmpleadoService {
       empleado.setLegajo(legajo);
       empleado.setTipoEmpleado(tipoEmpelado);
       empleado.setNegociosId(negociosId);
+      empleado.setUsuarioId(usuarioId);
 
       dao.crear(empleado);
 
@@ -59,8 +66,14 @@ public class EmpleadoService {
     }
   }
 
-  public void modificar(String id, String nombre, String apellido, String legajo, TipoEmpleado tipoEmpelado,
-      String[] negociosId)
+  public void modificar(
+      String id,
+      String nombre,
+      String apellido,
+      String legajo,
+      TipoEmpleado tipoEmpelado,
+      String[] negociosId,
+      String usuarioId)
       throws ErrorServiceException {
 
     try {
@@ -72,6 +85,7 @@ public class EmpleadoService {
       empleado.setLegajo(legajo);
       empleado.setTipoEmpleado(tipoEmpelado);
       empleado.setNegociosId(negociosId);
+      empleado.setUsuarioId(usuarioId);
 
       dao.actualizar(empleado);
 

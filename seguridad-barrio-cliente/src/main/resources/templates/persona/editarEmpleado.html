@@ -69,6 +69,13 @@
                                             </select>
                                         </div>
 
+                                        <select id="idUsuario" class="form-control" name="idUsuario"
+                                            th:disabled="${isDisabled}" required="required">
+                                            <option value="" disabled selected>Seleccionar usuario</option>
+                                            <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+                                                th:text="${usuario.email}">
+                                            </option>
+                                        </select>
                                     </div>
 
                                     <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"

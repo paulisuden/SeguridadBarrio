@@ -7,6 +7,7 @@ import com.is2.seguridad_barrio_cliente.dto.UsuarioDTO;
 import com.is2.seguridad_barrio_cliente.dto.VisitanteDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.EstadoMovimiento;
 import com.is2.seguridad_barrio_cliente.enumeration.TipoMovilidad;
+import com.is2.seguridad_barrio_cliente.enumeration.TipoVisita;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.HabitanteService;
 import com.is2.seguridad_barrio_cliente.service.InmuebleService;
@@ -14,6 +15,7 @@ import com.is2.seguridad_barrio_cliente.service.MovimientoVisitaService;
 import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 import com.is2.seguridad_barrio_cliente.service.VisitanteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -57,6 +60,7 @@ public class MovimientoVisitaController {
         movimientoVisita = new MovimientoVisitaDTO();
         List<VisitanteDTO> visitantes = visitanteServie.listar();
         model.addAttribute("listaVisitantes", visitantes);
+        model.addAttribute("estadosMovimiento", EstadoMovimiento.values());
 
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
@@ -68,7 +72,9 @@ public class MovimientoVisitaController {
                 PersonaDTO habitante = habitanteService.buscarPorUsuarioId(usuarioDTO.getId());
                 // busco el inmueble que corresponda a esa persona (habitante)
                 InmuebleDTO inmueble = habitante.getInmueble();
-                model.addAttribute("inmueble", inmueble);
+                List<InmuebleDTO> inmuebles = new ArrayList<>();
+                inmuebles.add(inmueble);
+                model.addAttribute("inmuebles", inmuebles);
                 // traigo una lista de los movimientos que se hayan realizado en ese inmueble
                 List<MovimientoVisitaDTO> movimientos = movimientoVisitaService.listarPorInmuebleId(inmueble.getId());
                 // traigo los visitantes vinculados con ese inmueble
@@ -77,7 +83,6 @@ public class MovimientoVisitaController {
                 movimientoVisita.setInmueble(inmueble);
                 model.addAttribute("movimientoVisita", movimientoVisita);
                 return viewEdit;
-                // return "habitante/editarMovimientoVisita";
             } else { // PERSONAL O ADMIN
 
                 List<InmuebleDTO> inmuebles = inmuebleService.listar();
@@ -116,12 +121,13 @@ public class MovimientoVisitaController {
             model.addAttribute("movimientoVisita", movimientoVisita);
 
             List<VisitanteDTO> visitantes = visitanteServie.listar();
-            model.addAttribute("visitantes", visitantes);
+            model.addAttribute("listaVisitantes", visitantes);
 
             List<InmuebleDTO> inmuebles = inmuebleService.listar();
             model.addAttribute("inmuebles", inmuebles);
 
             model.addAttribute("isDisabled", false);
+            model.addAttribute("estadosMovimiento", EstadoMovimiento.values());
 
             return viewEdit;
 
@@ -139,6 +145,7 @@ public class MovimientoVisitaController {
             MovimientoVisitaDTO movimientoVisita = movimientoVisitaService.buscar(id);
             model.addAttribute("movimientoVisita", movimientoVisita);
             model.addAttribute("isDisabled", true);
+            model.addAttribute("estadosMovimiento", EstadoMovimiento.values());
 
             return viewEdit;
 
@@ -159,11 +166,9 @@ public class MovimientoVisitaController {
                     UsuarioDTO usuarioDTO = usuarioService.buscarCuenta(name);
                     PersonaDTO habitante = habitanteService.buscarPorUsuarioId(usuarioDTO.getId());
                     InmuebleDTO inmueble = habitante.getInmueble();
-                    model.addAttribute("inmueble", inmueble);
                     List<MovimientoVisitaDTO> movimientos = movimientoVisitaService
                             .listarPorInmuebleId(inmueble.getId());
-                    model.addAttribute("movimientos", movimientos);
-                    System.out.println("llegoacaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                    model.addAttribute("listaMovimientoVisita", movimientos);
                     return viewList;
 
                     // return "habitante/listarMovimientoVisita";
@@ -184,13 +189,19 @@ public class MovimientoVisitaController {
     @PostMapping("/aceptarEditMovimientoVisita")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
             @RequestParam("fechasMovimiento") String fechasMovimientoStr, @RequestParam String observacion,
-            @RequestParam EstadoMovimiento estadoMovimiento, @RequestParam TipoMovilidad tipoMovilidad,
+            @RequestParam(required = false) EstadoMovimiento estadoMovimiento,
+            @RequestParam TipoMovilidad tipoMovilidad,
             @RequestParam String descripcionMovilidad, @RequestParam String idVisitante,
             @RequestParam String idInmueble,
             RedirectAttributes attributes, Model model) {
 
         LocalDateTime fechasMovimiento = null;
 
+        // Cuando lo crea el visitante
+        if (estadoMovimiento == null) {
+            estadoMovimiento = EstadoMovimiento.PENDIENTE;
+        }
+        System.out.println(estadoMovimiento);
         try {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

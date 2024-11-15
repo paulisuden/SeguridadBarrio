@@ -45,6 +45,7 @@ public class VisitanteController {
 
         visitante = new VisitanteDTO();
         model.addAttribute("visitante", visitante);
+        model.addAttribute("tipoVisita", TipoVisita.values());
         model.addAttribute("isDisabled", false);
         return viewEdit;
     }
@@ -72,6 +73,7 @@ public class VisitanteController {
             VisitanteDTO visitante = visitanteService.buscar(id);
             model.addAttribute("visitante", visitante);
             model.addAttribute("isDisabled", false);
+            model.addAttribute("tipoVisita", TipoVisita.values());
 
             return viewEdit;
 
@@ -89,6 +91,7 @@ public class VisitanteController {
             VisitanteDTO visitante = visitanteService.buscar(id);
             model.addAttribute("visitante", visitante);
             model.addAttribute("isDisabled", true);
+            model.addAttribute("tipoVisita", TipoVisita.values());
 
             return viewEdit;
 
@@ -102,17 +105,10 @@ public class VisitanteController {
     public String listarVisitante(Model model, Authentication authentication) {
         try {
             if (authentication != null) {
-                boolean hasHabitanteRole = authentication.getAuthorities().stream()
-                        .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
                 List<VisitanteDTO> listaVisitante = visitanteService.listar();
                 model.addAttribute("listaVisitantes", listaVisitante);
                 return viewList;
 
-                // if (hasHabitanteRole) {
-                // return "habitante/listarVisitante";
-                // } else { // ADMIN O PERSONAL
-                // return viewList;
-                // }
             } else {
                 throw new ErrorServiceException("El usuario no se encuentra logueado");
             }

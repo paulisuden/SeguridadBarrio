@@ -17,6 +17,7 @@ import com.is2.seguridad_barrio_cliente.dto.PersonaDTO;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
 import com.is2.seguridad_barrio_cliente.service.HabitanteService;
 import com.is2.seguridad_barrio_cliente.service.InmuebleService;
+import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 
 @Controller
 @PreAuthorize("hasRole('ADMIN') or hasRole('PERSONAL')")
@@ -27,6 +28,9 @@ public class HabitanteController {
   private HabitanteService habitanteService;
   @Autowired
   private InmuebleService inmuebleService;
+
+  @Autowired
+  private UsuarioService usuarioService;
 
   private String viewList = "persona/listarHabitante.html";
   private String redirectList = "redirect:/habitante/listarHabitante";
@@ -42,6 +46,7 @@ public class HabitanteController {
     model.addAttribute("habitante", habitante);
     model.addAttribute("inmuebles", inmuebles);
     model.addAttribute("isDisabled", false);
+    model.addAttribute("usuarios", usuarioService.listar());
 
     return viewEdit;
   }
@@ -73,6 +78,7 @@ public class HabitanteController {
       model.addAttribute("habitante", habitante);
       model.addAttribute("inmuebles", inmuebles);
       model.addAttribute("isDisabled", false);
+      model.addAttribute("usuarios", usuarioService.listar());
 
       return viewEdit;
 
@@ -94,6 +100,8 @@ public class HabitanteController {
       model.addAttribute("habitante", habitante);
       model.addAttribute("inmuebles", inmuebles);
       model.addAttribute("isDisabled", true);
+      model.addAttribute("usuarios", usuarioService.listar());
+
       return viewEdit;
 
     } catch (ErrorServiceException e) {
@@ -121,14 +129,15 @@ public class HabitanteController {
       @RequestParam String nombre,
       @RequestParam String apellido,
       @RequestParam String inmuebleId,
+      @RequestParam String idUsuario,
       RedirectAttributes attributes, Model model) {
 
     try {
 
       if ("0".equals(id)) {
-        habitanteService.crear(nombre, apellido, inmuebleId);
+        habitanteService.crear(nombre, apellido, inmuebleId, idUsuario);
       } else {
-        habitanteService.modificar(id, nombre, apellido, inmuebleId);
+        habitanteService.modificar(id, nombre, apellido, inmuebleId, idUsuario);
       }
 
       attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");

@@ -51,9 +51,8 @@
                                             <label for="tipoVisitas">Tipo de visita</label>
                                             <select id="tipoVisitas" class="form-control" name="tipoVisita"
                                                 th:disabled="${isDisabled}">
-                                                <option
-                                                    th:each="tipoVisita : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoVisita).values()}"
-                                                    th:value="${tipoVisita}" th:text="${tipoVisita}">
+                                                <option th:each="tipoVisita : ${tipoVisita}" th:value="${tipoVisita}"
+                                                    th:text="${tipoVisita.name()}">
                                                 </option>
                                             </select>
                                         </div>
