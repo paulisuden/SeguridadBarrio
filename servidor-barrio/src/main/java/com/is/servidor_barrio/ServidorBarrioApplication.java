@@ -44,23 +44,23 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		// Usuario usuario = new Usuario();
-		// usuario.setEmail("habitante@gmail.com");
-		// usuario.setClave(new BCryptPasswordEncoder().encode("1234"));
-		// usuario.setRol(Rol.HABITANTE);
-		// UsuarioService.save(usuario);
+		/**Usuario usuario = new Usuario();
+		usuario.setEmail("habitante@gmail.com");
+		usuario.setClave(new BCryptPasswordEncoder().encode("1234"));
+		usuario.setRol(Rol.HABITANTE);
+		UsuarioService.save(usuario);
 
-		// Usuario usuario2 = new Usuario();
-		// usuario2.setEmail("personal@gmail.com");
+		Usuario usuario2 = new Usuario();
+		usuario2.setEmail("personal@gmail.com");
 		// usuario2.setClave(new BCryptPasswordEncoder().encode("1234"));
 		// usuario2.setRol(Rol.PERSONAL);
-		// UsuarioService.save(usuario2);
+		// UsuarioService.save(usuario2);**/
 
-		// Usuario usuario3 = new Usuario();
-		// usuario3.setEmail("test@gmail.com");
-		// usuario3.setClave(new BCryptPasswordEncoder().encode("1234"));
-		// usuario3.setRol(Rol.ADMIN);
-		// UsuarioService.save(usuario3);
+		Usuario usuario3 = new Usuario();
+		usuario3.setEmail("test@gmail.com");
+		usuario3.setClave(new BCryptPasswordEncoder().encode("1234"));
+		usuario3.setRol(Rol.ADMIN);
+		UsuarioService.save(usuario3);
 
 		/*
 		 * Habitante habitante = new Habitante();

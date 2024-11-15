@@ -15,7 +15,9 @@ public class PlanillaHorariaDTO {
     private LocalDateTime salida;
     private EstadoAsistencia estadoAsistencia;
     private String observacionAsistencia;
-    // private EmpleadoDTO empleado;
+    private PersonaDTO empleado;
+    private String empleadoId;
+
 
 
     public String getEntradaAsString() {

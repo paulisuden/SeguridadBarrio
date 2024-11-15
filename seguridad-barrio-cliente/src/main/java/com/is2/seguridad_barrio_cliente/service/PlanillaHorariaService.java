@@ -19,7 +19,7 @@ public class PlanillaHorariaService {
     private PlanillaHorariaDAORest dao;
 
     public void crear(LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia,
-            String observacion) throws ErrorServiceException {
+            String observacion, String empleado) throws ErrorServiceException {
 
 
         try {
@@ -29,7 +29,7 @@ public class PlanillaHorariaService {
             planillaHoraria.setEstadoAsistencia(estadoAsistencia);
             planillaHoraria.setObservacionAsistencia(observacion);
             planillaHoraria.setSalida(salida);
-            // planillaHoraria.setEmpleadoId(idEmpleado);
+            planillaHoraria.setEmpleadoId(empleado);
 
 
             dao.crear(planillaHoraria);
@@ -65,7 +65,7 @@ public class PlanillaHorariaService {
     }
 
     public void modificar(String id, LocalDateTime entrada, LocalDateTime salida, EstadoAsistencia estadoAsistencia,
-            String observacion) throws ErrorServiceException {
+            String observacion, String empleado) throws ErrorServiceException {
 
 
         try {
@@ -76,7 +76,7 @@ public class PlanillaHorariaService {
             planillaHoraria.setEstadoAsistencia(estadoAsistencia);
             planillaHoraria.setObservacionAsistencia(observacion);
             planillaHoraria.setSalida(salida);
-            // planillaHoraria.setEmpleadoId(idEmpleado);
+            planillaHoraria.setEmpleadoId(empleado);
 
             dao.actualizar(planillaHoraria);
 

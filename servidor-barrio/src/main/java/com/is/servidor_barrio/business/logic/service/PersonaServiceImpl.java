@@ -53,5 +53,12 @@ public class PersonaServiceImpl extends BaseServiceImpl<Persona, String> impleme
     return personaRepository.findByUsuarioId(id);
   }
 
+  /* 
+  @Override
+  @Transactional
+  public Persona buscarHabitantePorInmueble(String id) {
+    return habitanteRepository.buscarPersonaPorInmueble(id);
+  }
+ */
 
 }
