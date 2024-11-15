@@ -3,6 +3,7 @@ package com.is.servidor_barrio.business.domain.dto.inmueble;
 import com.is.servidor_barrio.business.domain.dto.BaseDto;
 import com.is.servidor_barrio.business.domain.dto.unidadDeNegocio.UnidadDeNegocioDto;
 
+import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
