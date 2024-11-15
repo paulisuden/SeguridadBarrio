@@ -15,7 +15,7 @@
         <ul class="navbar-nav mr-lg-2">
             <li class="nav-item nav-profile dropdown">
                 <a class="nav-link" th:href="@{/login}" data-toggle="dropdown" id="profileDropdown">
-                    <img th:src="@{'/usuario/imagen/' + ${#authentication.name}}" alt="profile" />
+                    <img th:src="@{'/imagen/usuario/' + ${#authentication.name}}" alt="profile" />
                     <span class="nav-profile-name" th:text="${#authentication.name}"></span>
                 </a>
             </li>

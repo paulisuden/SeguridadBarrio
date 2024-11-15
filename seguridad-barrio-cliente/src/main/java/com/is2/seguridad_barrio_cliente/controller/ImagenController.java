@@ -1,7 +1,9 @@
 package com.is2.seguridad_barrio_cliente.controller;
 
 import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
+import com.is2.seguridad_barrio_cliente.dto.UsuarioDTO;
 import com.is2.seguridad_barrio_cliente.service.ImagenService;
+import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,8 @@ public class ImagenController {
 
     @Autowired
     private ImagenService imagenService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> fotoServicio(
@@ -28,6 +32,28 @@ public class ImagenController {
 
         try {
             ImagenDTO imagen = imagenService.buscar(id);
+            byte[] imgContenido = imagen.getContenido();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
+
+        } catch (Exception ex) {
+            model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping("/usuario/{email}")
+    public ResponseEntity<byte[]> imagenUsuario(
+            @PathVariable String email,
+            Model model) {
+
+        try {
+            UsuarioDTO usuario = usuarioService.buscarCuenta(email);
+
+            ImagenDTO imagen = imagenService.buscar(usuario.getImagen().getId());
             byte[] imgContenido = imagen.getContenido();
 
             HttpHeaders headers = new HttpHeaders();
