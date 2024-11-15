@@ -32,22 +32,28 @@ import java.util.List;
 @RequestMapping("/movimientoVisita")
 public class MovimientoVisitaController {
 
-    @Autowired private MovimientoVisitaService movimientoVisitaService;
+    @Autowired
+    private MovimientoVisitaService movimientoVisitaService;
 
-    @Autowired private VisitanteService visitanteServie;
+    @Autowired
+    private VisitanteService visitanteServie;
 
-    @Autowired private InmuebleService inmuebleService;
+    @Autowired
+    private InmuebleService inmuebleService;
 
-    @Autowired private UsuarioService usuarioService;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    @Autowired private HabitanteService habitanteService;
+    @Autowired
+    private HabitanteService habitanteService;
 
     private String viewList = "visita/listarMovimientoVisita.html";
     private String redirectList = "redirect:/movimientoVisita/listarMovimientoVisita";
     private String viewEdit = "visita/editarMovimientoVisita.html";
 
     @GetMapping("/altaMovimientoVisita")
-    public String alta(MovimientoVisitaDTO movimientoVisita, Model model, Authentication authentication) throws ErrorServiceException {
+    public String alta(MovimientoVisitaDTO movimientoVisita, Model model, Authentication authentication)
+            throws ErrorServiceException {
 
         movimientoVisita = new MovimientoVisitaDTO();
         List<VisitanteDTO> visitantes = visitanteServie.listar();
@@ -56,23 +62,24 @@ public class MovimientoVisitaController {
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
+
             if (hasHabitanteRole){
                 String name = authentication.getName(); //email
                 UsuarioDTO usuarioDTO = usuarioService.buscarCuenta(name);
-                //busco la persona que tenga ese idUsuario
+                // busco la persona que tenga ese idUsuario
                 PersonaDTO habitante = habitanteService.buscarPorUsuarioId(usuarioDTO.getId());
-                //busco el inmueble que corresponda a esa persona (habitante)
+                // busco el inmueble que corresponda a esa persona (habitante)
                 InmuebleDTO inmueble = habitante.getInmueble();
                 model.addAttribute("inmueble", inmueble);
-                //traigo una lista de los movimientos que se hayan realizado en ese inmueble
+                // traigo una lista de los movimientos que se hayan realizado en ese inmueble
                 List<MovimientoVisitaDTO> movimientos = movimientoVisitaService.listarPorInmuebleId(inmueble.getId());
-                //traigo los visitantes vinculados con ese inmueble
+                // traigo los visitantes vinculados con ese inmueble
                 model.addAttribute("movimientos", movimientos);
-                //para que el inmueble quede preseleccionado sin ninguna otra opcion
+                // para que el inmueble quede preseleccionado sin ninguna otra opcion
                 movimientoVisita.setInmueble(inmueble);
                 model.addAttribute("movimientoVisita", movimientoVisita);
                 return "habitante/editarMovimientoVisita";
-            } else { //PERSONAL O ADMIN
+            } else { // PERSONAL O ADMIN
 
                 List<InmuebleDTO> inmuebles = inmuebleService.listar();
                 model.addAttribute("inmuebles", inmuebles);
@@ -86,11 +93,8 @@ public class MovimientoVisitaController {
 
     }
 
-    
-
     @PostMapping("/baja")
     public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
-
 
         try {
 
@@ -152,17 +156,18 @@ public class MovimientoVisitaController {
                 boolean hasHabitanteRole = authentication.getAuthorities().stream()
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
                 if (hasHabitanteRole) {
-                    String name = authentication.getName(); //email
+                    String name = authentication.getName(); // email
                     UsuarioDTO usuarioDTO = usuarioService.buscarCuenta(name);
                     PersonaDTO habitante = habitanteService.buscarPorUsuarioId(usuarioDTO.getId());
                     InmuebleDTO inmueble = habitante.getInmueble();
                     model.addAttribute("inmueble", inmueble);
-                    List<MovimientoVisitaDTO> movimientos = movimientoVisitaService.listarPorInmuebleId(inmueble.getId());
+                    List<MovimientoVisitaDTO> movimientos = movimientoVisitaService
+                            .listarPorInmuebleId(inmueble.getId());
                     model.addAttribute("movimientos", movimientos);
                     return "habitante/listarMovimientoVisita";
-                } else { //ADMIN O PERSONAL
-                List<MovimientoVisitaDTO> listaMovimientoVisita = movimientoVisitaService.listar();
-                model.addAttribute("listaMovimientoVisita", listaMovimientoVisita);
+                } else { // ADMIN O PERSONAL
+                    List<MovimientoVisitaDTO> listaMovimientoVisita = movimientoVisitaService.listar();
+                    model.addAttribute("listaMovimientoVisita", listaMovimientoVisita);
                 }
             }
         } catch (ErrorServiceException e) {
@@ -217,7 +222,7 @@ public class MovimientoVisitaController {
 
     }
 
-    @GetMapping("/cancelarEditMovimientoVisita")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
@@ -252,6 +257,5 @@ public class MovimientoVisitaController {
         }
         return viewEdit;
     }
-
 
 }

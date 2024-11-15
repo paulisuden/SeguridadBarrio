@@ -29,14 +29,16 @@ import java.util.stream.Collectors;
 @RequestMapping("/visitante")
 public class VisitanteController {
 
-    @Autowired private VisitanteService visitanteService;
+    @Autowired
+    private VisitanteService visitanteService;
 
     private String viewList = "visita/listarVisitante.html";
     private String redirectList = "redirect:/visitante/listarVisitante";
     private String viewEdit = "visita/editarVisitante.html";
 
     @GetMapping("/altaVisitante")
-    public String alta(VisitanteDTO visitante, Model model, Authentication authentication) throws ErrorServiceException {
+    public String alta(VisitanteDTO visitante, Model model, Authentication authentication)
+            throws ErrorServiceException {
 
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
@@ -46,9 +48,9 @@ public class VisitanteController {
             model.addAttribute("visitante", visitante);
             model.addAttribute("isDisabled", false);
 
-            if (hasHabitanteRole){
+            if (hasHabitanteRole) {
                 return "habitante/editarVisitante";
-            } else { //ADMIN O PERSONAL
+            } else { // ADMIN O PERSONAL
                 return viewEdit;
             }
         } else {
@@ -57,10 +59,8 @@ public class VisitanteController {
 
     }
 
-
     @PostMapping("/baja")
     public String eliminarServicio(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
-
 
         try {
 
@@ -114,11 +114,11 @@ public class VisitanteController {
             if (authentication != null) {
                 boolean hasHabitanteRole = authentication.getAuthorities().stream()
                         .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
-                    List<VisitanteDTO> listaVisitante = visitanteService.listar();
-                    model.addAttribute("listaVisitantes", listaVisitante);
-                if (hasHabitanteRole){
+                List<VisitanteDTO> listaVisitante = visitanteService.listar();
+                model.addAttribute("listaVisitantes", listaVisitante);
+                if (hasHabitanteRole) {
                     return "habitante/listarVisitante";
-                } else { //ADMIN O PERSONAL
+                } else { // ADMIN O PERSONAL
                     return viewList;
                 }
             } else {
@@ -162,7 +162,7 @@ public class VisitanteController {
 
     }
 
-    @GetMapping("/cancelarEditVisitante")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
@@ -188,7 +188,5 @@ public class VisitanteController {
         }
         return viewEdit;
     }
-
-
 
 }

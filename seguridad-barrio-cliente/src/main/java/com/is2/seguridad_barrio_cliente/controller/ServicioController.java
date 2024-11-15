@@ -126,7 +126,7 @@ public class ServicioController {
 
     }
 
-    @GetMapping("/cancelarEditServicio")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

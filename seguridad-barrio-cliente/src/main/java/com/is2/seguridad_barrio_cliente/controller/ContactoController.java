@@ -147,8 +147,8 @@ public class ContactoController {
 
     }
 
-    @GetMapping("/cancelarEditContacto")
-    public String cancelarEdit() {
+    @GetMapping("/cancelar")
+    public String cancelar() {
 
         return redirectList;
     }

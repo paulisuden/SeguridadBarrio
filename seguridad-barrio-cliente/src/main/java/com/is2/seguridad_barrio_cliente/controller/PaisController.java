@@ -129,7 +129,7 @@ public class PaisController {
 
     }
 
-    @GetMapping("/cancelarEditPais")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;

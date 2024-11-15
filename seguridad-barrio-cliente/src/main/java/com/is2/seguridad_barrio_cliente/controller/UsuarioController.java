@@ -3,8 +3,13 @@ package com.is2.seguridad_barrio_cliente.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
+import com.is2.seguridad_barrio_cliente.dto.ImagenDTO;
 import com.is2.seguridad_barrio_cliente.dto.UsuarioDTO;
 import com.is2.seguridad_barrio_cliente.enumeration.Rol;
 import com.is2.seguridad_barrio_cliente.error.ErrorServiceException;
+import com.is2.seguridad_barrio_cliente.service.ImagenService;
 import com.is2.seguridad_barrio_cliente.service.UsuarioService;
 
 @Controller
@@ -24,6 +31,8 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private ImagenService imagenService;
     private String viewList = "usuario/listarUsuario.html";
     private String redirectList = "redirect:/usuario/listarUsuario";
     private String viewEdit = "usuario/editarUsuario.html";
@@ -146,10 +155,32 @@ public class UsuarioController {
 
     }
 
-    @GetMapping("/cancelarEditUsuario")
+    @GetMapping("/cancelar")
     public String cancelarEdit() {
 
         return redirectList;
+    }
+
+    @GetMapping("/imagen/{email}")
+    public ResponseEntity<byte[]> imagenUsuario(
+            @PathVariable String email,
+            Model model) {
+
+        try {
+            UsuarioDTO usuario = usuarioService.buscarCuenta(email);
+
+            ImagenDTO imagen = imagenService.buscar(usuario.getImagen().getId());
+            byte[] imgContenido = imagen.getContenido();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+            return new ResponseEntity<>(imgContenido, headers, HttpStatus.OK);
+
+        } catch (Exception ex) {
+            model.addAttribute("msgError", "Error inesperado al procesar la solicitud.");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     private String error(

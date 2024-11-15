@@ -4,97 +4,98 @@
 <head th:replace="~{fragments/head.html :: head_1}"></head>
 
 <body>
-<div class="container-scroller">
+    <div class="container-scroller">
 
-    <!-- Navbar -->
-    <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
+        <!-- Navbar -->
+        <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
 
-    <!-- Sidebar -->
-    <div class="container-fluid page-body-wrapper">
-        <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+        <!-- Sidebar -->
+        <div class="container-fluid page-body-wrapper">
+            <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+            <div class="content-wrapper">
 
-        <!-- FORMULARIO -->
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card large-form">
-                <div class="card">
-                    <div class="card-body">
+                <!-- FORMULARIO -->
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card large-form">
+                        <div class="card">
+                            <div class="card-body">
 
-                        <h5 class="card-title">Empleado</h5>
+                                <h5 class="card-title">Empleado</h5>
 
-                        <form class="forms-sample" action="/empleado/aceptarEditEmpleado" method="POST">
+                                <form class="forms-sample" action="/empleado/aceptarEditEmpleado" method="POST">
 
-                            <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                            <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+                                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
-                            <div class="form-group">
+                                    <div class="form-group">
 
-                                <input type="hidden" name="id" th:value="${empleado.id != null ? empleado.id : '0'}">
+                                        <input type="hidden" name="id"
+                                            th:value="${empleado.id != null ? empleado.id : '0'}">
 
-                                <label for="nombre">Nombre</label>
-                                <input type="text" id="nombre" name="nombre" th:value="${empleado.nombre}"
-                                               th:disabled="${isDisabled}" class="form-control"
-                                               placeholder="Escriba el nombre de la empleado" required="required">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" id="nombre" name="nombre" th:value="${empleado.nombre}"
+                                            th:disabled="${isDisabled}" class="form-control"
+                                            placeholder="Escriba el nombre de la empleado" required="required">
 
-                                <label for="nombre">Apellido</label>
-                                <input type="text" id="apellido" name="apellido" th:value="${empleado.apellido}"
-                                                th:disabled="${isDisabled}" class="form-control"
-                                                placeholder="Escriba el apellido de la empleado" required="required">
-                                
-                                
-                                <label for="nombre">Legajo</label>
-                                <input type="text" id="legajo" name="legajo" th:value="${empleado.legajo}"
-                                                th:disabled="${isDisabled}" class="form-control"
-                                                placeholder="Escriba el legajo de la empleado" required="required">           
-                                
+                                        <label for="nombre">Apellido</label>
+                                        <input type="text" id="apellido" name="apellido" th:value="${empleado.apellido}"
+                                            th:disabled="${isDisabled}" class="form-control"
+                                            placeholder="Escriba el apellido de la empleado" required="required">
 
-                                <div class="form-group">
-                                    <label for="tipoEmpleados">Tipo Empleado</label>
-                                    <select id="tipoEmpleados" class="form-control" name="tipoEmpleado" th:disabled="${isDisabled}">
-                                        <option th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoEmpleado).values()}"
-                                                th:value="${tipo.name()}"
-                                                th:text="${tipo.name()}"
-                                                th:selected="${tipo.name() == empleado.tipoEmpleado.name()}">
-                                        </option>
-                                    </select>
-                                </div>
-                                                
-                                <div class="form-group">
-                                    <label for="negocios">Negocios</label>
-                                    <select id="negocios" class="form-control" name="negociosId[]" th:disabled="${isDisabled}" multiple>
-                                        <option th:each="negocio : ${negocios}" 
-                                                th:value="${negocio.id}" 
-                                                th:text="${negocio.nombre}" 
-                                                th:selected="${empleado.negocios.contains(negocio)}">
-                                        </option>
-                                    </select>
-                                </div>
-                                
-                                
 
+                                        <label for="nombre">Legajo</label>
+                                        <input type="text" id="legajo" name="legajo" th:value="${empleado.legajo}"
+                                            th:disabled="${isDisabled}" class="form-control"
+                                            placeholder="Escriba el legajo de la empleado" required="required">
+
+
+                                        <div class="form-group">
+                                            <label for="tipoEmpleados">Tipo Empleado</label>
+                                            <select id="tipoEmpleados" class="form-control" name="tipoEmpleado"
+                                                th:disabled="${isDisabled}">
+                                                <option th:each="tipo : ${tipoEmpleados}" th:value="${tipo.name()}"
+                                                    th:text="${tipo.name()}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="negocios">Negocios</label>
+                                            <select id="negocios" class="form-control" name="negociosId[]"
+                                                th:disabled="${isDisabled}" multiple required>
+                                                <option th:each="negocio : ${negocios}" th:value="${negocio.id}"
+                                                    th:text="${negocio.nombre}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                        th:disabled="${isDisabled}">
+                                        Aceptar
+                                    </button>
+                                    <a th:href="@{/empleado/cancelar}" class="btn btn-light"
+                                        title="Cancelar la edición.">
+                                        Cancelar
+                                    </a>
+
+                                </form>
                             </div>
-
-                            <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2" th:disabled="${isDisabled}">
-                                Aceptar
-                            </button>
-
-                            <button type="submit" title="Cancelar la edición." class="btn btn-light" th:disabled="${isDisabled}" th:href="@{/empelado/cancelarEditEmpelado}">
-                                Cancelar
-                            </button>
-
-                        </form></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<footer th:replace="~{fragments/footer.html :: footer_}" > </footer>
-<!-- JS -->
-<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
-<script th:src="@{/js/off-canvas.js}"></script>
-<script th:src="@{/js/hoverable-collapse.js}"></script>
-<script th:src="@{/js/template.js}"></script>
+    <footer th:replace="~{fragments/footer.html :: footer_}"> </footer>
+    <!-- JS -->
+    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+    <script th:src="@{/js/off-canvas.js}"></script>
+    <script th:src="@{/js/hoverable-collapse.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
 
 </body>
 

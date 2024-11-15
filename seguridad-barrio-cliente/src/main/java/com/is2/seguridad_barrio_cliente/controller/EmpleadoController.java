@@ -46,13 +46,13 @@ public class EmpleadoController {
     return viewEdit;
   }
 
-  @GetMapping("/baja")
-  public String baja(@RequestParam String id, RedirectAttributes attributes, Model model) {
+  @PostMapping("/baja")
+  public String baja(@RequestParam("id") String id, RedirectAttributes redirectAttributes, Model model) {
 
     try {
 
       empleadoService.eliminar(id);
-      attributes.addFlashAttribute("msgExito", "La acción fue realizada correctamente.");
+      redirectAttributes.addFlashAttribute("msgExito", "Empleado #" + id + " eliminado correctamente.");
       return redirectList;
 
     } catch (ErrorServiceException e) {
@@ -108,12 +108,12 @@ public class EmpleadoController {
   public String listarEmpleado(Model model) {
     try {
       List<PersonaDTO> listaEmpleado = empleadoService.listar();
-      System.out.println(listaEmpleado.getFirst().getLegajo());
       model.addAttribute("listaEmpleado", listaEmpleado);
 
     } catch (ErrorServiceException e) {
       model.addAttribute("msgError", e.getMessage());
     } catch (Exception e) {
+      e.printStackTrace();
       model.addAttribute("msgError", "Error de Sistema");
     }
     return viewList;
@@ -147,7 +147,7 @@ public class EmpleadoController {
 
   }
 
-  @GetMapping("/cancelarEditEmpleado")
+  @GetMapping("/cancelar")
   public String cancelarEdit() {
 
     return redirectList;
