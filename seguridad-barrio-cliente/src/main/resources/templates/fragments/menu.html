@@ -9,7 +9,7 @@
             </a>
         </li>
         <!--USUARIO -->
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
             <a class="nav-link" th:href="@{/usuario/listarUsuario}">
                 <i class="typcn typcn-user-add-outline menu-icon"></i>
                 <span class="menu-title">Usuarios</span>
@@ -18,8 +18,8 @@
 
         <!--DIRECCION -->
 
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#direccion" aria-expanded="false"
+        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
+            <a class=" nav-link" data-toggle="collapse" href="#direccion" aria-expanded="false"
                 aria-controls="direccion">
                 <i class="typcn typcn-location menu-icon"></i>
                 <span class="menu-title">Dirección</span>
@@ -86,7 +86,7 @@
         </li>
 
         <!-- UNIDAD DE NEGOCIO -->
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'PERSONAL')">
             <a class="nav-link" data-toggle="collapse" href="#unidadDeNegocio" aria-expanded="false"
                 aria-controls="unidadDeNegocio">
                 <i class="typcn typcn-home menu-icon"></i>
@@ -106,7 +106,7 @@
         </li>
 
         <!-- PERSONAS -->
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'PERSONAL')">
             <a class="nav-link" data-toggle="collapse" href="#personas" aria-expanded="false" aria-controls="personas">
                 <i class="typcn typcn-user menu-icon"></i>
                 <span class="menu-title">Personas</span>
@@ -126,7 +126,7 @@
                     </li>
                 </ul>
 
-                <ul class="nav flex-column sub-menu">
+                <ul sec:authorize="hasAnyRole('ADMIN')" class="nav flex-column sub-menu">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/empleado/listarEmpleado}">Empleados</a>
                     </li>
@@ -135,7 +135,7 @@
         </li>
 
         <!-- PLANILLA HORARIA -->
-        <li class="nav-item">
+        <li class="nav-item" sec:authorize="hasAnyRole('ADMIN')">
             <a class="nav-link" th:href="@{/planillaHoraria/listarPlanillaHoraria}">
                 <i class=" typcn typcn-time menu-icon"></i>
                 <span class="menu-title">Planilla horaria</span>

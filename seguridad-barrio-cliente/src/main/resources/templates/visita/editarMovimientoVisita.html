@@ -12,102 +12,108 @@
         <!-- Sidebar -->
         <div class="container-fluid page-body-wrapper">
             <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+            <div class="content-wrapper">
 
-            <!-- FORMULARIO -->
-            <div class="col-lg-12 grid-margin stretch-card">
-                <div class="card large-form">
-                    <div class="card">
-                        <div class="card-body">
+                <!-- FORMULARIO -->
+                <div class="col-lg-12 grid-margin stretch-card">
+                    <div class="card large-form">
+                        <div class="card">
+                            <div class="card-body">
 
-                            <h5 class="card-title">Movimiento de visita</h5>
+                                <h5 class="card-title">Movimiento de visita</h5>
 
-                            <form class="forms-sample" action="/movimientoVisita/aceptarEditMovimientoVisita"
-                                method="POST">
+                                <form class="forms-sample" action="/movimientoVisita/aceptarEditMovimientoVisita"
+                                    method="POST">
 
-                                <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
-                                <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
+                                    <p th:if="${msgExito != null}" th:text="${msgExito}" style="color:green;"></p>
+                                    <p th:if="${msgError != null}" th:text="${msgError}" style="color: red;"></p>
 
-                                <div class="form-group">
-                                    <!-- Campo oculto para ID -->
-                                    <input type="hidden" name="id"
-                                        th:value="${movimientoVisita.id != null ? movimientoVisita.id : 0}">
-
-                                    <!-- Fecha del Movimiento -->
-                                    <label for="fechasMovimiento">Fecha de la visita</label>
-                                    <input type="text" id="fechasMovimiento" name="fechasMovimiento" 
-                                    th:value="${movimientoVisita.fechasMovimientoAsString}" 
-                                    class="form-control datetimepicker" placeholder="Selecciona la fecha y hora" required="required">
-                                
-                                    <!-- Estado del Movimiento -->
-                                    <label for="estadoMovimiento">Estado del Movimiento</label>
-                                    <select id="estadoMovimiento" class="form-control" name="estadoMovimiento"
-                                        th:disabled="${isDisabled}">
-                                        <option
-                                            th:each="estado : ${T(com.is2.seguridad_barrio_cliente.enumeration.EstadoMovimiento).values()}"
-                                            th:value="${estado}" th:text="${estado}"
-                                            th:selected="${movimientoVisita.estadoMovimiento == estado}">
-                                        </option>
-                                    </select>
-
-                                    <!-- Tipo de Movilidad -->
-                                    <label for="tipoMovilidad">Tipo de Movilidad</label>
-                                    <select id="tipoMovilidad" class="form-control" name="tipoMovilidad"
-                                        th:disabled="${isDisabled}">
-                                        <option
-                                            th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoMovilidad).values()}"
-                                            th:value="${tipo}" th:text="${tipo}"
-                                            th:selected="${movimientoVisita.tipoMovilidad == tipo}">
-                                        </option>
-                                    </select>
-
-                                    <!-- Descripción de Movilidad -->
-                                    <label for="descripcionMovilidad">Descripción de Movilidad</label>
-                                    <input type="text" id="descripcionMovilidad" name="descripcionMovilidad"
-                                        th:value="${movimientoVisita.descripcionMovilidad}" th:disabled="${isDisabled}"
-                                        class="form-control" placeholder="Descripción de Movilidad">
-
-                                    <!-- Visitante -->
                                     <div class="form-group">
-                                        <label for="visitantes">Visitante</label>
-                                        <select id="listaVisitantes" class="form-control" name="idVisitante"
+                                        <!-- Campo oculto para ID -->
+                                        <input type="hidden" name="id"
+                                            th:value="${movimientoVisita.id != null ? movimientoVisita.id : 0}">
+
+                                        <!-- Fecha del Movimiento -->
+                                        <label for="fechasMovimiento">Fecha de la visita</label>
+                                        <input type="text" id="fechasMovimiento" name="fechasMovimiento"
+                                            th:value="${movimientoVisita.fechasMovimientoAsString}"
+                                            class="form-control datetimepicker" placeholder="Selecciona la fecha y hora"
+                                            required="required">
+
+                                        <!-- Estado del Movimiento -->
+                                        <label for="estadoMovimiento">Estado del Movimiento</label>
+                                        <select id="estadoMovimiento" class="form-control" name="estadoMovimiento"
                                             th:disabled="${isDisabled}">
-                                            <option th:each="visitante : ${listaVisitantes}" th:value="${visitante.id}"
-                                                th:text="${visitante.nombre + ' ' + visitante.apellido}">
+                                            <option
+                                                th:each="estado : ${T(com.is2.seguridad_barrio_cliente.enumeration.EstadoMovimiento).values()}"
+                                                th:value="${estado}" th:text="${estado}"
+                                                th:selected="${movimientoVisita.estadoMovimiento == estado}">
                                             </option>
                                         </select>
-                                    </div>
 
-                                    <!-- Inmuebles -->
-                                    <div class="form-group">
-                                        <label for="inmuebles">Inmuebles</label>
-                                        <select id="inmuebles" class="form-control" name="idInmueble"
+                                        <!-- Tipo de Movilidad -->
+                                        <label for="tipoMovilidad">Tipo de Movilidad</label>
+                                        <select id="tipoMovilidad" class="form-control" name="tipoMovilidad"
                                             th:disabled="${isDisabled}">
-                                            <option th:each="inmueble : ${inmuebles}" th:value="${inmueble.id}"
-                                                th:text="${inmueble.calle + ' ' + inmueble.manzana + ' ' + inmueble.numeracion}">
+                                            <option
+                                                th:each="tipo : ${T(com.is2.seguridad_barrio_cliente.enumeration.TipoMovilidad).values()}"
+                                                th:value="${tipo}" th:text="${tipo}"
+                                                th:selected="${movimientoVisita.tipoMovilidad == tipo}">
                                             </option>
                                         </select>
-                                    </div>
 
-                                    <!-- Observación -->
-                                    <label for="observacion">Observación</label>
-                                    <textarea id="observacion" name="observacion" th:disabled="${isDisabled}"
-                                        class="form-control" placeholder="Observación" rows="3"
-                                        th:text="${movimientoVisita.observacion}">
+                                        <!-- Descripción de Movilidad -->
+                                        <label for="descripcionMovilidad">Descripción de Movilidad</label>
+                                        <input type="text" id="descripcionMovilidad" name="descripcionMovilidad"
+                                            th:value="${movimientoVisita.descripcionMovilidad}"
+                                            th:disabled="${isDisabled}" class="form-control"
+                                            placeholder="Descripción de Movilidad">
+
+                                        <!-- Visitante -->
+                                        <div class="form-group">
+                                            <label for="visitantes">Visitante</label>
+                                            <select id="listaVisitantes" class="form-control" name="idVisitante"
+                                                th:disabled="${isDisabled}">
+                                                <option th:each="visitante : ${listaVisitantes}"
+                                                    th:value="${visitante.id}"
+                                                    th:text="${visitante.nombre + ' ' + visitante.apellido}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Inmuebles -->
+                                        <div class="form-group">
+                                            <label for="inmuebles">Inmuebles</label>
+                                            <select id="inmuebles" class="form-control" name="idInmueble"
+                                                th:disabled="${isDisabled}">
+                                                <option th:each="inmueble : ${inmuebles}" th:value="${inmueble.id}"
+                                                    th:text="${inmueble.calle + ' ' + inmueble.manzana + ' ' + inmueble.numeracion}">
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Observación -->
+                                        <label for="observacion">Observación</label>
+                                        <textarea id="observacion" name="observacion" th:disabled="${isDisabled}"
+                                            class="form-control" placeholder="Observación" rows="3"
+                                            th:text="${movimientoVisita.observacion}">
                                     </textarea>
 
-                                </div>
+                                    </div>
 
 
-                                <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
-                                    th:disabled="${isDisabled}">
-                                    Aceptar
-                                </button>
+                                    <button type="submit" title="Guardar el registro." class="btn btn-primary mr-2"
+                                        th:disabled="${isDisabled}">
+                                        Aceptar
+                                    </button>
 
-                                <a href="#" th:href="@{/movimientoVisita/cancelarEditMovimientoVisita}" class="btn btn-light" title="Cancelar la edición.">
-                                    Cancelar
-                                </a>
+                                    <a href="#" th:href="@{/movimientoVisita/cancelar}" class="btn btn-light"
+                                        title="Cancelar la edición.">
+                                        Cancelar
+                                    </a>
 
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,7 +129,7 @@
     <script th:src="@{/js/template.js}"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             flatpickr(".datetimepicker", {
                 enableTime: true,
                 dateFormat: "Y-m-d H:i", // Formato compatible con tu backend
