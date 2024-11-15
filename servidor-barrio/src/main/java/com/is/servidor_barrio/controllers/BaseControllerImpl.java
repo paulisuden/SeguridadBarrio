@@ -14,6 +14,8 @@ import com.is.servidor_barrio.business.domain.dto.BaseDto;
 import com.is.servidor_barrio.business.domain.entity.Base;
 import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 
+import jakarta.validation.Valid;
+
 public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, DE, F extends BaseFacadeImpl<E, D, DC, DE, String>>
     implements BaseController<E, D, DC, DE, String> {
   @Autowired
@@ -50,7 +52,8 @@ public abstract class BaseControllerImpl<E extends Base, D extends BaseDto, DC, 
   }
 
   @PostMapping("")
-  public ResponseEntity<?> save(@RequestBody DC dto) {
+  //probar valid
+  public ResponseEntity<?> save(@Valid @RequestBody DC dto) {
     try {
       System.out.println("ENTRO A CONTOLLER SERVIDOR " + dto.getClass());
       return ResponseEntity.status(HttpStatus.OK).body(facade.save(dto));

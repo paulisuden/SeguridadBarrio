@@ -1,7 +1,7 @@
 package com.is.servidor_barrio.business.domain.entity;
 
 import jakarta.persistence.Entity;
-
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Entity
@@ -10,6 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pais extends Base {
-
+    @NotEmpty(message = "Debe indicar el nombre")
     private String nombre;
 }
