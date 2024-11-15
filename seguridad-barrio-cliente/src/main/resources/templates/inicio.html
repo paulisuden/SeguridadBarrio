@@ -12,13 +12,45 @@
 
         <!-- Sidebar -->
         <div class="container-fluid page-body-wrapper">
-            <nav th:replace="~{fragments/menu.html :: sideBar}"></nav>
+            <nav th:fragment="sideBar" class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+            
+                    <!--DASHBOARD -->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/inicio}">
+                            <i class="typcn typcn-arrow-left-thick menu-icon"></i>
+                            <span class="menu-title">HOME</span>
+                        </a>
+                    </li>
+
+                    <!-- VISITAS -->
+            
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#visita" aria-expanded="false" aria-controls="visita">
+                            <i class="typcn typcn-user menu-icon"></i>
+                            <span class="menu-title">Visitas</span>
+                            <i class="menu-arrow"></i>
+            
+                        </a>
+                        <div class="collapse" id="visita">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/visitante/listarVisitante}">Visitas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/movimientoVisita/listarMovimientoVisita}">Movimientos</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
 
             <!-- Main Content -->
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">HOME</h4>
+                        <h4 class="card-title">HOME HABITANTE</h4>
                     </div>
                 </div>
             </div>

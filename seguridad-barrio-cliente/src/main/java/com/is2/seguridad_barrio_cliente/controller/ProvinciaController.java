@@ -25,9 +25,9 @@ public class ProvinciaController {
     @Autowired
     private PaisService paisService;
 
-    private String viewList = "direccion/listarProvincia.html";
-    private String redirectList = "redirect:/provincia/listarProvincia";
-    private String viewEdit = "direccion/editarProvincia.html";
+    private String viewList = "listarProvincia.html";
+    private String redirectList = "redirect:/listarProvincia";
+    private String viewEdit = "editarProvincia.html";
 
     @GetMapping("/altaProvincia")
     public String alta(ProvinciaDTO provincia, Model model) throws ErrorServiceException {

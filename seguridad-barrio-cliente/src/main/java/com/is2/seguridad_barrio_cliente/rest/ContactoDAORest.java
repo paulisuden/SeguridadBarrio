@@ -31,7 +31,6 @@ public class ContactoDAORest {
 
     public ContactoDTO buscar(String id) throws ErrorServiceException {
 
-
         try {
 
             String uri = API_PATH + "/" + id;

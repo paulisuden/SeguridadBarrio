@@ -24,9 +24,9 @@ public class ContactoController {
     @Autowired
     private ContactoService contactoService;
 
-    private String viewList = "direccion/listarContacto.html";
-    private String redirectList = "redirect:/contacto/listarContacto";
-    private String viewEdit = "direccion/editarContacto.html";
+    private String viewList = "listarContacto.html";
+    private String redirectList = "redirect:/listarContacto";
+    private String viewEdit = "editarContacto.html";
 
     @GetMapping("/altaContacto")
     public String alta(ContactoDTO contacto, Model model) {

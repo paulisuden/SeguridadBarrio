@@ -26,9 +26,9 @@ public class InmuebleController {
     @Autowired
     private NegocioService unidadDeNegocioService;
 
-    private String viewList = "inmueble/listarInmueble.html";
-    private String redirectList = "redirect:/inmueble/listarInmueble";
-    private String viewEdit = "inmueble/editarInmueble.html";
+    private String viewList = "listarInmueble.html";
+    private String redirectList = "redirect:/listarInmueble";
+    private String viewEdit = "editarInmueble.html";
 
     @GetMapping("/altaInmueble")
     public String alta(InmuebleDTO inmueble, Model model) throws ErrorServiceException {

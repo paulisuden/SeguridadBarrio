@@ -28,9 +28,9 @@ public class EmpresaController {
     @Autowired
     private DireccionService direccionService;
 
-    private String viewList = "direccion/listarEmpresa.html";
-    private String redirectList = "redirect:/empresa/listarEmpresa";
-    private String viewEdit = "direccion/editarEmpresa.html";
+    private String viewList = "listarEmpresa.html";
+    private String redirectList = "redirect:/listarEmpresa";
+    private String viewEdit = "editarEmpresa.html";
 
     @GetMapping("/altaEmpresa")
     public String alta(

@@ -25,9 +25,9 @@ public class LocalidadController {
     @Autowired
     private LocalidadService localidadService;
 
-    private String viewList = "direccion/listarLocalidad.html";
-    private String redirectList = "redirect:/localidad/listarLocalidad";
-    private String viewEdit = "direccion/editarLocalidad.html";
+    private String viewList = "listarLocalidad.html";
+    private String redirectList = "redirect:/listarLocalidad";
+    private String viewEdit = "editarLocalidad.html";
 
     @GetMapping("/altaLocalidad")
     public String alta(LocalidadDTO localidad, Model model) throws ErrorServiceException {

@@ -1,6 +1,8 @@
 # Usa la imagen base de OpenJDK 17 en una versión ligera
 FROM openjdk:21-jdk-slim
 
+WORKDIR /app
+
 # Define la variable ARG para el archivo JAR
 ARG JAR_FILE=target/landing-0.0.1-SNAPSHOT.jar
 

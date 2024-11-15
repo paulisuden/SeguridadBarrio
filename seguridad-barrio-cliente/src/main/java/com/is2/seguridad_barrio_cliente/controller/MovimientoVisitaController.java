@@ -46,9 +46,9 @@ public class MovimientoVisitaController {
     @Autowired
     private HabitanteService habitanteService;
 
-    private String viewList = "visita/listarMovimientoVisita.html";
-    private String redirectList = "redirect:/movimientoVisita/listarMovimientoVisita";
-    private String viewEdit = "visita/editarMovimientoVisita.html";
+    private String viewList = "listarMovimientoVisita.html";
+    private String redirectList = "redirect:/listarMovimientoVisita";
+    private String viewEdit = "editarMovimientoVisita.html";
 
     @GetMapping("/altaMovimientoVisita")
     public String alta(MovimientoVisitaDTO movimientoVisita, Model model, Authentication authentication)

@@ -21,7 +21,7 @@ public class NegocioDAORest {
 
     try {
 
-      String uri = "http://localhost:8081/api/negocio/" + id;
+      String uri = "${URL}/api/negocio/" + id;
 
       ResponseEntity<NegocioDTO> response = restTemplate.getForEntity(uri, NegocioDTO.class);
       NegocioDTO negocio = response.getBody();
@@ -36,7 +36,7 @@ public class NegocioDAORest {
 
   public List<NegocioDTO> listar() throws ErrorServiceException {
     try {
-      String uri = "http://localhost:8081/api/negocio";
+      String uri = "${URL}/api/negocio";
 
       ResponseEntity<NegocioDTO[]> response = restTemplate.getForEntity(uri, NegocioDTO[].class);
       NegocioDTO[] negocios = response.getBody();

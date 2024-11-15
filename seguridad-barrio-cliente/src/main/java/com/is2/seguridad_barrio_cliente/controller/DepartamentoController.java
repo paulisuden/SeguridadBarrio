@@ -25,9 +25,9 @@ public class DepartamentoController {
     @Autowired
     private ProvinciaService provinciaService;
 
-    private String viewList = "direccion/listarDepartamento.html";
-    private String redirectList = "redirect:/departamento/listarDepartamento";
-    private String viewEdit = "direccion/editarDepartamento.html";
+    private String viewList = "listarDepartamento.html";
+    private String redirectList = "redirect:/listarDepartamento";
+    private String viewEdit = "editarDepartamento.html";
 
     @GetMapping("/altaDepartamento")
     public String alta(DepartamentoDTO departamento, Model model) throws ErrorServiceException {

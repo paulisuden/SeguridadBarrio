@@ -33,9 +33,9 @@ public class UsuarioController {
 
     @Autowired
     private ImagenService imagenService;
-    private String viewList = "usuario/listarUsuario.html";
-    private String redirectList = "redirect:/usuario/listarUsuario";
-    private String viewEdit = "usuario/editarUsuario.html";
+    private String viewList = "listarUsuario.html";
+    private String redirectList = "redirect:/listarUsuario";
+    private String viewEdit = "editarUsuario.html";
 
     @GetMapping("/altaUsuario")
     public String alta(

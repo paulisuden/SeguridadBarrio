@@ -26,9 +26,9 @@ public class HabitanteController {
   @Autowired
   private InmuebleService inmuebleService;
 
-  private String viewList = "persona/listarHabitante.html";
-  private String redirectList = "redirect:/habitante/listarHabitante";
-  private String viewEdit = "persona/editarHabitante.html";
+  private String viewList = "listarHabitante.html";
+  private String redirectList = "redirect:/listarHabitante";
+  private String viewEdit = "editarHabitante.html";
 
   @GetMapping("/altaHabitante")
   public String alta(PersonaDTO habitante, Model model) throws ErrorServiceException {

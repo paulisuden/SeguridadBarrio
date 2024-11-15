@@ -16,7 +16,7 @@ public class ImagenDAORest {
     @Autowired
     private RestTemplate restTemplate;
 
-    static final String API_PATH = "http://localhost:8081/api/imagen";
+    static final String API_PATH = "${URL}/api/imagen";
 
     public ImagenDTO buscar(String id) throws ErrorServiceException {
 

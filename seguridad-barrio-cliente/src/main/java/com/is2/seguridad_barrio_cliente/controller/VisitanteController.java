@@ -32,9 +32,9 @@ public class VisitanteController {
     @Autowired
     private VisitanteService visitanteService;
 
-    private String viewList = "visita/listarVisitante.html";
-    private String redirectList = "redirect:/visitante/listarVisitante";
-    private String viewEdit = "visita/editarVisitante.html";
+    private String viewList = "listarVisitante.html";
+    private String redirectList = "redirect:/listarVisitante";
+    private String viewEdit = "editarVisitante.html";
 
     @GetMapping("/altaVisitante")
     public String alta(VisitanteDTO visitante, Model model, Authentication authentication)

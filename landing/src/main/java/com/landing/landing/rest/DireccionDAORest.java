@@ -18,7 +18,7 @@ public class DireccionDAORest {
 
     public void crear(DireccionDTO direccion) throws ErrorServiceException {
         try {
-            String uri = "http://localhost:8081/api/direccion";
+            String uri = "${URL}/api/direccion";
             restTemplate.postForEntity(uri, direccion, DireccionDTO.class);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -30,7 +30,7 @@ public class DireccionDAORest {
 
         try {
 
-            String uri = "http://localhost:8081/api/direccion/" + id;
+            String uri = "${URL}/api/direccion/" + id;
 
             ResponseEntity<DireccionDTO> response = restTemplate.getForEntity(uri, DireccionDTO.class);
             DireccionDTO direccion = response.getBody();
@@ -47,7 +47,7 @@ public class DireccionDAORest {
 
         try {
 
-            String uri = "http://localhost:8081/api/direccion/" + direccion.getId();
+            String uri = "${URL}/api/direccion/" + direccion.getId();
             restTemplate.put(uri, direccion);
 
         } catch (Exception ex) {
@@ -60,7 +60,7 @@ public class DireccionDAORest {
 
         try {
 
-            String uri = "http://localhost:8081/api/direccion/" + id;
+            String uri = "${URL}/api/direccion/" + id;
             restTemplate.delete(uri);
 
         } catch (Exception ex) {
@@ -71,7 +71,7 @@ public class DireccionDAORest {
 
     public List<DireccionDTO> listar() throws ErrorServiceException {
         try {
-            String uri = "http://localhost:8081/api/direccion";
+            String uri = "${URL}/api/direccion";
 
             ResponseEntity<DireccionDTO[]> response = restTemplate.getForEntity(uri, DireccionDTO[].class);
             DireccionDTO[] direcciones = response.getBody();
@@ -87,7 +87,7 @@ public class DireccionDAORest {
             throws ErrorServiceException {
         try {
 
-            String uri = "http://localhost:8081/api/direccion/?localidadId=" + idLocalidad + "&nombre=" + nombre;
+            String uri = "${URL}/api/direccion/?localidadId=" + idLocalidad + "&nombre=" + nombre;
 
             ResponseEntity<DireccionDTO> response = restTemplate.getForEntity(uri, DireccionDTO.class);
 

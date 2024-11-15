@@ -88,7 +88,8 @@ public class MovimientoVisitaDAORest {
         try {
             String uri = "http://localhost:8081/api/movimientoVisita/listarPorInmueble/" + id;
 
-            ResponseEntity<MovimientoVisitaDTO[]> response = restTemplate.getForEntity(uri,MovimientoVisitaDTO[].class);
+            ResponseEntity<MovimientoVisitaDTO[]> response = restTemplate.getForEntity(uri,
+                    MovimientoVisitaDTO[].class);
 
             MovimientoVisitaDTO[] movimientos = response.getBody();
 
@@ -99,7 +100,7 @@ public class MovimientoVisitaDAORest {
         } catch (Exception ex) {
 
             ex.printStackTrace();
-            
+
             throw new ErrorServiceException("Error de Sistemas");
         }
     }

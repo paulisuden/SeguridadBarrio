@@ -27,9 +27,9 @@ public class EmpleadoController {
   @Autowired
   private NegocioService negocioService;
 
-  private String viewList = "persona/listarEmpleado.html";
-  private String redirectList = "redirect:/empleado/listarEmpleado";
-  private String viewEdit = "persona/editarEmpleado.html";
+  private String viewList = "listarEmpleado.html";
+  private String redirectList = "redirect:/listarEmpleado";
+  private String viewEdit = "editarEmpleado.html";
 
   @GetMapping("/altaEmpleado")
   public String alta(PersonaDTO empleado, Model model) throws ErrorServiceException {

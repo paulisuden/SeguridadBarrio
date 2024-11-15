@@ -25,9 +25,9 @@ public class PlanillaHorariaController {
     private PlanillaHorariaService planillaHorariaService;
     // @Autowired private EmpleadoService empleadoService;
 
-    private String viewList = "horarios/listarPlanillaHoraria.html";
-    private String redirectList = "redirect:/planillaHoraria/listarPlanillaHoraria";
-    private String viewEdit = "horarios/editarPlanillaHoraria.html";
+    private String viewList = "listarPlanillaHoraria.html";
+    private String redirectList = "redirect:/listarPlanillaHoraria";
+    private String viewEdit = "editarPlanillaHoraria.html";
 
     @GetMapping("/altaPlanillaHoraria")
     public String alta(PlanillaHorariaDTO planillaHoraria, Model model) throws ErrorServiceException {

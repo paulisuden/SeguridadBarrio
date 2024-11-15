@@ -25,9 +25,9 @@ public class DireccionController {
     @Autowired
     private DireccionService direccionService;
 
-    private String viewList = "direccion/listarDireccion.html";
-    private String redirectList = "redirect:/direccion/listarDireccion";
-    private String viewEdit = "direccion/editarDireccion.html";
+    private String viewList = "listarDireccion.html";
+    private String redirectList = "redirect:/listarDireccion";
+    private String viewEdit = "editarDireccion.html";
 
     @GetMapping("/altaDireccion")
     public String alta(DireccionDTO direccion, Model model) throws ErrorServiceException {

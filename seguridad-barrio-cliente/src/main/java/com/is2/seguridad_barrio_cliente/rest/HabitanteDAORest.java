@@ -85,7 +85,7 @@ public class HabitanteDAORest {
     }
   }
 
-  public PersonaDTO buscarPorUsuarioId(String id)throws ErrorServiceException {
+  public PersonaDTO buscarPorUsuarioId(String id) throws ErrorServiceException {
     try {
 
       String uri = "http://localhost:8081/api/persona/usuario/" + id;

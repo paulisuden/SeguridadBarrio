@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
-    private String viewLogin = "/login";
+    private String viewLogin = "login.html";
     private String redInicio = "redirect:/inicio";
 
     @GetMapping("/login")
@@ -22,7 +22,7 @@ public class LoginController {
 
     @GetMapping("/login/send")
     public String loginForm(@RequestParam(value = "email") String email, @RequestParam(value = "password") String clave,
-                            HttpSession session, ModelMap modelo) {
+            HttpSession session, ModelMap modelo) {
 
         return redInicio;
     }

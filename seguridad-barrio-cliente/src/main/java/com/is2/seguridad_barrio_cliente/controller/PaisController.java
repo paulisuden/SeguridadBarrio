@@ -21,9 +21,9 @@ public class PaisController {
     @Autowired
     private PaisService paisService;
 
-    private String viewList = "direccion/listarPais.html";
-    private String redirectList = "redirect:/pais/listarPais";
-    private String viewEdit = "direccion/editarPais.html";
+    private String viewList = "listarPais.html";
+    private String redirectList = "redirect:/listarPais";
+    private String viewEdit = "editarPais.html";
 
     @GetMapping("/altaPais")
     public String alta(PaisDTO pais, Model model) {

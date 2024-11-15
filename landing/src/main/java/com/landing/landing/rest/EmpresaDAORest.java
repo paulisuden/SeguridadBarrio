@@ -17,7 +17,7 @@ public class EmpresaDAORest {
     @Autowired
     private RestTemplate restTemplate;
 
-    static final String API_PATH = "http://localhost:8081/api/empresa";
+    static final String API_PATH = "${URL}/api/empresa";
 
     public EmpresaDTO buscar(String id) throws ErrorServiceException {
 

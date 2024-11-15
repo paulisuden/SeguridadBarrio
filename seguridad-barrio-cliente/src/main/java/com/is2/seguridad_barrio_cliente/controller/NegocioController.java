@@ -33,9 +33,9 @@ public class NegocioController {
   @Autowired
   private DireccionService direccionService;
 
-  private String viewList = "unidadDeNegocio/listarNegocio.html";
-  private String redirectList = "redirect:/negocio/listarNegocio";
-  private String viewEdit = "unidadDeNegocio/editarNegocio.html";
+  private String viewList = "listarNegocio.html";
+  private String redirectList = "redirect:/listarNegocio";
+  private String viewEdit = "editarNegocio.html";
 
   @GetMapping("/altaNegocio")
   public String alta(NegocioDTO negocio, Model model) throws ErrorServiceException {

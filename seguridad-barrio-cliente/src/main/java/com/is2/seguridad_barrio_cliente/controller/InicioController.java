@@ -53,7 +53,7 @@ public class InicioController {
             }
         } catch (Exception e) {
             model.addAttribute("mensajeError", e.getMessage());
-            return "visita/listarMovimientoVisita";
+            return "listarMovimientoVisita";
         }
     }
 
