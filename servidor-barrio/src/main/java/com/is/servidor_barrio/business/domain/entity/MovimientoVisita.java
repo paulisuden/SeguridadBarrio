@@ -1,6 +1,7 @@
 package com.is.servidor_barrio.business.domain.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import com.is.servidor_barrio.business.domain.enumeration.EstadoMovimiento;
 import com.is.servidor_barrio.business.domain.enumeration.TipoMovilidad;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovimientoVisita extends Base {
-  private Date fechasMovimiento;
+  private LocalDateTime fechasMovimiento;
   private String observacion;
   private EstadoMovimiento estadoMovimiento;
   private TipoMovilidad tipoMovilidad;

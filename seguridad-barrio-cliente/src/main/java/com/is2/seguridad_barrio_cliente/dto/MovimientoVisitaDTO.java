@@ -5,12 +5,13 @@ import com.is2.seguridad_barrio_cliente.enumeration.TipoMovilidad;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 public class MovimientoVisitaDTO implements Serializable {
     private String id;
-    private Date fechasMovimiento;
+    private LocalDateTime fechasMovimiento;
     private String observacion;
     private EstadoMovimiento estadoMovimiento;
     private TipoMovilidad tipoMovilidad;
@@ -19,4 +20,8 @@ public class MovimientoVisitaDTO implements Serializable {
     private String idVisitante;
     private InmuebleDTO inmueble;
     private String idInmueble;
+
+    public String getFechasMovimientoAsString() {
+        return fechasMovimiento != null ? fechasMovimiento.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) : "";
+    }
 }

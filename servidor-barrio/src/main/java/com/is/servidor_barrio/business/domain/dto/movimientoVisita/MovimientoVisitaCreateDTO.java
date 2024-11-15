@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +16,7 @@ import java.sql.Date;
 @Setter
 public class MovimientoVisitaCreateDTO {
 
-    private Date fechasMovimiento;
+    private LocalDateTime fechasMovimiento;
     private String observacion;
     private EstadoMovimiento estadoMovimiento;
     private TipoMovilidad tipoMovilidad;

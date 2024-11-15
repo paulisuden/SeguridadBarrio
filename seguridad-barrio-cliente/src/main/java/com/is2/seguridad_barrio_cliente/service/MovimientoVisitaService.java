@@ -8,7 +8,7 @@ import com.is2.seguridad_barrio_cliente.rest.MovimientoVisitaDAORest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,7 +17,7 @@ public class MovimientoVisitaService {
     @Autowired
     private MovimientoVisitaDAORest dao;
 
-    public void crear(Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
+    public void crear(LocalDateTime fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
             TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble)
             throws ErrorServiceException {
 
@@ -63,7 +63,7 @@ public class MovimientoVisitaService {
         }
     }
 
-    public void modificar(String id, Date fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
+    public void modificar(String id, LocalDateTime fechasMovimiento, String observacion, EstadoMovimiento estadoMovimiento,
             TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble)
             throws ErrorServiceException {
 

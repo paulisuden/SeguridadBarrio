@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h5 class="card-title">Movimiento de Visita</h5>
+                            <h5 class="card-title">Movimiento de visita</h5>
 
                             <form class="forms-sample" action="/movimientoVisita/aceptarEditMovimientoVisita"
                                 method="POST">
@@ -33,19 +33,11 @@
                                         th:value="${movimientoVisita.id != null ? movimientoVisita.id : 0}">
 
                                     <!-- Fecha del Movimiento -->
-                                    <label for="fechasMovimiento">Fecha del Movimiento</label>
-                                    <input type="date" id="fechasMovimiento" name="fechasMovimiento"
-                                        th:value="${#dates.format(movimientoVisita.fechasMovimiento, 'yyyy-MM-dd')}"
-                                        th:disabled="${isDisabled}" class="form-control"
-                                        placeholder="Fecha del Movimiento" required="required">
-
-                                    <!-- Observación -->
-                                    <label for="observacion">Observación</label>
-                                    <textarea id="observacion" name="observacion" th:disabled="${isDisabled}"
-                                        class="form-control" placeholder="Observación" rows="3"
-                                        th:text="${movimientoVisita.observacion}">
-                                </textarea>
-
+                                    <label for="fechasMovimiento">Fecha de la visita</label>
+                                    <input type="text" id="fechasMovimiento" name="fechasMovimiento" 
+                                    th:value="${movimientoVisita.fechasMovimientoAsString}" 
+                                    class="form-control datetimepicker" placeholder="Selecciona la fecha y hora" required="required">
+                                
                                     <!-- Estado del Movimiento -->
                                     <label for="estadoMovimiento">Estado del Movimiento</label>
                                     <select id="estadoMovimiento" class="form-control" name="estadoMovimiento"
@@ -77,9 +69,9 @@
                                     <!-- Visitante -->
                                     <div class="form-group">
                                         <label for="visitantes">Visitante</label>
-                                        <select id="visitantes" class="form-control" name="idVisitante"
+                                        <select id="listaVisitantes" class="form-control" name="idVisitante"
                                             th:disabled="${isDisabled}">
-                                            <option th:each="visitante : ${visitantes}" th:value="${visitante.id}"
+                                            <option th:each="visitante : ${listaVisitantes}" th:value="${visitante.id}"
                                                 th:text="${visitante.nombre + ' ' + visitante.apellido}">
                                             </option>
                                         </select>
@@ -96,6 +88,13 @@
                                         </select>
                                     </div>
 
+                                    <!-- Observación -->
+                                    <label for="observacion">Observación</label>
+                                    <textarea id="observacion" name="observacion" th:disabled="${isDisabled}"
+                                        class="form-control" placeholder="Observación" rows="3"
+                                        th:text="${movimientoVisita.observacion}">
+                                    </textarea>
+
                                 </div>
 
 
@@ -104,10 +103,9 @@
                                     Aceptar
                                 </button>
 
-                                <button type="submit" title="Cancelar la edición." class="btn btn-light"
-                                    th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                                <a href="#" th:href="@{/movimientoVisita/cancelarEditMovimientoVisita}" class="btn btn-light" title="Cancelar la edición.">
                                     Cancelar
-                                </button>
+                                </a>
 
                             </form>
                         </div>
@@ -123,6 +121,16 @@
     <script th:src="@{/js/off-canvas.js}"></script>
     <script th:src="@{/js/hoverable-collapse.js}"></script>
     <script th:src="@{/js/template.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr(".datetimepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i", // Formato compatible con tu backend
+                time_24hr: true
+            });
+        });
+    </script>
 
 </body>
 

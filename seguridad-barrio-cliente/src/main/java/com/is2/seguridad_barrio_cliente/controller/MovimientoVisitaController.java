@@ -23,9 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.sql.Date;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/movimientoVisita")
@@ -49,12 +50,12 @@ public class MovimientoVisitaController {
     public String alta(MovimientoVisitaDTO movimientoVisita, Model model, Authentication authentication) throws ErrorServiceException {
 
         movimientoVisita = new MovimientoVisitaDTO();
+        List<VisitanteDTO> visitantes = visitanteServie.listar();
+        model.addAttribute("listaVisitantes", visitantes);
 
         if (authentication != null) {
             boolean hasHabitanteRole = authentication.getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_HABITANTE"));
-                List<VisitanteDTO> visitantes = visitanteServie.listar();
-                model.addAttribute("listaVisitantes", visitantes);
             if (hasHabitanteRole){
                 String name = authentication.getName(); //email
                 UsuarioDTO usuarioDTO = usuarioService.buscarCuenta(name);
@@ -175,12 +176,18 @@ public class MovimientoVisitaController {
     ///////// FALTA AGREGAR EL INMUEBLE
     @PostMapping("/aceptarEditMovimientoVisita")
     public String aceptarEdit(@RequestParam(required = false, defaultValue = "0") String id,
-            @RequestParam Date fechasMovimiento, @RequestParam String observacion,
+            @RequestParam("fechasMovimiento") String fechasMovimientoStr, @RequestParam String observacion,
             @RequestParam EstadoMovimiento estadoMovimiento, @RequestParam TipoMovilidad tipoMovilidad,
             @RequestParam String descripcionMovilidad, @RequestParam String idVisitante,
             @RequestParam String idInmueble,
             RedirectAttributes attributes, Model model) {
+        
+        LocalDateTime fechasMovimiento = null;
+
         try {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            fechasMovimiento = LocalDateTime.parse(fechasMovimientoStr, formatter);
 
             if ("0".equals(id)) {
 
@@ -216,7 +223,7 @@ public class MovimientoVisitaController {
         return redirectList;
     }
 
-    private String error(String mensaje, Model model, String id, Date fechasMovimiento, String observacion,
+    private String error(String mensaje, Model model, String id, LocalDateTime fechasMovimiento, String observacion,
             EstadoMovimiento estadoMovimiento,
             TipoMovilidad tipoMovilidad, String descripcionMovilidad, String idVisitante, String idInmueble) {
 
