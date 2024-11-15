@@ -76,7 +76,8 @@
                                                 th:disabled="${isDisabled}">
                                                 <option th:each="visitante : ${listaVisitantes}"
                                                     th:value="${visitante.id}"
-                                                    th:text="${visitante.nombre + ' ' + visitante.apellido}">
+                                                    th:text="${visitante.nombre + ' ' + visitante.apellido}"
+                                                    th:selected="${visitante.id == movimientoVisita?.visitante?.id}">
                                                 </option>
                                             </select>
                                         </div>
@@ -87,9 +88,11 @@
                                             <select id="inmuebles" class="form-control" name="idInmueble"
                                                 th:disabled="${isDisabled}">
                                                 <option th:each="inmueble : ${inmuebles}" th:value="${inmueble.id}"
-                                                    th:text="${inmueble.calle + ' ' + inmueble.manzana + ' ' + inmueble.numeracion}">
+                                                    th:text="${inmueble.calle + ' ' + inmueble.manzana + ' ' + inmueble.numeracion}"
+                                                    th:selected="${inmueble.id == movimientoVisita?.inmueble?.id}">
                                                 </option>
                                             </select>
+
                                         </div>
 
                                         <!-- Observación -->
