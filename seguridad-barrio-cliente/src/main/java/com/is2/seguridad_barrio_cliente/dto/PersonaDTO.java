@@ -11,8 +11,8 @@ public class PersonaDTO {
   private String id;
   private String nombre;
   private String apellido;
-  // private String usuarioId;
-  // private UsuarioDTO usuario;
+  private String usuarioId;
+  private UsuarioDTO usuario;
   private String legajo;
   private TipoEmpleado tipoEmpleado;
   private String[] negociosId;
