@@ -66,11 +66,10 @@
                                         th:value="${movimientoVisita.id != null ? movimientoVisita.id : 0}">
 
                                     <!-- Fecha del Movimiento -->
-                                    <label for="fechasMovimiento">Fecha del Movimiento</label>
-                                    <input type="date" id="fechasMovimiento" name="fechasMovimiento"
-                                        th:value="${#dates.format(movimientoVisita.fechasMovimiento, 'yyyy-MM-dd')}"
-                                        th:disabled="${isDisabled}" class="form-control"
-                                        placeholder="Fecha del Movimiento" required="required">
+                                    <label for="fechasMovimiento">Fecha de la visita</label>
+                                    <input type="text" id="fechasMovimiento" name="fechasMovimiento" 
+                                    th:value="${movimientoVisita.fechasMovimientoAsString}" 
+                                    class="form-control datetimepicker" placeholder="Selecciona la fecha y hora" required="required">
 
                                     <!-- Estado del Movimiento -->
                                     <label for="estadoMovimiento">Estado del Movimiento</label>
@@ -134,10 +133,9 @@
                                     Aceptar
                                 </button>
 
-                                <button type="submit" title="Cancelar la edición." class="btn btn-light"
-                                    th:disabled="${isDisabled}" th:href="@{/direccion/cancelarEditDireccion}">
+                                <a href="#" th:href="@{/movimientoVisita/cancelarEditMovimientoVisita}" class="btn btn-light" title="Cancelar la edición.">
                                     Cancelar
-                                </button>
+                                </a>
 
                             </form>
                         </div>
@@ -153,6 +151,16 @@
     <script th:src="@{/js/off-canvas.js}"></script>
     <script th:src="@{/js/hoverable-collapse.js}"></script>
     <script th:src="@{/js/template.js}"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr(".datetimepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i", // Formato compatible con tu backend
+                time_24hr: true
+            });
+        });
+    </script>
 
 </body>
 
