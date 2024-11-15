@@ -15,6 +15,7 @@ import com.is.servidor_barrio.business.domain.entity.Habitante;
 import com.is.servidor_barrio.business.domain.entity.Inmueble;
 import com.is.servidor_barrio.business.domain.entity.Persona;
 import com.is.servidor_barrio.business.domain.entity.UnidadDeNegocio;
+import com.is.servidor_barrio.business.domain.entity.Usuario;
 import com.is.servidor_barrio.business.facade.BaseFacadeImpl;
 import com.is.servidor_barrio.business.logic.service.BaseService;
 import com.is.servidor_barrio.business.logic.service.EmpleadoServiceImpl;
@@ -22,6 +23,7 @@ import com.is.servidor_barrio.business.logic.service.HabitanteServiceImpl;
 import com.is.servidor_barrio.business.logic.service.InmuebleServiceImpl;
 import com.is.servidor_barrio.business.logic.service.PersonaServiceImpl;
 import com.is.servidor_barrio.business.logic.service.UnidadDeNegocioServiceImpl;
+import com.is.servidor_barrio.business.logic.service.UsuarioServiceImpl;
 import com.is.servidor_barrio.business.mapper.BaseMapper;
 import com.is.servidor_barrio.business.mapper.EmpleadoMapperImpl;
 import com.is.servidor_barrio.business.mapper.HabitanteMapperImpl;
@@ -41,7 +43,11 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
   @Autowired
   private HabitanteServiceImpl habitanteService;
 
-  @Autowired PersonaServiceImpl personaServiceImpl;
+  @Autowired
+  private UsuarioServiceImpl usuarioService;
+
+  @Autowired
+  PersonaServiceImpl personaServiceImpl;
 
   private BaseMapper<Empleado, PersonaDto, PersonaCreateDto, PersonaCreateDto> empleadoMapper;
   private BaseMapper<Habitante, PersonaDto, PersonaCreateDto, PersonaCreateDto> habitanteMapper;
@@ -56,7 +62,6 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
   public PersonaDto save(PersonaCreateDto personaCreateDto) throws Exception {
     // Crear la entidad Persona (Empleado o Habitante) utilizando el mapper
     Persona personaEntity;
-
     if (personaCreateDto.getLegajo() == null || personaCreateDto.getLegajo().isEmpty()) {
       // Crear Habitante usando el mapper de Habitante
       Habitante habitante = habitanteMapper.toEntityCreate(personaCreateDto);
@@ -69,6 +74,7 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
 
       personaEntity = habitante;
     } else {
+
       // Crear Empleado usando el mapper de Empleado
       Empleado empleadoEntity = empleadoMapper.toEntityCreate(personaCreateDto);
 
@@ -84,13 +90,17 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
             })
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
+
         empleadoEntity.setNegocios(negocios);
       }
 
       personaEntity = empleadoEntity;
     }
 
-    // Guardar la entidad Persona (Empleado o Habitante)
+    if (personaCreateDto.getUsuarioId() != null) {
+      Usuario usuario = usuarioService.findById(personaCreateDto.getUsuarioId());
+      personaEntity.setUsuario(usuario);
+    }
     var entityCreated = baseService.save(personaEntity);
     return baseMapper.toDTO(entityCreated); // Convertir la entidad a DTO
   }
@@ -130,6 +140,12 @@ public class PersonaFacadeImpl extends BaseFacadeImpl<Persona, PersonaDto, Perso
         empleado.setNegocios(negocios);
       }
     }
+
+    if (personaCreateDto.getUsuarioId() != null) {
+      Usuario usuario = usuarioService.findById(personaCreateDto.getUsuarioId());
+      personaEntity.setUsuario(usuario);
+    }
+
     var updatedEntity = baseService.update(id, personaEntity);
     return baseMapper.toDTO(updatedEntity);
   }

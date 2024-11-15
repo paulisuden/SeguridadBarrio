@@ -17,7 +17,7 @@ import lombok.Setter;
 public class PersonaDto extends BaseDto {
   private String nombre;
   private String apellido;
-  // private Long usuarioId;
+  private String usuarioId;
   private String legajo;
   private TipoEmpleado tipoEmpleado;
   private UnidadDeNegocioDto[] negocios;

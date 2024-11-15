@@ -17,8 +17,7 @@ public class PersonaCreateDto {
   private String nombre;
   @NotEmpty(message = "Debe indicar el nombre")
   private String apellido;
-  // private Long usuarioId;
-  @NotEmpty(message = "Debe indicar el legajo")
+  private String usuarioId;
   private String legajo;
   private TipoEmpleado tipoEmpleado;
   private String[] negociosId;
