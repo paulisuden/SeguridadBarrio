@@ -56,11 +56,11 @@ public class ServidorBarrioApplication implements CommandLineRunner {
 		// usuario2.setRol(Rol.PERSONAL);
 		// UsuarioService.save(usuario2);**/
 
-		Usuario usuario3 = new Usuario();
+		/**Usuario usuario3 = new Usuario();
 		usuario3.setEmail("test@gmail.com");
 		usuario3.setClave(new BCryptPasswordEncoder().encode("1234"));
 		usuario3.setRol(Rol.ADMIN);
-		UsuarioService.save(usuario3);
+		UsuarioService.save(usuario3);*/
 
 		/*
 		 * Habitante habitante = new Habitante();

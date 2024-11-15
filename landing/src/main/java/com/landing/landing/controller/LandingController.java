@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.landing.landing.error.ErrorServiceException;
+import com.landing.landing.service.AuthService;
 import com.landing.landing.service.EmpresaService;
 import com.landing.landing.service.NegocioService;
 
@@ -18,14 +19,18 @@ public class LandingController {
     @Autowired
     private EmpresaService empresaService;
 
+    @Autowired
+    private AuthService authService;
+
     @GetMapping("/")
     public String enter() {
         return "redirect:/landing";
     }
 
     @GetMapping("/landing")
-    public String landing(Model model) {
+    public String landing(Model model) throws ErrorServiceException {
         try {
+            authService.authenticateWithApi();
             var negocios = negocioService.listar();
             model.addAttribute("negocios", negocios);
             model.addAttribute("cantidadNegocios", negocios.size());
