@@ -131,6 +131,7 @@ public class InmuebleController {
             return error(e.getMessage(), model, id, numeracion, calle, manzana, idNegocio);
 
         } catch (Exception e) {
+
             return error("Error de Sistema", model, id, numeracion, calle, manzana, idNegocio);
         }
     }
