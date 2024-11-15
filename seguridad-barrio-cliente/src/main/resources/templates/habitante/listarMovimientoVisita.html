@@ -9,7 +9,6 @@
         <!-- Navbar -->
         <nav th:replace="~{fragments/navbar.html :: nav_bar}"></nav>
 
-
         <!-- Sidebar -->
         <div class="container-fluid page-body-wrapper">
             <nav th:fragment="sideBar" class="sidebar sidebar-offcanvas" id="sidebar">
@@ -46,7 +45,6 @@
                 </ul>
             </nav>
 
-
             <div class="content-wrapper">
 
                 <!-- Main Content -->
@@ -75,27 +73,72 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
-                                                    <th>Fecha</th>
-                                                    <th>Estado</th>
-                                                    <th>Tipo de Movilidad</th>
-                                                    <th>Descripción</th>
-                                                    <th>Visitante</th>
+                                                    <th class="ml-5"></th>
+                                                    <th class="ml-5">ID</th>
+                                                    <th scope="col">Fecha</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Tipo de movilidad</th>
+                                                    <th scope="col">Descripcion</th>
+                                                    <th scope="col">Visitante</th>
+                                                    <th scope="col">Inmueble</th>
+                                                    <th scope="col">Observación</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr th:each="movimiento, iterStat : ${movimientos}">
-                                                    <td th:text="${iterStat.count}"></td>
-                                                    <td th:text="${#dates.format(movimiento.fechasMovimiento, 'dd/MM/yyyy')}"></td>
-                                                    <td th:text="${movimiento.estadoMovimiento}"></td>
-                                                    <td th:text="${movimiento.tipoMovilidad}"></td>
-                                                    <td th:text="${movimiento.descripcionMovilidad}"></td>
-                                                    <td th:text="${movimiento.visitante.nombre + ' ' + movimiento.visitante.apellido}"></td>
+                                                <tr th:each="movimientoVisita : ${movimientos}">
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+
+                                                            <div class="dropdown">
+
+                                                                <button type="button"
+                                                                    class="btn btn-dark btn-rounded btn-icon"
+                                                                    data-toggle="dropdown">
+                                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                                </button>
+
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuIconButton3">
+                                                                    <h6 class="dropdown-header">Acciones</h6>
+                                                                    <a th:href="@{/movimientoVisita/modificar(id=${movimientoVisita.id})}"
+                                                                        type="button" class="dropdown-item">
+                                                                        Editar
+                                                                        <i class="typcn typcn-edit btn-icon-append"></i>
+                                                                    </a>
+                                                                    <a th:href="@{/movimientoVisita/consultar(id=${movimientoVisita.id})}"
+                                                                        type="button" class="dropdown-item">
+                                                                        Consultar
+                                                                        <i
+                                                                            class="typcn typcn-eye-outline btn-icon-append"></i>
+                                                                    </a>
+                                                                    <a href="#" class="dropdown-item"
+                                                                        data-toggle="modal" data-target="#popupPanel"
+                                                                        th:attr="data-id=${movimientoVisita.id}">
+                                                                        Eliminar
+                                                                        <i
+                                                                            class="typcn typcn-delete-outline btn-icon-append"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td th:text="'#' + ${movimientoVisita.id}"></td>
+                                                    <td th:text="${movimientoVisita.fechasMovimiento}"></td>
+                                                    <td th:text="${movimientoVisita.estadoMovimiento}"></td>
+                                                    <td th:text="${movimientoVisita.tipoMovilidad}"></td>
+                                                    <td th:text="${movimientoVisita.descripcionMovilidad}"></td>
+                                                    <td
+                                                        th:text="${movimientoVisita.visitante.nombre + ' ' + movimientoVisita.visitante.apellido}">
+                                                    </td>
+                                                    <td
+                                                        th:text="${movimientoVisita.inmueble.calle + ' ' + movimientoVisita.inmueble.manzana + ' ' + movimientoVisita.inmueble.numeracion}">
+                                                    </td>
+                                                    <td th:text="${movimientoVisita.observacion}"></td>
                                                 </tr>
                                                 <tr th:if="${movimientos.size() == 0}">
                                                     <td colspan="6" class="text-center">No hay movimientos realizados.</td>
                                                 </tr>
-                                                </tbody>
+                                            </tbody>
                                             </table>
                                         </div>
                                     </div>
